@@ -10,6 +10,15 @@ const items = [{
   label: 'Tab3',
   content: 'Finally, this is the content for Tab3'
 }]
+const key = inject('key')
+const stats = useStats()
+
+const { data, pending, error } = useFetch(`/api/links/${key}/stats/device`, {
+  params: {
+    interval: stats?.interval
+  },
+  lazy: true
+})
 </script>
 <template>
   <UCard>

@@ -61,6 +61,7 @@ const formatTimestamp = (e: Date) => {
       })
   }
 }
+const colorMode = useColorMode()
 const option = computed<EChartsOption>(() => {
   let values = data.value?.map((item: any) => ({ value: item.clicks, name: 'clicks' })) || []
   let xAxisData = data.value?.map((item: any) => formatTimestamp(new Date(item.start))) || []
@@ -92,18 +93,38 @@ const option = computed<EChartsOption>(() => {
       axisLine: {
         show: false
       }
+
     },
     yAxis: {
       type: 'value',
       minInterval: 1,
-      min: 0,
-      max: Math.max.apply(null, values.map((item: any) => item.value)) + 4
+      min: 0
+
+      // max: Math.max.apply(null, values.map((item: any) => item.value)) + 4
     },
     series: [
       {
         name: 'clicks',
         type: 'line',
-        data: values
+        data: values,
+        showSymbol: false,
+        smooth: true,
+        areaStyle: {
+          opacity: 0.5,
+          color: {
+            type: 'linear',
+            x: 0,
+            y: 0,
+            x2: 0,
+            y2: 1,
+            colorStops: [{
+              offset: 0, color: '#22c55e' // 0% 处的颜色
+            }, {
+              offset: 1, color: colorMode.value === 'dark' ? '#052e16' : '#ecfdf5' // 100% 处的颜色
+            }],
+            global: false // 缺省为 false
+          }
+        }
 
       }
     ]
@@ -115,3 +136,8 @@ const option = computed<EChartsOption>(() => {
     <v-chart class="h-[400px]" :option="option" :loading="pending" />
   </UCard>
 </template>
+<style>
+.a {
+  color: #f0fdf4;
+}
+</style>

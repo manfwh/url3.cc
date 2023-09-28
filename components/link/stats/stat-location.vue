@@ -32,9 +32,9 @@ type EChartsOption = ComposeOption<
   | MapSeriesOption
   |BarSeriesOption
 >
-const key = inject('key')
 const json: any = await $fetch('/data/world.geo.json')
 registerMap('world', json)
+const key = inject('key')
 const stats = useStats()
 const { data, pending, error } = useFetch(`/api/links/${key}/stats/country`, {
   params: {
@@ -54,7 +54,7 @@ const option = computed<EChartsOption>(() => {
     },
     grid: { right: '45%', left: '0%', bottom: '5%' },
     backgroundColor: 'transparent',
-    visualMap: {
+    visualMap: [{
       left: 'right',
       min: Math.min.apply(null, chartData.map((d: any) => d.value)),
       max: Math.max.apply(null, chartData.map((d: any) => d.value)),
@@ -63,14 +63,33 @@ const option = computed<EChartsOption>(() => {
         color: ['#dcfce7', '#22c55e']
       },
       text: ['High', 'Low'],
-      calculable: true
-    },
+      calculable: true,
+      seriesIndex: 1
+    }],
     color: ['#22c55e'],
     yAxis: {
       type: 'category',
-      data: chartData.map((item: any) => item.name)
+      data: chartData.map((item: any) => item.name),
+      splitLine: {
+        show: false
+      },
+      axisLine: {
+        show: false
+      },
+      axisTick: {
+        show: false
+      }
     },
-    xAxis: { gridIndex: 0, max: chartData.reduce((max: number, item: any) => max + item.value, 0) },
+    xAxis: {
+      gridIndex: 0,
+      max: chartData.reduce((max: number, item: any) => max + item.value, 0),
+      splitLine: {
+        show: false
+      },
+      axisLabel: {
+        show: false
+      }
+    },
     series: [
       {
         type: 'bar',
@@ -78,11 +97,11 @@ const option = computed<EChartsOption>(() => {
         label: {
           show: true,
           formatter: '{b}: {@score}',
-          position: 'insideBottomLeft'
+          position: 'right'
         },
         data: chartData,
         itemStyle: {
-          color: 'red',
+          color: '#86efac',
           borderRadius: [0, 5, 5, 0]
         },
         barWidth: 30
