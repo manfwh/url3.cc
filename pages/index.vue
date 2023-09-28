@@ -46,8 +46,14 @@ console.log('session', session)
   <div>
     <div class="sticky inset-x-0 top-0 z-30 w-full border-b dark:border-gray-600 backdrop-blur-lg">
       <div class="mx-auto w-full max-w-screen-xl px-2.5 lg:px-20">
-        <div class="flex justify-between items-center h-12">
-          <div>Logo</div>
+        <div class="flex justify-between items-center h-16">
+          <div>
+            <h1 class="text-primary font-semibold text-2xl">
+              <nuxt-link to="/">
+                URL3.cc
+              </nuxt-link>
+            </h1>
+          </div>
           <div class="flex items-center space-x-4">
             <SharedColorModeButton />
             <button v-if="!session" type="button" @click="signInWithGitHub">
