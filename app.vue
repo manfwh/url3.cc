@@ -9,4 +9,10 @@
   </div>
 </template>
 <script lang="ts" setup>
+useHead({
+  title: 'URL Shortener Tool - Url3.cc',
+  meta: [
+    { name: 'description', content: "Effortlessly shorten your links for improved sharing efficiency. Customize your short URLs, track click data, and gain insights into your links' performance." }
+  ]
+})
 </script>

@@ -28,7 +28,7 @@ type EChartsOption = ComposeOption<
 const key = inject('key')
 const stats = useStats()
 
-const { data, pending, error } = useFetch(`/api/links/${key}/stats/device`, {
+const { data, pending, error } = useFetch(`/api/links/${key}/stats/os`, {
   params: {
     interval: stats?.interval
   },
@@ -37,7 +37,7 @@ const { data, pending, error } = useFetch(`/api/links/${key}/stats/device`, {
 const option = computed<EChartsOption>(() => {
   return {
     title: {
-      text: 'Device',
+      text: 'Os',
       left: 'left'
     },
     tooltip: {
@@ -50,7 +50,7 @@ const option = computed<EChartsOption>(() => {
 
     series: [
       {
-        name: 'Device',
+        name: 'Os',
         type: 'pie',
         radius: ['55%', '70%'],
 
@@ -68,7 +68,7 @@ const option = computed<EChartsOption>(() => {
         top: 'top',
         height: 300,
 
-        data: data.value ? data.value.map((item: any) => ({ name: item.device, value: item.clicks })) : []
+        data: data.value ? data.value.map((item: any) => ({ name: item.os, value: item.clicks })) : []
       }
     ]
   }

@@ -64,6 +64,7 @@ const formatTimestamp = (e: Date) => {
 const colorMode = useColorMode()
 const option = computed<EChartsOption>(() => {
   let values = data.value?.map((item: any) => ({ value: item.clicks, name: 'clicks' })) || []
+  const clicks = values.reduce((total: number, { value }: {value: number}) => total + value, 0)
   let xAxisData = data.value?.map((item: any) => formatTimestamp(new Date(item.start))) || []
   if (pending.value) {
     values = []
@@ -71,7 +72,7 @@ const option = computed<EChartsOption>(() => {
   }
   return {
     title: {
-      text: 'TOTAL CLICKS',
+      text: clicks + ' TOTAL CLICKS',
       // subtext: 'CLICKS',
       left: 'left'
     },
@@ -98,7 +99,12 @@ const option = computed<EChartsOption>(() => {
     yAxis: {
       type: 'value',
       minInterval: 1,
-      min: 0
+      min: 0,
+      splitLine: {
+        lineStyle: {
+          type: 'dashed'
+        }
+      }
 
       // max: Math.max.apply(null, values.map((item: any) => item.value)) + 4
     },

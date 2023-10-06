@@ -50,9 +50,6 @@ export default defineAuthHandler(async (event) => {
 
     url.searchParams.append('granularity', intervalData[interval].granularity)
   }
-  console.log(url.searchParams.getAll('end'))
-  console.log(url.searchParams.getAll('start'))
-  console.log(new Date(Date.now() - 3600000))
   return await fetch(url.toString(), {
     headers: {
       Authorization: `Bearer ${process.env.TINYBIRD_API_KEY}`
@@ -60,6 +57,7 @@ export default defineAuthHandler(async (event) => {
   })
     .then(res => res.json())
     .then(({ data }) => {
+      console.log('data', data)
       if (endpoint === 'clicks') {
         try {
           const clicks = data[0]['count()']

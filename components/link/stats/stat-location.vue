@@ -52,7 +52,7 @@ const option = computed<EChartsOption>(() => {
     },
     tooltip: {
     },
-    grid: { right: '45%', left: '0%', bottom: '5%' },
+    grid: { left: '0%' },
     backgroundColor: 'transparent',
     visualMap: [{
       left: 'right',
@@ -63,60 +63,22 @@ const option = computed<EChartsOption>(() => {
         color: ['#dcfce7', '#22c55e']
       },
       text: ['High', 'Low'],
-      calculable: true,
-      seriesIndex: 1
+      calculable: true
     }],
     color: ['#22c55e'],
-    yAxis: {
-      type: 'category',
-      data: chartData.map((item: any) => item.name),
-      splitLine: {
-        show: false
-      },
-      axisLine: {
-        show: false
-      },
-      axisTick: {
-        show: false
-      }
-    },
-    xAxis: {
-      gridIndex: 0,
-      max: chartData.reduce((max: number, item: any) => max + item.value, 0),
-      splitLine: {
-        show: false
-      },
-      axisLabel: {
-        show: false
-      }
-    },
+
     series: [
-      {
-        type: 'bar',
-        right: 300,
-        label: {
-          show: true,
-          formatter: '{b}: {@score}',
-          position: 'right'
-        },
-        data: chartData,
-        itemStyle: {
-          color: '#86efac',
-          borderRadius: [0, 5, 5, 0]
-        },
-        barWidth: 30
-      },
       {
         id: 'population',
         type: 'map',
         map: 'world',
-        roam: true,
+        name: 'clicks',
+        // roam: true,
         seriesLayoutBy: 'row',
         itemStyle: {
-          areaColor: '#f8fafc',
-          borderColor: '#64748b'
+          areaColor: '#fff',
+          borderColor: '#ccc'
         },
-        left: '55%',
         emphasis: {
           itemStyle: {
             areaColor: '#22c55e'
@@ -125,28 +87,33 @@ const option = computed<EChartsOption>(() => {
             color: '#fff'
           }
         },
-        layoutCenter: ['75%', '50%'],
         // 如果宽高比大于 1 则宽度为 100，如果小于 1 则高度为 100，保证了不超过 100x100 的区域
-        layoutSize: 500,
         data: chartData
       }
     ]
   }
 })
-// onMounted(() => {
-//   $fetch('/data/world.geo.json')
-//     .then((json: any) => {
-//       registerMap('world', json)
-//       // chart.value?.setOption()
-//       if (data.value) {
-
-//       }
-//     })
-// })
-// const option: EChartsOption =
+const page = ref(1)
+const pageCount = 6
+const tableRows = computed(() => {
+  return data.value ? [...data.value].sort((a: any, b: any) => b.clicks - a.clicks).map((item: any) => ({ country: COUNTRIES[item.country], clicks: item.clicks })) : []
+})
+const rows = computed(() => {
+  return tableRows.value.slice((page.value - 1) * pageCount, (page.value) * pageCount)
+})
 </script>
 <template>
   <UCard>
-    <v-chart ref="chart" :option="option" class="h-[400px]" :loading="pending " />
+    <div class="grid grid-cols-2 gap-8">
+      <v-chart ref="chart" :option="option" class="h-[400px]" :loading="pending " />
+      <div>
+        <div class="min-h-[365px]">
+          <UTable :rows="rows" />
+        </div>
+        <div class="flex justify-end px-3 py-3.5">
+          <UPagination v-model="page" :loading="pending" :page-count="pageCount" :total="tableRows.length" :loading-state="{ icon: 'i-heroicons-arrow-path-20-solid', label: 'Loading...' }" />
+        </div>
+      </div>
+    </div>
   </UCard>
 </template>

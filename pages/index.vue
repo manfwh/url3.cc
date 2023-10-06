@@ -73,20 +73,28 @@ console.log('session', session)
       Shrink those lengthy URLs for quick content sharing.
     </p>
     <div class="mx-auto max-w-md pt-24">
-      <form ref="formRef" @submit.prevent="handleSubmit">
+      <form ref="formRef" class="mb-8" @submit.prevent="handleSubmit">
         <div class="relative">
           <UInput
-            size="lg"
             icon="i-heroicons-link"
+            variant="outline"
+            color="primary"
             type="url"
             autocomplete="off"
             name="url"
             input-class="pr-14"
             required
+            size="xl"
+            :disabled="submitting"
             placeholder="Enter a Link"
+            :ui="{
+              variant: {
+                outline: 'bg-white dark:bg-slate-800'
+              }
+            }"
           />
           <div class="absolute right-4 inset-y-0 flex items-center">
-            <UButton color="gray" variant="ghost" type="submit" :disabled="submitting">
+            <UButton color="primary" variant="ghost" type="submit" :disabled="submitting">
               <Loader v-if="submitting" class="h-4 w-4 animate-spin" />
               <CornerDownLeft v-else class="h-4 w-4" />
             </UButton>
@@ -124,7 +132,7 @@ console.log('session', session)
       <TransitionGroup
         v-if="isMounted"
         tag="ul"
-        class="relative"
+        class="relative space-y-4"
         appear
         move-class="transition-all duration-500"
         enter-active-class="transition-opacity duration-500"
@@ -135,40 +143,10 @@ console.log('session', session)
         leave-to-class="opacity-0"
       >
         <template v-for="item in links" :key="item.key">
-          <HomeLinkCard :link="item" @delete-link="deleteLink" />
+          <!-- <HomeLinkCard :link="item" @delete-link="deleteLink" /> -->
+          <LinkCard :link="item" />
         </template>
       </TransitionGroup>
-      <div>
-        <!-- <button v-if="!session" type="button" @click="signInWithGitHub">
-          Github 登录
-        </button>
-        <div v-if="session">
-          <span>{{ session.user.user_metadata.user_name }}</span>
-          <button type="button" @click="signOut">
-            退出
-          </button>
-          <form @submit.prevent="createProject">
-            <div>
-              <input type="text" name="projectName" placeholder="项目名">
-            </div>
-            <div>
-              <input type="text" name="slug" placeholder="slug">
-            </div>
-            <button type="submit">
-              创建项目
-            </button>
-          </form>
-        </div> -->
-        <!-- <h2>我的项目</h2>
-        <ul class="grid grid-cols-2 gap-4 ">
-          <li v-for="project in projects" :key="project.id" class="border p-4 my-2 rounded hover:shadow">
-            <nuxt-link :to="`/${project.slug}`">
-              <div>项目id:{{ project.id }}</div>
-              <div>项目名称：{{ project.name }}</div>
-            </nuxt-link>
-          </li>
-        </ul> -->
-      </div>
     </div>
     <Background />
   </div>
