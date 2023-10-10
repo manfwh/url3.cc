@@ -34,7 +34,7 @@ const menus = [
   }]
 ]
 const key = computed(() => {
-  return props.link?.key || props.homeLink.key!
+  return props.link?.key || props.homeLink?.key
 })
 const url = computed(() => {
   return props.link?.url || props.homeLink?.url
@@ -54,7 +54,7 @@ const download = (url: string) => {
   anchorRef.value.click()
 }
 
-const timeAgo = useTimeAgo(new Date(props.link.created_at))
+const timeAgo = props.link ? useTimeAgo(new Date(props.link?.created_at)) : null
 
 </script>
 <template>
@@ -62,8 +62,8 @@ const timeAgo = useTimeAgo(new Date(props.link.created_at))
     <UCard :ui="{body: {padding: 'sm:p-4'}}">
       <div class="flex justify-between items-center">
         <div class="flex-auto w-0 mr-4">
-          <div class="flex items-center">
-            <span class="text-gray-900 dark:text-gray-50 font-bold flex-shrink-0">短链接：<UIcon v-if="!!props.link.password" name="i-heroicons-lock-closed" /></span>
+          <div class="flex items-center relative">
+            <span class="text-gray-900 dark:text-gray-50 font-bold flex-shrink-0">Link: <UIcon v-if="!!props.link?.password" name="i-heroicons-lock-closed" /></span>
             <UButton variant="link" color="white" :to="fullDomain + key" target="_blank">
               {{ domain + '/' + key }}
             </UButton>
@@ -97,7 +97,7 @@ const timeAgo = useTimeAgo(new Date(props.link.created_at))
             </UModal>
           </div>
           <div class="text-gray-500 flex text-sm mt-2 truncate">
-            <span>Target：</span>
+            <span>Origin: </span>
             <a
               class="flex-1 truncate"
               :href="url"
@@ -108,7 +108,7 @@ const timeAgo = useTimeAgo(new Date(props.link.created_at))
           </div>
         </div>
         <div class="flex items-center space-x-4">
-          <LinkClicks :link-key="key" :clicks="props.link?.clicks" />
+          <LinkClicks :link-key="key!" :clicks="props.link?.clicks" />
           <UTooltip v-if="props.link" :text="`Created ${new Date(props.link?.created_at).toLocaleString()}`">
             <span class="text-sm  text-gray-500 dark:text-gray-400">{{ timeAgo }}</span>
           </UTooltip>

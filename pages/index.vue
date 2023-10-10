@@ -72,7 +72,7 @@ console.log('session', session)
     <p class="text-center text-gray-700 dark:text-gray-300 mt-4">
       Shrink those lengthy URLs for quick content sharing.
     </p>
-    <div class="mx-auto max-w-md pt-24">
+    <div class="mx-auto max-w-lg pt-24">
       <form ref="formRef" class="mb-8" @submit.prevent="handleSubmit">
         <div class="relative">
           <UInput
@@ -129,6 +129,7 @@ console.log('session', session)
           </button>
         </div> -->
       </form>
+
       <TransitionGroup
         v-if="isMounted"
         tag="ul"
@@ -147,6 +148,15 @@ console.log('session', session)
           <LinkCard :link="item" />
         </template>
       </TransitionGroup>
+      <UAlert
+        v-if="links && links.length > 0"
+        class="mt-8"
+        icon="i-heroicons-information-circle"
+        color="amber"
+        variant="subtle"
+        title="Note"
+        description="Public links will be automatically-deleted after 30 minutes. Create a free account to keep your links forever."
+      />
     </div>
     <Background />
   </div>

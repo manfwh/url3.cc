@@ -33,7 +33,7 @@ const { y } = useWindowScroll()
 <template>
   <div class="bg-slate-50 dark:bg-gray-950 pt-2 h-[2000px]">
     <div class="sticky top-[65px] bg-slate-50 dark:bg-gray-950 dark:shadow-slate-800 z-10 mb-2" :class="{'shadow-sm': y > 50 }">
-      <UContainer class="flex items-center justify-between h-16 transition-all duration-100 ">
+      <div class="container mx-auto flex items-center justify-between h-16 transition-all duration-100 ">
         <h1>
           <UButton color="gray" variant="ghost" :to="`${appConfig.fullDomain}${route.params.key}`" target="_blank">
             {{ appConfig.domain }}/{{ route.params.key }}
@@ -47,10 +47,9 @@ const { y } = useWindowScroll()
             </template>
           </USelectMenu>
         </div>
-      </UContainer>
+      </div>
     </div>
-
-    <UContainer>
+    <div class="container mx-auto">
       <ClientOnly>
         <div class="h-[2000px] space-y-12">
           <LinkStatsStatTimeserirs />
@@ -62,6 +61,6 @@ const { y } = useWindowScroll()
           </div>
         </div>
       </ClientOnly>
-    </UContainer>
+    </div>
   </div>
 </template>

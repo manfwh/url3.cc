@@ -39,7 +39,11 @@ export const getFileMd5 = (file: File): Promise<string> => {
 
 // 获取文件后缀名
 export const getFileSuffix = (fileName: string) => {
-  const fileSuffix = fileName.substring(fileName.lastIndexOf('.') + 1)
+  const lastIndexOf = fileName.lastIndexOf('.')
+  if (lastIndexOf === -1) {
+    return ''
+  }
+  const fileSuffix = fileName.substring(lastIndexOf + 1)
   return fileSuffix
 }
 

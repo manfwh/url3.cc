@@ -59,10 +59,12 @@ export interface Database {
           created_at: string
           domain: string | null
           id: number
+          image: string | null
           ios: string | null
           key: string
           password: string | null
           project_id: number | null
+          type: string
           url: string | null
           user_id: string | null
         }
@@ -72,10 +74,12 @@ export interface Database {
           created_at?: string
           domain?: string | null
           id?: number
+          image?: string | null
           ios?: string | null
           key: string
           password?: string | null
           project_id?: number | null
+          type?: string
           url?: string | null
           user_id?: string | null
         }
@@ -85,10 +89,12 @@ export interface Database {
           created_at?: string
           domain?: string | null
           id?: number
+          image?: string | null
           ios?: string | null
           key?: string
           password?: string | null
           project_id?: number | null
+          type?: string
           url?: string | null
           user_id?: string | null
         }

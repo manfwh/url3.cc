@@ -10,8 +10,11 @@ export default defineAuthHandler(async (event) => {
   const supabase = await serverSupabaseClient<Database>(event)
   // supabase.from('links').update('clicks',)
   const { url, slug, key, ...body } = await readValidatedBody(event, (body: any) => {
-    if (!body.url || !isValidUrl(body.url)) {
+    if (body.type === 'url' && (!body.url || !isValidUrl(body.url))) {
       throw new Error('Invalid URL')
+    }
+    if (body.type === 'image' && !body.image) {
+      throw new Error('Missing image')
     }
     if (!body.key) {
       throw new Error('Missing key')
@@ -47,7 +50,6 @@ export default defineAuthHandler(async (event) => {
 
     const { status, error } = await supabase.from('links').insert({
       key,
-      url,
       ...body,
       user_id: event.context.session.user.id
     })
@@ -57,7 +59,9 @@ export default defineAuthHandler(async (event) => {
     }
     try {
       const response = await redis.set(`short-link:${key}`, {
-        url: encodeURIComponent(url!),
+        type: body.type || 'url',
+        ...(url && { url: encodeURIComponent(url!) }),
+        ...(body.image && { image: body.image }),
         password: !!body.password,
         ...(body.ios && { ios: body.ios }),
         ...(body.android && { android: body.android })

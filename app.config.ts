@@ -12,12 +12,7 @@ export default defineAppConfig({
       }
     },
     tooltip: {
-      base: '[@media(pointer:coarse)]:hidden h-8 px-2 py-2 text-xs font-normal truncate',
-      background: 'bg-black dark:bg-white',
-      color: 'dark:text-gray-900 text-white',
-      popper: {
-        placement: 'top'
-      }
+
     },
     modal: {
       inner: 'fixed inset-0 overflow-y-auto w-screen'

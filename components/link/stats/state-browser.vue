@@ -34,6 +34,8 @@ const { data, pending, error } = useFetch(`/api/links/${key}/stats/browser`, {
   },
   lazy: true
 })
+const colorMode = useColorMode()
+
 const option = computed<EChartsOption>(() => {
   return {
     title: {
@@ -47,15 +49,15 @@ const option = computed<EChartsOption>(() => {
       bottom: '5%',
       left: 'center'
     },
-
+    backgroundColor: 'transparent',
     series: [
       {
-        name: 'Device',
+        name: 'Browser',
         type: 'pie',
         radius: ['55%', '70%'],
 
         itemStyle: {
-          borderColor: '#fff',
+          borderColor: colorMode.value === 'dark' ? '#000' : '#fff',
           borderWidth: 2
         },
         label: {

@@ -16,10 +16,12 @@ export default defineAuthHandler(async (event) => {
   try {
     console.log('updateBody', updateBody)
     const response = await redis.set(`short-link:${updateBody.key}`, {
-      url: encodeURIComponent(updateBody.url!),
+      type: body.type || 'url',
+      ...(updateBody.url && { url: encodeURIComponent(updateBody.url!) }),
+      ...(body.image && { image: body.image }),
       password: !!body.password,
-      ...(updateBody.ios && { ios: updateBody.ios }),
-      ...(updateBody.android && { android: updateBody.android })
+      ...(body.ios && { ios: body.ios }),
+      ...(body.android && { android: body.android })
     }, {
       xx: true
     })

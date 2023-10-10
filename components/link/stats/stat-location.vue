@@ -42,8 +42,9 @@ const { data, pending, error } = useFetch(`/api/links/${key}/stats/country`, {
   },
   lazy: true
 })
+const colorMode = useColorMode()
+
 const option = computed<EChartsOption>(() => {
-  console.log('data.value ', data.value)
   const chartData = data.value ? data.value.sort((a: any, b: any) => a.clicks - b.clicks).map((item: any) => ({ name: COUNTRIES[item.country], value: item.clicks })) : []
   return {
     title: {
@@ -76,8 +77,8 @@ const option = computed<EChartsOption>(() => {
         // roam: true,
         seriesLayoutBy: 'row',
         itemStyle: {
-          areaColor: '#fff',
-          borderColor: '#ccc'
+          areaColor: colorMode.value === 'dark' ? '#ccc' : '#fff',
+          borderColor: colorMode.value === 'dark' ? '#121212' : '#ccc'
         },
         emphasis: {
           itemStyle: {
