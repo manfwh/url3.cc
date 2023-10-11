@@ -15,7 +15,7 @@ const handleClick = async () => {
 </script>
 <template>
   <UButton variant="ghost" :ui="{ rounded: 'rounded-full' }" class="px-1.5" @click="handleClick">
-    <Check v-if="copied" :size="18" />
-    <CopyIcon v-else :size="18" />
+    <Check v-if="copied" :size="16" />
+    <CopyIcon v-else :size="16" />
   </UButton>
 </template>

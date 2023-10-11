@@ -15,7 +15,10 @@ export default defineEventHandler(async (event) => {
     }
   })
   key = `assets/_nocheck_${key}`
-  const url = await getSignedUrl(S3, new PutObjectCommand({ Bucket: 'url3-cc', Key: key }), { expiresIn: 3600 })
+  const url = await getSignedUrl(S3, new PutObjectCommand({
+    Bucket: 'url3-cc',
+    Key: key
+  }), { expiresIn: 3600 })
   return {
     url,
     key

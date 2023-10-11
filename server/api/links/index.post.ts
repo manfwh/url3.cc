@@ -47,6 +47,7 @@ export default defineAuthHandler(async (event) => {
         throw createError({ statusCode: 400, data: 'Invalid project_id' })
       }
     }
+    // 🔗
 
     const { status, error } = await supabase.from('links').insert({
       key,

@@ -60,20 +60,31 @@ const timeAgo = props.link ? useTimeAgo(new Date(props.link?.created_at)) : null
 <template>
   <li>
     <UCard :ui="{body: {padding: 'sm:p-4'}}">
-      <div class="flex justify-between items-center">
+      <div class="flex justify-between items-center gap-4">
+        <UTooltip v-if="props.link?.type === 'url'" text="Url">
+          <div class="rounded-md w-10 h-10 flex items-center justify-center bg-violet-50 dark:bg-violet-300">
+            <UIcon name="i-heroicons-link" class="w-6 h-6 text-violet-600 dark:text-violet-700" />
+          </div>
+        </UTooltip>
+        <UTooltip v-if="props.link?.type === 'image'" text="Image">
+          <div class="rounded-md w-10 h-10 flex items-center justify-center bg-teal-50 dark:bg-teal-300">
+            <UIcon name="i-heroicons-photo" class="w-6 h-6 text-teal-600 dark:text-teal-700" />
+          </div>
+        </UTooltip>
+
         <div class="flex-auto w-0 mr-4">
           <div class="flex items-center relative">
-            <span class="text-gray-900 dark:text-gray-50 font-bold flex-shrink-0">Link: <UIcon v-if="!!props.link?.password" name="i-heroicons-lock-closed" /></span>
-            <UButton variant="link" color="white" :to="fullDomain + key" target="_blank">
+            <UIcon v-if="!!props.link?.password" name="i-heroicons-lock-closed" class="mr-2" />
+            <nuxt-link :to="fullDomain + key" target="_blank" class="mr-4 hover:bg-slate-100 dark:hover:bg-slate-700 rounded-md px-2">
               {{ domain + '/' + key }}
-            </UButton>
+            </nuxt-link>
             <!-- <a class="text-primary truncate" :href="fullDomain + props.link.key" target="_blank"></a> -->
             <!-- <ExternalLink class="ml-2 text-gray-500" :size="16" /> -->
             <UTooltip text="Copy Link">
               <!-- <copy-button :text="fullDomain + props.link.key" /> -->
               <SharedCopyButton :text="fullDomain + key" />
             </UTooltip>
-            <UButton variant="ghost" :ui="{ rounded: 'rounded-full' }" icon="i-heroicons-qr-code" @click="isOpenQrcode = true" />
+            <UButton variant="ghost" :ui="{ rounded: 'rounded-full' }" size="xs" icon="i-heroicons-qr-code" @click="isOpenQrcode = true" />
             <UModal v-model="isOpenQrcode">
               <UCard>
                 <template #header>
@@ -96,15 +107,29 @@ const timeAgo = props.link ? useTimeAgo(new Date(props.link?.created_at)) : null
               </UCard>
             </UModal>
           </div>
-          <div class="text-gray-500 flex text-sm mt-2 truncate">
-            <span>Origin: </span>
-            <a
-              class="flex-1 truncate"
-              :href="url"
-              target="_blank"
-            >
-              {{ url }}
-            </a>
+          <div class="text-gray-500 dark:text-gray-300 text-sm mt-2 truncate items-center hover:bg-slate-100 dark:hover:bg-slate-700 inline-block rounded-md pl-1 pr-2 py-0.5">
+            <template v-if="props.link?.type === 'url'">
+              <UIcon name="i-heroicons-link" class="align-middle" />
+              <a
+                class="flex-1 truncate ml-2"
+                :href="url"
+                target="_blank"
+              >
+                {{ url }}
+              </a>
+            </template>
+            <template v-if="props.link?.type === 'image'">
+              <UIcon name="i-heroicons-photo" class="align-middle" />
+              <!-- <img :src="fullDomain + key" class="w-4 h-4"> -->
+              <a
+                class="flex-1 truncate ml-2"
+                :href="fullDomain + key"
+                target="_blank"
+              >
+                <!-- {{ props.link.image }} -->
+                img
+              </a>
+            </template>
           </div>
         </div>
         <div class="flex items-center space-x-4">
