@@ -3,7 +3,7 @@ import { nanoid } from 'nanoid'
 // import { fileTypeFromFile } from 'file-type'
 import type { FormSubmitEvent } from '@nuxt/ui/dist/runtime/types'
 import DraggerUpload from '@/components/shared/upload/dragger-upload.vue'
-import type { UploadFile } from '@/components/shared/upload/types'
+import type { UploadFile, UploadedFile } from '@/components/shared/upload/types'
 import { getFilename } from '@/utils'
 import { Tables, Enums } from '~/types/type'
 const { $toast } = useNuxtApp()
@@ -24,6 +24,8 @@ type State = {
   android?: string;
   title?: string;
   description?: string;
+  android_image?: string;
+  ios_image?: string;
 }
 const state = ref<State>({
   type: editLink.value?.type || 'image',
@@ -33,7 +35,11 @@ const state = ref<State>({
   key: editLink.value?.key || '',
   // project_id: editLink.value?.project_id || addEditState.value.projectId || null,
   ios: editLink.value?.ios || '',
-  android: editLink.value?.android || ''
+  android: editLink.value?.android || '',
+  title: editLink.value?.title || '',
+  description: editLink.value?.description || '',
+  android_image: editLink.value?.android_image || '',
+  ios_image: editLink.value?.ios_image || ''
 })
 
 // 是否正在获取key中
@@ -48,13 +54,11 @@ function setRandomKey () {
       fetchKeyLoading.value = false
     })
 }
-
 const submit = async (event: FormSubmitEvent<typeof state.value>) => {
   if (fetchKeyLoading.value) { return }
   try {
     submitting.value = true
     if (editLink.value?.id) {
-      // delete editLink.value.project
       await $fetch(`/api/links/${editLink.value.key}`, {
         method: 'PUT',
         body: {
@@ -77,7 +81,7 @@ const submit = async (event: FormSubmitEvent<typeof state.value>) => {
     addEditState.value.isOpen = false
   } catch (error: any) {
     submitting.value = false
-    $toast.error(error.message)
+    $toast.error(error?.data?.message || 'Create Error!')
   }
 }
 
@@ -88,40 +92,8 @@ watchDebounced(() => state.value.url, () => {
   setRandomKey()
 }, { debounce: 500 })
 
-const { files, open, reset, onChange } = useFileDialog({
-  accept: 'image/*' // Set to accept only image files
-})
-const openDialog = () => open()
-const uploadStatus = ref<'INIT' | 'UPLOADING' | 'DONE' | 'ERROR'>('INIT')
-onChange(async (files) => {
-  console.log(files)
-  if (!files) { return }
-  const id = nanoid()
-  const file = files[0]
-  const suffix = getFileSuffix(file.name)
-  const ext = suffix ? `.${suffix}` : ''
-  uploadStatus.value = 'UPLOADING'
-  const { url, key } = await $fetch(`/api/uploads/${id}${ext}`)
-  // await fetch(url, {
-  //   method: 'PUT',
-  //   body: file
-  // })
-  state.value.image = key
-  uploadStatus.value = 'DONE'
-  if (!state.value.key || !fetchKeyLoading.value) { setRandomKey() }
-  const xhr = new XMLHttpRequest()
-  xhr.open('PUT', url)
-  xhr.send(file)
-  xhr.upload.addEventListener('progress', (event) => {
-    console.log('event', event)
-    if (event.lengthComputable) {
-      const percentComplete = (event.loaded / event.total) * 100
-      console.log(`Progress: ${Math.round(percentComplete)}%`)
-    }
-  })
-})
-
 const uploadChange = (info: UploadFile, field: keyof typeof state.value) => {
+  console.log('info', info)
   if (info.status === 'done') {
     state.value[field] = info.result
   }
@@ -129,6 +101,19 @@ const uploadChange = (info: UploadFile, field: keyof typeof state.value) => {
     state.value.title = getFilename(info.name)
   }
 }
+
+const genUploadedFile = computed(() => (field: keyof typeof state.value) => {
+  if (state.value.type === 'image') {
+    if (!state.value[field]) { return [] }
+    const imageFile: UploadedFile = {
+      url: `https://file.url3.cc/${state.value[field]}`,
+      name: (field === 'image' ? state.value.title : state.value[field]) || '',
+      status: 'done'
+    }
+    return [imageFile]
+  }
+  return []
+})
 </script>
 <template>
   <div class="px-4">
@@ -145,7 +130,14 @@ const uploadChange = (info: UploadFile, field: keyof typeof state.value) => {
       </UFormGroup>
       <template v-else-if="state.type === 'image'">
         <UFormGroup label="Image File" name="type">
-          <DraggerUpload v-if="state.type === 'image'" accept="image/*" :max-count="1" @change="uploadChange($event, 'image')" @remove="state.image = ''" />
+          <DraggerUpload
+            v-if="state.type === 'image'"
+            :default-file-list="genUploadedFile('image')"
+            accept="image/*"
+            :max-count="1"
+            @change="uploadChange($event, 'image')"
+            @remove="state.image = ''"
+          />
           <!-- <input type="file"> -->
           <!-- <button
             type="button"
@@ -195,12 +187,27 @@ const uploadChange = (info: UploadFile, field: keyof typeof state.value) => {
           />
         </div>
       </UFormGroup>
-      <UFormGroup label="android" name="android" hint="可选">
+      <UFormGroup label="Android Targeting" name="android" hint="可选">
         <UInput v-if="state.type === 'url'" v-model="state.android" type="url" />
-        <DraggerUpload v-if="state.type === 'image'" accept="image/*" :max-count="1" @change="uploadChange($event, 'android')" @remove="state.android = ''" />
+        <DraggerUpload
+          v-if="state.type === 'image'"
+          accept="image/*"
+          :default-file-list="genUploadedFile('android_image')"
+          :max-count="1"
+          @change="uploadChange($event, 'android_image')"
+          @remove="state.android_image = ''"
+        />
       </UFormGroup>
-      <UFormGroup label="ios" name="ios" hint="可选">
-        <UInput v-model="state.ios" type="url" />
+      <UFormGroup label="Ios Targeting" name="ios" hint="可选">
+        <UInput v-if="state.type === 'url'" v-model="state.ios" type="url" />
+        <DraggerUpload
+          v-if="state.type === 'image'"
+          accept="image/*"
+          :default-file-list="genUploadedFile('ios_image')"
+          :max-count="1"
+          @change="uploadChange($event, 'ios_image')"
+          @remove="state.ios_image = ''"
+        />
       </UFormGroup>
 
       <UButton type="submit" :loading="submitting" :disabled="fetchKeyLoading">

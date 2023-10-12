@@ -107,27 +107,27 @@ const timeAgo = props.link ? useTimeAgo(new Date(props.link?.created_at)) : null
               </UCard>
             </UModal>
           </div>
-          <div class="text-gray-500 dark:text-gray-300 text-sm mt-2 truncate items-center hover:bg-slate-100 dark:hover:bg-slate-700 inline-block rounded-md pl-1 pr-2 py-0.5">
+          <div class="text-gray-500 dark:text-gray-300 text-sm mt-2 truncate items-center hover:bg-slate-100 dark:hover:bg-slate-700 inline-block rounded-md pl-2 pr-2 py-0.5">
             <template v-if="props.link?.type === 'url'">
-              <UIcon name="i-heroicons-link" class="align-middle" />
               <a
-                class="flex-1 truncate ml-2"
+                class="flex-1 truncate"
                 :href="url"
                 target="_blank"
               >
+                <UIcon name="i-heroicons-link" class="align-middle" />
                 {{ url }}
               </a>
             </template>
             <template v-if="props.link?.type === 'image'">
-              <UIcon name="i-heroicons-photo" class="align-middle" />
               <!-- <img :src="fullDomain + key" class="w-4 h-4"> -->
               <a
-                class="flex-1 truncate ml-2"
+                v-if="props.link.title"
+                class="flex-1 truncate"
                 :href="fullDomain + key"
                 target="_blank"
               >
-                <!-- {{ props.link.image }} -->
-                img
+                <UIcon name="i-heroicons-photo" class="align-middle" />
+                {{ props.link.title }}
               </a>
             </template>
           </div>

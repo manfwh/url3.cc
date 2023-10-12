@@ -1,14 +1,14 @@
 <script lang="ts" setup>
 import { nanoid } from 'nanoid'
 import { Loader } from 'lucide-vue-next'
-import type { UploadFile } from './types'
+import type { UploadFile, UploadedFile } from './types'
 import { fileToBase64 } from '@/utils'
 const props = defineProps<{
   accept?: string;
   name?: string;
   action?: string;
   maxCount?: number;
-  defaultFileList?: UploadFile[];
+  defaultFileList?: UploadedFile[];
 }>()
 const emit = defineEmits<{
   (eventName: 'change', file: UploadFile): void;
@@ -21,7 +21,17 @@ const { files, open, reset, onChange } = useFileDialog({
 const openDialog = () => {
   open()
 }
-const fileList = ref<Record<string, UploadFile>>(props.defaultFileList ? Object.fromEntries(props.defaultFileList.map(file => [nanoid(), file])) : {})
+const fileList = ref<Record<string, UploadFile>>(
+  props.defaultFileList
+    ? Object.fromEntries(props.defaultFileList.map((file) => {
+      const uid = nanoid()
+      return [uid, {
+        uid,
+        ...file
+      }]
+    }))
+    : {}
+)
 onChange(async (files) => {
   if (!files) { return }
   if (props.maxCount) {
@@ -51,7 +61,6 @@ onChange(async (files) => {
   fileList.value[id].result = key
   emit('change', fileList.value[id])
 
-  // if (!state.value.key || !fetchKeyLoading.value) { setRandomKey() }
   const xhr = new XMLHttpRequest()
   xhr.open('PUT', url)
   xhr.send(file)
@@ -86,14 +95,20 @@ const remove = (uid: string) => {
   <div>
     <button
       type="button"
-      class="w-full flex items-center justify-center p-0 mb-2 h-32 disabled:cursor-not-allowed disabled:opacity-75 rounded-md border border-dashed
+      class="w-full relative flex items-center justify-center p-0 mb-2 h-32 disabled:cursor-not-allowed disabled:opacity-75 rounded-md border border-dashed
        bg-gray-50 dark:placeholder-gray-500 text-sm shadow-sm dark:bg-gray-900 text-gray-900 dark:text-white transition-colors border-gray-300 dark:border-gray-700 hover:border-primary-400 focus:border-primary-500 dark:focus:border-primary-400 focus:outline-none"
       @click="openDialog"
     >
       <!-- Upload File -->
       <!-- <img  src="thumb" alt=""> -->
-      <img v-for="item in fileList" :key="item.uid" :src="item.thumb" :alt="item.name" class="h-full block">
-      <span v-if="Object.keys(fileList).length === 0">Choose Image</span>
+      <template v-for="item in fileList" :key="item.uid">
+        <img :src="item.thumb || item.url" :alt="item.name" class="h-full block">
+        <span v-if="item.status === 'uploading'" class="absolute inset-0 flex items-center justify-center bg-slate-700/60 dark:bg-slate-500/60"> <Loader v-if="item.status === 'uploading'" class="h-4 w-4 animate-spin" /> </span>
+      </template>
+      <div v-if="Object.keys(fileList).length === 0" class="absolute inset-0 flex flex-col items-center justify-center group transition-colors text-slate-700 dark:text-slate-300 hover:text-slate-800 hover:dark:text-slate-200">
+        <UIcon name="i-heroicons-cloud-arrow-up" class="w-8 h-8 group-hover:scale-90" />
+        <span>Drag and Drop or click to upload.</span>
+      </div>
     </button>
     <ul v-for="item in fileList" :key="item.uid" class="space-y-2">
       <li class="hover:bg-slate-50 dark:hover:bg-slate-700 transition-colors rounded-md px-1 py-0.5 text-sm  flex justify-between items-center">

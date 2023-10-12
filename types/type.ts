@@ -12,29 +12,32 @@ export interface Database {
       assets: {
         Row: {
           created_at: string
+          description: string | null
           id: number
           key: string | null
-          name: string | null
           owner_id: string | null
           project_id: number | null
+          title: string | null
           type: string | null
         }
         Insert: {
           created_at?: string
+          description?: string | null
           id?: number
           key?: string | null
-          name?: string | null
           owner_id?: string | null
           project_id?: number | null
+          title?: string | null
           type?: string | null
         }
         Update: {
           created_at?: string
+          description?: string | null
           id?: number
           key?: string | null
-          name?: string | null
           owner_id?: string | null
           project_id?: number | null
+          title?: string | null
           type?: string | null
         }
         Relationships: [
@@ -55,6 +58,8 @@ export interface Database {
       links: {
         Row: {
           android: string | null
+          android_asset_id: number | null
+          android_image: string | null
           asset_id: number | null
           clicks: number | null
           created_at: string
@@ -63,6 +68,8 @@ export interface Database {
           id: number
           image: string | null
           ios: string | null
+          ios_asset_id: number | null
+          ios_image: string | null
           key: string
           password: string | null
           project_id: number | null
@@ -73,6 +80,8 @@ export interface Database {
         }
         Insert: {
           android?: string | null
+          android_asset_id?: number | null
+          android_image?: string | null
           asset_id?: number | null
           clicks?: number | null
           created_at?: string
@@ -81,6 +90,8 @@ export interface Database {
           id?: number
           image?: string | null
           ios?: string | null
+          ios_asset_id?: number | null
+          ios_image?: string | null
           key: string
           password?: string | null
           project_id?: number | null
@@ -91,6 +102,8 @@ export interface Database {
         }
         Update: {
           android?: string | null
+          android_asset_id?: number | null
+          android_image?: string | null
           asset_id?: number | null
           clicks?: number | null
           created_at?: string
@@ -99,6 +112,8 @@ export interface Database {
           id?: number
           image?: string | null
           ios?: string | null
+          ios_asset_id?: number | null
+          ios_image?: string | null
           key?: string
           password?: string | null
           project_id?: number | null
@@ -109,8 +124,20 @@ export interface Database {
         }
         Relationships: [
           {
+            foreignKeyName: 'links_android_asset_id_fkey'
+            columns: ['android_asset_id']
+            referencedRelation: 'assets'
+            referencedColumns: ['id']
+          },
+          {
             foreignKeyName: 'links_asset_id_fkey'
             columns: ['asset_id']
+            referencedRelation: 'assets'
+            referencedColumns: ['id']
+          },
+          {
+            foreignKeyName: 'links_ios_asset_id_fkey'
+            columns: ['ios_asset_id']
             referencedRelation: 'assets'
             referencedColumns: ['id']
           },

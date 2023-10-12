@@ -9,32 +9,30 @@ type RequestBody = Exclude<Tables<'links'>, 'id' | 'user_id'> & {slug?: string}
 export default defineAuthHandler(async (event) => {
   const supabase = await serverSupabaseClient<Database>(event)
   // supabase.from('links').update('clicks',)
-  const { url, slug, key, ...body } = await readValidatedBody(event, (body: any) => {
+  const { url, slug, ...body } = await readValidatedBody(event, (body: any) => {
     if (body.type === 'url' && (!body.url || !isValidUrl(body.url))) {
       throw new Error('Invalid URL')
     }
     if (body.type === 'image' && !body.image) {
       throw new Error('Missing image')
     }
-    if (!body.key) {
-      throw new Error('Missing key')
-    }
-    if (body.key.includes('/')) {
+    // if (!body.key) {
+    //   throw new Error('Missing key')
+    // }
+    if (body.key && body.key.includes('/')) {
       throw new Error('Invalid key')
     }
     // 去掉前后斜杠
-    const key = body.key.replace(/^\/+|\/+$/g, '')
-    if (key.length === 0) {
-      throw new Error('Invalid key')
-    }
-    return {
-      ...body,
-      key
-    }
+    // const key = body.key.replace(/^\/+|\/+$/g, '')
+    // if (key.length === 0) {
+    //   throw new Error('Invalid key')
+    // }
+    return body
   }) as RequestBody
 
   // no project
   if (!slug) {
+    const key = body.key || await getRandomKey(supabase)
     // 检查key是否存在
     const link = await supabase.from('links').select('id').eq('key', key).single()
     if (link.data) {
@@ -47,11 +45,9 @@ export default defineAuthHandler(async (event) => {
         throw createError({ statusCode: 400, data: 'Invalid project_id' })
       }
     }
-    // 🔗
-
     const { status, error } = await supabase.from('links').insert({
-      key,
       ...body,
+      key,
       user_id: event.context.session.user.id
     })
     if (error) {
@@ -65,7 +61,9 @@ export default defineAuthHandler(async (event) => {
         ...(body.image && { image: body.image }),
         password: !!body.password,
         ...(body.ios && { ios: body.ios }),
-        ...(body.android && { android: body.android })
+        ...(body.android && { android: body.android }),
+        ...(body.ios_image && { ios_image: body.ios_image }),
+        ...(body.android_image && { android_image: body.android_image })
       }, {
         nx: true
       })
@@ -108,16 +106,3 @@ export default defineAuthHandler(async (event) => {
     return res
   }
 })
-
-async function getRandomKey (supabase: Awaited<ReturnType<typeof serverSupabaseClient<Database>>>, domain?: string): Promise<string> {
-  /* recursively get random key till it gets one that's available */
-  const key = nanoid()
-  const response = await supabase.from('links').select('*').eq('key', key).limit(1).maybeSingle()
-
-  if (response.data) {
-    // by the off chance that key already exists
-    return getRandomKey(supabase, domain)
-  } else {
-    return key
-  }
-}
