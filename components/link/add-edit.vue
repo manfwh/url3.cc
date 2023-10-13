@@ -5,9 +5,9 @@ import type { FormSubmitEvent } from '@nuxt/ui/dist/runtime/types'
 import DraggerUpload from '@/components/shared/upload/dragger-upload.vue'
 import type { UploadFile, UploadedFile } from '@/components/shared/upload/types'
 import { getFilename } from '@/utils'
-import { Tables, Enums } from '~/types/type'
+import { Enums } from '~/types/type'
 const { $toast } = useNuxtApp()
-const { fullDomain } = useAppConfig()
+// const { fullDomain } = useAppConfig()
 const addEditState = useLinkAddEditModal()
 const submitting = ref(false)
 
@@ -43,19 +43,19 @@ const state = ref<State>({
 })
 
 // 是否正在获取key中
-const fetchKeyLoading = ref(false)
-function setRandomKey () {
-  fetchKeyLoading.value = true
-  $fetch('/api/links/_random')
-    .then((key) => {
-      fetchKeyLoading.value = false
-      state.value.key = key
-    }).catch(() => {
-      fetchKeyLoading.value = false
-    })
-}
+// const fetchKeyLoading = ref(false)
+// function setRandomKey () {
+//   fetchKeyLoading.value = true
+//   $fetch('/api/links/_random')
+//     .then((key) => {
+//       fetchKeyLoading.value = false
+//       state.value.key = key
+//     }).catch(() => {
+//       fetchKeyLoading.value = false
+//     })
+// }
 const submit = async (event: FormSubmitEvent<typeof state.value>) => {
-  if (fetchKeyLoading.value) { return }
+  // if (fetchKeyLoading.value) { return }
   try {
     submitting.value = true
     if (editLink.value?.id) {
@@ -87,10 +87,10 @@ const submit = async (event: FormSubmitEvent<typeof state.value>) => {
 
 const showPassword = ref(false)
 
-watchDebounced(() => state.value.url, () => {
-  if (state.value.key || fetchKeyLoading.value) { return }
-  setRandomKey()
-}, { debounce: 500 })
+// watchDebounced(() => state.value.url, () => {
+//   if (state.value.key || fetchKeyLoading.value) { return }
+//   setRandomKey()
+// }, { debounce: 500 })
 
 const uploadChange = (info: UploadFile, field: keyof typeof state.value) => {
   console.log('info', info)
@@ -150,15 +150,15 @@ const genUploadedFile = computed(() => (field: keyof typeof state.value) => {
             {{ state.image }}
           </div> -->
         </UFormGroup>
-        <UFormGroup label="Title" name="title" hint="O">
+        <UFormGroup label="Title" name="title" hint="Optional">
           <UInput v-model="state.title" type="text" placeholder="Title" color="gray" variant="outline" />
         </UFormGroup>
-        <UFormGroup label="Description" name="description">
+        <UFormGroup label="Description" name="description" hint="Optional">
           <UInput v-model="state.description" type="text" color="gray" variant="outline" />
         </UFormGroup>
       </template>
 
-      <UFormGroup label="Shrot Link" name="key" :ui="{container: 'flex'}">
+      <!-- <UFormGroup label="Shrot Link" name="key" :ui="{container: 'flex'}">
         <span
           class="py-1.5  text-sm rounded-l-md px-2.5 ring-1 ring-inset ring-gray-300 dark:ring-gray-700 truncate"
         >{{ fullDomain }}</span>
@@ -174,8 +174,8 @@ const genUploadedFile = computed(() => (field: keyof typeof state.value) => {
         >
           {{ fetchKeyLoading ? 'Fetching...' : 'Set Random Key' }}
         </UButton>
-      </UFormGroup>
-      <UFormGroup label="访问密码" name="password" hint="可选">
+      </UFormGroup> -->
+      <UFormGroup label="访问密码" name="password" hint="Optional">
         <UInput v-model="state.password" icon="i-heroicons-lock-closed" :type="showPassword ? 'text' : 'password'" />
         <div class="absolute inset-y-0 flex items-center justify-center right-2">
           <UButton
@@ -187,7 +187,7 @@ const genUploadedFile = computed(() => (field: keyof typeof state.value) => {
           />
         </div>
       </UFormGroup>
-      <UFormGroup label="Android Targeting" name="android" hint="可选">
+      <UFormGroup label="Android Targeting" name="android" hint="Optional">
         <UInput v-if="state.type === 'url'" v-model="state.android" type="url" />
         <DraggerUpload
           v-if="state.type === 'image'"
@@ -198,7 +198,7 @@ const genUploadedFile = computed(() => (field: keyof typeof state.value) => {
           @remove="state.android_image = ''"
         />
       </UFormGroup>
-      <UFormGroup label="Ios Targeting" name="ios" hint="可选">
+      <UFormGroup label="Ios Targeting" name="ios" hint="Optional">
         <UInput v-if="state.type === 'url'" v-model="state.ios" type="url" />
         <DraggerUpload
           v-if="state.type === 'image'"
@@ -210,7 +210,7 @@ const genUploadedFile = computed(() => (field: keyof typeof state.value) => {
         />
       </UFormGroup>
 
-      <UButton type="submit" :loading="submitting" :disabled="fetchKeyLoading">
+      <UButton type="submit" :loading="submitting">
         Submit
       </UButton>
     </UForm>

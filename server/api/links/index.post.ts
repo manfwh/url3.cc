@@ -1,35 +1,18 @@
+import {
+  S3Client,
+  CopyObjectCommand
+} from '@aws-sdk/client-s3'
 import { serverSupabaseClient, serverSupabaseUser } from '#supabase/server'
 import { Database, Tables } from '~/types/type'
 
-import { isValidUrl } from '~/server/utils'
+import { validateRequest } from '~/server/utils/link'
 import { redis } from '~/server/utils/upstash'
 import { defineAuthHandler } from '~/server/utils/handler'
 
 type RequestBody = Exclude<Tables<'links'>, 'id' | 'user_id'> & {slug?: string}
 export default defineAuthHandler(async (event) => {
   const supabase = await serverSupabaseClient<Database>(event)
-  // supabase.from('links').update('clicks',)
-  const { url, slug, ...body } = await readValidatedBody(event, (body: any) => {
-    if (body.type === 'url' && (!body.url || !isValidUrl(body.url))) {
-      throw new Error('Invalid URL')
-    }
-    if (body.type === 'image' && !body.image) {
-      throw new Error('Missing image')
-    }
-    // if (!body.key) {
-    //   throw new Error('Missing key')
-    // }
-    if (body.key && body.key.includes('/')) {
-      throw new Error('Invalid key')
-    }
-    // 去掉前后斜杠
-    // const key = body.key.replace(/^\/+|\/+$/g, '')
-    // if (key.length === 0) {
-    //   throw new Error('Invalid key')
-    // }
-    return body
-  }) as RequestBody
-
+  const { url, slug, ...body } = await readValidatedBody(event, validateRequest) as RequestBody
   // no project
   if (!slug) {
     const key = body.key || await getRandomKey(supabase)
@@ -45,6 +28,9 @@ export default defineAuthHandler(async (event) => {
         throw createError({ statusCode: 400, data: 'Invalid project_id' })
       }
     }
+    // 删除图片前缀_nocjeck_
+    await copyImage(body)
+
     const { status, error } = await supabase.from('links').insert({
       ...body,
       key,
@@ -69,12 +55,12 @@ export default defineAuthHandler(async (event) => {
       })
       if (response !== 'OK') {
         await supabase.from('links').delete().eq('key', key)
-        throw createError({ statusCode: 400, data: 'Create Error' })
+        throw createError({ statusCode: 500, data: 'Create Error' })
       }
 
       setResponseStatus(event, status)
     } catch (error) {
-
+      throw createError({ statusCode: 500, data: 'Create Error' })
     }
   } else {
     const user = await serverSupabaseUser(event)
@@ -106,3 +92,42 @@ export default defineAuthHandler(async (event) => {
     return res
   }
 })
+
+async function copyImage (body: Partial<RequestBody>) {
+  if (body.type === 'image' && body.image) {
+    const S3 = new S3Client({
+      region: 'auto',
+      endpoint: `https://${process.env.CF_ACCOUNT_ID!}.r2.cloudflarestorage.com`,
+      credentials: {
+        accessKeyId: process.env.S3_ACCESS_KEY_ID!,
+        secretAccessKey: process.env.S3_SECRET_ACCESS_KEY!
+      }
+    })
+    const destKey = body.image.replace('_nocheck_', '')
+    const commands = []
+    const copyImagecommand = new CopyObjectCommand({
+      Bucket: process.env.S3_BUCKET_NAME!,
+      CopySource: process.env.S3_BUCKET_NAME! + '/' + body.image,
+      Key: destKey
+    })
+    commands.push(copyImagecommand)
+    if (body.android_image) {
+      const copyAndroidImagecommand = new CopyObjectCommand({
+        Bucket: process.env.S3_BUCKET_NAME!,
+        CopySource: process.env.S3_BUCKET_NAME! + '/' + body.android_image,
+        Key: destKey
+      })
+      commands.push(copyAndroidImagecommand)
+    }
+    if (body.ios_image) {
+      const copyIosImagecommand = new CopyObjectCommand({
+        Bucket: process.env.S3_BUCKET_NAME!,
+        CopySource: process.env.S3_BUCKET_NAME! + '/' + body.ios_image,
+        Key: destKey
+      })
+      commands.push(copyIosImagecommand)
+    }
+    await Promise.all(commands.map(command => S3.send(command)))
+    body.image = destKey
+  }
+}

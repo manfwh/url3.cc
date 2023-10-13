@@ -1,7 +1,8 @@
 <script setup lang="ts">
 import type { Database } from '~/types/type'
 const supabase = useSupabaseClient<Database>()
-const redirectTo = 'http://localhost:8888/confirm'
+const url = useRequestURL()
+const redirectTo = url.origin + '/confirm'
 async function signInWithGitHub () {
   console.log('redirectTo', redirectTo)
   const { data, error } = await supabase.auth.signInWithOAuth({

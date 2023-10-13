@@ -57,7 +57,6 @@ export default defineAuthHandler(async (event) => {
   })
     .then(res => res.json())
     .then(({ data }) => {
-      console.log('data', data)
       if (endpoint === 'clicks') {
         try {
           const clicks = data[0]['count()']
