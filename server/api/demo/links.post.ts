@@ -27,16 +27,3 @@ export default defineEventHandler(async (event) => {
     throw createError({ statusCode: 500, data: 'Failed to create link' })
   }
 })
-
-async function getRandomKey (supabase: Awaited<ReturnType<typeof serverSupabaseClient<Database>>>, domain?: string): Promise<string> {
-  /* recursively get random key till it gets one that's available */
-  const key = nanoid()
-  const response = await supabase.from('links').select('*').eq('key', key).limit(1).maybeSingle()
-
-  if (response.data) {
-    // by the off chance that key already exists
-    return getRandomKey(supabase, domain)
-  } else {
-    return key
-  }
-}

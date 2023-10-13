@@ -7,13 +7,16 @@ const props = defineProps<{
   isHome?: boolean
 }>()
 const emit = defineEmits<{
-  (e: 'deleteLink', value: Tables<'links'> | {url: string, key: string}): void
-  (e: 'editLink', value: Tables<'links'> | {url: string, key: string}): void
+  (e: 'deleteLink', key: string, link?: Tables<'links'>): void
+  (e: 'editLink', key: string, link?: Tables<'links'>): void
 }>()
 
 const domain = 'url3.cc'
 const fullDomain = `https://${domain}/`
 
+const key = computed(() => {
+  return props.link?.key || props.homeLink?.key
+})
 const menus = [
   [{
     label: 'Edit',
@@ -21,7 +24,7 @@ const menus = [
     shortcuts: ['E'],
     click: () => {
       // isOpen.value = true
-      emit('editLink', props.link || props.homeLink!)
+      emit('editLink', key.value!, props.link)
     }
   }],
   [{
@@ -29,13 +32,10 @@ const menus = [
     icon: 'i-heroicons-trash-20-solid',
     shortcuts: ['D'],
     click: () => {
-      emit('deleteLink', props.link || props.homeLink!)
+      emit('deleteLink', key.value!, props.link)
     }
   }]
 ]
-const key = computed(() => {
-  return props.link?.key || props.homeLink?.key
-})
 const url = computed(() => {
   return props.link?.url || props.homeLink?.url
 })

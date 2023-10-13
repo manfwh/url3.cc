@@ -1,6 +1,7 @@
 <script setup lang="ts">
+import { CornerDownLeft, Loader } from 'lucide-vue-next'
 import { useStorage } from '@vueuse/core'
-const { $toast } = useNuxtApp()
+const toast = useToast()
 const formRef = ref<HTMLFormElement>()
 
 const submitting = ref(false)
@@ -16,14 +17,30 @@ const handleSubmit = (e: Event) => {
     }
     formRef.value?.reset()
     submitting.value = false
-    $toast.success('创建成功')
+    toast.add({ title: 'Link Created' })
   }).catch(() => {
     submitting.value = false
-    $toast.error('创建失败')
+    toast.add({ title: 'Link Create Error' })
   })
 }
 const isMounted = useMounted()
 const links = useStorage<{key: string, url: string}[]>('links', [])
+const deleteLink = (key: string) => {
+  links.value = links.value.filter(link => link.key !== key)
+}
+const confirmModalState = useConfirmModal()
+
+const openDelModal = async (key: string) => {
+  const res = await openConfirmModal({
+    description: 'Are you sure to delete this link?'
+    // confirmText: 'Delete',
+  })
+  if (res === 'confirm') {
+    confirmModalState.value.isOpen = false
+    deleteLink(key)
+    toast.add({ title: 'Link deleted' })
+  }
+}
 const tabItems = [{
   label: 'Link',
   slot: 'link'
@@ -85,7 +102,7 @@ const tabItems = [{
     >
       <template v-for="item in links" :key="item.key">
         <!-- <HomeLinkCard :link="item" @delete-link="deleteLink" /> -->
-        <LinkCard :link="item" />
+        <LinkCard :home-link="item" @delete-link="openDelModal" />
       </template>
     </TransitionGroup>
     <UAlert

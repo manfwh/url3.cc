@@ -11,8 +11,8 @@ const supabase = useSupabase()
 const state = useLinkAddEditModal()
 const isOpen = toRef(() => state.value.isOpen)
 const toast = useToast()
-const openEditModal = async (link: Tables<'links'>) => {
-  const editLink = props.links?.find(item => item.id === link.id)
+const openEditModal = async (key: string, link?: Tables<'links'>) => {
+  const editLink = props.links?.find(item => item.id === link?.id)
   if (editLink) {
     state.value = {
       ...state.value,
@@ -28,17 +28,14 @@ const openEditModal = async (link: Tables<'links'>) => {
   }
 }
 const confirmModalState = useConfirmModal()
-const openDelModal = async (link: Tables<'links'>) => {
+const openDelModal = async (key: string, link?: Tables<'links'>) => {
   const res = await openConfirmModal({
     description: 'Are you sure to delete this link?'
     // confirmText: 'Delete',
   })
-  console.log('res', res)
-
   if (res === 'confirm') {
-    console.log('删除')
     confirmModalState.value.confirmLoading = true
-    $fetch(`/api/links/${link.key}`, {
+    $fetch(`/api/links/${link?.key}`, {
       method: 'DELETE'
     }).then(() => {
       // refresh()
