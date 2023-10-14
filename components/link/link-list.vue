@@ -7,12 +7,13 @@ const props = defineProps<{
 const emit = defineEmits<{
   (event: 'refresh'): void
 }>()
-const supabase = useSupabase()
 const state = useLinkAddEditModal()
 const isOpen = toRef(() => state.value.isOpen)
 const toast = useToast()
 const openEditModal = async (key: string, link?: Tables<'links'>) => {
+  console.log('edit2')
   const editLink = props.links?.find(item => item.id === link?.id)
+  console.log('editLink', editLink)
   if (editLink) {
     state.value = {
       ...state.value,
@@ -33,12 +34,12 @@ const openDelModal = async (key: string, link?: Tables<'links'>) => {
     description: 'Are you sure to delete this link?'
     // confirmText: 'Delete',
   })
+  console.log('link2', link)
   if (res === 'confirm') {
     confirmModalState.value.confirmLoading = true
     $fetch(`/api/links/${link?.key}`, {
       method: 'DELETE'
     }).then(() => {
-      // refresh()
       emit('refresh')
       toast.add({ title: 'Link deleted' })
       confirmModalState.value.confirmLoading = false

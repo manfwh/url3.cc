@@ -9,6 +9,15 @@ export default defineAppConfig({
         gray: {
           ghost: 'text-gray-700 dark:text-gray-200 hover:text-gray-900 dark:hover:text-white hover:bg-gray-100 dark:hover:bg-gray-800 focus-visible:ring-inset focus-visible:ring-2 focus-visible:ring-primary-500 dark:focus-visible:ring-primary-400'
         }
+      },
+      icon: {
+        size: {
+          sm: 'h-4 w-4'
+        }
+      },
+      default: {
+        sm: 'h-4 w-4',
+        loadingIcon: 'i-lucide-loader'
       }
     },
     tooltip: {

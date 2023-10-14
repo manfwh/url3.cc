@@ -5,9 +5,21 @@ export default defineNuxtConfig({
     ['@nuxtjs/eslint-module', { lintOnStart: false }],
     '@nuxtjs/supabase',
     '@vueuse/nuxt',
-    '@nuxt/ui'
+    '@nuxt/ui',
+    '@nuxtjs/fontaine'
   ],
   css: ['~/assets/css/main.css'],
+  fontMetrics: {
+    fonts: [
+      {
+        family: 'Poppins',
+        fallbacks: ['Georgia'],
+        fallbackName: 'fallback-poppins',
+        src: 'fonts/poppins.ttf',
+        root: 'assets'
+      }
+    ]
+  },
   supabase: {
     cookieOptions: {
       maxAge: 60 * 60 * 8,
@@ -26,5 +38,8 @@ export default defineNuxtConfig({
   },
   build: {
     transpile: ['vue-sonner', /echarts/]
+  },
+  ui: {
+    icons: ['lucide']
   }
 })

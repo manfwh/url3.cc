@@ -9,7 +9,7 @@ definePageMeta({
 
 const state = useLinkAddEditModal()
 const supabase = useSupabaseClient<Database>()
-const { $toast } = useNuxtApp()
+const toast = useToast()
 
 const { data: links, refresh } = await useAsyncData(
   'user-links',
@@ -29,8 +29,8 @@ const openAddModal = async () => {
     refresh()
   }
 }
-const openEditModal = async (link: Tables<'links'>) => {
-  const editLink = list.value?.find(item => item.id === link.id)
+const openEditModal = async (key?: string, link?: Tables<'links'>) => {
+  const editLink = list.value?.find(item => item.id === link?.id)
   if (editLink) {
     state.value = {
       ...state.value,
@@ -46,26 +46,22 @@ const openEditModal = async (link: Tables<'links'>) => {
 }
 const list = computed(() => links.value?.data)
 const confirmModalState = useConfirmModal()
-const openDelModal = async (link: Tables<'links'>) => {
-  console.log('link', link)
+const openDelModal = async (key: string, link?: Tables<'links'>) => {
   const res = await openConfirmModal({
-    description: '确认要删除吗？'
+    description: 'Are you sure to delete this link?'
   })
-  console.log('res', res)
-
   if (res === 'confirm') {
-    console.log('删除')
     confirmModalState.value.confirmLoading = true
-    $fetch(`/api/links/${link.key}`, {
+    $fetch(`/api/links/${key}`, {
       method: 'DELETE'
     }).then(() => {
       refresh()
-      $toast.success('Link deleted')
+      toast.add({ title: 'Link deleted' })
       confirmModalState.value.confirmLoading = false
       confirmModalState.value.isOpen = false
     })
       .catch(() => {
-        $toast.error('Link not deleted')
+        toast.add({ title: 'Link not deleted' })
         confirmModalState.value.confirmLoading = false
       })
     // setTimeout(() => {

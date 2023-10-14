@@ -50,37 +50,48 @@ const tabItems = [{
 }]
 </script>
 <template>
-  <div class="mx-auto max-w-lg pt-24">
+  <div class="mx-auto max-w-lg mt-16">
     <UTabs :items="tabItems">
       <template #link>
-        <form ref="formRef" class="mb-8" @submit.prevent="handleSubmit">
-          <div class="relative">
-            <UInput
-              icon="i-heroicons-link"
-              variant="outline"
-              color="primary"
-              type="url"
-              autocomplete="off"
-              name="url"
-              input-class="pr-14"
-              required
-              size="xl"
-              :disabled="submitting"
-              placeholder="Enter a Link"
-              :ui="{
-                variant: {
-                  outline: 'bg-white dark:bg-slate-800'
-                }
-              }"
-            />
-            <div class="absolute right-4 inset-y-0 flex items-center">
-              <UButton color="primary" variant="ghost" type="submit" :disabled="submitting">
-                <Loader v-if="submitting" class="h-4 w-4 animate-spin" />
-                <CornerDownLeft v-else class="h-4 w-4" />
-              </UButton>
+        <div class="bg-white dark:bg-gray-800 p-6 rounded-md divide-y divide-slate-200 dark:divide-gray-600">
+          <form ref="formRef" @submit.prevent="handleSubmit">
+            <label
+              class="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
+              for="url"
+            >Enter your long URL to get started</label>
+            <div class="relative mt-4">
+              <UInput
+                type="url"
+                autocomplete="off"
+                name="url"
+                required
+                size="md"
+                :disabled="submitting"
+                placeholder="https://example.com"
+                :ui="{
+                  variant: {
+                    outline: 'bg-white dark:bg-slate-800'
+                  }
+                }"
+              />
+              <!-- <div class="absolute right-4 inset-y-0 flex items-center">
+                <UButton color="primary" variant="ghost" type="submit" :disabled="submitting">
+                  <Loader v-if="submitting" class="h-4 w-4 animate-spin" />
+                  <CornerDownLeft v-else class="h-4 w-4" />
+                </UButton>
+              </div> -->
             </div>
+            <UButton block size="md" class="mt-4">
+              Generate Short Link
+            </UButton>
+          </form>
+          <div class="mt-4 pt-4">
+            <span class="font-semibold">Your Short Link:</span>
+            <p class="bg-slate-100 dark:bg-gray-700 rounded p-2 mt-2">
+              https://short.ly/abc123
+            </p>
           </div>
-        </form>
+        </div>
       </template>
       <template #image="{ item }">
         {{ item.label }}

@@ -39,11 +39,11 @@ const signInWithGitHub = async () => {
         </div>
       </div>
     </div>
-    <h1 class="text-6xl text-center text-gray-800 dark:text-gray-100 mt-24 font-bold ">
-      Create Your <span class="text-transparent bg-clip-text bg-gradient-to-r from-green-400 to-teal-400">Short Links</span>
+    <h1 class="text-6xl text-center text-gray-800 dark:text-gray-100 mt-24 font-bold mb-8">
+      Welcome to <span class="text-transparent bg-clip-text bg-gradient-to-r from-green-400 to-teal-400">Short Link</span> Generator!
     </h1>
-    <p class="text-center text-gray-700 dark:text-gray-300 mt-4">
-      Shrink those lengthy URLs for quick content sharing.
+    <p class="text-center text-gray-700 dark:text-gray-300">
+      Convert your lengthy URLs into short and simple links in just a single click. Get started now!
     </p>
     <HomeDemoCreate />
     <Background />

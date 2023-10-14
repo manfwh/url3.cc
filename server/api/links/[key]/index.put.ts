@@ -73,19 +73,19 @@ async function deleteImage (link: Tables<'links'>, updateBody: RequestBody) {
       commands.push(deleteIosImage)
     }
   }
-  if (updateBody.image && link.image) {
+  if (updateBody.image && link.image && updateBody.image !== link.image) {
     commands.push(new DeleteObjectCommand({
       Bucket: process.env.S3_BUCKET_NAME!,
       Key: link.image
     }))
   }
-  if (updateBody.android_image && link.android_image) {
+  if (updateBody.android_image && link.android_image && updateBody.android_image !== link.android_image) {
     commands.push(new DeleteObjectCommand({
       Bucket: process.env.S3_BUCKET_NAME!,
       Key: link.android_image
     }))
   }
-  if (updateBody.ios_image && link.ios_image) {
+  if (updateBody.ios_image && link.ios_image && updateBody.ios_image !== link.ios_image) {
     commands.push(new DeleteObjectCommand({
       Bucket: process.env.S3_BUCKET_NAME!,
       Key: link.ios_image

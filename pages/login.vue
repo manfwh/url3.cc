@@ -1,5 +1,10 @@
 <script setup lang="ts">
 import type { Database } from '~/types/type'
+
+definePageMeta({
+  middleware: 'auth'
+})
+
 const supabase = useSupabaseClient<Database>()
 const url = useRequestURL()
 const redirectTo = url.origin + '/confirm'

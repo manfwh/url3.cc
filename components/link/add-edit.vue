@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { nanoid } from 'nanoid'
 // import { fileTypeFromFile } from 'file-type'
-import type { FormSubmitEvent } from '@nuxt/ui/dist/runtime/types'
+import type { FormError, FormSubmitEvent } from '@nuxt/ui/dist/runtime/types'
 import DraggerUpload from '@/components/shared/upload/dragger-upload.vue'
 import type { UploadFile, UploadedFile } from '@/components/shared/upload/types'
 import { getFilename } from '@/utils'
@@ -106,7 +106,7 @@ const genUploadedFile = computed(() => (field: keyof typeof state.value) => {
   if (state.value.type === 'image') {
     if (!state.value[field]) { return [] }
     const imageFile: UploadedFile = {
-      url: `https://file.url3.cc/${state.value[field]}`,
+      url: `https://url3.cc/assets/${state.value[field]}`,
       name: (field === 'image' ? state.value.title : state.value[field]) || '',
       status: 'done'
     }
@@ -114,11 +114,20 @@ const genUploadedFile = computed(() => (field: keyof typeof state.value) => {
   }
   return []
 })
+
+const validate = (state: State): FormError[] => {
+  const errors = []
+  if (state.type === 'image') {
+    if (!state.image) { errors.push({ path: 'image', message: 'You must select an image!' }) }
+  }
+  return errors
+}
 </script>
 <template>
   <div class="px-4">
     <UForm
       :state="state"
+      :validate="validate"
       class="space-y-4"
       @submit="submit"
     >
@@ -126,10 +135,18 @@ const genUploadedFile = computed(() => (field: keyof typeof state.value) => {
         <USelectMenu v-model="state.type" :options="['url', 'image']" color="gray" variant="outline" />
       </UFormGroup>
       <UFormGroup v-if="state.type === 'url'" label="Target" name="url">
-        <UInput v-model="state.url" icon="i-heroicons-link" type="url" placeholder="https://baidu.com" required />
+        <UInput
+          v-model="state.url"
+          icon="i-heroicons-link"
+          type="url"
+          placeholder="https://expmale-long.com"
+          required
+          color="gray"
+          variant="outline"
+        />
       </UFormGroup>
       <template v-else-if="state.type === 'image'">
-        <UFormGroup label="Image File" name="type">
+        <UFormGroup label="Image File" name="image">
           <DraggerUpload
             v-if="state.type === 'image'"
             :default-file-list="genUploadedFile('image')"
@@ -138,17 +155,6 @@ const genUploadedFile = computed(() => (field: keyof typeof state.value) => {
             @change="uploadChange($event, 'image')"
             @remove="state.image = ''"
           />
-          <!-- <input type="file"> -->
-          <!-- <button
-            type="button"
-            class="w-full h-32 relative block bg-gray-50  disabled:cursor-not-allowed disabled:opacity-75   rounded-md   dark:placeholder-gray-500 text-sm px-2.5 py-1.5 shadow-sm dark:bg-gray-900 text-gray-900 dark:text-white transition-colors border border-dashed border-gray-300 dark:border-gray-700 hover:border-primary-400 focus:border-primary-500 dark:focus:border-primary-400 focus:outline-none"
-            @click="openDialog"
-          >
-            Upload File
-          </button>
-          <div v-if="state.image">
-            {{ state.image }}
-          </div> -->
         </UFormGroup>
         <UFormGroup label="Title" name="title" hint="Optional">
           <UInput v-model="state.title" type="text" placeholder="Title" color="gray" variant="outline" />
@@ -175,8 +181,8 @@ const genUploadedFile = computed(() => (field: keyof typeof state.value) => {
           {{ fetchKeyLoading ? 'Fetching...' : 'Set Random Key' }}
         </UButton>
       </UFormGroup> -->
-      <UFormGroup label="访问密码" name="password" hint="Optional">
-        <UInput v-model="state.password" icon="i-heroicons-lock-closed" :type="showPassword ? 'text' : 'password'" />
+      <UFormGroup label="Password" name="password" hint="Optional">
+        <UInput v-model="state.password" icon="i-heroicons-lock-closed" :type="showPassword ? 'text' : 'password'" color="gray" variant="outline" />
         <div class="absolute inset-y-0 flex items-center justify-center right-2">
           <UButton
             :icon="showPassword ? 'i-heroicons-eye-slash' : 'i-heroicons-eye'"
@@ -187,8 +193,8 @@ const genUploadedFile = computed(() => (field: keyof typeof state.value) => {
           />
         </div>
       </UFormGroup>
-      <UFormGroup label="Android Targeting" name="android" hint="Optional">
-        <UInput v-if="state.type === 'url'" v-model="state.android" type="url" />
+      <UFormGroup label="Android Targeting" :name="state.type === 'url' ? 'android' : 'android_image'" hint="Optional">
+        <UInput v-if="state.type === 'url'" v-model="state.android" type="url" color="gray" variant="outline" />
         <DraggerUpload
           v-if="state.type === 'image'"
           accept="image/*"
@@ -198,8 +204,8 @@ const genUploadedFile = computed(() => (field: keyof typeof state.value) => {
           @remove="state.android_image = ''"
         />
       </UFormGroup>
-      <UFormGroup label="Ios Targeting" name="ios" hint="Optional">
-        <UInput v-if="state.type === 'url'" v-model="state.ios" type="url" />
+      <UFormGroup label="Ios Targeting" hint="Optional" :name="state.type === 'url' ? 'ios' : 'ios_image'">
+        <UInput v-if="state.type === 'url'" v-model="state.ios" type="url" color="gray" variant="outline" />
         <DraggerUpload
           v-if="state.type === 'image'"
           accept="image/*"
@@ -209,10 +215,11 @@ const genUploadedFile = computed(() => (field: keyof typeof state.value) => {
           @remove="state.ios_image = ''"
         />
       </UFormGroup>
-
-      <UButton type="submit" :loading="submitting">
-        Submit
-      </UButton>
+      <div class="text-right">
+        <UButton type="submit" :loading="submitting">
+          {{ submitting ? 'Submitting' : 'Submit' }}
+        </UButton>
+      </div>
     </UForm>
   </div>
 </template>

@@ -27,16 +27,20 @@ const handleConfirm = () => {
           <UButton color="gray" variant="ghost" icon="i-heroicons-x-mark-20-solid" class="-my-1" @click="handleClose" />
         </div>
       </template>
-      <p v-if="state.label.description">
-        {{ state.label.description }}
-      </p>
+      <div class="flex items-center">
+        <!-- <UIcon name="i-heroicons-exclamation-triangle-solid" class="w-6 h-6 text-red-800" /> -->
+        <p v-if="state.label.description">
+          {{ state.label.description }}
+        </p>
+      </div>
+
       <template #footer>
         <div class="space-x-4 flex justify-end items-center">
           <UButton color="gray" variant="ghost" :disabled="state.confirmLoading" @click="handleClose">
-            取 消
+            Cancel
           </UButton>
-          <UButton :loading="state.confirmLoading" @click="handleConfirm">
-            确 认
+          <UButton :loading="state.confirmLoading" color="red" @click="handleConfirm">
+            Confirm
           </UButton>
         </div>
       </template>

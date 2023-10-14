@@ -1,3 +1,10 @@
-/* @tailwind base;
-@tailwind components;
-@tailwind utilities; */
+@font-face {
+  font-family: 'Poppins From CSS';
+  font-display: swap;
+  src: url('../fonts/poppins.ttf');
+}
+@font-face {
+  font-family: 'Poppins variant';
+  font-display: swap;
+  src: url('../fonts/poppins.ttf');
+}

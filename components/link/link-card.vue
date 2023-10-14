@@ -17,25 +17,29 @@ const fullDomain = `https://${domain}/`
 const key = computed(() => {
   return props.link?.key || props.homeLink?.key
 })
-const menus = [
-  [{
-    label: 'Edit',
-    icon: 'i-heroicons-pencil-square-20-solid',
-    shortcuts: ['E'],
-    click: () => {
+const menus = computed(() => {
+  return [
+    [{
+      label: 'Edit',
+      icon: 'i-heroicons-pencil-square-20-solid',
+      shortcuts: ['E'],
+      click: () => {
       // isOpen.value = true
-      emit('editLink', key.value!, props.link)
-    }
-  }],
-  [{
-    label: 'Delete',
-    icon: 'i-heroicons-trash-20-solid',
-    shortcuts: ['D'],
-    click: () => {
-      emit('deleteLink', key.value!, props.link)
-    }
-  }]
-]
+        console.log('edit', key.value, props.link)
+        emit('editLink', key.value!, props.link)
+      }
+    }],
+    [{
+      label: 'Delete',
+      icon: 'i-heroicons-trash-20-solid',
+      shortcuts: ['D'],
+      click: () => {
+        console.log('props.link', props.link)
+        emit('deleteLink', key.value!, props.link)
+      }
+    }]
+  ]
+})
 const url = computed(() => {
   return props.link?.url || props.homeLink?.url
 })
