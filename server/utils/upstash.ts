@@ -29,18 +29,25 @@ export const ratelimit = (
       }
 }
 
-export async function setRandomKey (url:string): Promise<{response: string; key: string}> {
+export async function setRandomKey (data: {
+  url?:string,
+  type?: string,
+  image?: string
+}): Promise<{response: string; key: string}> {
   const key = nanoid()
   const response = await redis.set(
     `short-link:${key}`,
-    { url },
+    {
+      ...data,
+      is_demo: true
+    },
     {
       nx: true,
       ex: 30 * 60
     }
   )
   if (response !== 'OK') {
-    return setRandomKey(url)
+    return setRandomKey(data)
   } else {
     return {
       response,

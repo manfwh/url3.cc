@@ -94,7 +94,7 @@ const remove = (uid: string) => {
   <div>
     <button
       type="button"
-      class="w-full relative flex items-center justify-center p-0 mb-2 h-32 disabled:cursor-not-allowed disabled:opacity-75 rounded-md border border-dashed
+      class="w-full box-content relative flex items-center justify-center p-0 h-32 disabled:cursor-not-allowed disabled:opacity-75 rounded-md border border-dashed
        bg-gray-50 dark:placeholder-gray-500 text-sm shadow-sm dark:bg-gray-900 text-gray-900 dark:text-white transition-colors border-gray-300 dark:border-gray-700 hover:border-primary-400 focus:border-primary-500 dark:focus:border-primary-400 focus:outline-none"
       @click="openDialog"
     >
@@ -110,28 +110,30 @@ const remove = (uid: string) => {
         <span>Drag and Drop or click to upload.</span>
       </div>
     </button>
-    <ul v-for="item in fileList" :key="item.uid" class="space-y-2">
-      <li class="hover:bg-slate-50 dark:hover:bg-slate-700 transition-colors rounded-md px-1 py-0.5 text-sm  flex justify-between items-center">
-        <div class="flex items-center truncate">
-          <UIcon v-if="item.status === 'uploading'" name="i-lucide-loader" class="h-4 w-4 animate-spin flex-shrink-0" />
-          <UIcon v-if="item.status === 'done'" name="i-heroicons-check" class="h-4 w-4 text-primary flex-shrink-0" />
-          <UIcon v-if="item.status === 'error'" name="i-heroicons-question-mark-circle" class="h-4 w-4 flex-shrink-0 text-red-500" />
-          <span class="ml-1 text-slate-700 dark:text-slate-50 truncate">{{ item.name }}
+    <SharedTransitionHeight>
+      <ul v-for="item in fileList" :key="item.uid" class="space-y-2 mt-2">
+        <li class="hover:bg-slate-50 dark:hover:bg-slate-700 transition-colors rounded-md px-1 py-0.5 text-sm  flex justify-between items-center">
+          <div class="flex items-center truncate ">
+            <UIcon v-if="item.status === 'uploading'" name="i-lucide-loader" class="h-4 w-4 animate-spin flex-shrink-0" />
+            <UIcon v-if="item.status === 'done'" name="i-heroicons-check" class="h-4 w-4 text-primary flex-shrink-0" />
+            <UIcon v-if="item.status === 'error'" name="i-heroicons-question-mark-circle" class="h-4 w-4 flex-shrink-0 text-red-500" />
+            <span class="ml-1 text-slate-700 dark:text-slate-50 truncate">{{ item.name }}
             <!-- {{ item.status }} -->
-          </span>
-        </div>
-        <UTooltip text="Delete">
-          <UButton
-            size="2xs"
-            icon="i-heroicons-trash"
-            color="gray"
-            variant="ghost"
-            class="ml-auto"
-            @click="remove(item.uid)"
-          />
-        </UTooltip>
-        <!-- <UIcon name="i-heroicons-x-mark" class="self-end" /> -->
-      </li>
-    </ul>
+            </span>
+          </div>
+          <UTooltip text="Delete">
+            <UButton
+              size="2xs"
+              icon="i-heroicons-trash"
+              color="gray"
+              variant="ghost"
+              class="ml-auto"
+              @click="remove(item.uid)"
+            />
+          </UTooltip>
+        </li>
+      </ul>
+    </SharedTransitionHeight>
+    <!-- <UIcon name="i-heroicons-x-mark" class="self-end" /> -->
   </div>
 </template>

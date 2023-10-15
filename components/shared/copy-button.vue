@@ -1,8 +1,10 @@
 <script setup lang="ts">
-import { CopyIcon, Check } from 'lucide-vue-next'
-const props = defineProps<{
-  text: string
-}>()
+
+const props = withDefaults(defineProps<{text: string, ui?: any}>(), {
+  ui: {
+    rounded: 'rounded-full'
+  }
+})
 const { $toast } = useNuxtApp()
 const { copy, copied } = useClipboard({
   source: props.text,
@@ -14,8 +16,5 @@ const handleClick = async () => {
 }
 </script>
 <template>
-  <UButton variant="ghost" :ui="{ rounded: 'rounded-full' }" class="px-1.5" @click="handleClick">
-    <Check v-if="copied" :size="16" />
-    <CopyIcon v-else :size="16" />
-  </UButton>
+  <UButton variant="ghost" :ui="props.ui" class="px-1.5" :icon="copied ? 'i-lucide-check' : 'i-lucide-copy'" @click="handleClick" />
 </template>
