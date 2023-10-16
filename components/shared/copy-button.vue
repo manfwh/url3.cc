@@ -2,7 +2,12 @@
 
 const props = withDefaults(defineProps<{text: string, ui?: any}>(), {
   ui: {
-    rounded: 'rounded-full'
+    rounded: 'rounded-full',
+    icon: {
+      size: {
+        sm: 'h-4 w-4'
+      }
+    }
   }
 })
 const { $toast } = useNuxtApp()
@@ -16,5 +21,12 @@ const handleClick = async () => {
 }
 </script>
 <template>
-  <UButton variant="ghost" :ui="props.ui" class="px-1.5" :icon="copied ? 'i-lucide-check' : 'i-lucide-copy'" @click="handleClick" />
+  <UButton
+    variant="ghost"
+    color="gray"
+    :ui="props.ui"
+    class="px-1.5"
+    :icon="copied ? 'i-lucide-check' : 'i-lucide-copy'"
+    @click="handleClick"
+  />
 </template>

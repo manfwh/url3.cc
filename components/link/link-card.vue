@@ -63,15 +63,20 @@ const timeAgo = props.link ? useTimeAgo(new Date(props.link?.created_at)) : null
 </script>
 <template>
   <li>
-    <UCard :ui="{body: {padding: 'sm:p-4'}}">
+    <UCard
+      :ui="{
+        body: {padding: 'sm:px-4 sm:py-2'},
+        ring: 'ring-1 ring-gray-200 dark:ring-gray-800 hover:ring-gray-300 dark:hover:ring-gray-700'
+      }"
+    >
       <div class="flex justify-between items-center gap-4">
         <UTooltip v-if="props.link?.type === 'url'" text="Url">
-          <div class="rounded-md w-10 h-10 flex items-center justify-center bg-violet-50 dark:bg-violet-300">
+          <div class="rounded-full w-10 h-10 flex items-center justify-center bg-violet-50 dark:bg-violet-300">
             <UIcon name="i-heroicons-link" class="w-6 h-6 text-violet-600 dark:text-violet-700" />
           </div>
         </UTooltip>
         <UTooltip v-if="props.link?.type === 'image'" text="Image">
-          <div class="rounded-md w-10 h-10 flex items-center justify-center bg-teal-50 dark:bg-teal-300">
+          <div class="rounded-full w-10 h-10 flex items-center justify-center bg-teal-50 dark:bg-teal-300">
             <UIcon name="i-heroicons-photo" class="w-6 h-6 text-teal-600 dark:text-teal-700" />
           </div>
         </UTooltip>
@@ -111,7 +116,7 @@ const timeAgo = props.link ? useTimeAgo(new Date(props.link?.created_at)) : null
               </UCard>
             </UModal>
           </div>
-          <div class="text-gray-500 dark:text-gray-300 text-sm mt-2 truncate items-center hover:bg-slate-100 dark:hover:bg-slate-700 inline-block rounded-md pl-2 pr-2 py-0.5">
+          <div class="text-gray-500 dark:text-gray-400 text-sm truncate items-center hover:bg-slate-100 dark:hover:bg-slate-700 inline-block rounded-md pl-2 pr-2 py-0.5">
             <template v-if="props.link?.type === 'url'">
               <a
                 class="flex-1 truncate"

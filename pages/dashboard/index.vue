@@ -10,13 +10,20 @@ definePageMeta({
 const state = useLinkAddEditModal()
 const supabase = useSupabaseClient<Database>()
 const toast = useToast()
-
-const { data: links, refresh } = await useAsyncData(
+const route = useRoute()
+const page = ref(route.query.page ? Number(route.query.page) : 1)
+const pageSize = 10
+const { data: links, refresh, pending } = await useAsyncData(
   'user-links',
   async () => await supabase
     .from('links')
-    .select('*')
+    .select('*', { count: 'exact' })
     .order('created_at', { ascending: false })
+    .range((page.value - 1) * pageSize, (page.value - 1) * pageSize + (pageSize - 1))
+  ,
+  {
+    watch: [page]
+  }
 )
 const isOpen = toRef(() => state.value.isOpen)
 const openAddModal = async () => {
@@ -76,17 +83,27 @@ const isCreateProjectOpen = ref(false)
 <template>
   <UContainer>
     <div class="h-36 flex justify-between items-center">
-      <h1 class="text-lg">
-        My Links
-      </h1>
+      <div>
+        <h1 class="text-lg">
+          Links
+        </h1>
+        <p class="text-sm text-gray-600 dark:text-gray-400">
+          Manage your links
+        </p>
+      </div>
       <UButton @click="openAddModal">
         Create Link
       </UButton>
     </div>
     <div class="grid grid-cols-10 gap-8">
+      <div v-if="pending">
+        Loading
+      </div>
       <ul v-if="links" class="col-span-10 space-y-4">
         <LinkCard v-for="link in list" :key="link.id" :link="link" @delete-link="openDelModal" @edit-link="openEditModal" />
       </ul>
+
+      <UPagination v-model="page" :page-count="pageSize" :total="links ? links?.count! : 0" />
     </div>
     <ModalAddEditProject v-model="isCreateProjectOpen" />
   </UContainer>
