@@ -1,0 +1,11 @@
+{
+  "language": "English",
+  "hero": {
+    "title": {
+      "part_1": "Welcome to",
+      "part_2": "Short Link",
+      "part_3": "Generator!"
+    },
+    "description": "Convert your lengthy URLs into short and simple links in just a single click. Get started now!"
+  }
+}
