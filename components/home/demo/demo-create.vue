@@ -27,11 +27,12 @@ const openDelModal = async (key: string) => {
     toast.add({ title: 'Link deleted' })
   }
 }
+const { t } = useI18n()
 const tabItems = [{
-  label: 'Link',
+  label: t('common.Link'),
   type: 'link'
 }, {
-  label: 'Image',
+  label: t('common.Image'),
   type: 'image'
 }]
 const route = useRoute()
@@ -130,7 +131,7 @@ const uploadChange = (info: UploadFile) => {
         <label
           class="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
           for="url"
-        >{{ item.label === 'Image' ?'Select your Image to get started' : 'Enter your long URL to get started' }}
+        >{{ item.type === 'image' ? $t('demo.label.image') : $t('demo.label.link') }}
         </label>
         <div class="relative mt-4">
           <SharedTransitionHeight>
@@ -153,14 +154,14 @@ const uploadChange = (info: UploadFile) => {
           </SharedTransitionHeight>
         </div>
         <UButton type="submit" block size="md" class="mt-4" :loading="submitting">
-          {{ item.label === 'Image' ? 'Generate Image Link' : 'Generate Short Link' }}
+          {{ item.type === 'image' ? $t('demo.submit.image') : $t('demo.submit.link') }}
         </UButton>
       </form>
     </div>
     <SharedTransitionHeight>
       <div v-if="createdLink" class="bg-white box-content dark:bg-gray-800  rounded-md mt-4">
         <div class="p-6">
-          <span class="font-semibold" @click="createdLink = null">Your Short Link:</span>
+          <span class="font-semibold" @click="createdLink = null">{{ $t('demo.your-short-link') }}</span>
           <p class="bg-slate-100 dark:bg-gray-700 rounded p-2 mt-2 mb-4 flex justify-between items-center">
             {{ fullDomain + createdLink.key }}
             <UTooltip text="Copy Link">
@@ -169,7 +170,7 @@ const uploadChange = (info: UploadFile) => {
             </UTooltip>
           </p>
           <p class="text-xs text-slate-600 dark:text-slate-400">
-            Public links will be automatically-deleted after 30 minutes. Create a free account to keep your links forever.
+            {{ $t('demo.warn') }}
           </p>
         </div>
       </div>

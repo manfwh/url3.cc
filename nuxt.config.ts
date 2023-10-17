@@ -6,7 +6,11 @@ export default defineNuxtConfig({
     '@nuxtjs/supabase',
     '@vueuse/nuxt',
     '@nuxt/ui',
-    '@nuxtjs/fontaine'
+    '@nuxtjs/fontaine',
+    ['@nuxtjs/i18n', {
+      locales: ['en', 'zh', 'ja'],
+      defaultLocale: 'en'
+    }]
   ],
   css: ['~/assets/css/main.css'],
   fontMetrics: {

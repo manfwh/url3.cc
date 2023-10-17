@@ -1,5 +1,5 @@
 <script setup lang="ts">
-
+import languageNativeNames from '@/locales/languageNativeNames'
 const supabase = useSupabaseClient()
 // const links = useStorage<{key: string, url: string}[]>('links', [])
 
@@ -15,6 +15,8 @@ const signInWithGitHub = async () => {
     }
   })
 }
+const { locale, locales } = useI18n()
+const switchLocalePath = useSwitchLocalePath()
 </script>
 <template>
   <div>
@@ -29,6 +31,37 @@ const signInWithGitHub = async () => {
             </h1>
           </div>
           <div class="flex items-center space-x-4">
+            <UPopover
+              :ui="{popper: {
+                placement: 'bottom-end'
+              }}"
+            >
+              <template #default>
+                <UButton color="gray" variant="ghost" icon="i-heroicons-language" />
+              </template>
+              <template #panel>
+                <div class="p-2 w-36">
+                  <div>
+                    <UButton
+                      v-for="item in locales"
+                      :key="item"
+                      :to="switchLocalePath(item as string)"
+                      color="gray"
+                      variant="ghost"
+                      class="w-full relative"
+                      :aria-label="locale === item ? `Currently selected language is ${languageNativeNames[locale as keyof typeof languageNativeNames]}` : `Switch language to {{ languageNativeNames[item as keyof typeof languageNativeNames] }}`"
+                      size="md"
+                    >
+                      <div class="space-x-3">
+                        <span>
+                          {{ languageNativeNames[item as keyof typeof languageNativeNames] }}
+                        </span>
+                      </div>
+                    </UButton>
+                  </div>
+                </div>
+              </template>
+            </UPopover>
             <SharedColorModeButton />
             <button v-if="!session" type="button" @click="signInWithGitHub">
               Github 登录
@@ -41,10 +74,10 @@ const signInWithGitHub = async () => {
       </div>
     </div>
     <h1 class="text-6xl text-center text-gray-800 dark:text-gray-100 mt-24 font-bold mb-8">
-      Welcome to <span class="text-transparent bg-clip-text bg-gradient-to-r from-green-400 to-teal-400">Short Link</span> Generator!
+      {{ $t('hero.title.part_1') }} <span class="text-transparent bg-clip-text bg-gradient-to-r from-green-400 to-teal-400">{{ $t('hero.title.part_2') }}</span> {{ $t('hero.title.part_3') }}
     </h1>
     <p class="text-center text-gray-700 dark:text-gray-300">
-      Convert your lengthy URLs into short and simple links in just a single click. Get started now!
+      {{ $t('hero.description') }}
     </p>
     <HomeDemoCreate />
     <Background />
