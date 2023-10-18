@@ -1,9 +1,17 @@
 {
   "language": "繁體中文",
+  "site": {
+    "title": "網址縮短工具 - Url3.cc",
+    "description": "輕鬆縮短您的連結，提高分享效率。自訂您的短網址，追蹤點擊數據，獲得對連結性能的洞察。"
+  },
   "common": {
     "Link": "連結",
     "Image": "圖片",
-    "drag-upload": "拖放或點擊上傳。"
+    "drag-upload": "拖放或點擊上傳。",
+    "download": "下載",
+    "SignIn": "登入",
+    "SignOut": "登出",
+    "Dashboard": "儀表板"
   },
   "hero": {
     "title": {
@@ -14,7 +22,7 @@
     "description": "只需點擊一下，即可將冗長的網址轉換為簡單的短連結。立即開始吧！"
   },
   "demo": {
-    "your-short-link": "您的短網址：",
+    "your_short_link": "您的短網址：",
     "warn": "公開的連結將在30分鐘後自動刪除。創建免費帳戶以永久保存您的連結。",
     "label": {
       "link": "輸入您的長網址以開始",

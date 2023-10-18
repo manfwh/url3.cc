@@ -6,7 +6,7 @@ import DraggerUpload from '@/components/shared/upload/dragger-upload.vue'
 import type { UploadFile, UploadedFile } from '@/components/shared/upload/types'
 import { getFilename } from '@/utils'
 import { Enums } from '~/types/type'
-const { $toast } = useNuxtApp()
+const toast = useToast()
 // const { fullDomain } = useAppConfig()
 const addEditState = useLinkAddEditModal()
 const submitting = ref(false)
@@ -74,14 +74,17 @@ const submit = async (event: FormSubmitEvent<typeof state.value>) => {
         }
       })
     }
-
-    $toast.success(editLink.value?.id ? 'Link updated' : 'Link created')
+    toast.add({
+      title: editLink.value?.id ? 'Link updated' : 'Link created'
+    })
     submitting.value = false
     addEditState.value.actionStatus = 'Saved'
     addEditState.value.isOpen = false
   } catch (error: any) {
     submitting.value = false
-    $toast.error(error?.data?.message || 'Create Error!')
+    toast.add({
+      title: error?.data?.message || 'Create Error!'
+    })
   }
 }
 

@@ -1,5 +1,4 @@
 <script lang="ts" setup>
-import { Toaster } from 'vue-sonner'
 const user = useSupabaseUser()
 const supabase = useSupabase()
 const items = [
@@ -18,11 +17,11 @@ const items = [
   }]
 ]
 
-const { data: projects } = await useAsyncData('projects', async () => {
-  return await supabase.from('projects').select('*')
-}, {
-  lazy: true
-})
+// const { data: projects } = await useAsyncData('projects', async () => {
+//   return await supabase.from('projects').select('*')
+// }, {
+//   lazy: true
+// })
 const route = useRoute()
 </script>
 
@@ -37,7 +36,7 @@ const route = useRoute()
                 URL3.cc
               </nuxt-link>
             </h1>
-            <div v-if="user">
+            <!-- <div v-if="user">
               <UPopover
                 :ui="{popper: {
                   placement: 'bottom-start'
@@ -118,7 +117,7 @@ const route = useRoute()
                   </div>
                 </template>
               </UPopover>
-            </div>
+            </div> -->
           </div>
 
           <div v-if="user" class="flex items-center space-x-3">
@@ -142,9 +141,7 @@ const route = useRoute()
       </div>
     </div>
     <slot />
-    <ClientOnly>
-      <Toaster position="bottom-right" />
-    </ClientOnly>
+
     <ModalContainer />
   </div>
 </template>

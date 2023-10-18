@@ -8,7 +8,6 @@ import { ratelimit, setRandomKey } from '~/server/utils/upstash'
 
 export default defineEventHandler(async (event) => {
   const { url, ...body } = await readValidatedBody(event, (body: any) => {
-    console.log('body', body)
     if (body.type === 'image') {
       if (!body.image) {
         throw new Error('Miss Image')

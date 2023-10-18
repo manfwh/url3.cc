@@ -1,9 +1,17 @@
 {
   "language": "English",
+  "site": {
+    "title": "URL Shortener Tool - Url3.cc",
+    "description": "Effortlessly shorten your links for improved sharing efficiency. Customize your short URLs, track click data, and gain insights into your links' performance."
+  },
   "common": {
     "Link": "Link",
     "Image": "Image",
-    "drag-upload": "Drag and Drop or click to upload."
+    "drag-upload": "Drag and Drop or click to upload.",
+    "download": "Download",
+    "SignIn": "Sign In",
+    "SignOut": "Sign Out",
+    "Dashboard": "Dashboard"
   },
   "hero": {
     "title": {
@@ -14,7 +22,7 @@
     "description": "Convert your lengthy URLs into short and simple links in just a single click. Get started now!"
   },
   "demo": {
-    "your-short-link:": "Your Short Link:",
+    "your_short_link": "Your Short Link:",
     "warn": "Public links will be automatically-deleted after 30 minutes. Create a free account to keep your links forever.",
     "label": {
       "link": "Enter your long URL to get started",

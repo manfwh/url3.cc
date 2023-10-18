@@ -10,14 +10,16 @@ const props = withDefaults(defineProps<{text: string, ui?: any}>(), {
     }
   }
 })
-const { $toast } = useNuxtApp()
+const toast = useToast()
 const { copy, copied } = useClipboard({
   source: props.text,
   legacy: true
 })
 const handleClick = async () => {
   await copy(props.text)
-  $toast.success('Successful copied!')
+  toast.add({
+    title: 'Successful copied!'
+  })
 }
 </script>
 <template>

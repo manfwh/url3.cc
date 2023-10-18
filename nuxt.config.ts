@@ -7,10 +7,7 @@ export default defineNuxtConfig({
     '@vueuse/nuxt',
     '@nuxt/ui',
     '@nuxtjs/fontaine',
-    ['@nuxtjs/i18n', {
-      locales: ['en', 'zh', 'ja'],
-      defaultLocale: 'en'
-    }]
+    '@nuxtjs/i18n'
   ],
   css: ['~/assets/css/main.css'],
   fontMetrics: {
@@ -45,5 +42,19 @@ export default defineNuxtConfig({
   },
   ui: {
     icons: ['lucide']
+  },
+  i18n: {
+    baseUrl: 'https://url3.cc',
+    locales: [{
+      code: 'en',
+      iso: 'en-US'
+    }, {
+      code: 'zh',
+      iso: 'zh-TW'
+    }, {
+      code: 'ja',
+      iso: 'ja-JP'
+    }],
+    defaultLocale: 'en'
   }
 })

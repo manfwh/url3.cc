@@ -1,12 +1,8 @@
 <script setup lang="ts">
 import languageNativeNames from '@/locales/languageNativeNames'
 const supabase = useSupabaseClient()
-// const links = useStorage<{key: string, url: string}[]>('links', [])
-
-// const deleteLink = (key: string) => {
-//   links.value = links.value.filter(link => link.key !== key)
-// }
 const { data: { session } } = await supabase.auth.getSession()
+
 const signInWithGitHub = async () => {
   const { error } = await supabase.auth.signInWithOAuth({
     provider: 'github',
@@ -17,6 +13,8 @@ const signInWithGitHub = async () => {
 }
 const { locale, locales } = useI18n()
 const switchLocalePath = useSwitchLocalePath()
+const localePath = useLocalePath()
+
 </script>
 <template>
   <div>
@@ -64,10 +62,10 @@ const switchLocalePath = useSwitchLocalePath()
             </UPopover>
             <SharedColorModeButton />
             <button v-if="!session" type="button" @click="signInWithGitHub">
-              Github 登录
+              {{ $t('common.SignIn') }}
             </button>
-            <UButton v-else to="/dashboard" variant="outline">
-              Dashboard
+            <UButton v-else :to="localePath('/dashboard')" variant="outline">
+              {{ $t('common.Dashboard') }}
             </UButton>
           </div>
         </div>

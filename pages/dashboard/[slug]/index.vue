@@ -29,7 +29,7 @@ const { data: links, refresh: refreshLink, pending: linkPending, status } = awai
 )
 const submitting = ref(false)
 const linkFormRef = ref<HTMLFormElement>()
-const { $toast } = useNuxtApp()
+const toast = useToast()
 const handleSubmit = async (e: Event) => {
   const target = e.target as HTMLFormElement
   try {
@@ -43,16 +43,22 @@ const handleSubmit = async (e: Event) => {
     })
     linkFormRef.value?.reset()
     refreshLink()
-    $toast.success('创建成功')
+    toast.add({
+      title: '创建成功'
+    })
   } catch (error: any) {
-    $toast.error('创建失败')
+    toast.add({
+      title: '创建失败'
+    })
   }
   submitting.value = false
 }
 const deleteLink = async (link: {id: number}) => {
   await supabase.from('links').delete().eq('id', link.id)
   refreshLink()
-  $toast.success('删除成功')
+  toast.add({
+    title: '删除成功'
+  })
 }
 const state = useLinkAddEditModal()
 

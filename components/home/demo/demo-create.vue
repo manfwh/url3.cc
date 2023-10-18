@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import { useQRCode } from '@vueuse/integrations/useQRCode'
 import { useStorage } from '@vueuse/core'
 import DraggerUpload from '~/components/shared/upload/dragger-upload.vue'
 import type { UploadFile } from '@/components/shared/upload/types'
@@ -7,13 +8,17 @@ const toast = useToast()
 const formRef = ref<HTMLFormElement>()
 
 const submitting = ref(false)
-const createdLink = ref<{url: string; key: string} | null>()
 
 const isMounted = useMounted()
 const links = useStorage<{key: string, url: string}[]>('links', [])
+const createdLink = computed(() => {
+  return links.value ? links.value[0] : null
+})
+
 const deleteLink = (key: string) => {
   links.value = links.value.filter(link => link.key !== key)
 }
+
 const confirmModalState = useConfirmModal()
 
 const openDelModal = async (key: string) => {
@@ -62,7 +67,7 @@ const handleSubmit = (e: Event) => {
     method: 'POST',
     body: { url: target?.url?.value, type: route.query.type || 'link', image: image.value }
   }).then((data) => {
-    createdLink.value = data
+    // createdLink.value = data
     links.value.unshift(data)
     formRef.value?.reset()
     submitting.value = false
@@ -78,15 +83,35 @@ const uploadChange = (info: UploadFile) => {
     image.value = info.result
   }
 }
+
+const qrcode = useQRCode(fullDomain + createdLink.value?.key, {
+  margin: 0,
+  width: 100,
+  height: 100,
+  color: {
+    // dark: '#fff',
+    // light: '#000'
+  }
+})
+const anchorRef = ref<HTMLAnchorElement>()
+const download = (url: string) => {
+  if (!anchorRef.value) { return }
+  anchorRef.value.href = qrcode.value
+  anchorRef.value.download = `${createdLink.value?.key}-qrcode.png`
+  anchorRef.value.click()
+}
+
 </script>
 
 <template>
-  <div class="mx-4 md:mx-auto  max-w-lg mt-16 h-[2000px]">
-    <UTabs v-model="selected" :items="tabItems">
-      <!-- <template #item="{item}">
+  <div class="mx-4 md:mx-auto  max-w-lg mt-16 min-h-screen">
+    <!-- <UTabs v-model="selected" :items="tabItems">
+    </UTabs> -->
+
+    <!-- <template #item="{item}">
 
       </template> -->
-      <!-- <template #image>
+    <!-- <template #image>
         <div class="bg-white dark:bg-gray-800 p-6 rounded-md dark:divide-gray-600">
           <form ref="formRef" class="mb-4" @submit.prevent="handleSubmit">
             <label
@@ -125,7 +150,6 @@ const uploadChange = (info: UploadFile) => {
           </Transition>
         </div>
       </template> -->
-    </UTabs>
     <div class="bg-white dark:bg-gray-800 p-6 rounded-md">
       <form ref="formRef" class="mb-4" @submit.prevent="handleSubmit">
         <label
@@ -135,7 +159,7 @@ const uploadChange = (info: UploadFile) => {
         </label>
         <div class="relative mt-4">
           <SharedTransitionHeight>
-            <DraggerUpload v-if="item.label === 'Image'" @change="uploadChange" @remove="image = ''" />
+            <DraggerUpload v-if="item.type === 'image'" @change="uploadChange" @remove="image = ''" />
             <UInput
               v-else
               type="url"
@@ -159,16 +183,26 @@ const uploadChange = (info: UploadFile) => {
       </form>
     </div>
     <SharedTransitionHeight>
-      <div v-if="createdLink" class="bg-white box-content dark:bg-gray-800  rounded-md mt-4">
-        <div class="p-6">
-          <span class="font-semibold" @click="createdLink = null">{{ $t('demo.your-short-link') }}</span>
-          <p class="bg-slate-100 dark:bg-gray-700 rounded p-2 mt-2 mb-4 flex justify-between items-center">
-            {{ fullDomain + createdLink.key }}
-            <UTooltip text="Copy Link">
-              <!-- <copy-button :text="fullDomain + props.link.key" /> -->
-              <SharedCopyButton :text="fullDomain + createdLink.key" :ui="{rounded: 'rounded-md'}" />
-            </UTooltip>
-          </p>
+      <div v-if="createdLink" class="flex bg-white box-content dark:bg-gray-800 rounded-md mt-4 p-6 gap-6">
+        <div class="flex-shrink-0 text-center">
+          <img :src="qrcode" class="w-24 h-24 block" alt="">
+          <UButton class="mt-2" block size="xs" @click="download">
+            {{ $t('common.download') }}
+          </UButton>
+          <a ref="anchorRef" class="hidden" />
+        </div>
+        <div>
+          <span class="font-semibold">{{ $t('demo.your_short_link') }}</span>
+          <div class="bg-slate-100 dark:bg-gray-700 rounded p-2 mt-2 mb-4 flex justify-between items-center">
+            <a :href="fullDomain + createdLink.key" target="_blank">{{ fullDomain + createdLink.key }}</a>
+            <div class="flex items-center">
+              <LinkClicks :link-key="createdLink.key!" />
+              <UTooltip text="Copy Link">
+                <!-- <copy-button :text="fullDomain + props.link.key" /> -->
+                <SharedCopyButton :text="fullDomain + createdLink.key" :ui="{rounded: 'rounded-md'}" />
+              </UTooltip>
+            </div>
+          </div>
           <p class="text-xs text-slate-600 dark:text-slate-400">
             {{ $t('demo.warn') }}
           </p>
