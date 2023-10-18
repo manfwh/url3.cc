@@ -61,9 +61,9 @@ const localePath = useLocalePath()
               </template>
             </UPopover>
             <SharedColorModeButton />
-            <button v-if="!session" type="button" @click="signInWithGitHub">
+            <UButton v-if="!session" variant="outline" :to="localePath('/login')">
               {{ $t('common.SignIn') }}
-            </button>
+            </UButton>
             <UButton v-else :to="localePath('/dashboard')" variant="outline">
               {{ $t('common.Dashboard') }}
             </UButton>

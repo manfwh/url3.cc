@@ -17,6 +17,20 @@ async function signInWithGitHub () {
 const {
   data: { session }
 } = await supabase.auth.getSession()
+
+const signInWithOAuth = async () => {
+  const { data, error } = await supabase.auth.signInWithOAuth({
+    provider: 'google',
+    options: {
+      queryParams: {
+        access_type: 'offline',
+        prompt: 'consent'
+      }
+    }
+  })
+  console.log('data', data)
+  console.log('error', error)
+}
 </script>
 <template>
   <div class="h-screen flex justify-center items-center">
@@ -26,6 +40,9 @@ const {
       </h1>
       <UButton v-if="!session" type="button" block @click="signInWithGitHub">
         Github 登录
+      </UButton>
+      <UButton v-if="!session" type="button" block @click="signInWithOAuth">
+        Google 登录
       </UButton>
     </UCard>
   </div>

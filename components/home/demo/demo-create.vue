@@ -87,11 +87,11 @@ const uploadChange = (info: UploadFile) => {
 const qrcode = useQRCode(fullDomain + createdLink.value?.key, {
   margin: 0,
   width: 100,
-  height: 100,
-  color: {
-    // dark: '#fff',
-    // light: '#000'
-  }
+  height: 100
+  // color: {
+  //   dark: '#fff',
+  //   light: '#000'
+  // }
 })
 const anchorRef = ref<HTMLAnchorElement>()
 const download = (url: string) => {
