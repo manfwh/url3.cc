@@ -22,6 +22,7 @@ const signInWithOAuth = async () => {
   const { data, error } = await supabase.auth.signInWithOAuth({
     provider: 'google',
     options: {
+      redirectTo,
       queryParams: {
         access_type: 'offline',
         prompt: 'consent'
