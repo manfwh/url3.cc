@@ -186,7 +186,12 @@ const download = (url: string) => {
       <div v-if="createdLink" class="flex bg-white box-content dark:bg-gray-800 rounded-md mt-4 p-6 gap-6">
         <div class="flex-shrink-0 text-center">
           <img :src="qrcode" class="w-24 h-24 block" alt="">
-          <UButton class="mt-2" block size="xs" @click="download">
+          <UButton
+            class="mt-2"
+            block
+            size="xs"
+            @click="download"
+          >
             {{ $t('common.download') }}
           </UButton>
           <a ref="anchorRef" class="hidden" />

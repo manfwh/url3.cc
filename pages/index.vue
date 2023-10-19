@@ -78,6 +78,5 @@ const localePath = useLocalePath()
       {{ $t('hero.description') }}
     </p>
     <HomeDemoCreate />
-    <Background />
   </div>
 </template>

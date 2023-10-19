@@ -1,6 +1,10 @@
 <script setup lang="ts">
+import type { FormError, FormSubmitEvent } from '@nuxt/ui/dist/runtime/types'
 import type { Database } from '~/types/type'
-
+definePageMeta({
+  layout: 'default',
+  middleware: 'auth'
+})
 const supabase = useSupabaseClient<Database>()
 const url = useRequestURL()
 const redirectTo = url.origin + '/confirm'
@@ -18,6 +22,8 @@ const {
   data: { session }
 } = await supabase.auth.getSession()
 
+const submitting = ref(false)
+// const router = useRouter()
 const signInWithOAuth = async () => {
   const { data, error } = await supabase.auth.signInWithOAuth({
     provider: 'google',
@@ -32,19 +38,63 @@ const signInWithOAuth = async () => {
   console.log('data', data)
   console.log('error', error)
 }
+
+const state = ref({
+  email: undefined
+})
+const localePath = useLocalePath()
+
+async function submit (event: FormSubmitEvent<any>) {
+  // Do something with data
+  console.log(event.data)
+  submitting.value = true
+  const { data, error } = await supabase.auth.signInWithOtp({
+    email: event.data.email,
+    options: {
+      // emailRedirectTo: 'https://example.com/welcome',
+    }
+  })
+  submitting.value = false
+  navigateTo('/auth/verify-request')
+
+  console.log('data', data)
+  console.log('error', error)
+}
 </script>
 <template>
-  <div class="h-screen flex justify-center items-center">
+  <div class="min-h-[calc(100vh-52px)] flex justify-center items-center">
     <UCard class="md:w-96">
       <h1 class="mb-8 text-2xl text-center">
-        Login
+        Sign in to <NuxtLink class="text-primary" :to="localePath('/')">
+          Url3.cc
+        </NuxtLink>
       </h1>
-      <UButton v-if="!session" type="button" block @click="signInWithGitHub">
-        Github 登录
-      </UButton>
-      <UButton v-if="!session" type="button" block @click="signInWithOAuth">
-        Google 登录
-      </UButton>
+      <div class="flex justify-between gap-4">
+        <UButton v-if="!session" class="flex-1" color="gray" :ui="{base: 'justify-center', rounded: 'rounded-sm'}" @click="signInWithGitHub">
+          <SharedBrandIcons provider="github" />
+        </UButton>
+        <UButton v-if="!session" class="flex-1" color="gray" :ui="{base: 'justify-center', rounded: 'rounded-sm'}" @click="signInWithOAuth">
+          <SharedBrandIcons provider="google" />
+        </UButton>
+        <UButton v-if="!session" class="flex-1" color="gray" :ui="{base: 'justify-center', rounded: 'rounded-sm'}" @click="signInWithOAuth">
+          <SharedBrandIcons provider="facebook" />
+        </UButton>
+      </div>
+      <div class="mt-4 pt-4 border-t border-gray-300 dark:border-gray-800">
+        <UForm
+          :state="state"
+          class="space-y-6"
+          @submit="submit"
+        >
+          <UFormGroup label="Email" name="email">
+            <UInput v-model="state.email" color="gray" type="email" placeholder="frank@example.com" required />
+          </UFormGroup>
+
+          <UButton type="submit" block :loading="submitting">
+            {{ !submitting ? 'Continue with email' : '' }}
+          </UButton>
+        </UForm>
+      </div>
     </UCard>
   </div>
 </template>
