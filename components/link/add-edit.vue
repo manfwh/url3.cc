@@ -1,11 +1,10 @@
 <script setup lang="ts">
-import { nanoid } from 'nanoid'
 // import { fileTypeFromFile } from 'file-type'
 import type { FormError, FormSubmitEvent } from '@nuxt/ui/dist/runtime/types'
 import DraggerUpload from '@/components/shared/upload/dragger-upload.vue'
 import type { UploadFile, UploadedFile } from '@/components/shared/upload/types'
 import { getFilename } from '@/utils'
-import { Enums } from '~/types/type'
+import type { Enums } from '~/types/type'
 const toast = useToast()
 // const { fullDomain } = useAppConfig()
 const addEditState = useLinkAddEditModal()

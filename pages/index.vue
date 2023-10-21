@@ -3,18 +3,9 @@ import languageNativeNames from '@/locales/languageNativeNames'
 const supabase = useSupabaseClient()
 const { data: { session } } = await supabase.auth.getSession()
 
-const signInWithGitHub = async () => {
-  const { error } = await supabase.auth.signInWithOAuth({
-    provider: 'github',
-    options: {
-      // redirectTo: 'http://localhost:3000/confirm'
-    }
-  })
-}
 const { locale, locales } = useI18n()
 const switchLocalePath = useSwitchLocalePath()
 const localePath = useLocalePath()
-
 </script>
 <template>
   <div>
@@ -41,7 +32,7 @@ const localePath = useLocalePath()
                 <div class="p-2 w-36">
                   <div>
                     <UButton
-                      v-for="item in locales"
+                      v-for="item in (locales as string[])"
                       :key="item"
                       :to="switchLocalePath(item as string)"
                       color="gray"
@@ -72,11 +63,24 @@ const localePath = useLocalePath()
       </div>
     </div>
     <h1 class="text-6xl text-center text-gray-800 dark:text-gray-100 mt-24 font-bold mb-8">
-      {{ $t('hero.title.part_1') }} <span class="text-transparent bg-clip-text bg-gradient-to-r from-green-400 to-teal-400">{{ $t('hero.title.part_2') }}</span> {{ $t('hero.title.part_3') }}
+      {{ $t('hero.title.part_1') }}
+      <span class="text-transparent bg-clip-text bg-gradient-to-r from-green-400 to-teal-400">{{ $t('hero.title.part_2') }}</span> {{ $t('hero.title.part_3') }}
     </h1>
     <p class="text-center text-gray-700 dark:text-gray-300">
       {{ $t('hero.description') }}
     </p>
     <HomeDemoCreate />
+    <div class="py-24 sm:py-32">
+      <div class="mx-auto px-4 sm:px-6 lg:px-8 max-w-7xl gap-16 sm:gap-y-24 flex flex-col">
+        <h2 class="text-3xl font-bold tracking-tight text-gray-900 dark:text-white sm:text-4xl lg:text-5xl text-center">
+          Features
+        </h2>
+        <div class="grid grid-cols-3">
+          <UCard>
+            d1
+          </UCard>
+        </div>
+      </div>
+    </div>
   </div>
 </template>

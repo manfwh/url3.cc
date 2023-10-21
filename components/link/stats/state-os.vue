@@ -66,8 +66,6 @@ const option = computed<EChartsOption>(() => {
         labelLine: {
           show: false
         },
-        left: 'top',
-        top: 'top',
         height: 300,
 
         data: data.value ? data.value.map((item: any) => ({ name: item.os, value: item.clicks })) : []

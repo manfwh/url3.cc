@@ -57,7 +57,7 @@ const option = computed<EChartsOption>(() => {
     backgroundColor: 'transparent',
     visualMap: [{
       left: 'right',
-      min: Math.min.apply(null, chartData.map((d: any) => d.value)),
+      min: 0,
       max: Math.max.apply(null, chartData.map((d: any) => d.value)),
       inRange: {
         // prettier-ignore
@@ -88,7 +88,6 @@ const option = computed<EChartsOption>(() => {
             color: '#fff'
           }
         },
-        // 如果宽高比大于 1 则宽度为 100，如果小于 1 则高度为 100，保证了不超过 100x100 的区域
         data: chartData
       }
     ]
@@ -109,7 +108,7 @@ const rows = computed(() => {
       <v-chart ref="chart" :option="option" class="h-[400px]" :loading="pending " />
       <div>
         <div class="min-h-[365px]">
-          <UTable :rows="rows" />
+          <UTable :rows="rows" :columns="[{key: 'country', label: 'Country'}, {key: 'clicks', label: 'Clicks'}]" />
         </div>
         <div class="flex justify-end px-3 py-3.5">
           <UPagination v-model="page" :loading="pending" :page-count="pageCount" :total="tableRows.length" :loading-state="{ icon: 'i-heroicons-arrow-path-20-solid', label: 'Loading...' }" />

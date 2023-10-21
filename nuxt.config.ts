@@ -7,9 +7,10 @@ export default defineNuxtConfig({
     '@vueuse/nuxt',
     '@nuxt/ui',
     '@nuxtjs/fontaine',
-    '@nuxtjs/i18n'
+    '@nuxtjs/i18n',
+    '@nuxt/content'
   ],
-  css: ['~/assets/css/main.css'],
+  css: ['~/assets/css/main.css', '~/assets/css/scrollbars.css'],
   fontMetrics: {
     fonts: [
       {
@@ -38,7 +39,7 @@ export default defineNuxtConfig({
     port: 8888
   },
   build: {
-    transpile: ['vue-sonner', /echarts/]
+    transpile: [/echarts/]
   },
   ui: {
     icons: ['lucide']
@@ -47,14 +48,25 @@ export default defineNuxtConfig({
     baseUrl: 'https://url3.cc',
     locales: [{
       code: 'en',
-      iso: 'en-US'
+      iso: 'en-US',
+      foo: 'bar'
     }, {
       code: 'zh',
-      iso: 'zh-TW'
+      iso: 'zh-TW',
+      foo: 'bar'
     }, {
       code: 'ja',
-      iso: 'ja-JP'
+      iso: 'ja-JP',
+      foo: 'bar'
     }],
     defaultLocale: 'en'
+  },
+  content: {
+    highlight: {
+      theme: 'material-theme'
+      // Theme used in all color schemes.
+      // theme: 'github-light'
+
+    }
   }
 })
