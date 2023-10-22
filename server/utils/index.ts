@@ -1,7 +1,7 @@
 import { customAlphabet } from 'nanoid'
 import { type H3Event, type EventHandlerRequest } from 'h3'
 import { serverSupabaseClient } from '#supabase/server'
-import { Database } from '~/types/type'
+import type { Database } from '~/types/type'
 
 export const isValidUrl = (url: string) => {
   try {

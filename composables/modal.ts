@@ -1,4 +1,4 @@
-import { Tables } from '~/types/type'
+import type { Tables } from '~/types/type'
 
 type LinkAddModal = {
   isOpen: boolean

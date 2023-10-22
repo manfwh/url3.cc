@@ -3,7 +3,7 @@ import {
   CopyObjectCommand
 } from '@aws-sdk/client-s3'
 import { serverSupabaseClient, serverSupabaseUser } from '#supabase/server'
-import { Database, Tables } from '~/types/type'
+import type { Database, Tables } from '~/types/type'
 
 import { validateRequest } from '~/server/utils/link'
 import { redis } from '~/server/utils/upstash'
@@ -30,11 +30,12 @@ export default defineAuthHandler(async (event) => {
     }
     // 删除图片前缀_nocjeck_
     await copyImage(body)
-
+    console.log('event.context.session.user.id', event.context.session.user.id)
+    console.log('key', key)
     const { status, error } = await supabase.from('links').insert({
       ...body,
-      key,
-      user_id: event.context.session.user.id
+      key
+      // user_id: event.context.session.user.id
     })
     if (error) {
       console.log('create link error', error)

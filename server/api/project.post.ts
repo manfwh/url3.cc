@@ -1,5 +1,5 @@
 import { serverSupabaseServiceRole, serverSupabaseUser } from '#supabase/server'
-import { Database } from '~/types/type'
+import type { Database } from '~/types/type'
 
 export default defineEventHandler(async (event) => {
   const { name, slug } = await readBody(event) as { slug?: string, name?: string }

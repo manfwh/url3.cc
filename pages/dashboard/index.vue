@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { openConfirmModal, useLinkAddEditModal } from '~/composables/modal'
-import { Database, Tables } from '~/types/type'
+import type { Database, Tables } from '~/types/type'
 
 definePageMeta({
   layout: 'dashboard',

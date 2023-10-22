@@ -3,7 +3,7 @@ import {
   DeleteObjectCommand
 } from '@aws-sdk/client-s3'
 import { serverSupabaseClient } from '#supabase/server'
-import { Database } from '~/types/type'
+import type { Database } from '~/types/type'
 import { redis } from '~/server/utils/upstash'
 
 export default defineAuthHandler(async (event) => {
@@ -12,7 +12,7 @@ export default defineAuthHandler(async (event) => {
   if (!key) {
     throw createError({ statusCode: 400, message: 'key is required' })
   }
-  const link = await supabase.from('links').select().eq('key', key).eq('user_id', event.context.session.user.id).single()
+  const link = await supabase.from('links').select().eq('key', key).single()
   if (!link.data) {
     throw createError({ statusCode: 404, message: 'link not found' })
   }

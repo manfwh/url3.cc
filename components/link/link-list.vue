@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { Tables } from '~/types/type'
+import type { Tables } from '~/types/type'
 
 const props = defineProps<{
   links: Tables<'links'>[]

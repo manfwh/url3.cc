@@ -4,7 +4,7 @@ import {
 } from '@aws-sdk/client-s3'
 import { defineAuthHandler } from '~/server/utils/handler'
 import { serverSupabaseClient } from '#supabase/server'
-import { Database, Tables } from '~/types/type'
+import type { Database, Tables } from '~/types/type'
 import { validateRequest } from '~/server/utils/link'
 
 type RequestBody = Exclude<Tables<'links'>, 'user_id'> & {slug?: string}
