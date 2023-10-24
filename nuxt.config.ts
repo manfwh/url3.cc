@@ -39,7 +39,7 @@ export default defineNuxtConfig({
     port: 8888
   },
   build: {
-    transpile: [/echarts/]
+    transpile: [/echarts/, 'vue-echarts', 'resize-detector']
   },
   ui: {
     icons: ['lucide']
