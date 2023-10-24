@@ -99,11 +99,14 @@ const isCreateProjectOpen = ref(false)
       <div v-if="pending">
         Loading
       </div>
-      <ul v-if="links" class="col-span-10 space-y-4">
-        <LinkCard v-for="link in list" :key="link.id" :link="link" @delete-link="openDelModal" @edit-link="openEditModal" />
-      </ul>
-
-      <UPagination v-model="page" :page-count="pageSize" :total="links ? links?.count! : 0" />
+      <div class="col-span-10">
+        <ul v-if="links" class="space-y-4">
+          <LinkCard v-for="link in list" :key="link.id" :link="link" @delete-link="openDelModal" @edit-link="openEditModal" />
+        </ul>
+        <div class="flex justify-end pt-8 pb-8">
+          <UPagination v-model="page" :page-count="pageSize" :total="links ? links?.count! : 0" />
+        </div>
+      </div>
     </div>
     <ModalAddEditProject v-model="isCreateProjectOpen" />
   </UContainer>

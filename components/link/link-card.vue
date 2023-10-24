@@ -83,8 +83,8 @@ const timeAgo = props.link ? useTimeAgo(new Date(props.link?.created_at)) : null
 
         <div class="flex-auto w-0 mr-4">
           <div class="flex items-center relative">
-            <UIcon v-if="!!props.link?.password" name="i-heroicons-lock-closed" class="mr-2" />
-            <nuxt-link :to="fullDomain + key" target="_blank" class="mr-4 hover:bg-slate-100 dark:hover:bg-slate-700 rounded-md px-2">
+            <nuxt-link :to="fullDomain + key" target="_blank" class="mr-4 hover:bg-slate-100 dark:hover:bg-slate-700 rounded-md px-2 flex items-center">
+              <UIcon v-if="!!props.link?.password" name="i-heroicons-lock-closed mr-1" />
               {{ domain + '/' + key }}
             </nuxt-link>
             <!-- <a class="text-primary truncate" :href="fullDomain + props.link.key" target="_blank"></a> -->
@@ -93,7 +93,14 @@ const timeAgo = props.link ? useTimeAgo(new Date(props.link?.created_at)) : null
               <!-- <copy-button :text="fullDomain + props.link.key" /> -->
               <SharedCopyButton :text="fullDomain + key" />
             </UTooltip>
-            <UButton variant="ghost" :ui="{ rounded: 'rounded-full' }" size="xs" icon="i-heroicons-qr-code" @click="isOpenQrcode = true" />
+            <UButton
+              variant="ghost"
+              color="gray"
+              :ui="{ rounded: 'rounded-full' }"
+              size="xs"
+              icon="i-heroicons-qr-code"
+              @click="isOpenQrcode = true"
+            />
             <UModal v-model="isOpenQrcode">
               <UCard>
                 <template #header>

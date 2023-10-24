@@ -31,7 +31,7 @@ const { y } = useWindowScroll()
 
 </script>
 <template>
-  <div class="bg-slate-50 dark:bg-gray-950 pt-2 h-[2000px]">
+  <div class="bg-slate-50 dark:bg-gray-950 pt-2 pb-28">
     <div
       class="sticky top-[65px] bg-slate-50 dark:bg-gray-950 dark:shadow-slate-800 z-10 mb-2"
       :class="{'shadow-sm': y > 50 }"

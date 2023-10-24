@@ -8,7 +8,10 @@ definePageMeta({
 const supabase = useSupabaseClient<Database>()
 const url = useRequestURL()
 const redirect = url.searchParams.get('redirect')
-const redirectTo = url.origin + '/confirm?redirect=' + redirect
+let redirectTo = url.origin + '/confirm'
+if (redirect) {
+  redirectTo = redirectTo + '?redirect=' + encodeURIComponent(redirect)
+}
 async function signInWithGitHub () {
   const { data, error } = await supabase.auth.signInWithOAuth({
     provider: 'github',
