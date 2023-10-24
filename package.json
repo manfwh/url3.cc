@@ -35,5 +35,10 @@
     "nanoid": "^4.0.2",
     "qrcode": "^1.5.3",
     "vue-echarts": "^6.6.1"
+  },
+  "pnpm": {
+    "overrides": {
+      "tslib": "2.5.1"
+    }
   }
 }
