@@ -32,5 +32,14 @@
       "link": "Generate Short Link",
       "image": "Generate Image Link"
     }
+  },
+  "features": {
+    "features": "Features",
+    "analysis": "Analysis",
+    "analysis_description": "Easily view the click count and visit sources of your short URLs to better understand your target audience.",
+    "devices_target": "Device Targeting",
+    "devices_target_description": "Smartly redirect to the most suitable page based on the visitor's mobile system for a better user experience.",
+    "custom": "Custom Links",
+    "custom_description": "Create fun short URLs for your long web addresses as you wish, making sharing easier and more enjoyable!"
   }
 }

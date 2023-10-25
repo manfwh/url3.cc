@@ -32,5 +32,14 @@
       "link": "ショートリンクを生成",
       "image": "画像リンクを生成"
     }
+  },
+  "features": {
+    "features": "特徴",
+    "analysis": "分析",
+    "analysis_description": "短縮URLのクリック数や訪問元を簡単に確認し、ターゲットオーディエンスをよりよく理解するのに役立ちます。",
+    "devices_target": "デバイスターゲット",
+    "devices_target_description": "訪問者のモバイルデバイスに合わせて最適なページにスマートに転送し、より良いユーザーエクスペリエンスを提供します。",
+    "custom": "カスタムリンク",
+    "custom_description": "長いURLから面白い短縮URLを自由に作成し、共有がより簡単で楽しくなります！"
   }
 }

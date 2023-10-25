@@ -32,5 +32,14 @@
       "link": "生成短網址",
       "image": "生成圖片網址"
     }
+  },
+  "features": {
+    "features": "特色",
+    "analysis": "分析",
+    "analysis_description": "輕鬆查看您的短網址的點擊量和訪問來源，幫助您更好地了解您的目標受眾。",
+    "devices_target": "設備類型跳轉",
+    "devices_target_description": "根據訪問者的手機系統，智能跳轉至最適合的頁面，提供更好的用戶體驗。",
+    "custom": "自訂連結",
+    "custom_description": "隨心所欲地為您的長網址創建有趣的短網址，使分享變得更簡單、更有趣！"
   }
 }
