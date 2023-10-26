@@ -78,7 +78,14 @@ const openDelModal = async (key: string, link?: Tables<'links'>) => {
   }
 }
 const isCreateProjectOpen = ref(false)
-
+defineShortcuts({
+  c: {
+    usingInput: true,
+    handler: () => {
+      openAddModal()
+    }
+  }
+})
 </script>
 <template>
   <UContainer>
@@ -91,8 +98,8 @@ const isCreateProjectOpen = ref(false)
           Manage your links
         </p>
       </div>
-      <UButton @click="openAddModal">
-        Create Link
+      <UButton variant="outline" @click="openAddModal">
+        Create Link <UKbd>C</UKbd>
       </UButton>
     </div>
     <div class="grid grid-cols-10 gap-8">

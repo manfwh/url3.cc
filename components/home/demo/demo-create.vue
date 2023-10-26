@@ -166,6 +166,7 @@ const download = (url: string) => {
               autocomplete="off"
               name="url"
               required
+              autofocus
               size="md"
               :disabled="submitting"
               placeholder="https://example.com"

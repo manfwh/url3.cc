@@ -15,15 +15,11 @@ export default defineAuthHandler(async (event) => {
   const { url, slug, ...body } = await readValidatedBody(event, validateRequest) as RequestBody
   // no project
   if (!slug) {
-    console.time('get key')
     const key = body.key || await getRandomKey(supabase)
-    console.timeEnd('get key')
 
     // 检查key是否存在
-    console.time('check key')
 
     const link = await supabase.from('links').select('id').eq('key', key).single()
-    console.timeEnd('check key')
 
     if (link.data) {
       throw createError({ statusCode: 400, data: 'Invalid key' })
@@ -36,16 +32,13 @@ export default defineAuthHandler(async (event) => {
       }
     }
     // 删除图片前缀_nocjeck_
-    console.time('delete image')
     await copyImage(body)
-    console.timeEnd('delete image')
-    console.time('create link')
     const { status, error } = await supabase.from('links').insert({
       ...body,
+      ...(url && { url }),
       key,
       user_id: event.context.session.user.id
     })
-    console.timeEnd('create link')
     if (error) {
       console.log('create link error', error)
       throw createError({ statusCode: 400, data: 'Create Error' })

@@ -27,7 +27,7 @@ type State = {
   ios_image?: string;
 }
 const state = ref<State>({
-  type: editLink.value?.type || 'image',
+  type: editLink.value?.type || 'url',
   image: editLink.value?.image || '',
   url: editLink.value?.url || '',
   password: editLink.value?.password || '',
@@ -133,9 +133,9 @@ const validate = (state: State): FormError[] => {
       class="space-y-4"
       @submit="submit"
     >
-      <UFormGroup label="Type" name="type">
+      <!-- <UFormGroup label="Type" name="type">
         <USelectMenu v-model="state.type" :options="['url', 'image']" color="gray" variant="outline" />
-      </UFormGroup>
+      </UFormGroup> -->
       <UFormGroup v-if="state.type === 'url'" label="Target" name="url">
         <UInput
           v-model="state.url"
@@ -143,6 +143,7 @@ const validate = (state: State): FormError[] => {
           type="url"
           placeholder="https://expmale-long.com"
           required
+          autofocus
           color="gray"
           variant="outline"
         />

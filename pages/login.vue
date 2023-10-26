@@ -79,9 +79,9 @@ async function submit (event: FormSubmitEvent<any>) {
         <UButton v-if="!session" class="flex-1" color="gray" :ui="{base: 'justify-center', rounded: 'rounded-sm'}" @click="signInWithOAuth">
           <SharedBrandIcons provider="google" />
         </UButton>
-        <UButton v-if="!session" class="flex-1" color="gray" :ui="{base: 'justify-center', rounded: 'rounded-sm'}" @click="signInWithOAuth">
+        <!-- <UButton v-if="!session" class="flex-1" color="gray" :ui="{base: 'justify-center', rounded: 'rounded-sm'}" @click="signInWithOAuth">
           <SharedBrandIcons provider="facebook" />
-        </UButton>
+        </UButton> -->
       </div>
       <div class="mt-4 pt-4 border-t border-gray-300 dark:border-gray-800">
         <UForm

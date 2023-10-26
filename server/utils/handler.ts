@@ -7,9 +7,7 @@ export const defineAuthHandler = <T extends EventHandlerRequest, D> (
     defineEventHandler<T>(async (event) => {
       const supabase = await serverSupabaseClient(event)
       try {
-        console.time('auth')
         const session = await supabase.auth.getSession()
-        console.timeEnd('auth')
         event.context.session = session.data.session
         if (session.data) {
           return handler(event)

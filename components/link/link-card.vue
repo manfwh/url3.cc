@@ -123,7 +123,7 @@ const timeAgo = props.link ? useTimeAgo(new Date(props.link?.created_at)) : null
               </UCard>
             </UModal>
           </div>
-          <div class="text-gray-500 dark:text-gray-400 text-sm truncate items-center hover:bg-slate-100 dark:hover:bg-slate-700 inline-block rounded-md pl-2 pr-2 py-0.5">
+          <div class="text-gray-500 dark:text-gray-400 text-sm max-w-full truncate items-center hover:bg-slate-100 dark:hover:bg-slate-700 inline-block rounded-md pl-2 pr-2 py-0.5">
             <template v-if="props.link?.type === 'url'">
               <a
                 class="flex-1 truncate"
