@@ -28,8 +28,9 @@ const items = [
       <div class="mx-auto w-full max-w-screen-xl px-2.5 lg:px-20">
         <div class="flex justify-between items-center h-16">
           <div>
-            <h1 class="text-primary font-semibold text-2xl">
-              <nuxt-link to="/">
+            <h1 class="text-primary font-semibold text-2xl ">
+              <nuxt-link to="/" class="flex items-center">
+                <img src="~/assets/imgs/logo.png" alt="logo" class="w-10 h-10 mr-2 block">
                 URL3.cc
               </nuxt-link>
             </h1>

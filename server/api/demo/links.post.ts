@@ -45,7 +45,7 @@ export default defineEventHandler(async (event) => {
     body.image = destKey
   }
   const { response, key } = await setRandomKey({
-    type: body.type || 'link',
+    type: body.type || 'url',
     url,
     image: body.image
   })

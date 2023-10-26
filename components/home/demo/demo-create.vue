@@ -65,7 +65,7 @@ const handleSubmit = (e: Event) => {
   }
   $fetch('/api/demo/links', {
     method: 'POST',
-    body: { url: target?.url?.value, type: route.query.type || 'link', image: image.value }
+    body: { url: target?.url?.value, type: route.query.type || 'url', image: image.value }
   }).then((data) => {
     // createdLink.value = data
     links.value.unshift(data)
@@ -203,7 +203,7 @@ const download = (url: string) => {
             <div class="bg-slate-100 dark:bg-gray-700 rounded p-2 mt-2 mb-4 flex justify-between items-center">
               <a :href="fullDomain + createdLink.key" target="_blank">{{ fullDomain + createdLink.key }}</a>
               <div class="flex items-center">
-                <LinkClicks :link-key="createdLink.key!" />
+                <LinkClicks :key="createdLink.key!" :link-key="createdLink.key!" />
                 <UTooltip text="Copy Link">
                   <!-- <copy-button :text="fullDomain + props.link.key" /> -->
                   <SharedCopyButton :text="fullDomain + createdLink.key" :ui="{rounded: 'rounded-md'}" />
