@@ -69,7 +69,7 @@ const items = [
     <p class="text-center text-gray-700 dark:text-gray-300 font-[Inter]">
       {{ $t('hero.description') }}
     </p>
-    <!-- <HomeDemoCreate /> -->
+    <HomeDemoCreate />
     <HomeFeatures />
   </div>
 </template>
