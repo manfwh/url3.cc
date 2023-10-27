@@ -19,7 +19,7 @@ const loadingOptions = computed(() => {
     maskColor: 'rgba(255, 255, 255, 0)'
   }
 })
-const selected = ref(INTERVALS[3].slug)
+const selected = ref(INTERVALS[0].slug)
 const current = computed(() => INTERVALS.find(item => item.slug === selected.value))
 provide('key', route.params.key)
 provide(THEME_KEY, colorMode)

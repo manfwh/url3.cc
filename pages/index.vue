@@ -27,17 +27,15 @@ const items = [
     <div class="sticky inset-x-0 top-0 z-30 w-full border-b dark:border-gray-600 backdrop-blur-lg">
       <div class="mx-auto w-full max-w-screen-xl px-2.5 lg:px-20">
         <div class="flex justify-between items-center h-16">
-          <div>
-            <h1 class="text-primary font-semibold text-2xl ">
-              <nuxt-link to="/" class="flex items-center">
-                <img src="~/assets/imgs/logo.png" alt="logo" class="w-10 h-10 mr-2 block">
-                URL3.cc
-              </nuxt-link>
-            </h1>
-          </div>
+          <h1 class="text-primary font-semibold text-sl md:text-2xl ">
+            <nuxt-link to="/" class="flex items-center">
+              <img src="~/assets/imgs/logo.png" alt="logo" class="w-8 h-8 md:w-10 md:h-10 mr-2 block">
+              URL3.cc
+            </nuxt-link>
+          </h1>
           <div class="flex items-center space-x-4">
-            <SharedSwitchLanguage />
-            <SharedColorModeButton />
+            <SharedSwitchLanguage class="hidden md:block" />
+            <SharedColorModeButton class="hidden md:block" />
 
             <UButton v-if="!session" variant="outline" :to="localePath('/login')">
               {{ $t('common.SignIn') }}
@@ -68,10 +66,10 @@ const items = [
       {{ $t('hero.title.part_1') }}
       <span class="text-transparent bg-clip-text bg-gradient-to-r from-green-400 to-teal-400">{{ $t('hero.title.part_2') }}</span> {{ $t('hero.title.part_3') }}
     </h1>
-    <p class="text-center text-gray-700 dark:text-gray-300">
+    <p class="text-center text-gray-700 dark:text-gray-300 font-[Inter]">
       {{ $t('hero.description') }}
     </p>
-    <HomeDemoCreate />
+    <!-- <HomeDemoCreate /> -->
     <HomeFeatures />
   </div>
 </template>

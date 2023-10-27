@@ -22,7 +22,7 @@ export default defineEventHandler(async (event) => {
   const ip = getRequestIP(event) || '63.141.57.109'
   const { success } = await ratelimit(5, '1 m').limit(ip)
   if (!success) {
-    throw createError({ statusCode: 429 })
+    throw createError({ statusCode: 429, statusMessage: 'Too Many Requests' })
   }
   if (body.type === 'image' && body.image) {
     const S3 = new S3Client({

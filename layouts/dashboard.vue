@@ -23,16 +23,18 @@ const items = [
 //   lazy: true
 // })
 const route = useRoute()
+const localePath = useLocalePath()
 </script>
 
 <template>
   <div>
     <div class="sticky left-0 right-0 top-0 z-20 bg-white dark:bg-black border-b  border-gray-200 dark:border-gray-700 ">
-      <div class="container mx-auto">
+      <div class="mx-auto w-full max-w-screen-xl px-2.5 lg:px-20">
         <div class="flex justify-between items-center h-16">
           <div class="flex">
-            <h1 class="text-primary font-semibold text-2xl mr-4">
-              <nuxt-link to="/">
+            <h1 class="text-primary font-semibold text-sl md:text-2xl ">
+              <nuxt-link :to="localePath('/')" class="flex items-center">
+                <img src="~/assets/imgs/logo.png" alt="logo" class="w-8 h-8 md:w-10 md:h-10 mr-2 block">
                 URL3.cc
               </nuxt-link>
             </h1>

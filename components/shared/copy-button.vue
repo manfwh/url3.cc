@@ -17,9 +17,9 @@ const { copy, copied } = useClipboard({
 })
 const handleClick = async () => {
   await copy(props.text)
-  toast.add({
-    title: 'Successful copied!'
-  })
+  // toast.add({
+  //   title: 'Successful copied!'
+  // })
 }
 </script>
 <template>
