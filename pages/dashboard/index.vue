@@ -99,7 +99,9 @@ defineShortcuts({
         </p>
       </div>
       <UButton variant="outline" @click="openAddModal">
-        Create Link <UKbd>C</UKbd>
+        Create Link <UKbd class="hidden lg:inline-block">
+          C
+        </UKbd>
       </UButton>
     </div>
     <div class="grid grid-cols-10 gap-8">

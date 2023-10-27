@@ -190,7 +190,7 @@ const download = (url: string) => {
     </div>
     <ClientOnly>
       <SharedTransitionHeight>
-        <div v-if="createdLink" class="flex bg-white box-content dark:bg-gray-800 rounded-md mt-4 p-6 gap-6">
+        <div v-if="createdLink" class=" bg-white box-content dark:bg-gray-800 rounded-md mt-4 p-6 gap-6">
           <div class="flex-shrink-0 text-center">
             <img :src="qrcode" class="w-24 h-24 block" alt="">
             <UButton
@@ -207,11 +207,18 @@ const download = (url: string) => {
             <span class="font-semibold">{{ $t('demo.your_short_link') }}</span>
             <div class="bg-slate-100 dark:bg-gray-700 rounded p-2 mt-2 mb-4 flex justify-between items-center">
               <a :href="fullDomain + createdLink.key" target="_blank">{{ fullDomain + createdLink.key }}</a>
-              <div class="flex items-center">
+              <div class="flex items-center gap-1">
                 <LinkClicks :key="createdLink.key!" :link-key="createdLink.key!" />
                 <UTooltip text="Copy Link">
                   <!-- <copy-button :text="fullDomain + props.link.key" /> -->
-                  <SharedCopyButton :text="fullDomain + createdLink.key" :ui="{rounded: 'rounded-md'}" />
+                  <SharedCopyButton
+                    :text="fullDomain + createdLink.key"
+                    :ui="{rounded: 'rounded-md', icon: {
+                      size: {
+                        sm: 'h-4 w-4'
+                      }
+                    }}"
+                  />
                 </UTooltip>
               </div>
             </div>
