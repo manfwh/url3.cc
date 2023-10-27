@@ -6,22 +6,11 @@ export default defineNuxtConfig({
     '@nuxtjs/supabase',
     '@vueuse/nuxt',
     '@nuxt/ui',
-    '@nuxtjs/fontaine',
+    '@nuxtjs/google-fonts',
     '@nuxtjs/i18n',
     '@nuxt/content'
   ],
   css: ['~/assets/css/main.css', '~/assets/css/scrollbars.css'],
-  fontMetrics: {
-    fonts: [
-      {
-        family: 'Poppins',
-        fallbacks: ['Georgia'],
-        fallbackName: 'fallback-poppins',
-        src: 'fonts/poppins.ttf',
-        root: 'assets'
-      }
-    ]
-  },
   supabase: {
     cookieOptions: {
       maxAge: 60 * 60 * 8,
@@ -67,6 +56,11 @@ export default defineNuxtConfig({
       // Theme used in all color schemes.
       // theme: 'github-light'
 
+    }
+  },
+  googleFonts: {
+    families: {
+      Inter: true
     }
   }
 })

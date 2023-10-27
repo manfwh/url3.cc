@@ -15,12 +15,14 @@ const { data: clicks, status } = useAsyncData(`link-${props.linkKey}-clicks`, as
     return props.clicks
   }
 })
+const localePath = useLocalePath()
+
 </script>
 <template>
   <UButton
     color="gray"
     size="xs"
-    :to="`/dashboard/links/${linkKey}`"
+    :to="localePath(`/dashboard/links/${linkKey}`)"
     variant="soft"
     icon="i-heroicons-chart-bar-solid"
     class="  text-gray-500 dark:text-gray-400"

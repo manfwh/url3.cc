@@ -2,7 +2,7 @@
   <NuxtLayout>
     <NuxtLoadingIndicator />
     <NuxtPage />
-    <UNotifications :ui="{ position: 'top-0 right-0' }" :timeout="0" />
+    <UNotifications :timeout="0" />
   </NuxtLayout>
 </template>
 <script lang="ts" setup>

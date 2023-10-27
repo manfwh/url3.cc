@@ -109,7 +109,7 @@ const download = (url: string) => {
 </script>
 
 <template>
-  <div class="mx-4 md:mx-auto max-w-lg mt-16">
+  <div class="mx-4 md:mx-auto max-w-lg mt-16 font-[Inter]">
     <!-- <UTabs v-model="selected" :items="tabItems">
     </UTabs> -->
 

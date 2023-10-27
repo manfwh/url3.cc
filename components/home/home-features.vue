@@ -19,7 +19,7 @@ const features = [
 ]
 </script>
 <template>
-  <div class="py-24 sm:py-32">
+  <div class="py-24 sm:py-32 font-[Inter]">
     <div class="mx-auto px-4 sm:px-6 lg:px-8 max-w-7xl gap-16 sm:gap-y-24 flex flex-col">
       <h2 class="text-3xl font-bold tracking-tight text-gray-900 dark:text-white sm:text-4xl lg:text-5xl text-center">
         {{ $t('features.features') }}
