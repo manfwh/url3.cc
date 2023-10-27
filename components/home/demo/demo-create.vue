@@ -71,10 +71,15 @@ const handleSubmit = (e: Event) => {
     links.value.unshift(data)
     formRef.value?.reset()
     submitting.value = false
-    toast.add({ title: 'Link Created' })
+    toast.add({ title: 'Link Created', icon: 'i-heroicons-check-circle', timeout: 3000 })
   }).catch((err: any) => {
     submitting.value = false
-    toast.add({ title: err?.data?.message })
+    toast.add({
+      title: 'Create Failed',
+      description: err?.data?.message,
+      icon: 'i-heroicons-exclamation-triangle',
+      color: 'red'
+    })
   })
 }
 
