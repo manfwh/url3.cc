@@ -22,3 +22,10 @@ export const validateRequest = (body: any) => {
     ...body
   }
 }
+
+const BLACK_DOMAINS = ['pornhub.com', 'www.pornhub.com', 'xvideos.com', 'xhamster.com', 'xnxx.com', 'redtube.com']
+
+export const isBlackDomain = (url: string) => {
+  const host = new URL(url).host
+  return BLACK_DOMAINS.includes(host)
+}
