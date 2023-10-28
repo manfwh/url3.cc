@@ -28,12 +28,12 @@ export const ratelimit = (
         limit: () => ({ success: true })
       }
 }
-
+type Expire = 1800 | 86400 | 604800 | 2592000 // 30 分 | 24 小时 | 1 周 | 1 月
 export async function setRandomKey (data: {
   url?:string,
   type?: string,
   image?: string
-}): Promise<{response: string; key: string}> {
+}, ex: Expire = 1800): Promise<{response: string; key: string}> {
   const key = nanoid()
   const response = await redis.set(
     `short-link:${key}`,
@@ -43,7 +43,7 @@ export async function setRandomKey (data: {
     },
     {
       nx: true,
-      ex: 30 * 60
+      ex
     }
   )
   if (response !== 'OK') {
