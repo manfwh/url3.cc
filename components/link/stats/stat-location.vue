@@ -104,7 +104,7 @@ const rows = computed(() => {
 </script>
 <template>
   <UCard>
-    <div class="grid grid-cols-2 gap-8">
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
       <v-chart ref="chart" :option="option" class="h-[400px]" :loading="pending " />
       <div>
         <div class="min-h-[365px]">

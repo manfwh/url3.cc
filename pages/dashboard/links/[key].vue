@@ -52,12 +52,12 @@ const { y } = useWindowScroll()
         </div>
       </div>
     </div>
-    <div class="container mx-auto min-h-screen">
+    <div class="md:container mx-4 md:mx-auto min-h-screen">
       <ClientOnly>
         <div class="space-y-12">
           <LinkStatsStatTimeserirs />
           <LinkStatsStatLocation />
-          <div class="grid grid-cols-3 gap-4">
+          <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
             <LinkStatsStatDevice />
             <LinkStatsStateBrowser />
             <LinkStatsStateOs />
