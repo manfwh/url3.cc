@@ -22,7 +22,6 @@ const items = [
 // }, {
 //   lazy: true
 // })
-const route = useRoute()
 const localePath = useLocalePath()
 </script>
 
@@ -38,88 +37,6 @@ const localePath = useLocalePath()
                 URL3.cc
               </nuxt-link>
             </h1>
-            <!-- <div v-if="user">
-              <UPopover
-                :ui="{popper: {
-                  placement: 'bottom-start'
-                }}"
-              >
-                <template #default>
-                  <UButton color="gray" variant="ghost" label="open">
-                    <template #leading>
-                      <UAvatar :src="user.user_metadata.avatar_url" size="xs" />
-                    </template>
-                    <div class="ml-1 mr-2">
-                      <span>
-                        {{ user.user_metadata.user_name }}
-                      </span>
-                    </div>
-                    <template #trailing>
-                      <UIcon name="i-heroicons-chevron-up-down-20-solid" class="w-4 h-4" />
-                    </template>
-                  </UButton>
-                </template>
-
-                <template #panel="{close}">
-                  <div class="p-2">
-                    <div class="w-48">
-                      <div class="p-2 text-xs text-gray-500">
-                        Personal Account
-                      </div>
-                      <UButton
-                        to="/dashboard"
-                        color="gray"
-                        variant="ghost"
-                        class="w-full relative"
-                        size="md"
-                        @click="close"
-                      >
-                        <template #leading>
-                          <UAvatar :src="user.user_metadata.avatar_url" size="sm" />
-                        </template>
-                        <div class="space-x-3">
-                          <span>
-                            {{ user.user_metadata.user_name }}
-                          </span>
-                        </div>
-                        <template v-if="route.path === '/dashboard'" #trailing>
-                          <span class="absolute inset-y-0 right-0 flex items-center pr-3">
-                            <UIcon name="i-heroicons-check" class="w-5 h-5" />
-                          </span>
-                        </template>
-                      </UButton>
-                      <div class="p-2 text-xs text-gray-500">
-                        Personal Account
-                      </div>
-                      <UButton
-                        v-for="item in projects?.data"
-                        :key="item.id"
-                        :to="`/dashboard/${item.slug}`"
-                        color="gray"
-                        variant="ghost"
-                        class="w-full relative"
-                        size="md"
-                        @click="close"
-                      >
-                        <template #leading>
-                          <UAvatar :src="user.user_metadata.avatar_url" size="sm" />
-                        </template>
-                        <div class="space-x-3">
-                          <span>
-                            {{ item.name }}
-                          </span>
-                        </div>
-                        <template v-if="route.path === '/dashboard/' + item.slug" #trailing>
-                          <span class="absolute inset-y-0 right-0 flex items-center pr-3">
-                            <UIcon name="i-heroicons-check" class="w-5 h-5" />
-                          </span>
-                        </template>
-                      </UButton>
-                    </div>
-                  </div>
-                </template>
-              </UPopover>
-            </div> -->
           </div>
 
           <div v-if="user" class="flex items-center space-x-3">

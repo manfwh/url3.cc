@@ -81,8 +81,12 @@ const submit = async (event: FormSubmitEvent<typeof state.value>) => {
     addEditState.value.isOpen = false
   } catch (error: any) {
     submitting.value = false
+
     toast.add({
-      title: error?.data?.message || 'Create Error!'
+      title: 'Create Failed',
+      description: error?.data?.message || '',
+      icon: 'i-heroicons-exclamation-triangle',
+      color: 'red'
     })
   }
 }

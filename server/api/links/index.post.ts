@@ -5,7 +5,7 @@ import {
 import { serverSupabaseClient, serverSupabaseUser } from '#supabase/server'
 import type { Database, Tables } from '~/types/type'
 
-import { validateRequest } from '~/server/utils/link'
+import { validateRequest, isBlackDomain } from '~/server/utils/link'
 import { redis } from '~/server/utils/upstash'
 import { defineAuthHandler } from '~/server/utils/handler'
 
@@ -13,6 +13,10 @@ type RequestBody = Exclude<Tables<'links'>, 'id' | 'user_id'> & {slug?: string}
 export default defineAuthHandler(async (event) => {
   const supabase = await serverSupabaseClient<Database>(event)
   const { url, slug, ...body } = await readValidatedBody(event, validateRequest) as RequestBody
+
+  if (url && isBlackDomain(url)) {
+    throw createError({ statusCode: 400, statusMessage: 'Invalid URL' })
+  }
   // no project
   if (!slug) {
     const key = body.key || await getRandomKey(supabase)
