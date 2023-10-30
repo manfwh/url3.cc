@@ -33,8 +33,10 @@ const items = [
           </nuxt-link>
         </h1>
         <div class="flex items-center space-x-4">
-          <SharedSwitchLanguage class="hidden md:block" />
-          <SharedColorModeButton class="hidden md:block" />
+          <div class="flex">
+            <SharedSwitchLanguage class="hidden md:block" />
+            <SharedColorModeButton class="hidden md:block" />
+          </div>
 
           <UButton v-if="!session" variant="outline" :to="localePath('/login')">
             {{ $t('common.SignIn') }}

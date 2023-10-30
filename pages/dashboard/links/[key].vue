@@ -36,7 +36,7 @@ const { y } = useWindowScroll()
       class="sticky top-[65px] bg-slate-50 dark:bg-gray-950 dark:shadow-slate-800 z-10 mb-2"
       :class="{'shadow-sm': y > 50 }"
     >
-      <div class="container mx-auto flex items-center justify-between h-16 transition-all duration-100 ">
+      <div class="w-full max-w-screen-xl px-2.5 lg:px-20 mx-auto flex items-center justify-between h-16 transition-all duration-100 ">
         <h1>
           <UButton color="gray" variant="ghost" :to="`${appConfig.fullDomain}${route.params.key}`" target="_blank">
             {{ appConfig.domain }}/{{ route.params.key }}
@@ -52,7 +52,7 @@ const { y } = useWindowScroll()
         </div>
       </div>
     </div>
-    <div class="md:container mx-4 md:mx-auto min-h-screen">
+    <div class="w-full max-w-screen-xl px-2.5 lg:px-20 mx-auto min-h-screen">
       <ClientOnly>
         <div class="space-y-12">
           <LinkStatsStatTimeserirs />
