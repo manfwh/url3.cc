@@ -4,6 +4,7 @@ import {
 } from '@aws-sdk/client-s3'
 
 import { isValidUrl } from '~/server/utils'
+import { isBlackDomain } from '~/server/utils/link'
 import { ratelimit, setRandomKey } from '~/server/utils/upstash'
 
 export default defineEventHandler(async (event) => {
@@ -16,8 +17,12 @@ export default defineEventHandler(async (event) => {
       // return createError({ statusCode: 400, statusMessage: 'Invalid URL' })
       throw new Error('Invalid URL')
     }
+
     return body
   }) as { url: string; slug?: string, type?: string, image?: string }
+  if (url && isBlackDomain(url)) {
+    throw createError({ statusCode: 400, statusMessage: 'Invalid URL' })
+  }
 
   const ip = getRequestIP(event) || '63.141.57.109'
   const { success } = await ratelimit(5, '1 m').limit(ip)

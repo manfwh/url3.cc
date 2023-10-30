@@ -90,22 +90,26 @@ const uploadChange = (info: UploadFile) => {
 }
 
 const qrcode = useQRCode(fullDomain + createdLink.value?.key, {
-  margin: 0,
+  margin: 2,
   width: 100,
   height: 100
-  // color: {
-  //   dark: '#fff',
-  //   light: '#000'
-  // }
 })
 const anchorRef = ref<HTMLAnchorElement>()
 const download = (url: string) => {
   if (!anchorRef.value) { return }
   anchorRef.value.href = qrcode.value
-  anchorRef.value.download = `${createdLink.value?.key}-qrcode.png`
+  anchorRef.value.download = `${createdLink.value?.key}-url3cc.png`
   anchorRef.value.click()
 }
 
+const expireOptions = [
+  { label: '1 day', value: 60 * 60 * 24 },
+  { label: '1 week', value: 60 * 60 * 24 * 7 },
+  { label: '1 month', value: 60 * 60 * 24 * 30 },
+  { label: 'Never(Need Sign In)', value: 'nerver', disabled: true }
+]
+const selectedExpire = ref(expireOptions[0].value)
+const expire = computed(() => expireOptions.find(expireOptions => expireOptions.value === selectedExpire.value))
 </script>
 
 <template>
@@ -183,6 +187,21 @@ const download = (url: string) => {
             />
           </SharedTransitionHeight>
         </div>
+        <!-- <div class="mt-4 grid grid-cols-2 gap-4">
+          <USelectMenu
+            v-model="selectedExpire"
+            :options="expireOptions"
+            placeholder="expire time"
+            value-attribute="value"
+            option-attribute="label"
+            size="md"
+          >
+            <template #label>
+              {{ expire?.label }}
+            </template>
+          </USelectMenu>
+          <UInput type="text" size="md" placeholder="password" />
+        </div> -->
         <UButton type="submit" block size="md" class="mt-4" :loading="submitting">
           {{ item.type === 'image' ? $t('demo.submit.image') : $t('demo.submit.link') }}
         </UButton>
@@ -190,7 +209,7 @@ const download = (url: string) => {
     </div>
     <ClientOnly>
       <SharedTransitionHeight>
-        <div v-if="createdLink" class=" bg-white box-content dark:bg-gray-800 rounded-md mt-4 p-6 gap-6">
+        <div v-if="createdLink" class="md:flex bg-white box-content dark:bg-gray-800 rounded-md mt-4 p-6 gap-6">
           <div class="flex-shrink-0 text-center">
             <img :src="qrcode" class="w-24 h-24 block" alt="">
             <UButton

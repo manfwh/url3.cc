@@ -80,7 +80,6 @@ const openDelModal = async (key: string, link?: Tables<'links'>) => {
 const isCreateProjectOpen = ref(false)
 defineShortcuts({
   c: {
-    usingInput: true,
     handler: () => {
       openAddModal()
     }

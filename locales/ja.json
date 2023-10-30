@@ -23,7 +23,7 @@
   },
   "demo": {
     "your_short_link": "あなたのショートリンク：",
-    "warn": "公開リンクは30分後に自動的に削除されます。リンクを永久に保持するには無料アカウントを作成してください。",
+    "warn": "Public links will be automatically-deleted if no one accesses them within 30 days. Create a free account to keep your links forever.",
     "label": {
       "link": "開始するには長いURLを入力してください",
       "image": "開始するには画像を選択してください"
