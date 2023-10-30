@@ -23,7 +23,7 @@
   },
   "demo": {
     "your_short_link": "Your Short Url:",
-    "warn": "Public links will be automatically-deleted after 30 minutes. Create a free account to keep your links forever.",
+    "warn": "Public links will be automatically-deleted if no one accesses them within 30 days. Create a free account to keep your links forever.",
     "label": {
       "link": "Enter your long URL to get started",
       "image": "Select your Image to get started"

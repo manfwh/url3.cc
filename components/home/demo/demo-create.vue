@@ -90,19 +90,15 @@ const uploadChange = (info: UploadFile) => {
 }
 
 const qrcode = useQRCode(fullDomain + createdLink.value?.key, {
-  margin: 0,
+  margin: 2,
   width: 100,
   height: 100
-  // color: {
-  //   dark: '#fff',
-  //   light: '#000'
-  // }
 })
 const anchorRef = ref<HTMLAnchorElement>()
 const download = (url: string) => {
   if (!anchorRef.value) { return }
   anchorRef.value.href = qrcode.value
-  anchorRef.value.download = `${createdLink.value?.key}-qrcode.png`
+  anchorRef.value.download = `${createdLink.value?.key}-url3cc.png`
   anchorRef.value.click()
 }
 
