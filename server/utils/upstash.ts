@@ -33,7 +33,7 @@ export async function setRandomKey (data: {
   url?:string,
   type?: string,
   image?: string
-}, ex: Expire = 1800): Promise<{response: string; key: string}> {
+}, ex: Expire = 2592000): Promise<{response: string; key: string}> {
   const key = nanoid()
   const response = await redis.set(
     `short-link:${key}`,

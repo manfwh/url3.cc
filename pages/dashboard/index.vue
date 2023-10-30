@@ -87,7 +87,7 @@ defineShortcuts({
 })
 </script>
 <template>
-  <UContainer>
+  <div class="mx-auto w-full max-w-screen-xl px-2.5 lg:px-20">
     <div class="h-36 flex justify-between items-center">
       <div>
         <h1 class="text-lg">
@@ -117,5 +117,5 @@ defineShortcuts({
       </div>
     </div>
     <ModalAddEditProject v-model="isCreateProjectOpen" />
-  </UContainer>
+  </div>
 </template>
