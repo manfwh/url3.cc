@@ -41,5 +41,17 @@
     "devices_target_description": "Smartly redirect to the most suitable page based on the visitor's mobile system for a better user experience.",
     "custom": "Custom Links",
     "custom_description": "Create fun short URLs for your long web addresses as you wish, making sharing easier and more enjoyable!"
+  },
+  "questions": {
+    "questions": "Questions",
+    "q1": "What is url3. cc?",
+    "a1": "url3. cc is a free URL shortening service that allows you to shorten your long URLs into short and simple links in a few seconds.",
+    "q2": "How do I use url3. cc?",
+    "a2": "Enter a long URL in the input box and click the Generate button to generate a short URL",
+    "q3": "How long is the validity period of the link?",
+    "a3": "The validity period of links created by non logged in users is 30 days. If someone visits the link within 30 days, the validity period of the link will be extended to 30 days",
+    "q4": "How to contact?",
+    "a4": "You can send me an email at service@url3.cc"
   }
+  
 }
