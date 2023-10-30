@@ -51,7 +51,7 @@
     "q3": "How long is the validity period of the link?",
     "a3": "The validity period of links created by non logged in users is 30 days. If someone visits the link within 30 days, the validity period of the link will be extended to 30 days",
     "q4": "How to contact?",
-    "a4": "You can send me an email at service@url3.cc"
+    "a4": "You can send me an email at service{'@'}url3.cc"
   }
   
 }
