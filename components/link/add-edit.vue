@@ -137,9 +137,9 @@ const validate = (state: State): FormError[] => {
       class="space-y-4"
       @submit="submit"
     >
-      <!-- <UFormGroup label="Type" name="type">
+      <UFormGroup label="Type" name="type">
         <USelectMenu v-model="state.type" :options="['url', 'image']" color="gray" variant="outline" />
-      </UFormGroup> -->
+      </UFormGroup>
       <UFormGroup v-if="state.type === 'url'" label="Target" name="url">
         <UInput
           v-model="state.url"
