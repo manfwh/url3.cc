@@ -11,7 +11,27 @@
     "download": "ダウンロード",
     "SignIn": "サインイン",
     "SignOut": "サインアウト",
-    "Dashboard": "ダッシュボード"
+    "Dashboard": "ダッシュボード",
+    "timeAgo": {
+      "just-now": "たった今",
+      "ago": "{0} 前",
+      "in": "{0} 後",
+      "last-month": "先月",
+      "next-month": "来月",
+      "month": "月 | 月",
+      "last-year": "昨年",
+      "next-year": "来年",
+      "year": "年 | 年",
+      "yesterday": "昨日",
+      "tomorrow": "明日",
+      "day": "日 | 日",
+      "last-week": "先週",
+      "next-week": "来週",
+      "week": "週 | 週",
+      "hour": "時 | 時間",
+      "minute": "分 | 分間",
+      "second": "秒 | 秒"
+   }
   },
   "hero": {
     "title": {
@@ -52,5 +72,27 @@
     "a3": "非ログインユーザーによって作成されたリンクの有効期間は30日です。誰かが30日以内にリンクを訪れると、リンクの有効期間は30日延長されます。",
     "q4": "連絡先はどうすればよいですか？",
     "a4": "service{'@'}url3.cc までメールを送信することができます。"
-  }
+  },
+  "form": {
+    "Type": "タイプ",
+    "Image_File": "画像ファイル",
+    "Title": "タイトル",
+    "Description": "説明",
+    "Target": "ターゲット",
+    "Password": "パスワード",
+    "Ios_target": "iOS ターゲット",
+    "Andorid_target": "Android ターゲット",
+    "Note": "ノート",
+    "Note_Tip": "自分だけが見ることができます",
+    "Submitting": "送信中",
+    "Submit": "送信",
+    "Optional": "オプション",
+    "Drag_and_Drop_or_click_to_upload": "ドラッグアンドドロップまたはクリックしてアップロード"
+ },
+ "Create_Link": "リンクを作成",
+ "Edit_Link": "リンクを編集",
+ "image_type": "画像",
+ "url_type": "URL",
+ "Links": "リンク",
+ "Manage_your_links": "リンクを管理する"
 }

@@ -107,7 +107,7 @@ const remove = (uid: string) => {
       </template>
       <div v-if="Object.keys(fileList).length === 0" class="absolute inset-0 flex flex-col items-center justify-center group transition-colors text-slate-700 dark:text-slate-300 hover:text-slate-800 hover:dark:text-slate-200">
         <UIcon name="i-heroicons-cloud-arrow-up" class="w-8 h-8 group-hover:scale-90" />
-        <span>Drag and Drop or click to upload.</span>
+        <span>{{ $t('form.Drag_and_Drop_or_click_to_upload') }}</span>
       </div>
     </button>
     <SharedTransitionHeight>

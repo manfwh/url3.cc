@@ -14,7 +14,7 @@ function handleClose () {
       <template #header>
         <div class="flex items-center justify-between">
           <h3 class="text-base font-semibold text-gray-900 dark:text-white">
-            {{ state.link ? 'Edit Link' : 'Create Link' }}
+            {{ state.link ? $t('Edit_Link') : $t('Create_Link') }}
           </h3>
           <UButton color="gray" variant="ghost" icon="i-heroicons-x-mark-20-solid" class="-my-1" @click="handleClose" />
         </div>
