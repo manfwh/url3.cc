@@ -91,14 +91,14 @@ defineShortcuts({
     <div class="h-36 flex justify-between items-center">
       <div>
         <h1 class="text-lg">
-          Links
+          {{ $t('Links') }}
         </h1>
         <p class="text-sm text-gray-600 dark:text-gray-400">
-          Manage your links
+          {{ $t('Manage_your_links') }}
         </p>
       </div>
       <UButton variant="outline" @click="openAddModal">
-        Create Link <UKbd class="hidden lg:inline-block">
+        {{ $t('Create_Link') }} <UKbd class="hidden lg:inline-block">
           C
         </UKbd>
       </UButton>
