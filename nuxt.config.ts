@@ -68,6 +68,7 @@ export default defineNuxtConfig({
     url: 'https://app.url3.cc'
   },
   sitemap: {
+    xsl: false,
     exclude: ['/auth/**', '/test/**', '/confirm', '/dashboard']
   }
 })
