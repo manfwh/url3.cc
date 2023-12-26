@@ -167,25 +167,23 @@ const expire = computed(() => expireOptions.find(expireOptions => expireOptions.
         >{{ item.type === 'image' ? $t('demo.label.image') : $t('demo.label.link') }}
         </label>
         <div class="relative mt-4">
-          <SharedTransitionHeight>
-            <DraggerUpload v-if="item.type === 'image'" @change="uploadChange" @remove="image = ''" />
-            <UInput
-              v-else
-              type="url"
-              autocomplete="off"
-              name="url"
-              required
-              autofocus
-              size="md"
-              :disabled="submitting"
-              placeholder="https://example.com"
-              :ui="{
-                variant: {
-                  outline: 'bg-white dark:bg-slate-800'
-                }
-              }"
-            />
-          </SharedTransitionHeight>
+          <DraggerUpload v-if="item.type === 'image'" @change="uploadChange" @remove="image = ''" />
+          <UInput
+            v-else
+            type="url"
+            autocomplete="off"
+            name="url"
+            required
+            autofocus
+            size="md"
+            :disabled="submitting"
+            placeholder="https://example.com"
+            :ui="{
+              variant: {
+                outline: 'bg-white dark:bg-slate-800'
+              }
+            }"
+          />
         </div>
         <!-- <div class="mt-4 grid grid-cols-2 gap-4">
           <USelectMenu
