@@ -28,7 +28,7 @@ const localePath = useLocalePath()
     class="  text-gray-500 dark:text-gray-400"
   >
     <USkeleton v-if="(status === 'pending' || status === 'idle') && clicks === undefined" class="w-3 h-5" />
-    <span v-else class="w-3 text-center">{{ clicks }} </span>
+    <span v-else class="min-w-[12px] text-center">{{ clicks }} </span>
     clicks
   </UButton>
 </template>
