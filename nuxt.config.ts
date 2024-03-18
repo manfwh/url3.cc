@@ -9,7 +9,8 @@ export default defineNuxtConfig({
     '@nuxtjs/google-fonts',
     '@nuxtjs/i18n',
     '@nuxt/content',
-    'nuxt-simple-sitemap'
+    'nuxt-simple-sitemap',
+    '@pinia/nuxt'
   ],
   css: ['~/assets/css/main.css', '~/assets/css/scrollbars.css'],
   supabase: {

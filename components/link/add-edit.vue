@@ -1,15 +1,18 @@
 <script setup lang="ts">
 // import { fileTypeFromFile } from 'file-type'
-import type { FormError, FormSubmitEvent } from '@nuxt/ui/dist/runtime/types'
+import type { FormSubmitEvent, FormError } from '#ui/types'
 import DraggerUpload from '@/components/shared/upload/dragger-upload.vue'
 import type { UploadFile, UploadedFile } from '@/components/shared/upload/types'
 import { getFilename } from '@/utils'
+import { useUserStore } from '~/store/user'
 import type { Enums } from '~/types/type'
 const toast = useToast()
 const { t } = useI18n()
-// const { fullDomain } = useAppConfig()
+const { fullDomain } = useAppConfig()
 const addEditState = useLinkAddEditModal()
 const submitting = ref(false)
+
+const { user } = useUserStore()
 
 const editLink = computed(() => addEditState.value.link)
 
@@ -45,19 +48,19 @@ const state = ref<State>({
 })
 
 // 是否正在获取key中
-// const fetchKeyLoading = ref(false)
-// function setRandomKey () {
-//   fetchKeyLoading.value = true
-//   $fetch('/api/links/_random')
-//     .then((key) => {
-//       fetchKeyLoading.value = false
-//       state.value.key = key
-//     }).catch(() => {
-//       fetchKeyLoading.value = false
-//     })
-// }
+const fetchKeyLoading = ref(false)
+function setRandomKey () {
+  fetchKeyLoading.value = true
+  $fetch('/api/links/_random')
+    .then((key) => {
+      fetchKeyLoading.value = false
+      state.value.key = key
+    }).catch(() => {
+      fetchKeyLoading.value = false
+    })
+}
 const submit = async (event: FormSubmitEvent<typeof state.value>) => {
-  // if (fetchKeyLoading.value) { return }
+  if (fetchKeyLoading.value) { return }
   try {
     submitting.value = true
     if (editLink.value?.id) {
@@ -191,12 +194,12 @@ const currentType = computed(() => typeOptions.find(item => item.value === state
         </UFormGroup>
       </template>
 
-      <!-- <UFormGroup label="Shrot Link" name="key" :ui="{container: 'flex'}">
+      <UFormGroup v-if="user?.role === 'admin'" label="Shrot Link" name="key" :ui="{container: 'flex'}">
         <span
           class="py-1.5  text-sm rounded-l-md px-2.5 ring-1 ring-inset ring-gray-300 dark:ring-gray-700 truncate"
         >{{ fullDomain }}</span>
 
-        <UInput v-model="state.key" type="text" :disabled="fetchKeyLoading || !state.key" required :ui="{rounded: 'rounded-l-none', wrapper: 'flex-1 -ml-[1px]'}" />
+        <UInput v-model="state.key" type="text" :disabled="fetchKeyLoading" :ui="{rounded: 'rounded-l-none', wrapper: 'flex-1 -ml-[1px]'}" />
         <UButton
           class="absolute bottom-full right-0 mb-1"
           size="xs"
@@ -207,7 +210,7 @@ const currentType = computed(() => typeOptions.find(item => item.value === state
         >
           {{ fetchKeyLoading ? 'Fetching...' : 'Set Random Key' }}
         </UButton>
-      </UFormGroup> -->
+      </UFormGroup>
       <UFormGroup :label="$t('form.Password')" name="password" :hint="$t('form.Optional')">
         <UInput v-model="state.password" icon="i-heroicons-lock-closed" :type="showPassword ? 'text' : 'password'" color="gray" variant="outline" />
         <div class="absolute inset-y-0 flex items-center justify-center right-2">
@@ -243,7 +246,7 @@ const currentType = computed(() => typeOptions.find(item => item.value === state
         />
       </UFormGroup>
       <UFormGroup :label="$t('form.Note')" :hint="$t('form.Optional')" name="note" :description="$t('form.Note_Tip')">
-        <UInput v-model="state.ios" type="text" color="gray" variant="outline" />
+        <UInput v-model="state.note" type="text" color="gray" variant="outline" />
       </UFormGroup>
       <div class="text-right">
         <UButton type="submit" :loading="submitting">
