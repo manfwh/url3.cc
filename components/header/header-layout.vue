@@ -1,13 +1,12 @@
 <script lang="ts" setup>
-const { t } = useI18n()
-const supabase = useSupabaseClient()
-const { data: { session } } = await supabase.auth.getSession()
-const localePath = useLocalePath()
-const user = useSupabaseUser()
+import { useUserStore } from '~/store/user'
 
+const { t } = useI18n()
+const { user: userInfo, signOut } = useUserStore()
+const localePath = useLocalePath()
 const items = [
   [{
-    label: user.value?.email || '-',
+    label: userInfo?.email || '-',
     slot: 'account',
     disabled: true
   }],
@@ -15,7 +14,7 @@ const items = [
     label: 'Sign out',
     icon: 'i-heroicons-arrow-left-on-rectangle',
     click: async () => {
-      await supabase.auth.signOut()
+      await signOut()
       location.reload()
     }
   }]
@@ -37,19 +36,19 @@ const items = [
             <SharedColorModeButton class="hidden md:block" />
           </div>
 
-          <UButton v-if="!session" variant="outline" :to="localePath('/login')">
+          <UButton v-if="!userInfo" variant="outline" :to="localePath('/login')">
             {{ $t('common.SignIn') }}
           </UButton>
           <UButton v-else :to="localePath('/dashboard')" variant="outline">
             {{ $t('common.Dashboard') }}
           </UButton>
           <UDropdown
-            v-if="user"
+            v-if="userInfo"
             :items="items"
             :ui="{ item: { disabled: 'cursor-text select-text' } }"
             :popper="{ placement: 'bottom-end' }"
           >
-            <UAvatar :src="user.user_metadata.avatar_url" />
+            <UAvatar :src="userInfo?.avatar" />
             <template #account="{ item }">
               <div class="text-left">
                 <p class="truncate font-medium text-gray-900 dark:text-white">

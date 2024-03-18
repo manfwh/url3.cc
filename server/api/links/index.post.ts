@@ -17,16 +17,18 @@ export default defineAuthHandler(async (event) => {
   if (url && isBlackDomain(url)) {
     throw createError({ statusCode: 400, statusMessage: 'Invalid URL' })
   }
+  if (event.context.session.user_role !== 'admin' && body.key) {
+    throw createError({ statusCode: 400, data: 'Invalid key' })
+  }
   // no project
   if (!slug) {
     const key = body.key || await getRandomKey(supabase)
 
     // 检查key是否存在
-
     const link = await supabase.from('links').select('id').eq('key', key).single()
 
     if (link.data) {
-      throw createError({ statusCode: 400, data: 'Invalid key' })
+      throw createError({ statusCode: 400, data: 'Key already exists' })
     }
     // 检查project是否是自己的
     if (body.project_id) {
