@@ -1,6 +1,6 @@
 <template>
+  <NuxtLoadingIndicator />
   <NuxtLayout>
-    <NuxtLoadingIndicator />
     <NuxtPage />
     <UNotifications :timeout="0" />
   </NuxtLayout>
