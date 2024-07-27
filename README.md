@@ -1,6 +1,13 @@
-# Nuxt 3 Minimal Starter
+# About
 
-Look at the [Nuxt 3 documentation](https://nuxt.com/docs/getting-started/introduction) to learn more.
+Url3.cc is a service that generates short links
+
+# Feature
+🔗 Generate Short URLs: Easily convert long URLs into short, shareable links.
+🖼️ Image Link Shortening: Turn image URLs into concise, easy-to-share links.
+📊 Link Management: Conveniently manage all your shortened links in one place.
+📈 Analytics: Track and analyze link clicks and performance data.
+💼 Efficient Promotion: Ideal for more effective online marketing campaigns.
 
 ## Setup
 
