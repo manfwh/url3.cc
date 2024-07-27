@@ -3,11 +3,11 @@
 Url3.cc is a service that generates short links
 
 # Feature
-🔗 Generate Short URLs: Easily convert long URLs into short, shareable links.
-🖼️ Image Link Shortening: Turn image URLs into concise, easy-to-share links.
-📊 Link Management: Conveniently manage all your shortened links in one place.
-📈 Analytics: Track and analyze link clicks and performance data.
-💼 Efficient Promotion: Ideal for more effective online marketing campaigns.
+- 🔗 Generate Short URLs: Easily convert long URLs into short, shareable links.
+- 🖼️ Image Link Shortening: Turn image URLs into concise, easy-to-share links.
+- 📊 Link Management: Conveniently manage all your shortened links in one place.
+- 📈 Analytics: Track and analyze link clicks and performance data.
+- 💼 Efficient Promotion: Ideal for more effective online marketing campaigns.
 
 ## Setup
 
