@@ -11,7 +11,27 @@
     "download": "Baixar",
     "SignIn": "Entrar",
     "SignOut": "Sair",
-    "Dashboard": "Painel"
+    "Dashboard": "Painel",
+    "timeAgo": {
+      "just-now": "agora mesmo",
+      "ago": "há {0}",
+      "in": "em {0}",
+      "last-month": "mês passado",
+      "next-month": "próximo mês",
+      "month": "mês | meses",
+      "last-year": "ano passado",
+      "next-year": "próximo ano",
+      "year": "ano | anos",
+      "yesterday": "ontem",
+      "tomorrow": "amanhã",
+      "day": "dia | dias",
+      "last-week": "semana passada",
+      "next-week": "próxima semana",
+      "week": "semana | semanas",
+      "hour": "hora | horas",
+      "minute": "minuto | minutos",
+      "second": "segundo | segundos"
+    }
   },
   "hero": {
     "title": {
@@ -52,5 +72,27 @@
     "a3": "O período de validade dos links criados por usuários não logados é de 30 dias. Se alguém visitar o link dentro de 30 dias, o período de validade do link será estendido por 30 dias",
     "q4": "Como entrar em contato?",
     "a4": "Você pode me enviar um email para service{'@'}url3.cc"
-  }
+  },
+  "form": {
+    "Type": "Tipo",
+    "Image_File": "Arquivo de Imagem",
+    "Title": "Título",
+    "Description": "Descrição",
+    "Target": "Destino",
+    "Password": "Senha",
+    "Ios_target": "Destino iOS",
+    "Andorid_target": "Destino Android",
+    "Note": "Nota",
+    "Note_Tip": "Visível apenas para você",
+    "Submitting": "Enviando",
+    "Submit": "Enviar",
+    "Optional": "Opcional",
+    "Drag_and_Drop_or_click_to_upload": "Arraste e solte ou clique para fazer upload."
+  },
+  "Create_Link": "Criar Link",
+  "Edit_Link": "Editar Link",
+  "image_type": "Imagem",
+  "url_type": "URL",
+  "Links": "Links",
+  "Manage_your_links": "Gerenciar seus links"
 }

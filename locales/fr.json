@@ -11,7 +11,27 @@
     "download": "Télécharger",
     "SignIn": "Se Connecter",
     "SignOut": "Se Déconnecter",
-    "Dashboard": "Tableau de Bord"
+    "Dashboard": "Tableau de Bord",
+    "timeAgo": {
+      "just-now": "à l'instant",
+      "ago": "il y a {0}",
+      "in": "dans {0}",
+      "last-month": "le mois dernier",
+      "next-month": "le mois prochain",
+      "month": "mois",
+      "last-year": "l'année dernière",
+      "next-year": "l'année prochaine",
+      "year": "an | ans",
+      "yesterday": "hier",
+      "tomorrow": "demain",
+      "day": "jour | jours",
+      "last-week": "la semaine dernière",
+      "next-week": "la semaine prochaine",
+      "week": "semaine | semaines",
+      "hour": "heure | heures",
+      "minute": "minute | minutes",
+      "second": "seconde | secondes"
+    }
   },
   "hero": {
     "title": {
@@ -52,5 +72,27 @@
     "a3": "La durée de validité des liens créés par les utilisateurs non connectés est de 30 jours. Si quelqu'un visite le lien dans les 30 jours, la durée de validité du lien sera prolongée de 30 jours",
     "q4": "Comment nous contacter ?",
     "a4": "Vous pouvez m'envoyer un email à service{'@'}url3.cc"
-  }
+  },
+  "form": {
+    "Type": "Type",
+    "Image_File": "Fichier Image",
+    "Title": "Titre",
+    "Description": "Description",
+    "Target": "Cible",
+    "Password": "Mot de passe",
+    "Ios_target": "Cible iOS",
+    "Andorid_target": "Cible Android",
+    "Note": "Note",
+    "Note_Tip": "Visible uniquement par vous",
+    "Submitting": "Soumission",
+    "Submit": "Soumettre",
+    "Optional": "Optionnel",
+    "Drag_and_Drop_or_click_to_upload": "Glissez-déposez ou cliquez pour télécharger."
+  },
+  "Create_Link": "Créer un Lien",
+  "Edit_Link": "Modifier le Lien",
+  "image_type": "Image",
+  "url_type": "URL",
+  "Links": "Liens",
+  "Manage_your_links": "Gérer vos liens"
 }

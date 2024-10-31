@@ -1,56 +1,98 @@
 {
-  "language": "한국어",
+  "language": "Español",
   "site": {
-    "title": "URL 단축 도구 - Url3.cc",
-    "description": "링크 공유 효율성을 높이기 위해 손쉽게 링크를 단축하세요. 짧은 URL을 맞춤 설정하고, 클릭 데이터를 추적하며, 링크 성능에 대한 인사이트를 얻으세요."
+    "title": "Herramienta de Acortamiento de URL - Url3.cc",
+    "description": "Acorta tus enlaces fácilmente para mejorar la eficiencia de compartir. Personaliza tus URLs cortas, rastrea datos de clics y obtén información sobre el rendimiento de tus enlaces."
   },
   "common": {
-    "Link": "링크",
-    "Image": "이미지",
-    "drag-upload": "드래그 앤 드롭 또는 클릭하여 업로드하세요.",
-    "download": "다운로드",
-    "SignIn": "로그인",
-    "SignOut": "로그아웃",
-    "Dashboard": "대시보드"
+    "Link": "Enlace",
+    "Image": "Imagen",
+    "drag-upload": "Arrastra y suelta o haz clic para subir.",
+    "download": "Descargar",
+    "SignIn": "Iniciar Sesión",
+    "SignOut": "Cerrar Sesión",
+    "Dashboard": "Panel de Control",
+    "timeAgo": {
+      "just-now": "justo ahora",
+      "ago": "hace {0}",
+      "in": "en {0}",
+      "last-month": "el mes pasado",
+      "next-month": "el próximo mes",
+      "month": "mes | meses",
+      "last-year": "el año pasado",
+      "next-year": "el próximo año",
+      "year": "año | años",
+      "yesterday": "ayer",
+      "tomorrow": "mañana",
+      "day": "día | días",
+      "last-week": "la semana pasada",
+      "next-week": "la próxima semana",
+      "week": "semana | semanas",
+      "hour": "hora | horas",
+      "minute": "minuto | minutos",
+      "second": "segundo | segundos"
+    }
   },
   "hero": {
     "title": {
-      "part_1": "환영합니다",
-      "part_2": "단축 URL",
-      "part_3": "생성기!"
+      "part_1": "Bienvenido al",
+      "part_2": "Generador de",
+      "part_3": "URLs Cortas!"
     },
-    "description": "긴 URL을 단 한 번의 클릭으로 짧고 간단한 링크로 변환하세요. 지금 시작하세요!"
+    "description": "Convierte tus URLs largas en enlaces cortos y simples con un solo clic. ¡Comienza ahora!"
   },
   "demo": {
-    "your_short_link": "귀하의 단축 URL:",
-    "warn": "30일 동안 접속이 없는 공개 링크는 자동으로 삭제됩니다. 링크를 영구적으로 유지하려면 무료 계정을 만드세요.",
+    "your_short_link": "Tu URL Corta:",
+    "warn": "Los enlaces públicos se eliminarán automáticamente si nadie accede a ellos durante 30 días. Crea una cuenta gratuita para mantener tus enlaces para siempre.",
     "label": {
-      "link": "시작하려면 긴 URL을 입력하세요",
-      "image": "시작하려면 이미지를 선택하세요"
+      "link": "Ingresa tu URL larga para comenzar",
+      "image": "Selecciona tu imagen para comenzar"
     },
     "submit": {
-      "link": "단축 URL 생성",
-      "image": "이미지 URL 생성"
+      "link": "Generar URL Corta",
+      "image": "Generar URL de Imagen"
     }
   },
   "features": {
-    "features": "기능",
-    "analysis": "분석",
-    "analysis_description": "단축 URL의 클릭 수와 방문 출처를 쉽게 확인하여 대상 사용자를 더 잘 이해할 수 있습니다.",
-    "devices_target": "기기 타겟팅",
-    "devices_target_description": "방문자의 모바일 시스템을 기반으로 가장 적합한 페이지로 스마트하게 리디렉션하여 더 나은 사용자 경험을 제공합니다.",
-    "custom": "맞춤 링크",
-    "custom_description": "원하는 대로 긴 웹 주소에 대한 재미있는 짧은 URL을 만들어 공유를 더 쉽고 즐겁게 만드세요!"
+    "features": "Características",
+    "analysis": "Análisis",
+    "analysis_description": "Visualiza fácilmente el recuento de clics y las fuentes de visitas de tus URLs cortas para comprender mejor a tu audiencia objetivo.",
+    "devices_target": "Orientación por Dispositivo",
+    "devices_target_description": "Redirige de manera inteligente a la página más adecuada según el sistema móvil del visitante para una mejor experiencia de usuario.",
+    "custom": "Enlaces Personalizados",
+    "custom_description": "¡Crea URLs cortas divertidas para tus direcciones web largas como desees, haciendo que compartir sea más fácil y agradable!"
   },
   "questions": {
-    "questions": "질문",
-    "q1": "url3.cc는 무엇인가요?",
-    "a1": "url3.cc는 긴 URL을 몇 초 만에 짧고 간단한 링크로 줄일 수 있는 무료 URL 단축 서비스입니다.",
-    "q2": "url3.cc를 어떻게 사용하나요?",
-    "a2": "입력 상자에 긴 URL을 입력하고 생성 버튼을 클릭하여 짧은 URL을 생성하세요",
-    "q3": "링크의 유효 기간은 얼마인가요?",
-    "a3": "비로그인 사용자가 생성한 링크의 유효 기간은 30일입니다. 30일 이내에 누군가가 링크를 방문하면 링크의 유효 기간이 30일 연장됩니다",
-    "q4": "연락은 어떻게 하나요?",
-    "a4": "service{'@'}url3.cc로 이메일을 보내주세요"
-  }
+    "questions": "Preguntas",
+    "q1": "¿Qué es url3.cc?",
+    "a1": "url3.cc es un servicio gratuito de acortamiento de URLs que te permite acortar tus URLs largas en enlaces cortos y simples en segundos.",
+    "q2": "¿Cómo uso url3.cc?",
+    "a2": "Ingresa una URL larga en el cuadro de entrada y haz clic en el botón Generar para crear una URL corta",
+    "q3": "¿Cuál es el período de validez del enlace?",
+    "a3": "El período de validez de los enlaces creados por usuarios no registrados es de 30 días. Si alguien visita el enlace dentro de los 30 días, el período de validez del enlace se extenderá por 30 días más",
+    "q4": "¿Cómo contactar?",
+    "a4": "Puedes enviarme un correo electrónico a service{'@'}url3.cc"
+  },
+  "form": {
+    "Type": "Tipo",
+    "Image_File": "Archivo de Imagen",
+    "Title": "Título",
+    "Description": "Descripción",
+    "Target": "Destino",
+    "Password": "Contraseña",
+    "Ios_target": "Destino iOS",
+    "Andorid_target": "Destino Android",
+    "Note": "Nota",
+    "Note_Tip": "Solo visible para ti",
+    "Submitting": "Enviando",
+    "Submit": "Enviar",
+    "Optional": "Opcional",
+    "Drag_and_Drop_or_click_to_upload": "Arrastra y suelta o haz clic para subir."
+  },
+  "Create_Link": "Crear Enlace",
+  "Edit_Link": "Editar Enlace",
+  "image_type": "Imagen",
+  "url_type": "URL",
+  "Links": "Enlaces",
+  "Manage_your_links": "Administra tus enlaces"
 }

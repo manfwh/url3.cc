@@ -11,7 +11,27 @@
     "download": "Herunterladen",
     "SignIn": "Anmelden",
     "SignOut": "Abmelden",
-    "Dashboard": "Dashboard"
+    "Dashboard": "Dashboard",
+    "timeAgo": {
+      "just-now": "gerade eben",
+      "ago": "vor {0}",
+      "in": "in {0}",
+      "last-month": "letzten Monat",
+      "next-month": "nächsten Monat",
+      "month": "Monat | Monate",
+      "last-year": "letztes Jahr",
+      "next-year": "nächstes Jahr",
+      "year": "Jahr | Jahre",
+      "yesterday": "gestern",
+      "tomorrow": "morgen",
+      "day": "Tag | Tage",
+      "last-week": "letzte Woche",
+      "next-week": "nächste Woche",
+      "week": "Woche | Wochen",
+      "hour": "Stunde | Stunden",
+      "minute": "Minute | Minuten",
+      "second": "Sekunde | Sekunden"
+    }
   },
   "hero": {
     "title": {
@@ -52,5 +72,27 @@
     "a3": "Die Gültigkeitsdauer von Links, die von nicht angemeldeten Benutzern erstellt wurden, beträgt 30 Tage. Wenn jemand den Link innerhalb von 30 Tagen besucht, wird die Gültigkeitsdauer des Links um 30 Tage verlängert",
     "q4": "Wie kann ich Kontakt aufnehmen?",
     "a4": "Sie können mir eine E-Mail an service{'@'}url3.cc senden"
-  }
+  },
+  "form": {
+    "Type": "Typ",
+    "Image_File": "Bilddatei",
+    "Title": "Titel",
+    "Description": "Beschreibung",
+    "Target": "Ziel",
+    "Password": "Passwort",
+    "Ios_target": "iOS-Ziel",
+    "Andorid_target": "Android-Ziel",
+    "Note": "Notiz",
+    "Note_Tip": "Nur für Sie sichtbar",
+    "Submitting": "Wird gesendet",
+    "Submit": "Senden",
+    "Optional": "Optional",
+    "Drag_and_Drop_or_click_to_upload": "Drag & Drop oder klicken zum Hochladen."
+  },
+  "Create_Link": "Link erstellen",
+  "Edit_Link": "Link bearbeiten",
+  "image_type": "Bild",
+  "url_type": "URL",
+  "Links": "Links",
+  "Manage_your_links": "Verwalten Sie Ihre Links"
 }
