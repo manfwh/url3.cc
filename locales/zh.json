@@ -11,7 +11,27 @@
     "download": "下載",
     "SignIn": "登入",
     "SignOut": "登出",
-    "Dashboard": "儀表板"
+    "Dashboard": "儀表板",
+    "timeAgo": {
+      "just-now": "剛剛",
+      "ago": "{0} 前",
+      "in": "在 {0}",
+      "last-month": "上個月",
+      "next-month": "下個月",
+      "month": "月 | 月",
+      "last-year": "去年",
+      "next-year": "明年",
+      "year": "年 | 年",
+      "yesterday": "昨天",
+      "tomorrow": "明天",
+      "day": "天 | 天",
+      "last-week": "上週",
+      "next-week": "下週",
+      "week": "週 | 週",
+      "hour": "小時 | 小時",
+      "minute": "分鐘 | 分鐘",
+      "second": "秒 | 秒"
+   }
   },
   "hero": {
     "title": {
@@ -52,5 +72,27 @@
     "a3": "非註冊用戶創建的連結有效期為30天。如果有人在30天內訪問連結，連結的有效期將延長至30天。",
     "q4": "如何聯繫？",
     "a4": "您可以發送電子郵件至 service{'@'}url3.cc。"
-  }
+  },
+  "form": {
+    "Type": "類型",
+    "Image_File": "圖片檔案",
+    "Title": "標題",
+    "Description": "描述",
+    "Target": "目標",
+    "Password": "密碼",
+    "Ios_target": "iOS 目標",
+    "Andorid_target": "Android 目標",
+    "Note": "備註",
+    "Note_Tip": "僅對自己可見",
+    "Submitting": "正在提交",
+    "Submit": "提交",
+    "Optional": "選填",
+    "Drag_and_Drop_or_click_to_upload": "拖放或點擊上傳"
+ },
+ "Create_Link": "創建連結",
+ "Edit_Link": "編輯連結",
+ "image_type": "圖片",
+ "url_type": "網址",
+ "Links": "連結",
+ "Manage_your_links": "管理您的連結"
 }

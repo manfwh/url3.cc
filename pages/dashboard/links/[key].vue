@@ -28,7 +28,10 @@ provide(STATS_KEY, {
   interval: selected
 })
 const { y } = useWindowScroll()
-
+const router = useRouter()
+const backRoute = () => {
+  router.back()
+}
 </script>
 <template>
   <div class="bg-slate-50 dark:bg-gray-950 pt-2 pb-28">
@@ -37,7 +40,14 @@ const { y } = useWindowScroll()
       :class="{'shadow-sm': y > 50 }"
     >
       <div class="w-full max-w-screen-xl px-2.5 lg:px-20 mx-auto flex items-center justify-between h-16 transition-all duration-100 ">
-        <h1>
+        <h1 class="flex items-center">
+          <UButton
+            :ui="{ rounded: 'rounded-full' }"
+            icon="i-heroicons-arrow-small-left"
+            color="gray"
+            variant="ghost"
+            @click="backRoute"
+          />
           <UButton color="gray" variant="ghost" :to="`${appConfig.fullDomain}${route.params.key}`" target="_blank">
             {{ appConfig.domain }}/{{ route.params.key }}
           </UButton>

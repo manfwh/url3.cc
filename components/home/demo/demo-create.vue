@@ -167,25 +167,23 @@ const expire = computed(() => expireOptions.find(expireOptions => expireOptions.
         >{{ item.type === 'image' ? $t('demo.label.image') : $t('demo.label.link') }}
         </label>
         <div class="relative mt-4">
-          <SharedTransitionHeight>
-            <DraggerUpload v-if="item.type === 'image'" @change="uploadChange" @remove="image = ''" />
-            <UInput
-              v-else
-              type="url"
-              autocomplete="off"
-              name="url"
-              required
-              autofocus
-              size="md"
-              :disabled="submitting"
-              placeholder="https://example.com"
-              :ui="{
-                variant: {
-                  outline: 'bg-white dark:bg-slate-800'
-                }
-              }"
-            />
-          </SharedTransitionHeight>
+          <DraggerUpload v-if="item.type === 'image'" @change="uploadChange" @remove="image = ''" />
+          <UInput
+            v-else
+            type="url"
+            autocomplete="off"
+            name="url"
+            required
+            autofocus
+            size="md"
+            :disabled="submitting"
+            placeholder="https://example.com"
+            :ui="{
+              variant: {
+                outline: 'bg-white dark:bg-slate-800'
+              }
+            }"
+          />
         </div>
         <!-- <div class="mt-4 grid grid-cols-2 gap-4">
           <USelectMenu
@@ -207,47 +205,49 @@ const expire = computed(() => expireOptions.find(expireOptions => expireOptions.
         </UButton>
       </form>
     </div>
-    <ClientOnly>
-      <SharedTransitionHeight>
-        <div v-if="createdLink" class="md:flex bg-white box-content dark:bg-gray-800 rounded-md mt-4 p-6 gap-6">
-          <div class="flex-shrink-0 text-center">
-            <img :src="qrcode" class="w-24 h-24 block" alt="">
-            <UButton
-              class="mt-2"
-              block
-              size="xs"
-              @click="download"
-            >
-              {{ $t('common.download') }}
-            </UButton>
-            <a ref="anchorRef" class="hidden" />
-          </div>
-          <div>
-            <span class="font-semibold">{{ $t('demo.your_short_link') }}</span>
-            <div class="bg-slate-100 dark:bg-gray-700 rounded p-2 mt-2 mb-4 flex justify-between items-center">
-              <a :href="fullDomain + createdLink.key" target="_blank">{{ fullDomain + createdLink.key }}</a>
-              <div class="flex items-center gap-1">
-                <LinkClicks :key="createdLink.key!" :link-key="createdLink.key!" />
-                <UTooltip text="Copy Link">
-                  <!-- <copy-button :text="fullDomain + props.link.key" /> -->
-                  <SharedCopyButton
-                    :text="fullDomain + createdLink.key"
-                    :ui="{rounded: 'rounded-md', icon: {
-                      size: {
-                        sm: 'h-4 w-4'
-                      }
-                    }}"
-                  />
-                </UTooltip>
-              </div>
+    <div class="min-h-[230px] mt-4">
+      <ClientOnly>
+        <SharedTransitionHeight>
+          <div v-if="createdLink && !submitting" class="md:flex bg-white dark:bg-gray-800 rounded-md px-6 py-4 gap-6">
+            <div class="flex-shrink-0 text-center">
+              <img :src="qrcode" class="w-24 h-24 block" alt="">
+              <UButton
+                class="mt-2"
+                block
+                size="xs"
+                @click="download"
+              >
+                {{ $t('common.download') }}
+              </UButton>
+              <a ref="anchorRef" class="hidden" />
             </div>
-            <p class="text-xs text-slate-600 dark:text-slate-400">
-              {{ $t('demo.warn') }}
-            </p>
+            <div>
+              <span class="font-semibold">{{ $t('demo.your_short_link') }}</span>
+              <div class="bg-slate-100 dark:bg-gray-700 rounded p-2 mt-2 mb-4 flex justify-between items-center">
+                <a :href="fullDomain + createdLink.key" target="_blank">{{ fullDomain + createdLink.key }}</a>
+                <div class="flex items-center gap-1">
+                  <LinkClicks :key="createdLink.key!" :link-key="createdLink.key!" />
+                  <UTooltip text="Copy Link">
+                    <!-- <copy-button :text="fullDomain + props.link.key" /> -->
+                    <SharedCopyButton
+                      :text="fullDomain + createdLink.key"
+                      :ui="{rounded: 'rounded-md', icon: {
+                        size: {
+                          sm: 'h-4 w-4'
+                        }
+                      }}"
+                    />
+                  </UTooltip>
+                </div>
+              </div>
+              <p class="text-xs text-slate-600 dark:text-slate-400">
+                {{ $t('demo.warn') }}
+              </p>
+            </div>
           </div>
-        </div>
-      </SharedTransitionHeight>
-    </ClientOnly>
+        </SharedTransitionHeight>
+      </ClientOnly>
+    </div>
 
     <!-- <UAlert
       v-if="links && links.length > 0"

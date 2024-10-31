@@ -1,3 +1,4 @@
+import { jwtDecode } from 'jwt-decode'
 import type { EventHandler, EventHandlerRequest } from 'h3'
 import { serverSupabaseClient } from '#supabase/server'
 
@@ -10,6 +11,11 @@ export const defineAuthHandler = <T extends EventHandlerRequest, D> (
         const session = await supabase.auth.getSession()
         event.context.session = session.data.session
         if (session.data) {
+          if (session.data.session?.access_token) {
+            const decoded = jwtDecode(session.data.session?.access_token)
+            // @ts-ignore
+            event.context.session.user_role = decoded.user_role
+          }
           return handler(event)
         } else {
           throw createError({ statusCode: 401, message: 'Unauthorized' })

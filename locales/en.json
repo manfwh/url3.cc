@@ -11,7 +11,27 @@
     "download": "Download",
     "SignIn": "Sign In",
     "SignOut": "Sign Out",
-    "Dashboard": "Dashboard"
+    "Dashboard": "Dashboard",
+    "timeAgo": {
+      "just-now": "just now",
+      "ago": "{0} ago",
+      "in": "in {0}",
+      "last-month": "last month",
+      "next-month": "next month",
+      "month": "month | months",
+      "last-year": "last year",
+      "next-year": "next year",
+      "year": "year | years",
+      "yesterday": "yesterday",
+      "tomorrow": "tomorrow",
+      "day": "day | days",
+      "last-week": "last week",
+      "next-week": "next week",
+      "week": "week | weeks",
+      "hour": "hour | hours",
+      "minute": "minute | minutes",
+      "second": "second | seconds"
+    }
   },
   "hero": {
     "title": {
@@ -52,6 +72,29 @@
     "a3": "The validity period of links created by non logged in users is 30 days. If someone visits the link within 30 days, the validity period of the link will be extended to 30 days",
     "q4": "How to contact?",
     "a4": "You can send me an email at service{'@'}url3.cc"
-  }
+  },
+  "form": {
+    "Type": "Type",
+    "Image_File": "Image File",
+    "Title": "Title",
+    "Description": "Description",
+    "Target": "Target",
+    "Password": "Password",
+    "Ios_target": "Ios Target",
+    "Andorid_target": "Android Target",
+    "Note": "Note",
+    "Note_Tip": "Visible to oneself only",
+    "Submitting": "Submitting",
+    "Submit": "Submit",
+    "Optional": "Optional",
+    "Drag_and_Drop_or_click_to_upload": "Drag and Drop or click to upload."
+  },
+  "Create_Link": "Create Link",
+  "Edit_Link": "Edit Link",
+  "image_type": "Image",
+  "url_type": "Url",
+  "Links": "Links",
+  "Manage_your_links": "Manage your links"
+  
   
 }

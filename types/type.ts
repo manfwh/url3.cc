@@ -44,12 +44,14 @@ export interface Database {
           {
             foreignKeyName: 'assets_owner_id_fkey'
             columns: ['owner_id']
+            isOneToOne: false
             referencedRelation: 'users'
             referencedColumns: ['id']
           },
           {
             foreignKeyName: 'assets_project_id_fkey'
             columns: ['project_id']
+            isOneToOne: false
             referencedRelation: 'projects'
             referencedColumns: ['id']
           }
@@ -71,6 +73,7 @@ export interface Database {
           ios_asset_id: number | null
           ios_image: string | null
           key: string
+          note: string | null
           password: string | null
           project_id: number | null
           title: string | null
@@ -93,6 +96,7 @@ export interface Database {
           ios_asset_id?: number | null
           ios_image?: string | null
           key: string
+          note?: string | null
           password?: string | null
           project_id?: number | null
           title?: string | null
@@ -115,6 +119,7 @@ export interface Database {
           ios_asset_id?: number | null
           ios_image?: string | null
           key?: string
+          note?: string | null
           password?: string | null
           project_id?: number | null
           title?: string | null
@@ -126,30 +131,35 @@ export interface Database {
           {
             foreignKeyName: 'links_android_asset_id_fkey'
             columns: ['android_asset_id']
+            isOneToOne: false
             referencedRelation: 'assets'
             referencedColumns: ['id']
           },
           {
             foreignKeyName: 'links_asset_id_fkey'
             columns: ['asset_id']
+            isOneToOne: false
             referencedRelation: 'assets'
             referencedColumns: ['id']
           },
           {
             foreignKeyName: 'links_ios_asset_id_fkey'
             columns: ['ios_asset_id']
+            isOneToOne: false
             referencedRelation: 'assets'
             referencedColumns: ['id']
           },
           {
             foreignKeyName: 'links_project_id_fkey'
             columns: ['project_id']
+            isOneToOne: false
             referencedRelation: 'projects'
             referencedColumns: ['id']
           },
           {
             foreignKeyName: 'links_user_id_fkey'
             columns: ['user_id']
+            isOneToOne: false
             referencedRelation: 'users'
             referencedColumns: ['id']
           }
@@ -181,12 +191,14 @@ export interface Database {
           {
             foreignKeyName: 'project_users_project_id_fkey'
             columns: ['project_id']
+            isOneToOne: true
             referencedRelation: 'projects'
             referencedColumns: ['id']
           },
           {
             foreignKeyName: 'project_users_user_id_fkey'
             columns: ['user_id']
+            isOneToOne: true
             referencedRelation: 'users'
             referencedColumns: ['id']
           }
@@ -218,6 +230,7 @@ export interface Database {
           {
             foreignKeyName: 'projects_owner_id_fkey'
             columns: ['owner_id']
+            isOneToOne: false
             referencedRelation: 'users'
             referencedColumns: ['id']
           }
@@ -240,12 +253,14 @@ export interface Database {
           {
             foreignKeyName: 'projects_teams_project_id_fkey'
             columns: ['project_id']
+            isOneToOne: false
             referencedRelation: 'projects'
             referencedColumns: ['id']
           },
           {
             foreignKeyName: 'projects_teams_team_id_fkey'
             columns: ['team_id']
+            isOneToOne: false
             referencedRelation: 'teams'
             referencedColumns: ['id']
           }
@@ -289,6 +304,7 @@ export interface Database {
           {
             foreignKeyName: 'users_id_fkey'
             columns: ['id']
+            isOneToOne: true
             referencedRelation: 'users'
             referencedColumns: ['id']
           }
@@ -311,12 +327,14 @@ export interface Database {
           {
             foreignKeyName: 'users_teams_team_id_fkey'
             columns: ['team_id']
+            isOneToOne: false
             referencedRelation: 'teams'
             referencedColumns: ['id']
           },
           {
             foreignKeyName: 'users_teams_user_id_fkey'
             columns: ['user_id']
+            isOneToOne: false
             referencedRelation: 'users'
             referencedColumns: ['id']
           }

@@ -8,7 +8,9 @@ export default defineNuxtConfig({
     '@nuxt/ui',
     '@nuxtjs/google-fonts',
     '@nuxtjs/i18n',
-    '@nuxt/content'
+    '@nuxt/content',
+    'nuxt-simple-sitemap',
+    '@pinia/nuxt'
   ],
   css: ['~/assets/css/main.css', '~/assets/css/scrollbars.css'],
   supabase: {
@@ -23,7 +25,7 @@ export default defineNuxtConfig({
       login: '/login',
       exclude: ['/']
     } as any
-  },
+  } as any,
   devServer: {
     port: 8888
   },
@@ -34,7 +36,7 @@ export default defineNuxtConfig({
     icons: ['lucide']
   },
   i18n: {
-    baseUrl: 'https://url3.cc',
+    baseUrl: 'https://app.url3.cc',
     locales: [
       {
         code: 'en',
@@ -99,5 +101,12 @@ export default defineNuxtConfig({
     families: {
       Inter: true
     }
+  },
+  site: {
+    url: 'https://app.url3.cc'
+  },
+  sitemap: {
+    xsl: false,
+    exclude: ['/auth/**', '/test/**', '/confirm', '/dashboard']
   }
 })

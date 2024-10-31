@@ -58,7 +58,9 @@ const download = (url: string) => {
   anchorRef.value.click()
 }
 
-const timeAgo = props.link ? useTimeAgo(new Date(props.link?.created_at)) : null
+const timeAgo = props.link
+  ? useLocaleTimeAgo(new Date(props.link?.created_at))
+  : null
 
 </script>
 <template>
