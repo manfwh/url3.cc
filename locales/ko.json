@@ -1,0 +1,98 @@
+{
+  "language": "Español",
+  "site": {
+    "title": "Herramienta de Acortamiento de URL - Url3.cc",
+    "description": "Acorta tus enlaces fácilmente para mejorar la eficiencia de compartir. Personaliza tus URLs cortas, rastrea datos de clics y obtén información sobre el rendimiento de tus enlaces."
+  },
+  "common": {
+    "Link": "Enlace",
+    "Image": "Imagen",
+    "drag-upload": "Arrastra y suelta o haz clic para subir.",
+    "download": "Descargar",
+    "SignIn": "Iniciar Sesión",
+    "SignOut": "Cerrar Sesión",
+    "Dashboard": "Panel de Control",
+    "timeAgo": {
+      "just-now": "justo ahora",
+      "ago": "hace {0}",
+      "in": "en {0}",
+      "last-month": "el mes pasado",
+      "next-month": "el próximo mes",
+      "month": "mes | meses",
+      "last-year": "el año pasado",
+      "next-year": "el próximo año",
+      "year": "año | años",
+      "yesterday": "ayer",
+      "tomorrow": "mañana",
+      "day": "día | días",
+      "last-week": "la semana pasada",
+      "next-week": "la próxima semana",
+      "week": "semana | semanas",
+      "hour": "hora | horas",
+      "minute": "minuto | minutos",
+      "second": "segundo | segundos"
+    }
+  },
+  "hero": {
+    "title": {
+      "part_1": "Bienvenido al",
+      "part_2": "Generador de",
+      "part_3": "URLs Cortas!"
+    },
+    "description": "Convierte tus URLs largas en enlaces cortos y simples con un solo clic. ¡Comienza ahora!"
+  },
+  "demo": {
+    "your_short_link": "Tu URL Corta:",
+    "warn": "Los enlaces públicos se eliminarán automáticamente si nadie accede a ellos durante 30 días. Crea una cuenta gratuita para mantener tus enlaces para siempre.",
+    "label": {
+      "link": "Ingresa tu URL larga para comenzar",
+      "image": "Selecciona tu imagen para comenzar"
+    },
+    "submit": {
+      "link": "Generar URL Corta",
+      "image": "Generar URL de Imagen"
+    }
+  },
+  "features": {
+    "features": "Características",
+    "analysis": "Análisis",
+    "analysis_description": "Visualiza fácilmente el recuento de clics y las fuentes de visitas de tus URLs cortas para comprender mejor a tu audiencia objetivo.",
+    "devices_target": "Orientación por Dispositivo",
+    "devices_target_description": "Redirige de manera inteligente a la página más adecuada según el sistema móvil del visitante para una mejor experiencia de usuario.",
+    "custom": "Enlaces Personalizados",
+    "custom_description": "¡Crea URLs cortas divertidas para tus direcciones web largas como desees, haciendo que compartir sea más fácil y agradable!"
+  },
+  "questions": {
+    "questions": "Preguntas",
+    "q1": "¿Qué es url3.cc?",
+    "a1": "url3.cc es un servicio gratuito de acortamiento de URLs que te permite acortar tus URLs largas en enlaces cortos y simples en segundos.",
+    "q2": "¿Cómo uso url3.cc?",
+    "a2": "Ingresa una URL larga en el cuadro de entrada y haz clic en el botón Generar para crear una URL corta",
+    "q3": "¿Cuál es el período de validez del enlace?",
+    "a3": "El período de validez de los enlaces creados por usuarios no registrados es de 30 días. Si alguien visita el enlace dentro de los 30 días, el período de validez del enlace se extenderá por 30 días más",
+    "q4": "¿Cómo contactar?",
+    "a4": "Puedes enviarme un correo electrónico a service{'@'}url3.cc"
+  },
+  "form": {
+    "Type": "Tipo",
+    "Image_File": "Archivo de Imagen",
+    "Title": "Título",
+    "Description": "Descripción",
+    "Target": "Destino",
+    "Password": "Contraseña",
+    "Ios_target": "Destino iOS",
+    "Andorid_target": "Destino Android",
+    "Note": "Nota",
+    "Note_Tip": "Solo visible para ti",
+    "Submitting": "Enviando",
+    "Submit": "Enviar",
+    "Optional": "Opcional",
+    "Drag_and_Drop_or_click_to_upload": "Arrastra y suelta o haz clic para subir."
+  },
+  "Create_Link": "Crear Enlace",
+  "Edit_Link": "Editar Enlace",
+  "image_type": "Imagen",
+  "url_type": "URL",
+  "Links": "Enlaces",
+  "Manage_your_links": "Administra tus enlaces"
+}

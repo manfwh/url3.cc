@@ -1,0 +1,56 @@
+{
+  "language": "Italiano",
+  "site": {
+    "title": "Strumento di Accorciamento URL - Url3.cc",
+    "description": "Accorcia facilmente i tuoi link per migliorare l'efficienza della condivisione. Personalizza i tuoi URL brevi, traccia i dati dei clic e ottieni informazioni sulle prestazioni dei tuoi link."
+  },
+  "common": {
+    "Link": "Link",
+    "Image": "Immagine",
+    "drag-upload": "Trascina e rilascia o clicca per caricare.",
+    "download": "Scarica",
+    "SignIn": "Accedi",
+    "SignOut": "Esci",
+    "Dashboard": "Dashboard"
+  },
+  "hero": {
+    "title": {
+      "part_1": "Benvenuto al",
+      "part_2": "Generatore di",
+      "part_3": "URL Brevi!"
+    },
+    "description": "Converti i tuoi URL lunghi in link brevi e semplici con un solo clic. Inizia ora!"
+  },
+  "demo": {
+    "your_short_link": "Il tuo URL Breve:",
+    "warn": "I link pubblici verranno eliminati automaticamente se nessuno vi accede entro 30 giorni. Crea un account gratuito per mantenere i tuoi link per sempre.",
+    "label": {
+      "link": "Inserisci il tuo URL lungo per iniziare",
+      "image": "Seleziona la tua immagine per iniziare"
+    },
+    "submit": {
+      "link": "Genera URL Breve",
+      "image": "Genera URL Immagine"
+    }
+  },
+  "features": {
+    "features": "Funzionalità",
+    "analysis": "Analisi",
+    "analysis_description": "Visualizza facilmente il numero di clic e le fonti di visita dei tuoi URL brevi per comprendere meglio il tuo pubblico target.",
+    "devices_target": "Targeting per Dispositivo",
+    "devices_target_description": "Reindirizza in modo intelligente alla pagina più adatta in base al sistema mobile del visitatore per una migliore esperienza utente.",
+    "custom": "Link Personalizzati",
+    "custom_description": "Crea URL brevi divertenti per i tuoi indirizzi web lunghi come desideri, rendendo la condivisione più facile e piacevole!"
+  },
+  "questions": {
+    "questions": "Domande",
+    "q1": "Cos'è url3.cc?",
+    "a1": "url3.cc è un servizio gratuito di accorciamento URL che ti permette di accorciare i tuoi URL lunghi in link brevi e semplici in pochi secondi.",
+    "q2": "Come si usa url3.cc?",
+    "a2": "Inserisci un URL lungo nella casella di input e clicca sul pulsante Genera per creare un URL breve",
+    "q3": "Qual è il periodo di validità del link?",
+    "a3": "Il periodo di validità dei link creati da utenti non registrati è di 30 giorni. Se qualcuno visita il link entro 30 giorni, il periodo di validità del link verrà esteso di 30 giorni",
+    "q4": "Come contattare?",
+    "a4": "Puoi inviarmi una email a service{'@'}url3.cc"
+  }
+}

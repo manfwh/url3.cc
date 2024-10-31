@@ -1,0 +1,98 @@
+{
+  "language": "Deutsch",
+  "site": {
+    "title": "URL-Kürzungstool - Url3.cc",
+    "description": "Kürzen Sie Ihre Links mühelos für eine verbesserte Sharing-Effizienz. Passen Sie Ihre kurzen URLs an, verfolgen Sie Klickdaten und gewinnen Sie Einblicke in die Leistung Ihrer Links."
+  },
+  "common": {
+    "Link": "Link",
+    "Image": "Bild",
+    "drag-upload": "Drag & Drop oder klicken zum Hochladen.",
+    "download": "Herunterladen",
+    "SignIn": "Anmelden",
+    "SignOut": "Abmelden",
+    "Dashboard": "Dashboard",
+    "timeAgo": {
+      "just-now": "gerade eben",
+      "ago": "vor {0}",
+      "in": "in {0}",
+      "last-month": "letzten Monat",
+      "next-month": "nächsten Monat",
+      "month": "Monat | Monate",
+      "last-year": "letztes Jahr",
+      "next-year": "nächstes Jahr",
+      "year": "Jahr | Jahre",
+      "yesterday": "gestern",
+      "tomorrow": "morgen",
+      "day": "Tag | Tage",
+      "last-week": "letzte Woche",
+      "next-week": "nächste Woche",
+      "week": "Woche | Wochen",
+      "hour": "Stunde | Stunden",
+      "minute": "Minute | Minuten",
+      "second": "Sekunde | Sekunden"
+    }
+  },
+  "hero": {
+    "title": {
+      "part_1": "Willkommen beim",
+      "part_2": "Kurz-URL",
+      "part_3": "Generator!"
+    },
+    "description": "Wandeln Sie Ihre langen URLs mit nur einem Klick in kurze und einfache Links um. Starten Sie jetzt!"
+  },
+  "demo": {
+    "your_short_link": "Ihre Kurz-URL:",
+    "warn": "Öffentliche Links werden automatisch gelöscht, wenn sie 30 Tage lang nicht aufgerufen werden. Erstellen Sie ein kostenloses Konto, um Ihre Links dauerhaft zu behalten.",
+    "label": {
+      "link": "Geben Sie Ihre lange URL ein, um zu beginnen",
+      "image": "Wählen Sie Ihr Bild aus, um zu beginnen"
+    },
+    "submit": {
+      "link": "Kurz-URL generieren",
+      "image": "Bild-URL generieren"
+    }
+  },
+  "features": {
+    "features": "Funktionen",
+    "analysis": "Analyse",
+    "analysis_description": "Sehen Sie einfach die Anzahl der Klicks und Besucherquellen Ihrer kurzen URLs, um Ihre Zielgruppe besser zu verstehen.",
+    "devices_target": "Geräte-Targeting",
+    "devices_target_description": "Intelligente Weiterleitung zur am besten geeigneten Seite basierend auf dem mobilen System des Besuchers für eine bessere Benutzererfahrung.",
+    "custom": "Benutzerdefinierte Links",
+    "custom_description": "Erstellen Sie lustige Kurz-URLs für Ihre langen Webadressen nach Ihren Wünschen und machen Sie das Teilen einfacher und angenehmer!"
+  },
+  "questions": {
+    "questions": "Fragen",
+    "q1": "Was ist url3.cc?",
+    "a1": "url3.cc ist ein kostenloser URL-Kürzungsdienst, mit dem Sie Ihre langen URLs in wenigen Sekunden in kurze und einfache Links umwandeln können.",
+    "q2": "Wie benutze ich url3.cc?",
+    "a2": "Geben Sie eine lange URL in das Eingabefeld ein und klicken Sie auf die Schaltfläche Generieren, um eine Kurz-URL zu erstellen",
+    "q3": "Wie lange ist der Link gültig?",
+    "a3": "Die Gültigkeitsdauer von Links, die von nicht angemeldeten Benutzern erstellt wurden, beträgt 30 Tage. Wenn jemand den Link innerhalb von 30 Tagen besucht, wird die Gültigkeitsdauer des Links um 30 Tage verlängert",
+    "q4": "Wie kann ich Kontakt aufnehmen?",
+    "a4": "Sie können mir eine E-Mail an service{'@'}url3.cc senden"
+  },
+  "form": {
+    "Type": "Typ",
+    "Image_File": "Bilddatei",
+    "Title": "Titel",
+    "Description": "Beschreibung",
+    "Target": "Ziel",
+    "Password": "Passwort",
+    "Ios_target": "iOS-Ziel",
+    "Andorid_target": "Android-Ziel",
+    "Note": "Notiz",
+    "Note_Tip": "Nur für Sie sichtbar",
+    "Submitting": "Wird gesendet",
+    "Submit": "Senden",
+    "Optional": "Optional",
+    "Drag_and_Drop_or_click_to_upload": "Drag & Drop oder klicken zum Hochladen."
+  },
+  "Create_Link": "Link erstellen",
+  "Edit_Link": "Link bearbeiten",
+  "image_type": "Bild",
+  "url_type": "URL",
+  "Links": "Links",
+  "Manage_your_links": "Verwalten Sie Ihre Links"
+}
