@@ -1,0 +1,56 @@
+{
+  "language": "Français",
+  "site": {
+    "title": "Outil de Raccourcissement d'URL - Url3.cc",
+    "description": "Raccourcissez facilement vos liens pour améliorer l'efficacité du partage. Personnalisez vos URLs courts, suivez les données de clics et obtenez des informations sur les performances de vos liens."
+  },
+  "common": {
+    "Link": "Lien",
+    "Image": "Image",
+    "drag-upload": "Glissez-déposez ou cliquez pour télécharger.",
+    "download": "Télécharger",
+    "SignIn": "Se Connecter",
+    "SignOut": "Se Déconnecter",
+    "Dashboard": "Tableau de Bord"
+  },
+  "hero": {
+    "title": {
+      "part_1": "Bienvenue sur le",
+      "part_2": "Générateur d'URL",
+      "part_3": "Courts !"
+    },
+    "description": "Convertissez vos URLs longs en liens courts et simples en un seul clic. Commencez maintenant !"
+  },
+  "demo": {
+    "your_short_link": "Votre URL Court :",
+    "warn": "Les liens publics seront automatiquement supprimés si personne n'y accède pendant 30 jours. Créez un compte gratuit pour conserver vos liens indéfiniment.",
+    "label": {
+      "link": "Entrez votre URL long pour commencer",
+      "image": "Sélectionnez votre image pour commencer"
+    },
+    "submit": {
+      "link": "Générer l'URL Court",
+      "image": "Générer l'URL d'Image"
+    }
+  },
+  "features": {
+    "features": "Fonctionnalités",
+    "analysis": "Analyse",
+    "analysis_description": "Visualisez facilement le nombre de clics et les sources de visites de vos URLs courts pour mieux comprendre votre audience cible.",
+    "devices_target": "Ciblage par Appareil",
+    "devices_target_description": "Redirigez intelligemment vers la page la plus appropriée en fonction du système mobile du visiteur pour une meilleure expérience utilisateur.",
+    "custom": "Liens Personnalisés",
+    "custom_description": "Créez des URLs courts amusants pour vos longues adresses web comme vous le souhaitez, rendant le partage plus facile et plus agréable !"
+  },
+  "questions": {
+    "questions": "Questions",
+    "q1": "Qu'est-ce que url3.cc ?",
+    "a1": "url3.cc est un service gratuit de raccourcissement d'URL qui vous permet de raccourcir vos URLs longs en liens courts et simples en quelques secondes.",
+    "q2": "Comment utiliser url3.cc ?",
+    "a2": "Entrez un URL long dans la zone de saisie et cliquez sur le bouton Générer pour créer un URL court",
+    "q3": "Quelle est la durée de validité du lien ?",
+    "a3": "La durée de validité des liens créés par les utilisateurs non connectés est de 30 jours. Si quelqu'un visite le lien dans les 30 jours, la durée de validité du lien sera prolongée de 30 jours",
+    "q4": "Comment nous contacter ?",
+    "a4": "Vous pouvez m'envoyer un email à service{'@'}url3.cc"
+  }
+}

@@ -35,19 +35,56 @@ export default defineNuxtConfig({
   },
   i18n: {
     baseUrl: 'https://url3.cc',
-    locales: [{
-      code: 'en',
-      iso: 'en-US',
-      foo: 'bar'
-    }, {
-      code: 'zh',
-      iso: 'zh-TW',
-      foo: 'bar'
-    }, {
-      code: 'ja',
-      iso: 'ja-JP',
-      foo: 'bar'
-    }],
+    locales: [
+      {
+        code: 'en',
+        iso: 'en-US',
+        foo: 'bar'
+      }, {
+        code: 'zh',
+        iso: 'zh-TW',
+        foo: 'bar'
+      }, {
+        code: 'ja',
+        iso: 'ja-JP',
+        foo: 'bar'
+      },
+      {
+        code: 'es',
+        iso: 'es-ES',
+        foo: 'bar'
+      },
+      {
+        code: 'pt',
+        iso: 'pt-BR',
+        foo: 'bar'
+      },
+      {
+        code: 'fr',
+        iso: 'fr-FR',
+        foo: 'bar'
+      },
+      {
+        code: 'ko',
+        iso: 'ko-KR',
+        foo: 'bar'
+      },
+      {
+        code: 'ru',
+        iso: 'ru-RU',
+        foo: 'bar'
+      },
+      {
+        code: 'it',
+        iso: 'it-IT',
+        foo: 'bar'
+      },
+      {
+        code: 'de',
+        iso: 'de-DE',
+        foo: 'bar'
+      }
+    ],
     defaultLocale: 'en'
   },
   content: {
