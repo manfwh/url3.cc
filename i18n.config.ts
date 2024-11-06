@@ -8,6 +8,9 @@ import ko from './locales/ko.json'
 import ru from './locales/ru.json'
 import it from './locales/it.json'
 import de from './locales/de.json'
+import id from './locales/id.json'
+import vi from './locales/vi.json'
+import th from './locales/th.json'
 export default defineI18nConfig(() => ({
   legacy: false,
   locale: 'en',
@@ -21,6 +24,9 @@ export default defineI18nConfig(() => ({
     ko,
     ru,
     it,
-    de
+    de,
+    id,
+    vi,
+    th
   }
 }))

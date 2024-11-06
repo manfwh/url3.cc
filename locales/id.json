@@ -1,0 +1,98 @@
+{
+  "language": "Bahasa Indonesia",
+  "site": {
+    "title": "Alat Pemendek URL - Url3.cc",
+    "description": "Persingkat tautan Anda dengan mudah untuk meningkatkan efisiensi berbagi. Sesuaikan URL pendek Anda, lacak data klik, dan dapatkan wawasan tentang kinerja tautan Anda."
+  },
+  "common": {
+    "Link": "Tautan",
+    "Image": "Gambar",
+    "drag-upload": "Seret dan lepas atau klik untuk mengunggah.",
+    "download": "Unduh",
+    "SignIn": "Masuk",
+    "SignOut": "Keluar",
+    "Dashboard": "Dasbor",
+    "timeAgo": {
+      "just-now": "baru saja",
+      "ago": "{0} yang lalu",
+      "in": "dalam {0}",
+      "last-month": "bulan lalu",
+      "next-month": "bulan depan",
+      "month": "bulan",
+      "last-year": "tahun lalu",
+      "next-year": "tahun depan",
+      "year": "tahun",
+      "yesterday": "kemarin",
+      "tomorrow": "besok",
+      "day": "hari",
+      "last-week": "minggu lalu",
+      "next-week": "minggu depan",
+      "week": "minggu",
+      "hour": "jam",
+      "minute": "menit",
+      "second": "detik"
+    }
+  },
+  "hero": {
+    "title": {
+      "part_1": "Selamat datang di",
+      "part_2": "Generator URL",
+      "part_3": "Pendek!"
+    },
+    "description": "Ubah URL panjang Anda menjadi tautan pendek dan sederhana dengan satu klik. Mulai sekarang!"
+  },
+  "demo": {
+    "your_short_link": "URL Pendek Anda:",
+    "warn": "Tautan publik akan dihapus secara otomatis jika tidak ada yang mengaksesnya selama 30 hari. Buat akun gratis untuk menyimpan tautan Anda selamanya.",
+    "label": {
+      "link": "Masukkan URL panjang Anda untuk memulai",
+      "image": "Pilih gambar Anda untuk memulai"
+    },
+    "submit": {
+      "link": "Buat URL Pendek",
+      "image": "Buat URL Gambar"
+    }
+  },
+  "features": {
+    "features": "Fitur",
+    "analysis": "Analisis",
+    "analysis_description": "Lihat dengan mudah jumlah klik dan sumber kunjungan URL pendek Anda untuk lebih memahami audiens target Anda.",
+    "devices_target": "Penargetan Perangkat",
+    "devices_target_description": "Alihkan secara cerdas ke halaman yang paling sesuai berdasarkan sistem seluler pengunjung untuk pengalaman pengguna yang lebih baik.",
+    "custom": "Tautan Kustom",
+    "custom_description": "Buat URL pendek yang menyenangkan untuk alamat web panjang Anda sesuai keinginan, membuat berbagi lebih mudah dan menyenangkan!"
+  },
+  "questions": {
+    "questions": "Pertanyaan",
+    "q1": "Apa itu url3.cc?",
+    "a1": "url3.cc adalah layanan pemendek URL gratis yang memungkinkan Anda memendekkan URL panjang menjadi tautan pendek dan sederhana dalam hitungan detik.",
+    "q2": "Bagaimana cara menggunakan url3.cc?",
+    "a2": "Masukkan URL panjang di kotak input dan klik tombol Buat untuk membuat URL pendek",
+    "q3": "Berapa lama masa berlaku tautan?",
+    "a3": "Masa berlaku tautan yang dibuat oleh pengguna yang tidak masuk adalah 30 hari. Jika seseorang mengunjungi tautan dalam 30 hari, masa berlaku tautan akan diperpanjang 30 hari",
+    "q4": "Bagaimana cara menghubungi?",
+    "a4": "Anda dapat mengirim email kepada saya di service{'@'}url3.cc"
+  },
+  "form": {
+    "Type": "Tipe",
+    "Image_File": "File Gambar",
+    "Title": "Judul",
+    "Description": "Deskripsi",
+    "Target": "Target",
+    "Password": "Kata Sandi",
+    "Ios_target": "Target iOS",
+    "Andorid_target": "Target Android",
+    "Note": "Catatan",
+    "Note_Tip": "Hanya terlihat oleh Anda",
+    "Submitting": "Mengirim",
+    "Submit": "Kirim",
+    "Optional": "Opsional",
+    "Drag_and_Drop_or_click_to_upload": "Seret dan lepas atau klik untuk mengunggah."
+  },
+  "Create_Link": "Buat Tautan",
+  "Edit_Link": "Edit Tautan",
+  "image_type": "Gambar",
+  "url_type": "URL",
+  "Links": "Tautan",
+  "Manage_your_links": "Kelola tautan Anda"
+}

@@ -52,6 +52,26 @@ export default defineNuxtConfig({
         foo: 'bar'
       },
       {
+        code: 'ko',
+        iso: 'ko-KR',
+        foo: 'bar'
+      },
+      {
+        code: 'id',
+        name: 'Bahasa Indonesia',
+        iso: 'id-ID'
+      },
+      {
+        code: 'vi',
+        name: 'Tiếng Việt',
+        iso: 'vi-VN'
+      },
+      {
+        code: 'th',
+        name: 'ไทย',
+        iso: 'th-TH'
+      },
+      {
         code: 'es',
         iso: 'es-ES',
         foo: 'bar'
@@ -64,11 +84,6 @@ export default defineNuxtConfig({
       {
         code: 'fr',
         iso: 'fr-FR',
-        foo: 'bar'
-      },
-      {
-        code: 'ko',
-        iso: 'ko-KR',
         foo: 'bar'
       },
       {
