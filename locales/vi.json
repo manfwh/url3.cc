@@ -1,0 +1,98 @@
+{
+  "language": "Tiếng Việt",
+  "site": {
+    "title": "Công cụ Rút gọn URL - Url3.cc",
+    "description": "Rút gọn liên kết của bạn một cách dễ dàng để tăng hiệu quả chia sẻ. Tùy chỉnh URL ngắn của bạn, theo dõi dữ liệu nhấp chuột và có được thông tin chi tiết về hiệu suất liên kết của bạn."
+  },
+  "common": {
+    "Link": "Liên kết",
+    "Image": "Hình ảnh",
+    "drag-upload": "Kéo và thả hoặc nhấp để tải lên.",
+    "download": "Tải xuống",
+    "SignIn": "Đăng nhập",
+    "SignOut": "Đăng xuất",
+    "Dashboard": "Bảng điều khiển",
+    "timeAgo": {
+      "just-now": "vừa xong",
+      "ago": "{0} trước",
+      "in": "trong {0}",
+      "last-month": "tháng trước",
+      "next-month": "tháng sau",
+      "month": "tháng",
+      "last-year": "năm trước",
+      "next-year": "năm sau",
+      "year": "năm",
+      "yesterday": "hôm qua",
+      "tomorrow": "ngày mai",
+      "day": "ngày",
+      "last-week": "tuần trước",
+      "next-week": "tuần sau",
+      "week": "tuần",
+      "hour": "giờ",
+      "minute": "phút",
+      "second": "giây"
+    }
+  },
+  "hero": {
+    "title": {
+      "part_1": "Chào mừng đến với",
+      "part_2": "Trình tạo URL",
+      "part_3": "Ngắn!"
+    },
+    "description": "Chuyển đổi URL dài của bạn thành liên kết ngắn và đơn giản chỉ với một cú nhấp chuột. Bắt đầu ngay!"
+  },
+  "demo": {
+    "your_short_link": "URL Ngắn của bạn:",
+    "warn": "Liên kết công khai sẽ tự động bị xóa nếu không có ai truy cập trong vòng 30 ngày. Tạo tài khoản miễn phí để giữ liên kết của bạn mãi mãi.",
+    "label": {
+      "link": "Nhập URL dài của bạn để bắt đầu",
+      "image": "Chọn hình ảnh của bạn để bắt đầu"
+    },
+    "submit": {
+      "link": "Tạo URL Ngắn",
+      "image": "Tạo URL Hình ảnh"
+    }
+  },
+  "features": {
+    "features": "Tính năng",
+    "analysis": "Phân tích",
+    "analysis_description": "Dễ dàng xem số lượt nhấp và nguồn truy cập của URL ngắn của bạn để hiểu rõ hơn về đối tượng mục tiêu của bạn.",
+    "devices_target": "Nhắm mục tiêu Thiết bị",
+    "devices_target_description": "Chuyển hướng thông minh đến trang phù hợp nhất dựa trên hệ thống di động của người truy cập để có trải nghiệm người dùng tốt hơn.",
+    "custom": "Liên kết Tùy chỉnh",
+    "custom_description": "Tạo URL ngắn thú vị cho địa chỉ web dài của bạn theo ý muốn, làm cho việc chia sẻ dễ dàng và thú vị hơn!"
+  },
+  "questions": {
+    "questions": "Câu hỏi",
+    "q1": "url3.cc là gì?",
+    "a1": "url3.cc là dịch vụ rút gọn URL miễn phí cho phép bạn rút ngắn URL dài thành liên kết ngắn và đơn giản trong vài giây.",
+    "q2": "Làm thế nào để sử dụng url3.cc?",
+    "a2": "Nhập URL dài vào hộp nhập liệu và nhấp vào nút Tạo để tạo URL ngắn",
+    "q3": "Thời hạn hiệu lực của liên kết là bao lâu?",
+    "a3": "Thời hạn hiệu lực của liên kết được tạo bởi người dùng chưa đăng nhập là 30 ngày. Nếu có người truy cập liên kết trong vòng 30 ngày, thời hạn hiệu lực của liên kết sẽ được gia hạn thêm 30 ngày",
+    "q4": "Làm thế nào để liên hệ?",
+    "a4": "Bạn có thể gửi email cho tôi tại service{'@'}url3.cc"
+  },
+  "form": {
+    "Type": "Loại",
+    "Image_File": "Tệp Hình ảnh",
+    "Title": "Tiêu đề",
+    "Description": "Mô tả",
+    "Target": "Mục tiêu",
+    "Password": "Mật khẩu",
+    "Ios_target": "Mục tiêu iOS",
+    "Andorid_target": "Mục tiêu Android",
+    "Note": "Ghi chú",
+    "Note_Tip": "Chỉ hiển thị với bạn",
+    "Submitting": "Đang gửi",
+    "Submit": "Gửi",
+    "Optional": "Tùy chọn",
+    "Drag_and_Drop_or_click_to_upload": "Kéo và thả hoặc nhấp để tải lên."
+  },
+  "Create_Link": "Tạo Liên kết",
+  "Edit_Link": "Chỉnh sửa Liên kết",
+  "image_type": "Hình ảnh",
+  "url_type": "URL",
+  "Links": "Liên kết",
+  "Manage_your_links": "Quản lý liên kết của bạn"
+}
