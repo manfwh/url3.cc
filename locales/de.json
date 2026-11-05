@@ -43,7 +43,7 @@
   },
   "demo": {
     "your_short_link": "Ihre Kurz-URL:",
-    "warn": "Öffentliche Links werden automatisch gelöscht, wenn sie 30 Tage lang nicht aufgerufen werden. Erstellen Sie ein kostenloses Konto, um Ihre Links dauerhaft zu behalten.",
+    "warn": "Gast-Links laufen 7 Tage nach dem Erstellen ab. Melde dich an, um sie länger zu behalten.",
     "label": {
       "link": "Geben Sie Ihre lange URL ein, um zu beginnen",
       "image": "Wählen Sie Ihr Bild aus, um zu beginnen"
@@ -69,7 +69,7 @@
     "q2": "Wie benutze ich url3.cc?",
     "a2": "Geben Sie eine lange URL in das Eingabefeld ein und klicken Sie auf die Schaltfläche Generieren, um eine Kurz-URL zu erstellen",
     "q3": "Wie lange ist der Link gültig?",
-    "a3": "Die Gültigkeitsdauer von Links, die von nicht angemeldeten Benutzern erstellt wurden, beträgt 30 Tage. Wenn jemand den Link innerhalb von 30 Tagen besucht, wird die Gültigkeitsdauer des Links um 30 Tage verlängert",
+    "a3": "Gast-Links laufen 7 Tage nach dem Erstellen ab. Angemeldete Nutzer können eine längere Dauer wählen, auch ohne Ablauf. Gäste können 3 Links pro Stunde und 10 pro Tag erstellen. Angemeldete Konten können 30 pro Tag erstellen.",
     "q4": "Wie kann ich Kontakt aufnehmen?",
     "a4": "Sie können mir eine E-Mail an service{'@'}url3.cc senden"
   },
@@ -94,5 +94,59 @@
   "image_type": "Bild",
   "url_type": "URL",
   "Links": "Links",
-  "Manage_your_links": "Verwalten Sie Ihre Links"
+  "Manage_your_links": "Verwalten Sie Ihre Links",
+  "security": {
+    "limits_guest": "Gäste können 3 Links pro Stunde und 10 pro Tag erstellen.",
+    "limits_user": "Angemeldete Konten können 30 Links pro Tag erstellen.",
+    "sign_in_longer": "Melde dich an, um eine Laufzeit von mehr als 7 Tagen zu wählen.",
+    "created": "Link erstellt",
+    "create_failed": "Link konnte nicht erstellt werden",
+    "rate_limited_guest_hour": "Gastlimit erreicht: 3 Kurzlinks pro Stunde. Versuche es später erneut oder melde dich an.",
+    "rate_limited_guest_day": "Gastlimit erreicht: 10 Kurzlinks pro Tag. Versuche es morgen erneut oder melde dich an.",
+    "rate_limited_user_day": "Tageslimit erreicht: 30 Kurzlinks pro Tag.",
+    "rate_limited_report": "Zu viele Meldungen aus diesem Netz. Versuche es später erneut.",
+    "rate_limited": "Zu viele Anfragen. Versuche es später erneut.",
+    "unsafe_invalid": "Gib eine gültige http- oder https-URL ein.",
+    "unsafe_scheme": "Nur http- und https-Links sind erlaubt.",
+    "unsafe_ip": "Links auf eine IP-Adresse sind nicht erlaubt.",
+    "unsafe_localhost": "Links auf localhost sind nicht erlaubt.",
+    "unsafe_private": "Links auf private oder interne Netze sind nicht erlaubt.",
+    "unsafe_blacklist": "Dieses Ziel ist blockiert.",
+    "unsafe_safe_browsing": "Safe Browsing hat dieses Ziel als unsicher markiert.",
+    "invalid_expiry": "Diese Laufzeit ist für dieses Konto nicht verfügbar.",
+    "unauthorized": "Melde dich an, um diesen Link zu erstellen.",
+    "unsupported_type": "Hier können nur http- und https-Links gekürzt werden.",
+    "not_found": "Dieser Kurzlink existiert nicht oder ist abgelaufen.",
+    "invalid_report": "Wähle einen Grund für die Meldung.",
+    "image_required": "Du musst ein Bild auswählen.",
+    "expiry": {
+      "label": "Link-Laufzeit",
+      "day": "1 Tag",
+      "week": "7 Tage",
+      "month": "30 Tage",
+      "quarter": "90 Tage",
+      "year": "1 Jahr",
+      "never": "Kein Ablauf"
+    },
+    "report": {
+      "button": "Melden",
+      "site_button": "Kurzlink melden",
+      "title": "Diesen Link melden",
+      "description": "Bitte uns, diesen Kurzlink zur Entfernung zu prüfen.",
+      "reason": "Grund",
+      "details": "Details (optional)",
+      "details_placeholder": "Was sollen wir wissen?",
+      "submit": "Meldung senden",
+      "cancel": "Abbrechen",
+      "success": "Danke. Die Meldung ist eingegangen und der Link wartet auf Prüfung.",
+      "failed": "Die Meldung konnte nicht gesendet werden. Versuche es erneut.",
+      "phishing": "Phishing oder Betrug",
+      "malware": "Schadsoftware",
+      "spam": "Spam",
+      "other": "Sonstiges",
+      "link_label": "Kurzlink",
+      "link_placeholder": "https://url3.cc/example",
+      "invalid_link": "Gib einen gültigen url3.cc-Kurzlink ein."
+    }
+  }
 }

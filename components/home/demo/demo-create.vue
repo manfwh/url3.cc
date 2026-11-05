@@ -3,8 +3,14 @@ import { useQRCode } from '@vueuse/integrations/useQRCode'
 import { useStorage } from '@vueuse/core'
 import DraggerUpload from '~/components/shared/upload/dragger-upload.vue'
 import type { UploadFile } from '@/components/shared/upload/types'
+import { checkUrlSafety } from '~/utils/url-safety'
+import { linkErrorI18nKey } from '~/utils/link-api-error'
+import { EXPIRY } from '~/utils/link-policy'
 const { fullDomain } = useAppConfig()
 const toast = useToast()
+const user = useSupabaseUser()
+const isAuthed = computed(() => !!user.value)
+const errorMessage = ref('')
 const formRef = ref<HTMLFormElement>()
 
 const submitting = ref(false)
@@ -58,25 +64,39 @@ const item = computed(() => tabItems[selected.value])
 const image = ref('')
 const handleSubmit = (e: Event) => {
   const target = e.target as HTMLFormElement
-  submitting.value = true
+  const url = String(target?.url?.value || '').trim()
+  errorMessage.value = ''
 
-  if (route.query.type === 'image') {
-    // TODO: Image
+  if ((route.query.type || 'url') !== 'url') {
+    errorMessage.value = t('security.unsupported_type')
+    return
   }
-  $fetch('/api/demo/links', {
+
+  const safety = checkUrlSafety(url)
+  if (!safety.ok) {
+    errorMessage.value = t(`security.unsafe_${safety.reason}`)
+    return
+  }
+
+  submitting.value = true
+  $fetch(isAuthed.value ? '/api/links' : '/api/demo/links', {
     method: 'POST',
-    body: { url: target?.url?.value, type: route.query.type || 'url', image: image.value }
-  }).then((data) => {
-    // createdLink.value = data
+    body: {
+      url,
+      type: 'url',
+      expiresIn: Number(selectedExpire.value)
+    }
+  }).then((data: { key: string, url: string }) => {
     links.value.unshift(data)
     formRef.value?.reset()
     submitting.value = false
-    toast.add({ title: 'Link Created', icon: 'i-heroicons-check-circle', timeout: 3000 })
+    toast.add({ title: t('security.created'), icon: 'i-heroicons-check-circle', timeout: 3000 })
   }).catch((err: any) => {
     submitting.value = false
+    errorMessage.value = t(linkErrorI18nKey(err))
     toast.add({
-      title: 'Create Failed',
-      description: err?.data?.message,
+      title: t('security.create_failed'),
+      description: errorMessage.value,
       icon: 'i-heroicons-exclamation-triangle',
       color: 'red'
     })
@@ -89,7 +109,8 @@ const uploadChange = (info: UploadFile) => {
   }
 }
 
-const qrcode = useQRCode(fullDomain + createdLink.value?.key, {
+const qrText = computed(() => createdLink.value?.key ? fullDomain + createdLink.value.key : ' ')
+const qrcode = useQRCode(qrText, {
   margin: 2,
   width: 100,
   height: 100
@@ -102,14 +123,32 @@ const download = (url: string) => {
   anchorRef.value.click()
 }
 
-const expireOptions = [
-  { label: '1 day', value: 60 * 60 * 24 },
-  { label: '1 week', value: 60 * 60 * 24 * 7 },
-  { label: '1 month', value: 60 * 60 * 24 * 30 },
-  { label: 'Never(Need Sign In)', value: 'nerver', disabled: true }
-]
-const selectedExpire = ref(expireOptions[0].value)
-const expire = computed(() => expireOptions.find(expireOptions => expireOptions.value === selectedExpire.value))
+const expireOptions = computed(() => {
+  const options = [
+    { label: t('security.expiry.day'), value: String(EXPIRY.day) },
+    { label: t('security.expiry.week'), value: String(EXPIRY.week) }
+  ]
+  if (!isAuthed.value) { return options }
+  return [
+    ...options,
+    { label: t('security.expiry.month'), value: String(EXPIRY.month) },
+    { label: t('security.expiry.quarter'), value: String(EXPIRY.quarter) },
+    { label: t('security.expiry.year'), value: String(EXPIRY.year) },
+    { label: t('security.expiry.never'), value: String(EXPIRY.never) }
+  ]
+})
+const selectedExpire = ref(String(EXPIRY.week))
+const expireTouched = ref(false)
+const selectedExpireLabel = computed(() => expireOptions.value.find(option => option.value === selectedExpire.value)?.label)
+watch(isAuthed, (authed) => {
+  if (!expireTouched.value) {
+    selectedExpire.value = authed ? String(EXPIRY.never) : String(EXPIRY.week)
+    return
+  }
+  if (!expireOptions.value.some(option => option.value === selectedExpire.value)) {
+    selectedExpire.value = String(EXPIRY.week)
+  }
+}, { immediate: true })
 </script>
 
 <template>
@@ -185,6 +224,36 @@ const expire = computed(() => expireOptions.find(expireOptions => expireOptions.
             }"
           />
         </div>
+        <div class="mt-4">
+          <label class="text-sm font-medium" for="expires">{{ $t('security.expiry.label') }}</label>
+          <USelectMenu
+            v-model="selectedExpire"
+            class="mt-2"
+            :options="expireOptions"
+            value-attribute="value"
+            option-attribute="label"
+            size="md"
+            @update:model-value="expireTouched = true"
+          >
+            <template #label>
+              {{ selectedExpireLabel }}
+            </template>
+          </USelectMenu>
+          <p v-if="!isAuthed" class="mt-2 text-xs text-slate-500 dark:text-slate-400">
+            {{ $t('security.sign_in_longer') }}
+          </p>
+        </div>
+        <p class="mt-3 text-xs text-slate-600 dark:text-slate-400">
+          {{ isAuthed ? $t('security.limits_user') : $t('security.limits_guest') }}
+        </p>
+        <UAlert
+          v-if="errorMessage"
+          class="mt-4"
+          color="red"
+          variant="subtle"
+          icon="i-heroicons-exclamation-triangle"
+          :title="errorMessage"
+        />
         <!-- <div class="mt-4 grid grid-cols-2 gap-4">
           <USelectMenu
             v-model="selectedExpire"
@@ -243,6 +312,9 @@ const expire = computed(() => expireOptions.find(expireOptions => expireOptions.
               <p class="text-xs text-slate-600 dark:text-slate-400">
                 {{ $t('demo.warn') }}
               </p>
+              <div class="mt-3">
+                <LinkReportLink :link-key="createdLink.key" />
+              </div>
             </div>
           </div>
         </SharedTransitionHeight>

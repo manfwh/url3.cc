@@ -1,6 +1,7 @@
 <script setup lang="ts">
 
 import type { Database } from '~/types/type'
+import { linkErrorI18nKey } from '~/utils/link-api-error'
 
 definePageMeta({
   layout: 'dashboard'
@@ -30,6 +31,7 @@ const { data: links, refresh: refreshLink, pending: linkPending, status } = awai
 const submitting = ref(false)
 const linkFormRef = ref<HTMLFormElement>()
 const toast = useToast()
+const { t } = useI18n()
 const handleSubmit = async (e: Event) => {
   const target = e.target as HTMLFormElement
   try {
@@ -48,7 +50,8 @@ const handleSubmit = async (e: Event) => {
     })
   } catch (error: any) {
     toast.add({
-      title: '创建失败'
+      title: t('security.create_failed'),
+      description: t(linkErrorI18nKey(error))
     })
   }
   submitting.value = false

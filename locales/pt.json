@@ -43,7 +43,7 @@
   },
   "demo": {
     "your_short_link": "Sua URL Curta:",
-    "warn": "Links públicos serão automaticamente excluídos se ninguém acessá-los dentro de 30 dias. Crie uma conta gratuita para manter seus links para sempre.",
+    "warn": "Links de visitantes expiram 7 dias depois de criados. Entre para mantê-los por mais tempo.",
     "label": {
       "link": "Digite sua URL longa para começar",
       "image": "Selecione sua imagem para começar"
@@ -69,7 +69,7 @@
     "q2": "Como usar o url3.cc?",
     "a2": "Digite uma URL longa na caixa de entrada e clique no botão Gerar para criar uma URL curta",
     "q3": "Qual é o período de validade do link?",
-    "a3": "O período de validade dos links criados por usuários não logados é de 30 dias. Se alguém visitar o link dentro de 30 dias, o período de validade do link será estendido por 30 dias",
+    "a3": "Links de visitantes expiram 7 dias depois de criados. Quem entra pode escolher uma validade maior, inclusive sem expiração. Visitantes podem criar 3 links por hora e 10 por dia. Contas conectadas podem criar 30 por dia.",
     "q4": "Como entrar em contato?",
     "a4": "Você pode me enviar um email para service{'@'}url3.cc"
   },
@@ -94,5 +94,59 @@
   "image_type": "Imagem",
   "url_type": "URL",
   "Links": "Links",
-  "Manage_your_links": "Gerenciar seus links"
+  "Manage_your_links": "Gerenciar seus links",
+  "security": {
+    "limits_guest": "Visitantes podem criar 3 links por hora e 10 por dia.",
+    "limits_user": "Contas conectadas podem criar 30 links por dia.",
+    "sign_in_longer": "Entre para escolher uma validade maior que 7 dias.",
+    "created": "Link criado",
+    "create_failed": "Não foi possível criar o link",
+    "rate_limited_guest_hour": "Limite de visitante atingido: 3 links curtos por hora. Tente mais tarde ou entre.",
+    "rate_limited_guest_day": "Limite de visitante atingido: 10 links curtos por dia. Tente amanhã ou entre.",
+    "rate_limited_user_day": "Limite diário atingido: 30 links curtos por dia.",
+    "rate_limited_report": "Há denúncias demais desta rede. Tente mais tarde.",
+    "rate_limited": "Pedidos demais. Tente mais tarde.",
+    "unsafe_invalid": "Informe uma URL http ou https válida.",
+    "unsafe_scheme": "Só links http e https são permitidos.",
+    "unsafe_ip": "Links para um endereço IP não são permitidos.",
+    "unsafe_localhost": "Links para localhost não são permitidos.",
+    "unsafe_private": "Links para redes privadas ou internas não são permitidos.",
+    "unsafe_blacklist": "Este destino está bloqueado.",
+    "unsafe_safe_browsing": "O Safe Browsing marcou este destino como inseguro.",
+    "invalid_expiry": "Essa validade não está disponível para esta conta.",
+    "unauthorized": "Entre para criar este link.",
+    "unsupported_type": "Aqui só é possível encurtar links http e https.",
+    "not_found": "Este link curto não existe ou expirou.",
+    "invalid_report": "Escolha um motivo para a denúncia.",
+    "image_required": "Você precisa selecionar uma imagem.",
+    "expiry": {
+      "label": "Validade do link",
+      "day": "1 dia",
+      "week": "7 dias",
+      "month": "30 dias",
+      "quarter": "90 dias",
+      "year": "1 ano",
+      "never": "Sem validade"
+    },
+    "report": {
+      "button": "Denunciar",
+      "site_button": "Denunciar um link curto",
+      "title": "Denunciar este link",
+      "description": "Peça uma revisão para remover este link curto.",
+      "reason": "Motivo",
+      "details": "Detalhes (opcional)",
+      "details_placeholder": "O que devemos saber?",
+      "submit": "Enviar denúncia",
+      "cancel": "Cancelar",
+      "success": "Obrigado. A denúncia foi recebida e o link entrou na fila de revisão.",
+      "failed": "Não foi possível enviar a denúncia. Tente de novo.",
+      "phishing": "Phishing ou golpe",
+      "malware": "Malware",
+      "spam": "Spam",
+      "other": "Outro",
+      "link_label": "Link curto",
+      "link_placeholder": "https://url3.cc/example",
+      "invalid_link": "Informe um link curto válido do url3.cc."
+    }
+  }
 }

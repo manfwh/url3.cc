@@ -6,6 +6,9 @@ import type { UploadFile, UploadedFile } from '@/components/shared/upload/types'
 import { getFilename } from '@/utils'
 import { useUserStore } from '~/store/user'
 import type { Enums } from '~/types/type'
+import { checkUrlSafety } from '~/utils/url-safety'
+import { linkErrorI18nKey } from '~/utils/link-api-error'
+import { EXPIRY } from '~/utils/link-policy'
 const toast = useToast()
 const { t } = useI18n()
 const { fullDomain } = useAppConfig()
@@ -75,7 +78,8 @@ const submit = async (event: FormSubmitEvent<typeof state.value>) => {
       await $fetch('/api/links', {
         method: 'POST',
         body: {
-          ...state.value
+          ...state.value,
+          expiresIn: Number(expiresIn.value)
         }
       })
     }
@@ -89,8 +93,8 @@ const submit = async (event: FormSubmitEvent<typeof state.value>) => {
     submitting.value = false
 
     toast.add({
-      title: 'Create Failed',
-      description: error?.data?.message || '',
+      title: t('security.create_failed'),
+      description: t(linkErrorI18nKey(error)),
       icon: 'i-heroicons-exclamation-triangle',
       color: 'red'
     })
@@ -98,6 +102,16 @@ const submit = async (event: FormSubmitEvent<typeof state.value>) => {
 }
 
 const showPassword = ref(false)
+const expiresIn = ref(String(EXPIRY.never))
+const expireOptions = computed(() => [
+  { label: t('security.expiry.day'), value: String(EXPIRY.day) },
+  { label: t('security.expiry.week'), value: String(EXPIRY.week) },
+  { label: t('security.expiry.month'), value: String(EXPIRY.month) },
+  { label: t('security.expiry.quarter'), value: String(EXPIRY.quarter) },
+  { label: t('security.expiry.year'), value: String(EXPIRY.year) },
+  { label: t('security.expiry.never'), value: String(EXPIRY.never) }
+])
+const selectedExpireLabel = computed(() => expireOptions.value.find(option => option.value === expiresIn.value)?.label)
 
 // watchDebounced(() => state.value.url, () => {
 //   if (state.value.key || fetchKeyLoading.value) { return }
@@ -130,7 +144,15 @@ const genUploadedFile = computed(() => (field: keyof typeof state.value) => {
 const validate = (state: State): FormError[] => {
   const errors = []
   if (state.type === 'image') {
-    if (!state.image) { errors.push({ path: 'image', message: 'You must select an image!' }) }
+    if (!state.image) { errors.push({ path: 'image', message: t('security.image_required') }) }
+  }
+  for (const field of ['url', 'ios', 'android'] as const) {
+    const value = state[field]
+    if (!value) { continue }
+    const safety = checkUrlSafety(value)
+    if (!safety.ok) {
+      errors.push({ path: field, message: t(`security.unsafe_${safety.reason}`) })
+    }
   }
   return errors
 }
@@ -247,6 +269,18 @@ const currentType = computed(() => typeOptions.find(item => item.value === state
       </UFormGroup>
       <UFormGroup :label="$t('form.Note')" :hint="$t('form.Optional')" name="note" :description="$t('form.Note_Tip')">
         <UInput v-model="state.note" type="text" color="gray" variant="outline" />
+      </UFormGroup>
+      <UFormGroup v-if="!editLink" :label="$t('security.expiry.label')" name="expiresIn" :description="$t('security.limits_user')">
+        <USelectMenu
+          v-model="expiresIn"
+          :options="expireOptions"
+          value-attribute="value"
+          option-attribute="label"
+        >
+          <template #label>
+            {{ selectedExpireLabel }}
+          </template>
+        </USelectMenu>
       </UFormGroup>
       <div class="text-right">
         <UButton type="submit" :loading="submitting">

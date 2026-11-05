@@ -52,13 +52,16 @@ const backRoute = () => {
             {{ appConfig.domain }}/{{ route.params.key }}
           </UButton>
         </h1>
-        <div class="w-44">
-          <USelectMenu v-model="selected" :options="INTERVALS" option-attribute="display" value-attribute="slug">
+        <div class="flex items-center gap-2">
+          <LinkReportLink :link-key="String(route.params.key)" />
+          <div class="w-44">
+            <USelectMenu v-model="selected" :options="INTERVALS" option-attribute="display" value-attribute="slug">
             <template #label>
               <UIcon name="i-heroicons-calendar-days" />
               {{ current?.display }}
             </template>
-          </USelectMenu>
+            </USelectMenu>
+          </div>
         </div>
       </div>
     </div>

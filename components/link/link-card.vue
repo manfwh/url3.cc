@@ -159,6 +159,7 @@ const timeAgo = props.link
           <UTooltip v-if="props.link" :text="`Created ${new Date(props.link?.created_at).toLocaleString()}`">
             <span class="text-sm  text-gray-500 dark:text-gray-400">{{ timeAgo }}</span>
           </UTooltip>
+          <LinkReportLink v-if="key" :link-key="key" />
           <UDropdown :items="menus" :popper="{ placement: 'bottom' }" :ui="{ width: 'w-36'}">
             <UButton color="gray" variant="ghost" icon="i-heroicons-ellipsis-vertical" />
           </UDropdown>

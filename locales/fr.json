@@ -43,7 +43,7 @@
   },
   "demo": {
     "your_short_link": "Votre URL Court :",
-    "warn": "Les liens publics seront automatiquement supprimés si personne n'y accède pendant 30 jours. Créez un compte gratuit pour conserver vos liens indéfiniment.",
+    "warn": "Les liens invités expirent 7 jours après leur création. Connectez-vous pour les conserver plus longtemps.",
     "label": {
       "link": "Entrez votre URL long pour commencer",
       "image": "Sélectionnez votre image pour commencer"
@@ -69,7 +69,7 @@
     "q2": "Comment utiliser url3.cc ?",
     "a2": "Entrez un URL long dans la zone de saisie et cliquez sur le bouton Générer pour créer un URL court",
     "q3": "Quelle est la durée de validité du lien ?",
-    "a3": "La durée de validité des liens créés par les utilisateurs non connectés est de 30 jours. Si quelqu'un visite le lien dans les 30 jours, la durée de validité du lien sera prolongée de 30 jours",
+    "a3": "Les liens invités expirent 7 jours après leur création. Les comptes connectés peuvent choisir une durée plus longue, y compris sans expiration. Les invités peuvent créer 3 liens par heure et 10 par jour. Les comptes connectés peuvent en créer 30 par jour.",
     "q4": "Comment nous contacter ?",
     "a4": "Vous pouvez m'envoyer un email à service{'@'}url3.cc"
   },
@@ -94,5 +94,59 @@
   "image_type": "Image",
   "url_type": "URL",
   "Links": "Liens",
-  "Manage_your_links": "Gérer vos liens"
+  "Manage_your_links": "Gérer vos liens",
+  "security": {
+    "limits_guest": "Les invités peuvent créer 3 liens par heure et 10 par jour.",
+    "limits_user": "Les comptes connectés peuvent créer 30 liens par jour.",
+    "sign_in_longer": "Connectez-vous pour choisir une durée supérieure à 7 jours.",
+    "created": "Lien créé",
+    "create_failed": "Impossible de créer le lien",
+    "rate_limited_guest_hour": "Limite invité atteinte : 3 liens courts par heure. Réessayez plus tard ou connectez-vous.",
+    "rate_limited_guest_day": "Limite invité atteinte : 10 liens courts par jour. Réessayez demain ou connectez-vous.",
+    "rate_limited_user_day": "Limite quotidienne atteinte : 30 liens courts par jour.",
+    "rate_limited_report": "Trop de signalements depuis ce réseau. Réessayez plus tard.",
+    "rate_limited": "Trop de requêtes. Réessayez plus tard.",
+    "unsafe_invalid": "Saisissez une URL http ou https valide.",
+    "unsafe_scheme": "Seuls les liens http et https sont autorisés.",
+    "unsafe_ip": "Les liens vers une adresse IP ne sont pas autorisés.",
+    "unsafe_localhost": "Les liens vers localhost ne sont pas autorisés.",
+    "unsafe_private": "Les liens vers un réseau privé ou interne ne sont pas autorisés.",
+    "unsafe_blacklist": "Cette destination est bloquée.",
+    "unsafe_safe_browsing": "Safe Browsing a signalé cette destination comme dangereuse.",
+    "invalid_expiry": "Cette durée n’est pas disponible pour ce compte.",
+    "unauthorized": "Connectez-vous pour créer ce lien.",
+    "unsupported_type": "Seuls les liens http et https peuvent être raccourcis ici.",
+    "not_found": "Ce lien court n’existe pas ou a expiré.",
+    "invalid_report": "Choisissez un motif de signalement.",
+    "image_required": "Vous devez sélectionner une image.",
+    "expiry": {
+      "label": "Expiration du lien",
+      "day": "1 jour",
+      "week": "7 jours",
+      "month": "30 jours",
+      "quarter": "90 jours",
+      "year": "1 an",
+      "never": "Sans expiration"
+    },
+    "report": {
+      "button": "Signaler",
+      "site_button": "Signaler un lien court",
+      "title": "Signaler ce lien",
+      "description": "Demandez-nous d’examiner ce lien court en vue d’un retrait.",
+      "reason": "Motif",
+      "details": "Détails (facultatif)",
+      "details_placeholder": "Que devons-nous savoir ?",
+      "submit": "Envoyer le signalement",
+      "cancel": "Annuler",
+      "success": "Merci. Le signalement est reçu et le lien est en attente d’examen.",
+      "failed": "Impossible d’envoyer le signalement. Réessayez.",
+      "phishing": "Hameçonnage ou arnaque",
+      "malware": "Logiciel malveillant",
+      "spam": "Spam",
+      "other": "Autre",
+      "link_label": "Lien court",
+      "link_placeholder": "https://url3.cc/example",
+      "invalid_link": "Saisissez un lien court url3.cc valide."
+    }
+  }
 }

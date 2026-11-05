@@ -5,18 +5,34 @@ import {
 import { serverSupabaseClient, serverSupabaseUser } from '#supabase/server'
 import type { Database, Tables } from '~/types/type'
 
-import { validateRequest, isBlackDomain } from '~/server/utils/link'
+import { validateRequest } from '~/server/utils/link'
 import { redis } from '~/server/utils/upstash'
 import { defineAuthHandler } from '~/server/utils/handler'
+import { resolveExpiry } from '~/utils/link-policy'
+import { assertLocalDestination, assertRemoteDestination, enforceCreateRateLimit } from '~/server/utils/create-policy'
 
-type RequestBody = Exclude<Tables<'links'>, 'id' | 'user_id'> & {slug?: string}
+type RequestBody = Exclude<Tables<'links'>, 'id' | 'user_id'> & {slug?: string, expiresIn?: number | string}
 export default defineAuthHandler(async (event) => {
   const supabase = await serverSupabaseClient<Database>(event)
-  const { url, slug, ...body } = await readValidatedBody(event, validateRequest) as RequestBody
-
-  if (url && isBlackDomain(url)) {
-    throw createError({ statusCode: 400, statusMessage: 'Invalid URL' })
+  const { url, slug, expiresIn, ...body } = await readValidatedBody(event, validateRequest) as RequestBody
+  const userId = event.context.session?.user?.id as string | undefined
+  if (!userId) {
+    throw createError({ statusCode: 401, statusMessage: 'Unauthorized', data: { code: 'unauthorized' } })
   }
+  const expiry = resolveExpiry(expiresIn, 'user')
+  if (!expiry.ok) {
+    throw createError({ statusCode: 400, statusMessage: 'Invalid expiry', data: { code: 'invalid_expiry' } })
+  }
+  const destinations = [url, body.ios, body.android].flatMap((value) => {
+    if (typeof value !== 'string' || !value.trim()) { return [] }
+    return [assertLocalDestination(value)]
+  })
+  await enforceCreateRateLimit(event, 'user', userId)
+  for (const destination of destinations) {
+    await assertRemoteDestination(destination)
+  }
+  const redisOptions = expiry.seconds > 0 ? { nx: true, ex: expiry.seconds } : { nx: true }
+
   if (event.context.session.user_role !== 'admin' && body.key) {
     throw createError({ statusCode: 400, data: 'Invalid key' })
   }
@@ -59,15 +75,19 @@ export default defineAuthHandler(async (event) => {
         ...(body.android && { android: body.android }),
         ...(body.ios_image && { ios_image: body.ios_image }),
         ...(body.android_image && { android_image: body.android_image })
-      }, {
-        nx: true
-      })
+      }, redisOptions)
       if (response !== 'OK') {
         await supabase.from('links').delete().eq('key', key)
         throw createError({ statusCode: 500, data: 'Create Error' })
       }
 
-      setResponseStatus(event, status)
+      setResponseStatus(event, 201)
+      return {
+        key,
+        url: url ?? null,
+        expiresIn: expiry.seconds,
+        expiresAt: expiry.seconds > 0 ? new Date(Date.now() + expiry.seconds * 1000).toISOString() : null
+      }
     } catch (error) {
       throw createError({ statusCode: 500, data: 'Create Error' })
     }
@@ -93,10 +113,8 @@ export default defineAuthHandler(async (event) => {
         key
       }),
       redis.set(`short-link:${key}`, {
-        url
-      }, {
-        nx: true
-      })
+        ...(url ? { url: encodeURIComponent(url) } : {})
+      }, redisOptions)
     ])
     return res
   }

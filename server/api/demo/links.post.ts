@@ -1,70 +1,56 @@
-import {
-  S3Client,
-  CopyObjectCommand
-} from '@aws-sdk/client-s3'
+import { serverSupabaseUser } from '#supabase/server'
+import { resolveExpiry } from '~/utils/link-policy'
+import { assertLocalDestination, assertRemoteDestination, enforceCreateRateLimit } from '~/server/utils/create-policy'
+import { setRandomKey } from '~/server/utils/upstash'
 
-import { isValidUrl } from '~/server/utils'
-import { isBlackDomain } from '~/server/utils/link'
-import { ratelimit, setRandomKey } from '~/server/utils/upstash'
+// Guest create has no captcha in v1. Abuse control is the IP limit (3/hour and 10/day) plus URL safety.
+export default defineEventHandler(async (event) => {
+  const body = await readBody(event) as { url?: unknown, type?: unknown, expiresIn?: unknown }
+  const type = body?.type || 'url'
+  if (type !== 'url') {
+    throw createError({
+      statusCode: 400,
+      statusMessage: 'Unsupported type',
+      data: { code: 'unsupported_type' }
+    })
+  }
 
-export default defineEventHandler((event) => {
-  // 服务暂停 - 防止滥用
-  throw createError({
-    statusCode: 503,
-    statusMessage: 'Service Temporarily Unavailable - Demo service is currently disabled due to abuse prevention'
-  })
+  const url = typeof body?.url === 'string' ? body.url.trim() : ''
+  const destination = assertLocalDestination(url)
 
-  // const { url, ...body } = await readValidatedBody(event, (body: any) => {
-  //   if (body.type === 'image') {
-  //     if (!body.image) {
-  //       throw new Error('Miss Image')
-  //     }
-  //   } else if (!body.url || !isValidUrl(body.url)) {
-  //     // return createError({ statusCode: 400, statusMessage: 'Invalid URL' })
-  //     throw new Error('Invalid URL')
-  //   }
+  let userId: string | null = null
+  try {
+    const user = await serverSupabaseUser(event)
+    userId = user?.id ?? null
+  } catch {
+    userId = null
+  }
+  const role = userId ? 'user' : 'guest'
+  const expiry = resolveExpiry(body?.expiresIn, role)
+  if (!expiry.ok) {
+    throw createError({
+      statusCode: 400,
+      statusMessage: 'Invalid expiry',
+      data: { code: 'invalid_expiry' }
+    })
+  }
 
-  //   return body
-  // }) as { url: string; slug?: string, type?: string, image?: string }
-  // if (url && isBlackDomain(url)) {
-  //   throw createError({ statusCode: 400, statusMessage: 'Invalid URL' })
-  // }
+  await enforceCreateRateLimit(event, role, userId)
+  await assertRemoteDestination(destination)
 
-  // const ip = getRequestIP(event) || '63.141.57.109'
-  // const { success } = await ratelimit(5, '1 m').limit(ip)
-  // if (!success) {
-  //   throw createError({ statusCode: 429, statusMessage: 'Too Many Requests' })
-  // }
-  // if (body.type === 'image' && body.image) {
-  //   const S3 = new S3Client({
-  //     region: 'auto',
-  //     endpoint: `https://${process.env.CF_ACCOUNT_ID!}.r2.cloudflarestorage.com`,
-  //     credentials: {
-  //       accessKeyId: process.env.S3_ACCESS_KEY_ID!,
-  //       secretAccessKey: process.env.S3_SECRET_ACCESS_KEY!
-  //     }
-  //   })
-  //   const destKey = body.image.replace('_nocheck_', '')
-  //   const commands = []
-  //   const copyImagecommand = new CopyObjectCommand({
-  //     Bucket: process.env.S3_BUCKET_NAME!,
-  //     CopySource: process.env.S3_BUCKET_NAME! + '/' + body.image,
-  //     Key: destKey
-  //   })
-  //   commands.push(copyImagecommand)
-  //   await Promise.all(commands.map(command => S3.send(command)))
-  //   body.image = destKey
-  // }
-  // const { response, key } = await setRandomKey({
-  //   type: body.type || 'url',
-  //   url,
-  //   image: body.image
-  // })
-  // if (response === 'OK') {
-  //   return {
-  //     key, url
-  //   }
-  // } else {
-  //   throw createError({ statusCode: 500, data: 'Failed to create link' })
-  // }
+  const { response, key } = await setRandomKey({
+    type: 'url',
+    url: destination
+  }, expiry.seconds)
+  if (response !== 'OK') {
+    throw createError({ statusCode: 500, statusMessage: 'Create Error', data: { code: 'create_failed' } })
+  }
+
+  setResponseStatus(event, 201)
+  return {
+    key,
+    url: destination,
+    expiresIn: expiry.seconds,
+    expiresAt: expiry.seconds > 0 ? new Date(Date.now() + expiry.seconds * 1000).toISOString() : null
+  }
 })

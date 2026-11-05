@@ -43,7 +43,7 @@
   },
   "demo": {
     "your_short_link": "URL Ngắn của bạn:",
-    "warn": "Liên kết công khai sẽ tự động bị xóa nếu không có ai truy cập trong vòng 30 ngày. Tạo tài khoản miễn phí để giữ liên kết của bạn mãi mãi.",
+    "warn": "Liên kết của khách hết hạn sau 7 ngày kể từ khi tạo. Đăng nhập để giữ lâu hơn.",
     "label": {
       "link": "Nhập URL dài của bạn để bắt đầu",
       "image": "Chọn hình ảnh của bạn để bắt đầu"
@@ -69,7 +69,7 @@
     "q2": "Làm thế nào để sử dụng url3.cc?",
     "a2": "Nhập URL dài vào hộp nhập liệu và nhấp vào nút Tạo để tạo URL ngắn",
     "q3": "Thời hạn hiệu lực của liên kết là bao lâu?",
-    "a3": "Thời hạn hiệu lực của liên kết được tạo bởi người dùng chưa đăng nhập là 30 ngày. Nếu có người truy cập liên kết trong vòng 30 ngày, thời hạn hiệu lực của liên kết sẽ được gia hạn thêm 30 ngày",
+    "a3": "Liên kết của khách hết hạn sau 7 ngày kể từ khi tạo. Người đã đăng nhập có thể chọn thời hạn dài hơn, kể cả không hết hạn. Khách tạo được 3 liên kết mỗi giờ và 10 mỗi ngày. Tài khoản đã đăng nhập tạo được 30 mỗi ngày.",
     "q4": "Làm thế nào để liên hệ?",
     "a4": "Bạn có thể gửi email cho tôi tại service{'@'}url3.cc"
   },
@@ -94,5 +94,59 @@
   "image_type": "Hình ảnh",
   "url_type": "URL",
   "Links": "Liên kết",
-  "Manage_your_links": "Quản lý liên kết của bạn"
+  "Manage_your_links": "Quản lý liên kết của bạn",
+  "security": {
+    "limits_guest": "Khách có thể tạo 3 liên kết mỗi giờ và 10 liên kết mỗi ngày.",
+    "limits_user": "Tài khoản đã đăng nhập có thể tạo 30 liên kết mỗi ngày.",
+    "sign_in_longer": "Đăng nhập để chọn thời hạn dài hơn 7 ngày.",
+    "created": "Đã tạo liên kết",
+    "create_failed": "Không tạo được liên kết",
+    "rate_limited_guest_hour": "Đã đạt giới hạn khách: 3 liên kết ngắn mỗi giờ. Hãy thử lại sau hoặc đăng nhập.",
+    "rate_limited_guest_day": "Đã đạt giới hạn khách: 10 liên kết ngắn mỗi ngày. Hãy thử lại vào ngày mai hoặc đăng nhập.",
+    "rate_limited_user_day": "Đã đạt giới hạn mỗi ngày: 30 liên kết ngắn.",
+    "rate_limited_report": "Mạng này gửi quá nhiều báo cáo. Hãy thử lại sau.",
+    "rate_limited": "Quá nhiều yêu cầu. Hãy thử lại sau.",
+    "unsafe_invalid": "Nhập URL http hoặc https hợp lệ.",
+    "unsafe_scheme": "Chỉ cho phép liên kết http và https.",
+    "unsafe_ip": "Không cho phép liên kết tới địa chỉ IP.",
+    "unsafe_localhost": "Không cho phép liên kết tới localhost.",
+    "unsafe_private": "Không cho phép liên kết tới mạng riêng hoặc mạng nội bộ.",
+    "unsafe_blacklist": "Đích này đã bị chặn.",
+    "unsafe_safe_browsing": "Safe Browsing đánh dấu đích này là không an toàn.",
+    "invalid_expiry": "Tài khoản này không dùng được thời hạn đó.",
+    "unauthorized": "Hãy đăng nhập để tạo liên kết này.",
+    "unsupported_type": "Ở đây chỉ rút gọn được liên kết http và https.",
+    "not_found": "Liên kết ngắn này không tồn tại hoặc đã hết hạn.",
+    "invalid_report": "Hãy chọn lý do báo cáo.",
+    "image_required": "Bạn phải chọn một ảnh.",
+    "expiry": {
+      "label": "Thời hạn liên kết",
+      "day": "1 ngày",
+      "week": "7 ngày",
+      "month": "30 ngày",
+      "quarter": "90 ngày",
+      "year": "1 năm",
+      "never": "Không hết hạn"
+    },
+    "report": {
+      "button": "Báo cáo",
+      "site_button": "Báo cáo liên kết ngắn",
+      "title": "Báo cáo liên kết này",
+      "description": "Nhờ chúng tôi xem xét gỡ liên kết ngắn này.",
+      "reason": "Lý do",
+      "details": "Chi tiết (không bắt buộc)",
+      "details_placeholder": "Chúng tôi cần biết điều gì?",
+      "submit": "Gửi báo cáo",
+      "cancel": "Hủy",
+      "success": "Cảm ơn. Đã nhận báo cáo và đưa liên kết vào hàng chờ xem xét.",
+      "failed": "Không gửi được báo cáo. Hãy thử lại.",
+      "phishing": "Lừa đảo hoặc phishing",
+      "malware": "Phần mềm độc hại",
+      "spam": "Thư rác",
+      "other": "Khác",
+      "link_label": "Liên kết ngắn",
+      "link_placeholder": "https://url3.cc/example",
+      "invalid_link": "Nhập liên kết ngắn url3.cc hợp lệ."
+    }
+  }
 }
