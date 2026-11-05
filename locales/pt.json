@@ -69,7 +69,7 @@
     "q2": "Como usar o url3.cc?",
     "a2": "Digite uma URL longa na caixa de entrada e clique no botão Gerar para criar uma URL curta",
     "q3": "Qual é o período de validade do link?",
-    "a3": "Links de visitantes expiram 7 dias depois de criados e essa duração não pode ser alterada. Quem entra pode escolher de 1 a 90 dias. O padrão é 30 dias. Visitantes podem criar 3 links por hora e 10 por dia. Contas conectadas podem criar 30 por dia.",
+    "a3": "Links de visitantes expiram 7 dias depois de criados e essa duração não pode ser alterada. Quem entra pode escolher de 1 a 90 dias. O padrão é 30 dias.",
     "q4": "Como entrar em contato?",
     "a4": "Você pode me enviar um email para service{'@'}url3.cc"
   },
@@ -96,8 +96,6 @@
   "Links": "Links",
   "Manage_your_links": "Gerenciar seus links",
   "security": {
-    "limits_guest": "Visitantes podem criar 3 links por hora e 10 por dia.",
-    "limits_user": "Contas conectadas podem criar 30 links por dia.",
     "sign_in_longer": "Entre para escolher uma validade de 1 a 90 dias. O padrão é 30 dias.",
     "created": "Link criado",
     "create_failed": "Não foi possível criar o link",

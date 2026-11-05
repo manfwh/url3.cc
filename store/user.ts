@@ -11,14 +11,15 @@ export const useUserStore = defineStore('userStore', () => {
   const getUser = async () => {
     const { data: { session } } = await supabase.auth.getSession()
     if (session?.user) {
-      const jwt = jwtDecode(session.access_token)
+      const jwt = jwtDecode<{ user_role?: 'admin' }>(session.access_token)
       user.value = {
         name: session.user.user_metadata.name,
         email: session.user.email,
         avatar: session.user.user_metadata.avatar_url,
-        // @ts-ignore
         role: jwt.user_role
       }
+    } else {
+      user.value = undefined
     }
   }
   const signOut = () => {

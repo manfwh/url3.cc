@@ -69,7 +69,7 @@
     "q2": "Bagaimana cara menggunakan url3.cc?",
     "a2": "Masukkan URL panjang di kotak input dan klik tombol Buat untuk membuat URL pendek",
     "q3": "Berapa lama masa berlaku tautan?",
-    "a3": "Tautan tamu kedaluwarsa 7 hari setelah dibuat dan durasinya tidak dapat diubah. Pengguna yang masuk dapat memilih 1 sampai 90 hari. Nilai bawaan adalah 30 hari. Tamu dapat membuat 3 tautan per jam dan 10 per hari. Akun yang masuk dapat membuat 30 per hari.",
+    "a3": "Tautan tamu kedaluwarsa 7 hari setelah dibuat dan durasinya tidak dapat diubah. Pengguna yang masuk dapat memilih 1 sampai 90 hari. Nilai bawaan adalah 30 hari.",
     "q4": "Bagaimana cara menghubungi?",
     "a4": "Anda dapat mengirim email kepada saya di service{'@'}url3.cc"
   },
@@ -96,8 +96,6 @@
   "Links": "Tautan",
   "Manage_your_links": "Kelola tautan Anda",
   "security": {
-    "limits_guest": "Tamu dapat membuat 3 tautan per jam dan 10 per hari.",
-    "limits_user": "Akun yang masuk dapat membuat 30 tautan per hari.",
     "sign_in_longer": "Masuk untuk memilih masa berlaku 1 sampai 90 hari. Nilai bawaan adalah 30 hari.",
     "created": "Tautan dibuat",
     "create_failed": "Tautan tidak dapat dibuat",

@@ -49,13 +49,11 @@
     "q2": "Come si usa url3.cc?",
     "a2": "Inserisci un URL lungo nella casella di input e clicca sul pulsante Genera per creare un URL breve",
     "q3": "Qual è il periodo di validità del link?",
-    "a3": "I link degli ospiti scadono dopo 7 giorni e la durata non si può cambiare. Gli utenti che accedono possono scegliere da 1 a 90 giorni. Il valore predefinito è 30 giorni. Gli ospiti possono creare 3 link all’ora e 10 al giorno. Gli account connessi possono crearne 30 al giorno.",
+    "a3": "I link degli ospiti scadono dopo 7 giorni e la durata non si può cambiare. Gli utenti che accedono possono scegliere da 1 a 90 giorni. Il valore predefinito è 30 giorni.",
     "q4": "Come contattare?",
     "a4": "Puoi inviarmi una email a service{'@'}url3.cc"
   },
   "security": {
-    "limits_guest": "Gli ospiti possono creare 3 link all’ora e 10 al giorno.",
-    "limits_user": "Gli account connessi possono creare 30 link al giorno.",
     "sign_in_longer": "Accedi per scegliere una scadenza da 1 a 90 giorni. Il valore predefinito è 30 giorni.",
     "created": "Link creato",
     "create_failed": "Impossibile creare il link",

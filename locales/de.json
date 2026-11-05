@@ -69,7 +69,7 @@
     "q2": "Wie benutze ich url3.cc?",
     "a2": "Geben Sie eine lange URL in das Eingabefeld ein und klicken Sie auf die Schaltfläche Generieren, um eine Kurz-URL zu erstellen",
     "q3": "Wie lange ist der Link gültig?",
-    "a3": "Gast-Links laufen nach 7 Tagen ab, und diese Dauer lässt sich nicht ändern. Angemeldete Nutzer können 1 bis 90 Tage wählen. Der Standard ist 30 Tage. Gäste können 3 Links pro Stunde und 10 pro Tag erstellen. Angemeldete Konten können 30 pro Tag erstellen.",
+    "a3": "Gast-Links laufen nach 7 Tagen ab, und diese Dauer lässt sich nicht ändern. Angemeldete Nutzer können 1 bis 90 Tage wählen. Der Standard ist 30 Tage.",
     "q4": "Wie kann ich Kontakt aufnehmen?",
     "a4": "Sie können mir eine E-Mail an service{'@'}url3.cc senden"
   },
@@ -96,8 +96,6 @@
   "Links": "Links",
   "Manage_your_links": "Verwalten Sie Ihre Links",
   "security": {
-    "limits_guest": "Gäste können 3 Links pro Stunde und 10 pro Tag erstellen.",
-    "limits_user": "Angemeldete Konten können 30 Links pro Tag erstellen.",
     "sign_in_longer": "Melde dich an, um eine Laufzeit von 1 bis 90 Tagen zu wählen. Der Standard ist 30 Tage.",
     "created": "Link erstellt",
     "create_failed": "Link konnte nicht erstellt werden",

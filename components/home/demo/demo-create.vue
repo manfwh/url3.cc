@@ -225,9 +225,6 @@ const expiryDays = ref(USER_DEFAULT_DAYS)
             {{ $t('security.sign_in_longer') }}
           </p>
         </div>
-        <p class="mt-3 text-xs text-slate-600 dark:text-slate-400">
-          {{ isAuthed ? $t('security.limits_user') : $t('security.limits_guest') }}
-        </p>
         <UAlert
           v-if="errorMessage"
           class="mt-4"

@@ -1,12 +1,13 @@
 <script lang="ts" setup>
+import { storeToRefs } from 'pinia'
 import { useUserStore } from '~/store/user'
 
-const { t } = useI18n()
-const { user: userInfo, signOut } = useUserStore()
+const userStore = useUserStore()
+const { user: userInfo } = storeToRefs(userStore)
 const localePath = useLocalePath()
-const items = [
+const items = computed(() => [
   [{
-    label: userInfo?.email || '-',
+    label: userInfo.value?.email || '-',
     slot: 'account',
     disabled: true
   }],
@@ -14,11 +15,11 @@ const items = [
     label: 'Sign out',
     icon: 'i-heroicons-arrow-left-on-rectangle',
     click: async () => {
-      await signOut()
+      await userStore.signOut()
       location.reload()
     }
   }]
-]
+])
 </script>
 <template>
   <div class="sticky inset-x-0 top-0 z-30 w-full border-b dark:border-gray-600 backdrop-blur-lg">

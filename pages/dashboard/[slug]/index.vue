@@ -4,7 +4,8 @@ import type { Database } from '~/types/type'
 import { linkErrorI18nKey } from '~/utils/link-api-error'
 
 definePageMeta({
-  layout: 'dashboard'
+  layout: 'dashboard',
+  middleware: 'auth'
 })
 
 // import MyWorker from '~/lib/worker?worker'
