@@ -5,7 +5,7 @@ import DraggerUpload from '~/components/shared/upload/dragger-upload.vue'
 import type { UploadFile } from '@/components/shared/upload/types'
 import { checkUrlSafety } from '~/utils/url-safety'
 import { linkErrorI18nKey } from '~/utils/link-api-error'
-import { EXPIRY } from '~/utils/link-policy'
+import { DAY_SECONDS, USER_DEFAULT_DAYS, USER_MAX_DAYS, USER_MIN_DAYS } from '~/utils/link-policy'
 const { fullDomain } = useAppConfig()
 const toast = useToast()
 const user = useSupabaseUser()
@@ -78,14 +78,18 @@ const handleSubmit = (e: Event) => {
     return
   }
 
+  const days = Number(expiryDays.value)
+  if (isAuthed.value && (!Number.isInteger(days) || days < USER_MIN_DAYS || days > USER_MAX_DAYS)) {
+    errorMessage.value = t('security.invalid_expiry')
+    return
+  }
+
   submitting.value = true
   $fetch(isAuthed.value ? '/api/links' : '/api/demo/links', {
     method: 'POST',
-    body: {
-      url,
-      type: 'url',
-      expiresIn: Number(selectedExpire.value)
-    }
+    body: isAuthed.value
+      ? { url, type: 'url', expiresIn: days * DAY_SECONDS }
+      : { url, type: 'url' }
   }).then((data: { key: string, url: string }) => {
     links.value.unshift(data)
     formRef.value?.reset()
@@ -123,32 +127,7 @@ const download = (url: string) => {
   anchorRef.value.click()
 }
 
-const expireOptions = computed(() => {
-  const options = [
-    { label: t('security.expiry.day'), value: String(EXPIRY.day) },
-    { label: t('security.expiry.week'), value: String(EXPIRY.week) }
-  ]
-  if (!isAuthed.value) { return options }
-  return [
-    ...options,
-    { label: t('security.expiry.month'), value: String(EXPIRY.month) },
-    { label: t('security.expiry.quarter'), value: String(EXPIRY.quarter) },
-    { label: t('security.expiry.year'), value: String(EXPIRY.year) },
-    { label: t('security.expiry.never'), value: String(EXPIRY.never) }
-  ]
-})
-const selectedExpire = ref(String(EXPIRY.week))
-const expireTouched = ref(false)
-const selectedExpireLabel = computed(() => expireOptions.value.find(option => option.value === selectedExpire.value)?.label)
-watch(isAuthed, (authed) => {
-  if (!expireTouched.value) {
-    selectedExpire.value = authed ? String(EXPIRY.never) : String(EXPIRY.week)
-    return
-  }
-  if (!expireOptions.value.some(option => option.value === selectedExpire.value)) {
-    selectedExpire.value = String(EXPIRY.week)
-  }
-}, { immediate: true })
+const expiryDays = ref(USER_DEFAULT_DAYS)
 </script>
 
 <template>
@@ -225,21 +204,24 @@ watch(isAuthed, (authed) => {
           />
         </div>
         <div class="mt-4">
-          <label class="text-sm font-medium" for="expires">{{ $t('security.expiry.label') }}</label>
-          <USelectMenu
-            v-model="selectedExpire"
-            class="mt-2"
-            :options="expireOptions"
-            value-attribute="value"
-            option-attribute="label"
-            size="md"
-            @update:model-value="expireTouched = true"
-          >
-            <template #label>
-              {{ selectedExpireLabel }}
-            </template>
-          </USelectMenu>
-          <p v-if="!isAuthed" class="mt-2 text-xs text-slate-500 dark:text-slate-400">
+          <template v-if="isAuthed">
+            <label class="text-sm font-medium" for="expires">{{ $t('security.expiry.label') }}</label>
+            <UInput
+              id="expires"
+              v-model.number="expiryDays"
+              class="mt-2"
+              type="number"
+              :min="USER_MIN_DAYS"
+              :max="USER_MAX_DAYS"
+              step="1"
+              required
+            />
+            <p class="mt-2 text-xs text-slate-500 dark:text-slate-400">
+              {{ $t('security.expiry.range') }}
+            </p>
+          </template>
+          <p v-else class="text-xs text-slate-500 dark:text-slate-400">
+            {{ $t('security.guest_fixed') }}
             {{ $t('security.sign_in_longer') }}
           </p>
         </div>
@@ -254,21 +236,6 @@ watch(isAuthed, (authed) => {
           icon="i-heroicons-exclamation-triangle"
           :title="errorMessage"
         />
-        <!-- <div class="mt-4 grid grid-cols-2 gap-4">
-          <USelectMenu
-            v-model="selectedExpire"
-            :options="expireOptions"
-            placeholder="expire time"
-            value-attribute="value"
-            option-attribute="label"
-            size="md"
-          >
-            <template #label>
-              {{ expire?.label }}
-            </template>
-          </USelectMenu>
-          <UInput type="text" size="md" placeholder="password" />
-        </div> -->
         <UButton type="submit" block size="md" class="mt-4" :loading="submitting">
           {{ item.type === 'image' ? $t('demo.submit.image') : $t('demo.submit.link') }}
         </UButton>

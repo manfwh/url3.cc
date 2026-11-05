@@ -23,7 +23,7 @@
   },
   "demo": {
     "your_short_link": "Il tuo URL Breve:",
-    "warn": "I link degli ospiti scadono 7 giorni dopo la creazione. Accedi per conservarli più a lungo.",
+    "warn": "I link degli ospiti scadono dopo 7 giorni e la durata non si può cambiare. Accedi per scegliere da 1 a 90 giorni.",
     "label": {
       "link": "Inserisci il tuo URL lungo per iniziare",
       "image": "Seleziona la tua immagine per iniziare"
@@ -49,14 +49,14 @@
     "q2": "Come si usa url3.cc?",
     "a2": "Inserisci un URL lungo nella casella di input e clicca sul pulsante Genera per creare un URL breve",
     "q3": "Qual è il periodo di validità del link?",
-    "a3": "I link degli ospiti scadono 7 giorni dopo la creazione. Gli utenti che accedono possono scegliere una durata più lunga, anche senza scadenza. Gli ospiti possono creare 3 link all’ora e 10 al giorno. Gli account connessi possono crearne 30 al giorno.",
+    "a3": "I link degli ospiti scadono dopo 7 giorni e la durata non si può cambiare. Gli utenti che accedono possono scegliere da 1 a 90 giorni. Il valore predefinito è 30 giorni. Gli ospiti possono creare 3 link all’ora e 10 al giorno. Gli account connessi possono crearne 30 al giorno.",
     "q4": "Come contattare?",
     "a4": "Puoi inviarmi una email a service{'@'}url3.cc"
   },
   "security": {
     "limits_guest": "Gli ospiti possono creare 3 link all’ora e 10 al giorno.",
     "limits_user": "Gli account connessi possono creare 30 link al giorno.",
-    "sign_in_longer": "Accedi per scegliere una durata superiore a 7 giorni.",
+    "sign_in_longer": "Accedi per scegliere una scadenza da 1 a 90 giorni. Il valore predefinito è 30 giorni.",
     "created": "Link creato",
     "create_failed": "Impossibile creare il link",
     "rate_limited_guest_hour": "Limite ospite raggiunto: 3 link brevi all’ora. Riprova più tardi o accedi.",
@@ -70,7 +70,6 @@
     "unsafe_localhost": "I link a localhost non sono consentiti.",
     "unsafe_private": "I link a reti private o interne non sono consentiti.",
     "unsafe_blacklist": "Questa destinazione è bloccata.",
-    "unsafe_safe_browsing": "Safe Browsing ha segnalato questa destinazione come non sicura.",
     "invalid_expiry": "Questa scadenza non è disponibile per questo account.",
     "unauthorized": "Accedi per creare questo link.",
     "unsupported_type": "Qui si possono accorciare solo link http e https.",
@@ -82,9 +81,7 @@
       "day": "1 giorno",
       "week": "7 giorni",
       "month": "30 giorni",
-      "quarter": "90 giorni",
-      "year": "1 anno",
-      "never": "Senza scadenza"
+      "range": "Scegli da 1 a 90 giorni. Il valore predefinito è 30."
     },
     "report": {
       "button": "Segnala",
@@ -105,6 +102,7 @@
       "link_label": "Link breve",
       "link_placeholder": "https://url3.cc/example",
       "invalid_link": "Inserisci un link breve url3.cc valido."
-    }
+    },
+    "guest_fixed": "I link degli ospiti scadono dopo 7 giorni."
   }
 }

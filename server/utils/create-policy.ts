@@ -22,48 +22,6 @@ export function assertLocalDestination (url: string) {
   return result.url.toString()
 }
 
-export async function assertRemoteDestination (url: string) {
-  const apiKey = process.env.SAFE_BROWSING_API_KEY
-  if (!apiKey) { return }
-
-  let response: Response
-  try {
-    response = await fetch(`https://safebrowsing.googleapis.com/v4/threatMatches:find?key=${encodeURIComponent(apiKey)}`, {
-      method: 'POST',
-      headers: { 'content-type': 'application/json' },
-      body: JSON.stringify({
-        client: { clientId: 'url3cc', clientVersion: '1.0.0' },
-        threatInfo: {
-          threatTypes: ['MALWARE', 'SOCIAL_ENGINEERING', 'UNWANTED_SOFTWARE', 'POTENTIALLY_HARMFUL_APPLICATION'],
-          platformTypes: ['ANY_PLATFORM'],
-          threatEntryTypes: ['URL'],
-          threatEntries: [{ url }]
-        }
-      })
-    })
-  } catch (error) {
-    console.log('safe browsing lookup failed', error)
-    return
-  }
-
-  if (!response.ok) {
-    console.log('safe browsing lookup failed', response.status)
-    return
-  }
-
-  const body = await response.json() as { matches?: unknown[] }
-  if (body.matches?.length) {
-    throw createError({
-      statusCode: 400,
-      statusMessage: 'Unsafe URL',
-      data: {
-        code: 'unsafe_url',
-        reason: 'safe_browsing'
-      }
-    })
-  }
-}
-
 export async function enforceCreateRateLimit (event: H3Event, role: 'guest' | 'user', userId?: string | null) {
   if (role === 'user') {
     if (!userId) {

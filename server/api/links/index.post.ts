@@ -9,7 +9,7 @@ import { validateRequest } from '~/server/utils/link'
 import { redis } from '~/server/utils/upstash'
 import { defineAuthHandler } from '~/server/utils/handler'
 import { resolveExpiry } from '~/utils/link-policy'
-import { assertLocalDestination, assertRemoteDestination, enforceCreateRateLimit } from '~/server/utils/create-policy'
+import { enforceCreateRateLimit } from '~/server/utils/create-policy'
 
 type RequestBody = Exclude<Tables<'links'>, 'id' | 'user_id'> & {slug?: string, expiresIn?: number | string}
 export default defineAuthHandler(async (event) => {
@@ -23,15 +23,8 @@ export default defineAuthHandler(async (event) => {
   if (!expiry.ok) {
     throw createError({ statusCode: 400, statusMessage: 'Invalid expiry', data: { code: 'invalid_expiry' } })
   }
-  const destinations = [url, body.ios, body.android].flatMap((value) => {
-    if (typeof value !== 'string' || !value.trim()) { return [] }
-    return [assertLocalDestination(value)]
-  })
   await enforceCreateRateLimit(event, 'user', userId)
-  for (const destination of destinations) {
-    await assertRemoteDestination(destination)
-  }
-  const redisOptions = expiry.seconds > 0 ? { nx: true, ex: expiry.seconds } : { nx: true }
+  const redisOptions = { nx: true, ex: expiry.seconds }
 
   if (event.context.session.user_role !== 'admin' && body.key) {
     throw createError({ statusCode: 400, data: 'Invalid key' })

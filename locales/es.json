@@ -43,7 +43,7 @@
   },
   "demo": {
     "your_short_link": "Tu URL Corta:",
-    "warn": "Los enlaces de invitados caducan 7 días después de crearse. Inicia sesión para conservarlos más tiempo.",
+    "warn": "Los enlaces de invitados caducan a los 7 días y esa duración no se puede cambiar. Inicia sesión para elegir de 1 a 90 días.",
     "label": {
       "link": "Ingresa tu URL larga para comenzar",
       "image": "Selecciona tu imagen para comenzar"
@@ -69,7 +69,7 @@
     "q2": "¿Cómo uso url3.cc?",
     "a2": "Ingresa una URL larga en el cuadro de entrada y haz clic en el botón Generar para crear una URL corta",
     "q3": "¿Cuál es el período de validez del enlace?",
-    "a3": "Los enlaces de invitados caducan 7 días después de crearse. Quienes inician sesión pueden elegir una caducidad más larga, o ninguna. Los invitados pueden crear 3 enlaces por hora y 10 al día. Las cuentas con sesión pueden crear 30 al día.",
+    "a3": "Los enlaces de invitados caducan a los 7 días y esa duración no se puede cambiar. Quienes inician sesión pueden elegir de 1 a 90 días. El valor predeterminado es 30 días. Los invitados pueden crear 3 enlaces por hora y 10 al día. Las cuentas con sesión pueden crear 30 al día.",
     "q4": "¿Cómo contactar?",
     "a4": "Puedes enviarme un correo electrónico a service{'@'}url3.cc"
   },
@@ -98,7 +98,7 @@
   "security": {
     "limits_guest": "Los invitados pueden crear 3 enlaces por hora y 10 al día.",
     "limits_user": "Las cuentas con sesión pueden crear 30 enlaces al día.",
-    "sign_in_longer": "Inicia sesión para elegir una caducidad mayor de 7 días.",
+    "sign_in_longer": "Inicia sesión para elegir una caducidad de 1 a 90 días. El valor predeterminado es 30 días.",
     "created": "Enlace creado",
     "create_failed": "No se pudo crear el enlace",
     "rate_limited_guest_hour": "Límite de invitado alcanzado: 3 enlaces cortos por hora. Inténtalo más tarde o inicia sesión.",
@@ -112,7 +112,6 @@
     "unsafe_localhost": "No se permiten enlaces a localhost.",
     "unsafe_private": "No se permiten enlaces a redes privadas o internas.",
     "unsafe_blacklist": "Este destino está bloqueado.",
-    "unsafe_safe_browsing": "Safe Browsing marcó este destino como no seguro.",
     "invalid_expiry": "Esa caducidad no está disponible para esta cuenta.",
     "unauthorized": "Inicia sesión para crear este enlace.",
     "unsupported_type": "Aquí solo se pueden acortar enlaces http y https.",
@@ -124,9 +123,7 @@
       "day": "1 día",
       "week": "7 días",
       "month": "30 días",
-      "quarter": "90 días",
-      "year": "1 año",
-      "never": "Sin caducidad"
+      "range": "Elige de 1 a 90 días. El valor predeterminado es 30."
     },
     "report": {
       "button": "Reportar",
@@ -147,6 +144,7 @@
       "link_label": "Enlace corto",
       "link_placeholder": "https://url3.cc/example",
       "invalid_link": "Introduce un enlace corto válido de url3.cc."
-    }
+    },
+    "guest_fixed": "Los enlaces de invitados caducan a los 7 días."
   }
 }

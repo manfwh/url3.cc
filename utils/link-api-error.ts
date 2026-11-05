@@ -10,8 +10,7 @@ const UNSAFE_REASONS = new Set([
   'ip',
   'localhost',
   'private',
-  'blacklist',
-  'safe_browsing'
+  'blacklist'
 ])
 
 export function linkErrorI18nKey (err: unknown): string {

@@ -43,7 +43,7 @@
   },
   "demo": {
     "your_short_link": "Votre URL Court :",
-    "warn": "Les liens invités expirent 7 jours après leur création. Connectez-vous pour les conserver plus longtemps.",
+    "warn": "Les liens invités expirent au bout de 7 jours et cette durée ne peut pas être modifiée. Connectez-vous pour choisir de 1 à 90 jours.",
     "label": {
       "link": "Entrez votre URL long pour commencer",
       "image": "Sélectionnez votre image pour commencer"
@@ -69,7 +69,7 @@
     "q2": "Comment utiliser url3.cc ?",
     "a2": "Entrez un URL long dans la zone de saisie et cliquez sur le bouton Générer pour créer un URL court",
     "q3": "Quelle est la durée de validité du lien ?",
-    "a3": "Les liens invités expirent 7 jours après leur création. Les comptes connectés peuvent choisir une durée plus longue, y compris sans expiration. Les invités peuvent créer 3 liens par heure et 10 par jour. Les comptes connectés peuvent en créer 30 par jour.",
+    "a3": "Les liens invités expirent au bout de 7 jours et cette durée ne peut pas être modifiée. Les comptes connectés peuvent choisir de 1 à 90 jours. La valeur par défaut est 30 jours. Les invités peuvent créer 3 liens par heure et 10 par jour. Les comptes connectés peuvent en créer 30 par jour.",
     "q4": "Comment nous contacter ?",
     "a4": "Vous pouvez m'envoyer un email à service{'@'}url3.cc"
   },
@@ -98,7 +98,7 @@
   "security": {
     "limits_guest": "Les invités peuvent créer 3 liens par heure et 10 par jour.",
     "limits_user": "Les comptes connectés peuvent créer 30 liens par jour.",
-    "sign_in_longer": "Connectez-vous pour choisir une durée supérieure à 7 jours.",
+    "sign_in_longer": "Connectez-vous pour choisir une durée de 1 à 90 jours. La valeur par défaut est 30 jours.",
     "created": "Lien créé",
     "create_failed": "Impossible de créer le lien",
     "rate_limited_guest_hour": "Limite invité atteinte : 3 liens courts par heure. Réessayez plus tard ou connectez-vous.",
@@ -112,7 +112,6 @@
     "unsafe_localhost": "Les liens vers localhost ne sont pas autorisés.",
     "unsafe_private": "Les liens vers un réseau privé ou interne ne sont pas autorisés.",
     "unsafe_blacklist": "Cette destination est bloquée.",
-    "unsafe_safe_browsing": "Safe Browsing a signalé cette destination comme dangereuse.",
     "invalid_expiry": "Cette durée n’est pas disponible pour ce compte.",
     "unauthorized": "Connectez-vous pour créer ce lien.",
     "unsupported_type": "Seuls les liens http et https peuvent être raccourcis ici.",
@@ -124,9 +123,7 @@
       "day": "1 jour",
       "week": "7 jours",
       "month": "30 jours",
-      "quarter": "90 jours",
-      "year": "1 an",
-      "never": "Sans expiration"
+      "range": "Choisissez de 1 à 90 jours. La valeur par défaut est 30."
     },
     "report": {
       "button": "Signaler",
@@ -147,6 +144,7 @@
       "link_label": "Lien court",
       "link_placeholder": "https://url3.cc/example",
       "invalid_link": "Saisissez un lien court url3.cc valide."
-    }
+    },
+    "guest_fixed": "Les liens invités expirent au bout de 7 jours."
   }
 }

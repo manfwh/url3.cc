@@ -1,7 +1,7 @@
 import assert from 'node:assert/strict'
 import { describe, it } from 'node:test'
 import { linkErrorI18nKey } from './link-api-error.ts'
-import { EXPIRY, resolveExpiry } from './link-policy.ts'
+import { DAY_SECONDS, GUEST_TTL_SECONDS, resolveExpiry, USER_DEFAULT_DAYS, USER_MAX_DAYS } from './link-policy.ts'
 import { checkUrlSafety } from './url-safety.ts'
 
 describe('checkUrlSafety', () => {
@@ -35,17 +35,20 @@ describe('checkUrlSafety', () => {
 })
 
 describe('resolveExpiry', () => {
-  it('defaults guests to 7 days and rejects longer values', () => {
-    assert.deepEqual(resolveExpiry(undefined, 'guest'), { ok: true, seconds: EXPIRY.week })
-    assert.deepEqual(resolveExpiry(EXPIRY.day, 'guest'), { ok: true, seconds: EXPIRY.day })
-    assert.deepEqual(resolveExpiry(EXPIRY.month, 'guest'), { ok: false })
-    assert.deepEqual(resolveExpiry(EXPIRY.never, 'guest'), { ok: false })
+  it('fixes guest links at 7 days and rejects a custom expiry', () => {
+    assert.deepEqual(resolveExpiry(undefined, 'guest'), { ok: true, seconds: GUEST_TTL_SECONDS })
+    assert.deepEqual(resolveExpiry('', 'guest'), { ok: true, seconds: GUEST_TTL_SECONDS })
+    assert.deepEqual(resolveExpiry(GUEST_TTL_SECONDS, 'guest'), { ok: false })
+    assert.deepEqual(resolveExpiry(DAY_SECONDS, 'guest'), { ok: false })
   })
 
-  it('lets signed-in users keep a link longer or with no expiry', () => {
-    assert.deepEqual(resolveExpiry(undefined, 'user'), { ok: true, seconds: EXPIRY.never })
-    assert.deepEqual(resolveExpiry(String(EXPIRY.year), 'user'), { ok: true, seconds: EXPIRY.year })
-    assert.deepEqual(resolveExpiry('0', 'user'), { ok: true, seconds: 0 })
+  it('defaults signed-in links to 30 days and allows 1 to 90 days', () => {
+    assert.deepEqual(resolveExpiry(undefined, 'user'), { ok: true, seconds: USER_DEFAULT_DAYS * DAY_SECONDS })
+    assert.deepEqual(resolveExpiry(DAY_SECONDS, 'user'), { ok: true, seconds: DAY_SECONDS })
+    assert.deepEqual(resolveExpiry(USER_MAX_DAYS * DAY_SECONDS, 'user'), { ok: true, seconds: USER_MAX_DAYS * DAY_SECONDS })
+    assert.deepEqual(resolveExpiry(0, 'user'), { ok: false })
+    assert.deepEqual(resolveExpiry(365 * DAY_SECONDS, 'user'), { ok: false })
+    assert.deepEqual(resolveExpiry(91 * DAY_SECONDS, 'user'), { ok: false })
   })
 })
 
@@ -59,7 +62,7 @@ describe('linkErrorI18nKey', () => {
       data: { code: 'unsafe_url', reason: 'private' }
     }), 'security.unsafe_private')
     assert.equal(linkErrorI18nKey({
-      data: { code: 'unsafe_url', reason: 'safe_browsing' }
-    }), 'security.unsafe_safe_browsing')
+      data: { code: 'unsafe_url', reason: 'other' }
+    }), 'security.unsafe_invalid')
   })
 })

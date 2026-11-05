@@ -8,7 +8,7 @@ import { useUserStore } from '~/store/user'
 import type { Enums } from '~/types/type'
 import { checkUrlSafety } from '~/utils/url-safety'
 import { linkErrorI18nKey } from '~/utils/link-api-error'
-import { EXPIRY } from '~/utils/link-policy'
+import { DAY_SECONDS, USER_DEFAULT_DAYS, USER_MAX_DAYS, USER_MIN_DAYS } from '~/utils/link-policy'
 const toast = useToast()
 const { t } = useI18n()
 const { fullDomain } = useAppConfig()
@@ -79,7 +79,7 @@ const submit = async (event: FormSubmitEvent<typeof state.value>) => {
         method: 'POST',
         body: {
           ...state.value,
-          expiresIn: Number(expiresIn.value)
+          expiresIn: Number(expiryDays.value) * DAY_SECONDS
         }
       })
     }
@@ -102,16 +102,7 @@ const submit = async (event: FormSubmitEvent<typeof state.value>) => {
 }
 
 const showPassword = ref(false)
-const expiresIn = ref(String(EXPIRY.never))
-const expireOptions = computed(() => [
-  { label: t('security.expiry.day'), value: String(EXPIRY.day) },
-  { label: t('security.expiry.week'), value: String(EXPIRY.week) },
-  { label: t('security.expiry.month'), value: String(EXPIRY.month) },
-  { label: t('security.expiry.quarter'), value: String(EXPIRY.quarter) },
-  { label: t('security.expiry.year'), value: String(EXPIRY.year) },
-  { label: t('security.expiry.never'), value: String(EXPIRY.never) }
-])
-const selectedExpireLabel = computed(() => expireOptions.value.find(option => option.value === expiresIn.value)?.label)
+const expiryDays = ref(USER_DEFAULT_DAYS)
 
 // watchDebounced(() => state.value.url, () => {
 //   if (state.value.key || fetchKeyLoading.value) { return }
@@ -145,6 +136,9 @@ const validate = (state: State): FormError[] => {
   const errors = []
   if (state.type === 'image') {
     if (!state.image) { errors.push({ path: 'image', message: t('security.image_required') }) }
+  }
+  if (!editLink.value && (!Number.isInteger(expiryDays.value) || expiryDays.value < USER_MIN_DAYS || expiryDays.value > USER_MAX_DAYS)) {
+    errors.push({ path: 'expiresIn', message: t('security.invalid_expiry') })
   }
   for (const field of ['url', 'ios', 'android'] as const) {
     const value = state[field]
@@ -270,17 +264,8 @@ const currentType = computed(() => typeOptions.find(item => item.value === state
       <UFormGroup :label="$t('form.Note')" :hint="$t('form.Optional')" name="note" :description="$t('form.Note_Tip')">
         <UInput v-model="state.note" type="text" color="gray" variant="outline" />
       </UFormGroup>
-      <UFormGroup v-if="!editLink" :label="$t('security.expiry.label')" name="expiresIn" :description="$t('security.limits_user')">
-        <USelectMenu
-          v-model="expiresIn"
-          :options="expireOptions"
-          value-attribute="value"
-          option-attribute="label"
-        >
-          <template #label>
-            {{ selectedExpireLabel }}
-          </template>
-        </USelectMenu>
+      <UFormGroup v-if="!editLink" :label="$t('security.expiry.label')" name="expiresIn" :description="$t('security.expiry.range')" :hint="$t('security.limits_user')">
+        <UInput v-model.number="expiryDays" type="number" :min="USER_MIN_DAYS" :max="USER_MAX_DAYS" step="1" required />
       </UFormGroup>
       <div class="text-right">
         <UButton type="submit" :loading="submitting">

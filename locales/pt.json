@@ -43,7 +43,7 @@
   },
   "demo": {
     "your_short_link": "Sua URL Curta:",
-    "warn": "Links de visitantes expiram 7 dias depois de criados. Entre para mantê-los por mais tempo.",
+    "warn": "Links de visitantes expiram 7 dias depois de criados e essa duração não pode ser alterada. Entre para escolher de 1 a 90 dias.",
     "label": {
       "link": "Digite sua URL longa para começar",
       "image": "Selecione sua imagem para começar"
@@ -69,7 +69,7 @@
     "q2": "Como usar o url3.cc?",
     "a2": "Digite uma URL longa na caixa de entrada e clique no botão Gerar para criar uma URL curta",
     "q3": "Qual é o período de validade do link?",
-    "a3": "Links de visitantes expiram 7 dias depois de criados. Quem entra pode escolher uma validade maior, inclusive sem expiração. Visitantes podem criar 3 links por hora e 10 por dia. Contas conectadas podem criar 30 por dia.",
+    "a3": "Links de visitantes expiram 7 dias depois de criados e essa duração não pode ser alterada. Quem entra pode escolher de 1 a 90 dias. O padrão é 30 dias. Visitantes podem criar 3 links por hora e 10 por dia. Contas conectadas podem criar 30 por dia.",
     "q4": "Como entrar em contato?",
     "a4": "Você pode me enviar um email para service{'@'}url3.cc"
   },
@@ -98,7 +98,7 @@
   "security": {
     "limits_guest": "Visitantes podem criar 3 links por hora e 10 por dia.",
     "limits_user": "Contas conectadas podem criar 30 links por dia.",
-    "sign_in_longer": "Entre para escolher uma validade maior que 7 dias.",
+    "sign_in_longer": "Entre para escolher uma validade de 1 a 90 dias. O padrão é 30 dias.",
     "created": "Link criado",
     "create_failed": "Não foi possível criar o link",
     "rate_limited_guest_hour": "Limite de visitante atingido: 3 links curtos por hora. Tente mais tarde ou entre.",
@@ -112,7 +112,6 @@
     "unsafe_localhost": "Links para localhost não são permitidos.",
     "unsafe_private": "Links para redes privadas ou internas não são permitidos.",
     "unsafe_blacklist": "Este destino está bloqueado.",
-    "unsafe_safe_browsing": "O Safe Browsing marcou este destino como inseguro.",
     "invalid_expiry": "Essa validade não está disponível para esta conta.",
     "unauthorized": "Entre para criar este link.",
     "unsupported_type": "Aqui só é possível encurtar links http e https.",
@@ -124,9 +123,7 @@
       "day": "1 dia",
       "week": "7 dias",
       "month": "30 dias",
-      "quarter": "90 dias",
-      "year": "1 ano",
-      "never": "Sem validade"
+      "range": "Escolha de 1 a 90 dias. O padrão é 30."
     },
     "report": {
       "button": "Denunciar",
@@ -147,6 +144,7 @@
       "link_label": "Link curto",
       "link_placeholder": "https://url3.cc/example",
       "invalid_link": "Informe um link curto válido do url3.cc."
-    }
+    },
+    "guest_fixed": "Links de visitantes expiram após 7 dias."
   }
 }

@@ -43,7 +43,7 @@
   },
   "demo": {
     "your_short_link": "URL Ngắn của bạn:",
-    "warn": "Liên kết của khách hết hạn sau 7 ngày kể từ khi tạo. Đăng nhập để giữ lâu hơn.",
+    "warn": "Liên kết của khách hết hạn sau 7 ngày và không đổi được thời hạn. Đăng nhập để chọn từ 1 đến 90 ngày.",
     "label": {
       "link": "Nhập URL dài của bạn để bắt đầu",
       "image": "Chọn hình ảnh của bạn để bắt đầu"
@@ -69,7 +69,7 @@
     "q2": "Làm thế nào để sử dụng url3.cc?",
     "a2": "Nhập URL dài vào hộp nhập liệu và nhấp vào nút Tạo để tạo URL ngắn",
     "q3": "Thời hạn hiệu lực của liên kết là bao lâu?",
-    "a3": "Liên kết của khách hết hạn sau 7 ngày kể từ khi tạo. Người đã đăng nhập có thể chọn thời hạn dài hơn, kể cả không hết hạn. Khách tạo được 3 liên kết mỗi giờ và 10 mỗi ngày. Tài khoản đã đăng nhập tạo được 30 mỗi ngày.",
+    "a3": "Liên kết của khách hết hạn sau 7 ngày và không thể đổi thời hạn. Người đã đăng nhập có thể chọn từ 1 đến 90 ngày, mặc định là 30 ngày. Khách tạo được 3 liên kết mỗi giờ và 10 mỗi ngày. Tài khoản đã đăng nhập tạo được 30 mỗi ngày.",
     "q4": "Làm thế nào để liên hệ?",
     "a4": "Bạn có thể gửi email cho tôi tại service{'@'}url3.cc"
   },
@@ -98,7 +98,7 @@
   "security": {
     "limits_guest": "Khách có thể tạo 3 liên kết mỗi giờ và 10 liên kết mỗi ngày.",
     "limits_user": "Tài khoản đã đăng nhập có thể tạo 30 liên kết mỗi ngày.",
-    "sign_in_longer": "Đăng nhập để chọn thời hạn dài hơn 7 ngày.",
+    "sign_in_longer": "Đăng nhập để chọn thời hạn từ 1 đến 90 ngày. Mặc định là 30 ngày.",
     "created": "Đã tạo liên kết",
     "create_failed": "Không tạo được liên kết",
     "rate_limited_guest_hour": "Đã đạt giới hạn khách: 3 liên kết ngắn mỗi giờ. Hãy thử lại sau hoặc đăng nhập.",
@@ -112,7 +112,6 @@
     "unsafe_localhost": "Không cho phép liên kết tới localhost.",
     "unsafe_private": "Không cho phép liên kết tới mạng riêng hoặc mạng nội bộ.",
     "unsafe_blacklist": "Đích này đã bị chặn.",
-    "unsafe_safe_browsing": "Safe Browsing đánh dấu đích này là không an toàn.",
     "invalid_expiry": "Tài khoản này không dùng được thời hạn đó.",
     "unauthorized": "Hãy đăng nhập để tạo liên kết này.",
     "unsupported_type": "Ở đây chỉ rút gọn được liên kết http và https.",
@@ -124,9 +123,7 @@
       "day": "1 ngày",
       "week": "7 ngày",
       "month": "30 ngày",
-      "quarter": "90 ngày",
-      "year": "1 năm",
-      "never": "Không hết hạn"
+      "range": "Chọn từ 1 đến 90 ngày. Mặc định là 30 ngày."
     },
     "report": {
       "button": "Báo cáo",
@@ -147,6 +144,7 @@
       "link_label": "Liên kết ngắn",
       "link_placeholder": "https://url3.cc/example",
       "invalid_link": "Nhập liên kết ngắn url3.cc hợp lệ."
-    }
+    },
+    "guest_fixed": "Liên kết của khách hết hạn sau 7 ngày."
   }
 }

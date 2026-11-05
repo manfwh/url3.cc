@@ -43,7 +43,7 @@
   },
   "demo": {
     "your_short_link": "Your Short Url:",
-    "warn": "Guest links expire 7 days after they are created. Sign in to keep links for longer.",
+    "warn": "Guest links expire 7 days after they are created. Sign in to choose an expiry from 1 to 90 days.",
     "label": {
       "link": "Enter your long URL to get started",
       "image": "Select your Image to get started"
@@ -69,7 +69,7 @@
     "q2": "How do I use url3. cc?",
     "a2": "Enter a long URL in the input box and click the Generate button to generate a short URL",
     "q3": "How long is the validity period of the link?",
-    "a3": "Guest links expire 7 days after they are created. Signed-in users can keep a link for longer, including no expiry. Guests can create 3 links per hour and 10 per day. Signed-in accounts can create 30 per day.",
+    "a3": "Guest links expire 7 days after they are created and that duration cannot be changed. Signed-in users can choose an expiry from 1 to 90 days. The default is 30 days. Guests can create 3 links per hour and 10 per day. Signed-in accounts can create 30 per day.",
     "q4": "How to contact?",
     "a4": "You can send me an email at service{'@'}url3.cc"
   },
@@ -98,7 +98,7 @@
   "security": {
     "limits_guest": "Guests can create 3 links per hour and 10 per day.",
     "limits_user": "Signed-in accounts can create 30 links per day.",
-    "sign_in_longer": "Sign in to keep a link for longer than 7 days.",
+    "sign_in_longer": "Sign in to choose an expiry from 1 to 90 days. The default is 30 days.",
     "created": "Link created",
     "create_failed": "Could not create the link",
     "rate_limited_guest_hour": "Guest limit reached: 3 short links per hour. Try again later or sign in.",
@@ -112,7 +112,6 @@
     "unsafe_localhost": "Links to localhost are not allowed.",
     "unsafe_private": "Links to private or internal networks are not allowed.",
     "unsafe_blacklist": "This destination is blocked.",
-    "unsafe_safe_browsing": "This destination was flagged as unsafe by Safe Browsing.",
     "invalid_expiry": "That expiry is not available for this account.",
     "unauthorized": "Sign in to create this link.",
     "unsupported_type": "Only http and https links can be shortened here.",
@@ -124,9 +123,7 @@
       "day": "1 day",
       "week": "7 days",
       "month": "30 days",
-      "quarter": "90 days",
-      "year": "1 year",
-      "never": "No expiry"
+      "range": "Choose 1 to 90 days. The default is 30."
     },
     "report": {
       "button": "Report",
@@ -147,6 +144,7 @@
       "link_label": "Short link",
       "link_placeholder": "https://url3.cc/example",
       "invalid_link": "Enter a valid url3.cc short link."
-    }
+    },
+    "guest_fixed": "Guest links expire after 7 days."
   }
 }

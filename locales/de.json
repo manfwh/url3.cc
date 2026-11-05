@@ -43,7 +43,7 @@
   },
   "demo": {
     "your_short_link": "Ihre Kurz-URL:",
-    "warn": "Gast-Links laufen 7 Tage nach dem Erstellen ab. Melde dich an, um sie länger zu behalten.",
+    "warn": "Gast-Links laufen nach 7 Tagen ab, und diese Dauer lässt sich nicht ändern. Melde dich an, um 1 bis 90 Tage zu wählen.",
     "label": {
       "link": "Geben Sie Ihre lange URL ein, um zu beginnen",
       "image": "Wählen Sie Ihr Bild aus, um zu beginnen"
@@ -69,7 +69,7 @@
     "q2": "Wie benutze ich url3.cc?",
     "a2": "Geben Sie eine lange URL in das Eingabefeld ein und klicken Sie auf die Schaltfläche Generieren, um eine Kurz-URL zu erstellen",
     "q3": "Wie lange ist der Link gültig?",
-    "a3": "Gast-Links laufen 7 Tage nach dem Erstellen ab. Angemeldete Nutzer können eine längere Dauer wählen, auch ohne Ablauf. Gäste können 3 Links pro Stunde und 10 pro Tag erstellen. Angemeldete Konten können 30 pro Tag erstellen.",
+    "a3": "Gast-Links laufen nach 7 Tagen ab, und diese Dauer lässt sich nicht ändern. Angemeldete Nutzer können 1 bis 90 Tage wählen. Der Standard ist 30 Tage. Gäste können 3 Links pro Stunde und 10 pro Tag erstellen. Angemeldete Konten können 30 pro Tag erstellen.",
     "q4": "Wie kann ich Kontakt aufnehmen?",
     "a4": "Sie können mir eine E-Mail an service{'@'}url3.cc senden"
   },
@@ -98,7 +98,7 @@
   "security": {
     "limits_guest": "Gäste können 3 Links pro Stunde und 10 pro Tag erstellen.",
     "limits_user": "Angemeldete Konten können 30 Links pro Tag erstellen.",
-    "sign_in_longer": "Melde dich an, um eine Laufzeit von mehr als 7 Tagen zu wählen.",
+    "sign_in_longer": "Melde dich an, um eine Laufzeit von 1 bis 90 Tagen zu wählen. Der Standard ist 30 Tage.",
     "created": "Link erstellt",
     "create_failed": "Link konnte nicht erstellt werden",
     "rate_limited_guest_hour": "Gastlimit erreicht: 3 Kurzlinks pro Stunde. Versuche es später erneut oder melde dich an.",
@@ -112,7 +112,6 @@
     "unsafe_localhost": "Links auf localhost sind nicht erlaubt.",
     "unsafe_private": "Links auf private oder interne Netze sind nicht erlaubt.",
     "unsafe_blacklist": "Dieses Ziel ist blockiert.",
-    "unsafe_safe_browsing": "Safe Browsing hat dieses Ziel als unsicher markiert.",
     "invalid_expiry": "Diese Laufzeit ist für dieses Konto nicht verfügbar.",
     "unauthorized": "Melde dich an, um diesen Link zu erstellen.",
     "unsupported_type": "Hier können nur http- und https-Links gekürzt werden.",
@@ -124,9 +123,7 @@
       "day": "1 Tag",
       "week": "7 Tage",
       "month": "30 Tage",
-      "quarter": "90 Tage",
-      "year": "1 Jahr",
-      "never": "Kein Ablauf"
+      "range": "Wähle 1 bis 90 Tage. Der Standard ist 30."
     },
     "report": {
       "button": "Melden",
@@ -147,6 +144,7 @@
       "link_label": "Kurzlink",
       "link_placeholder": "https://url3.cc/example",
       "invalid_link": "Gib einen gültigen url3.cc-Kurzlink ein."
-    }
+    },
+    "guest_fixed": "Gast-Links laufen nach 7 Tagen ab."
   }
 }
