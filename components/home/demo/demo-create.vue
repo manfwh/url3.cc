@@ -3,8 +3,14 @@ import { useQRCode } from '@vueuse/integrations/useQRCode'
 import { useStorage } from '@vueuse/core'
 import DraggerUpload from '~/components/shared/upload/dragger-upload.vue'
 import type { UploadFile } from '@/components/shared/upload/types'
+import { checkUrlSafety } from '~/utils/url-safety'
+import { linkErrorI18nKey } from '~/utils/link-api-error'
+import { DAY_SECONDS, USER_DEFAULT_DAYS, USER_MAX_DAYS, USER_MIN_DAYS } from '~/utils/link-policy'
 const { fullDomain } = useAppConfig()
 const toast = useToast()
+const user = useSupabaseUser()
+const isAuthed = computed(() => !!user.value)
+const errorMessage = ref('')
 const formRef = ref<HTMLFormElement>()
 
 const submitting = ref(false)
@@ -58,25 +64,43 @@ const item = computed(() => tabItems[selected.value])
 const image = ref('')
 const handleSubmit = (e: Event) => {
   const target = e.target as HTMLFormElement
-  submitting.value = true
+  const url = String(target?.url?.value || '').trim()
+  errorMessage.value = ''
 
-  if (route.query.type === 'image') {
-    // TODO: Image
+  if ((route.query.type || 'url') !== 'url') {
+    errorMessage.value = t('security.unsupported_type')
+    return
   }
-  $fetch('/api/demo/links', {
+
+  const safety = checkUrlSafety(url)
+  if (!safety.ok) {
+    errorMessage.value = t(`security.unsafe_${safety.reason}`)
+    return
+  }
+
+  const days = Number(expiryDays.value)
+  if (isAuthed.value && (!Number.isInteger(days) || days < USER_MIN_DAYS || days > USER_MAX_DAYS)) {
+    errorMessage.value = t('security.invalid_expiry')
+    return
+  }
+
+  submitting.value = true
+  $fetch(isAuthed.value ? '/api/links' : '/api/demo/links', {
     method: 'POST',
-    body: { url: target?.url?.value, type: route.query.type || 'url', image: image.value }
-  }).then((data) => {
-    // createdLink.value = data
+    body: isAuthed.value
+      ? { url, type: 'url', expiresIn: days * DAY_SECONDS }
+      : { url, type: 'url' }
+  }).then((data: { key: string, url: string }) => {
     links.value.unshift(data)
     formRef.value?.reset()
     submitting.value = false
-    toast.add({ title: 'Link Created', icon: 'i-heroicons-check-circle', timeout: 3000 })
+    toast.add({ title: t('security.created'), icon: 'i-heroicons-check-circle', timeout: 3000 })
   }).catch((err: any) => {
     submitting.value = false
+    errorMessage.value = t(linkErrorI18nKey(err))
     toast.add({
-      title: 'Create Failed',
-      description: err?.data?.message,
+      title: t('security.create_failed'),
+      description: errorMessage.value,
       icon: 'i-heroicons-exclamation-triangle',
       color: 'red'
     })
@@ -89,7 +113,8 @@ const uploadChange = (info: UploadFile) => {
   }
 }
 
-const qrcode = useQRCode(fullDomain + createdLink.value?.key, {
+const qrText = computed(() => createdLink.value?.key ? fullDomain + createdLink.value.key : ' ')
+const qrcode = useQRCode(qrText, {
   margin: 2,
   width: 100,
   height: 100
@@ -102,14 +127,7 @@ const download = (url: string) => {
   anchorRef.value.click()
 }
 
-const expireOptions = [
-  { label: '1 day', value: 60 * 60 * 24 },
-  { label: '1 week', value: 60 * 60 * 24 * 7 },
-  { label: '1 month', value: 60 * 60 * 24 * 30 },
-  { label: 'Never(Need Sign In)', value: 'nerver', disabled: true }
-]
-const selectedExpire = ref(expireOptions[0].value)
-const expire = computed(() => expireOptions.find(expireOptions => expireOptions.value === selectedExpire.value))
+const expiryDays = ref(USER_DEFAULT_DAYS)
 </script>
 
 <template>
@@ -185,21 +203,39 @@ const expire = computed(() => expireOptions.find(expireOptions => expireOptions.
             }"
           />
         </div>
-        <!-- <div class="mt-4 grid grid-cols-2 gap-4">
-          <USelectMenu
-            v-model="selectedExpire"
-            :options="expireOptions"
-            placeholder="expire time"
-            value-attribute="value"
-            option-attribute="label"
-            size="md"
-          >
-            <template #label>
-              {{ expire?.label }}
-            </template>
-          </USelectMenu>
-          <UInput type="text" size="md" placeholder="password" />
-        </div> -->
+        <div class="mt-4">
+          <template v-if="isAuthed">
+            <label class="text-sm font-medium" for="expires">{{ $t('security.expiry.label') }}</label>
+            <UInput
+              id="expires"
+              v-model.number="expiryDays"
+              class="mt-2"
+              type="number"
+              :min="USER_MIN_DAYS"
+              :max="USER_MAX_DAYS"
+              step="1"
+              required
+            />
+            <p class="mt-2 text-xs text-slate-500 dark:text-slate-400">
+              {{ $t('security.expiry.range') }}
+            </p>
+          </template>
+          <p v-else class="text-xs text-slate-500 dark:text-slate-400">
+            {{ $t('security.guest_fixed') }}
+            {{ $t('security.sign_in_longer') }}
+          </p>
+        </div>
+        <p class="mt-3 text-xs text-slate-600 dark:text-slate-400">
+          {{ isAuthed ? $t('security.limits_user') : $t('security.limits_guest') }}
+        </p>
+        <UAlert
+          v-if="errorMessage"
+          class="mt-4"
+          color="red"
+          variant="subtle"
+          icon="i-heroicons-exclamation-triangle"
+          :title="errorMessage"
+        />
         <UButton type="submit" block size="md" class="mt-4" :loading="submitting">
           {{ item.type === 'image' ? $t('demo.submit.image') : $t('demo.submit.link') }}
         </UButton>
@@ -243,6 +279,9 @@ const expire = computed(() => expireOptions.find(expireOptions => expireOptions.
               <p class="text-xs text-slate-600 dark:text-slate-400">
                 {{ $t('demo.warn') }}
               </p>
+              <div class="mt-3">
+                <LinkReportLink :link-key="createdLink.key" />
+              </div>
             </div>
           </div>
         </SharedTransitionHeight>

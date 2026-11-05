@@ -43,7 +43,7 @@
   },
   "demo": {
     "your_short_link": "URL Pendek Anda:",
-    "warn": "Tautan publik akan dihapus secara otomatis jika tidak ada yang mengaksesnya selama 30 hari. Buat akun gratis untuk menyimpan tautan Anda selamanya.",
+    "warn": "Tautan tamu kedaluwarsa 7 hari setelah dibuat. Masuk untuk memilih masa berlaku 1 sampai 90 hari.",
     "label": {
       "link": "Masukkan URL panjang Anda untuk memulai",
       "image": "Pilih gambar Anda untuk memulai"
@@ -69,7 +69,7 @@
     "q2": "Bagaimana cara menggunakan url3.cc?",
     "a2": "Masukkan URL panjang di kotak input dan klik tombol Buat untuk membuat URL pendek",
     "q3": "Berapa lama masa berlaku tautan?",
-    "a3": "Masa berlaku tautan yang dibuat oleh pengguna yang tidak masuk adalah 30 hari. Jika seseorang mengunjungi tautan dalam 30 hari, masa berlaku tautan akan diperpanjang 30 hari",
+    "a3": "Tautan tamu kedaluwarsa 7 hari setelah dibuat dan durasinya tidak dapat diubah. Pengguna yang masuk dapat memilih 1 sampai 90 hari. Nilai bawaan adalah 30 hari. Tamu dapat membuat 3 tautan per jam dan 10 per hari. Akun yang masuk dapat membuat 30 per hari.",
     "q4": "Bagaimana cara menghubungi?",
     "a4": "Anda dapat mengirim email kepada saya di service{'@'}url3.cc"
   },
@@ -94,5 +94,58 @@
   "image_type": "Gambar",
   "url_type": "URL",
   "Links": "Tautan",
-  "Manage_your_links": "Kelola tautan Anda"
+  "Manage_your_links": "Kelola tautan Anda",
+  "security": {
+    "limits_guest": "Tamu dapat membuat 3 tautan per jam dan 10 per hari.",
+    "limits_user": "Akun yang masuk dapat membuat 30 tautan per hari.",
+    "sign_in_longer": "Masuk untuk memilih masa berlaku 1 sampai 90 hari. Nilai bawaan adalah 30 hari.",
+    "created": "Tautan dibuat",
+    "create_failed": "Tautan tidak dapat dibuat",
+    "rate_limited_guest_hour": "Batas tamu tercapai: 3 tautan pendek per jam. Coba lagi nanti atau masuk.",
+    "rate_limited_guest_day": "Batas tamu tercapai: 10 tautan pendek per hari. Coba lagi besok atau masuk.",
+    "rate_limited_user_day": "Batas harian tercapai: 30 tautan pendek per hari.",
+    "rate_limited_report": "Terlalu banyak laporan dari jaringan ini. Coba lagi nanti.",
+    "rate_limited": "Terlalu banyak permintaan. Coba lagi nanti.",
+    "unsafe_invalid": "Masukkan URL http atau https yang valid.",
+    "unsafe_scheme": "Hanya tautan http dan https yang diizinkan.",
+    "unsafe_ip": "Tautan ke alamat IP tidak diizinkan.",
+    "unsafe_localhost": "Tautan ke localhost tidak diizinkan.",
+    "unsafe_private": "Tautan ke jaringan privat atau internal tidak diizinkan.",
+    "unsafe_blacklist": "Tujuan ini diblokir.",
+    "unsafe_safe_browsing": "Tujuan ini ditandai tidak aman oleh Safe Browsing dan tidak dapat dipendekkan.",
+    "invalid_expiry": "Masa berlaku itu tidak tersedia untuk akun ini.",
+    "unauthorized": "Masuk untuk membuat tautan ini.",
+    "unsupported_type": "Hanya tautan http dan https yang dapat dipendekkan di sini.",
+    "not_found": "Tautan pendek ini tidak ada atau sudah kedaluwarsa.",
+    "invalid_report": "Pilih alasan laporan.",
+    "image_required": "Anda harus memilih gambar.",
+    "expiry": {
+      "label": "Masa berlaku tautan",
+      "day": "1 hari",
+      "week": "7 hari",
+      "month": "30 hari",
+      "range": "Pilih 1 sampai 90 hari. Nilai bawaan adalah 30 hari."
+    },
+    "report": {
+      "button": "Laporkan",
+      "site_button": "Laporkan tautan pendek",
+      "title": "Laporkan tautan ini",
+      "description": "Minta kami meninjau tautan pendek ini untuk diturunkan.",
+      "reason": "Alasan",
+      "details": "Detail (opsional)",
+      "details_placeholder": "Apa yang perlu kami ketahui?",
+      "submit": "Kirim laporan",
+      "cancel": "Batal",
+      "success": "Terima kasih. Laporan diterima dan tautan antre untuk ditinjau.",
+      "failed": "Laporan tidak dapat dikirim. Coba lagi.",
+      "phishing": "Phishing atau penipuan",
+      "malware": "Malware",
+      "spam": "Spam",
+      "other": "Lainnya",
+      "link_label": "Tautan pendek",
+      "link_placeholder": "https://url3.cc/example",
+      "invalid_link": "Masukkan tautan pendek url3.cc yang valid."
+    },
+    "guest_fixed": "Tautan tamu kedaluwarsa setelah 7 hari."
+  }
 }

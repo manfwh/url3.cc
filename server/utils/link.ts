@@ -1,8 +1,23 @@
-import { isValidUrl } from '~/server/utils'
+import { checkUrlSafety } from '~/utils/url-safety'
 // 验证请求参数
 export const validateRequest = (body: any) => {
-  if (body.type === 'url' && (!body.url || !isValidUrl(body.url))) {
-    throw new Error('Invalid URL')
+  if (body.type === 'url' && (typeof body.url !== 'string' || !body.url.trim())) {
+    throw createError({
+      statusCode: 400,
+      statusMessage: 'Unsafe URL',
+      data: { code: 'unsafe_url', reason: 'invalid' }
+    })
+  }
+  for (const value of [body.url, body.ios, body.android]) {
+    if (typeof value !== 'string' || !value.trim()) { continue }
+    const safety = checkUrlSafety(value)
+    if (!safety.ok) {
+      throw createError({
+        statusCode: 400,
+        statusMessage: 'Unsafe URL',
+        data: { code: 'unsafe_url', reason: safety.reason }
+      })
+    }
   }
   if (body.type === 'image' && !body.image) {
     throw new Error('Missing image')
@@ -23,9 +38,7 @@ export const validateRequest = (body: any) => {
   }
 }
 
-const BLACK_DOMAINS = ['pornhub.com', 'www.pornhub.com', 'xvideos.com', 'xhamster.com', 'xnxx.com', 'redtube.com']
-
 export const isBlackDomain = (url: string) => {
-  const host = new URL(url).host
-  return BLACK_DOMAINS.includes(host)
+  const safety = checkUrlSafety(url)
+  return !safety.ok && safety.reason === 'blacklist'
 }

@@ -6,6 +6,9 @@ import type { UploadFile, UploadedFile } from '@/components/shared/upload/types'
 import { getFilename } from '@/utils'
 import { useUserStore } from '~/store/user'
 import type { Enums } from '~/types/type'
+import { checkUrlSafety } from '~/utils/url-safety'
+import { linkErrorI18nKey } from '~/utils/link-api-error'
+import { DAY_SECONDS, USER_DEFAULT_DAYS, USER_MAX_DAYS, USER_MIN_DAYS } from '~/utils/link-policy'
 const toast = useToast()
 const { t } = useI18n()
 const { fullDomain } = useAppConfig()
@@ -75,7 +78,8 @@ const submit = async (event: FormSubmitEvent<typeof state.value>) => {
       await $fetch('/api/links', {
         method: 'POST',
         body: {
-          ...state.value
+          ...state.value,
+          expiresIn: Number(expiryDays.value) * DAY_SECONDS
         }
       })
     }
@@ -89,8 +93,8 @@ const submit = async (event: FormSubmitEvent<typeof state.value>) => {
     submitting.value = false
 
     toast.add({
-      title: 'Create Failed',
-      description: error?.data?.message || '',
+      title: t('security.create_failed'),
+      description: t(linkErrorI18nKey(error)),
       icon: 'i-heroicons-exclamation-triangle',
       color: 'red'
     })
@@ -98,6 +102,7 @@ const submit = async (event: FormSubmitEvent<typeof state.value>) => {
 }
 
 const showPassword = ref(false)
+const expiryDays = ref(USER_DEFAULT_DAYS)
 
 // watchDebounced(() => state.value.url, () => {
 //   if (state.value.key || fetchKeyLoading.value) { return }
@@ -130,7 +135,18 @@ const genUploadedFile = computed(() => (field: keyof typeof state.value) => {
 const validate = (state: State): FormError[] => {
   const errors = []
   if (state.type === 'image') {
-    if (!state.image) { errors.push({ path: 'image', message: 'You must select an image!' }) }
+    if (!state.image) { errors.push({ path: 'image', message: t('security.image_required') }) }
+  }
+  if (!editLink.value && (!Number.isInteger(expiryDays.value) || expiryDays.value < USER_MIN_DAYS || expiryDays.value > USER_MAX_DAYS)) {
+    errors.push({ path: 'expiresIn', message: t('security.invalid_expiry') })
+  }
+  for (const field of ['url', 'ios', 'android'] as const) {
+    const value = state[field]
+    if (!value) { continue }
+    const safety = checkUrlSafety(value)
+    if (!safety.ok) {
+      errors.push({ path: field, message: t(`security.unsafe_${safety.reason}`) })
+    }
   }
   return errors
 }
@@ -247,6 +263,9 @@ const currentType = computed(() => typeOptions.find(item => item.value === state
       </UFormGroup>
       <UFormGroup :label="$t('form.Note')" :hint="$t('form.Optional')" name="note" :description="$t('form.Note_Tip')">
         <UInput v-model="state.note" type="text" color="gray" variant="outline" />
+      </UFormGroup>
+      <UFormGroup v-if="!editLink" :label="$t('security.expiry.label')" name="expiresIn" :description="$t('security.expiry.range')" :hint="$t('security.limits_user')">
+        <UInput v-model.number="expiryDays" type="number" :min="USER_MIN_DAYS" :max="USER_MAX_DAYS" step="1" required />
       </UFormGroup>
       <div class="text-right">
         <UButton type="submit" :loading="submitting">

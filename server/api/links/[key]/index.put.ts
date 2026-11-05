@@ -5,17 +5,19 @@ import {
 import { defineAuthHandler } from '~/server/utils/handler'
 import { serverSupabaseClient } from '#supabase/server'
 import type { Database, Tables } from '~/types/type'
-import { validateRequest, isBlackDomain } from '~/server/utils/link'
+import { validateRequest } from '~/server/utils/link'
+import { assertLocalDestination } from '~/server/utils/create-policy'
 
 type RequestBody = Exclude<Tables<'links'>, 'user_id'> & {slug?: string}
 export default defineAuthHandler(async (event) => {
   // const params = getRouterParams(event)
-  const body = await readValidatedBody(event, validateRequest) as RequestBody
-  if (body.url && isBlackDomain(body.url)) {
-    throw createError({ statusCode: 400, statusMessage: 'Invalid URL' })
+  const body = await readValidatedBody(event, validateRequest) as RequestBody & { expiresIn?: number | string }
+  const { id, expiresIn: _expiresIn, ...updateBody } = body
+  void _expiresIn
+  for (const value of [updateBody.url, updateBody.ios, updateBody.android]) {
+    if (typeof value === 'string' && value.trim()) { assertLocalDestination(value) }
   }
   const supabase = await serverSupabaseClient<Database>(event)
-  const { id, ...updateBody } = body
   const { data: link, error: selectErr, status: selectStatus } = await supabase.from('links').select().eq('id', id).single()
   if (selectErr) {
     throw createError({ statusCode: selectStatus, data: 'Error' })

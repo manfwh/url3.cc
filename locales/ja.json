@@ -31,7 +31,7 @@
       "hour": "時 | 時間",
       "minute": "分 | 分間",
       "second": "秒 | 秒"
-   }
+    }
   },
   "hero": {
     "title": {
@@ -43,7 +43,7 @@
   },
   "demo": {
     "your_short_link": "あなたのショートリンク：",
-    "warn": "Public links will be automatically-deleted if no one accesses them within 30 days. Create a free account to keep your links forever.",
+    "warn": "ゲストのリンクは作成から 7 日で期限切れになり、期間は変更できません。ログインすると 1 日から 90 日を選べます。",
     "label": {
       "link": "開始するには長いURLを入力してください",
       "image": "開始するには画像を選択してください"
@@ -69,7 +69,7 @@
     "q2": "url3.cc をどのように使用しますか？",
     "a2": "入力ボックスに長いURLを入力し、生成ボタンをクリックして短いURLを生成します。",
     "q3": "リンクの有効期間はどのくらいですか？",
-    "a3": "非ログインユーザーによって作成されたリンクの有効期間は30日です。誰かが30日以内にリンクを訪れると、リンクの有効期間は30日延長されます。",
+    "a3": "ゲストのリンクは作成から 7 日で期限切れになり、期間は変更できません。ログインすると 1 日から 90 日を選べ、初期値は 30 日です。ゲストは 1 時間に 3 件、1 日に 10 件までです。ログインアカウントは 1 日 30 件までです。",
     "q4": "連絡先はどうすればよいですか？",
     "a4": "service{'@'}url3.cc までメールを送信することができます。"
   },
@@ -88,11 +88,64 @@
     "Submit": "送信",
     "Optional": "オプション",
     "Drag_and_Drop_or_click_to_upload": "ドラッグアンドドロップまたはクリックしてアップロード"
- },
- "Create_Link": "リンクを作成",
- "Edit_Link": "リンクを編集",
- "image_type": "画像",
- "url_type": "URL",
- "Links": "リンク",
- "Manage_your_links": "リンクを管理する"
+  },
+  "Create_Link": "リンクを作成",
+  "Edit_Link": "リンクを編集",
+  "image_type": "画像",
+  "url_type": "URL",
+  "Links": "リンク",
+  "Manage_your_links": "リンクを管理する",
+  "security": {
+    "limits_guest": "ゲストは 1 時間に 3 件、1 日に 10 件まで作成できます。",
+    "limits_user": "ログインアカウントは 1 日 30 件まで作成できます。",
+    "sign_in_longer": "ログインすると 1 日から 90 日の期限を選べます。初期値は 30 日です。",
+    "created": "リンクを作成しました",
+    "create_failed": "リンクを作成できませんでした",
+    "rate_limited_guest_hour": "ゲスト上限に達しました。1 時間に 3 件までです。しばらく待つか、ログインしてください。",
+    "rate_limited_guest_day": "ゲスト上限に達しました。1 日に 10 件までです。明日もう一度試すか、ログインしてください。",
+    "rate_limited_user_day": "1 日の上限（30 件）に達しました。",
+    "rate_limited_report": "このネットワークからの報告が多すぎます。しばらくしてからもう一度お試しください。",
+    "rate_limited": "リクエストが多すぎます。しばらくしてからもう一度お試しください。",
+    "unsafe_invalid": "有効な http または https の URL を入力してください。",
+    "unsafe_scheme": "http と https のリンクのみ利用できます。",
+    "unsafe_ip": "IP アドレスへのリンクは利用できません。",
+    "unsafe_localhost": "localhost へのリンクは利用できません。",
+    "unsafe_private": "プライベートネットワークや内部ネットワークへのリンクは利用できません。",
+    "unsafe_blacklist": "この宛先はブロックされています。",
+    "unsafe_safe_browsing": "この宛先は Safe Browsing により危険と判定されたため、短縮できません。",
+    "invalid_expiry": "このアカウントではその有効期限を選べません。",
+    "unauthorized": "このリンクを作成するにはログインしてください。",
+    "unsupported_type": "ここでは http と https のリンクのみ短縮できます。",
+    "not_found": "このショートリンクは存在しないか、期限切れです。",
+    "invalid_report": "報告理由を選択してください。",
+    "image_required": "画像を選択してください。",
+    "expiry": {
+      "label": "有効期限",
+      "day": "1 日",
+      "week": "7 日",
+      "month": "30 日",
+      "range": "1 日から 90 日を選べます。初期値は 30 日です。"
+    },
+    "report": {
+      "button": "報告",
+      "site_button": "ショートリンクを報告",
+      "title": "このリンクを報告",
+      "description": "このショートリンクの削除審査を依頼します。",
+      "reason": "理由",
+      "details": "詳細（任意）",
+      "details_placeholder": "知らせたい内容を入力",
+      "submit": "報告を送信",
+      "cancel": "キャンセル",
+      "success": "ありがとうございます。報告を受け付け、審査待ちにしました。",
+      "failed": "報告を送信できませんでした。もう一度お試しください。",
+      "phishing": "フィッシングまたは詐欺",
+      "malware": "マルウェア",
+      "spam": "スパム",
+      "other": "その他",
+      "link_label": "ショートリンク",
+      "link_placeholder": "https://url3.cc/example",
+      "invalid_link": "有効な url3.cc のショートリンクを入力してください。"
+    },
+    "guest_fixed": "ゲストのリンクは 7 日で期限切れになります。"
+  }
 }

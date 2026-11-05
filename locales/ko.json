@@ -43,7 +43,7 @@
   },
   "demo": {
     "your_short_link": "귀하의 단축 URL:",
-    "warn": "30일 동안 접속이 없는 공개 링크는 자동으로 삭제됩니다. 링크를 영구적으로 유지하려면 무료 계정을 만드세요.",
+    "warn": "비로그인 링크는 만든 뒤 7일이 지나면 만료되며 기간을 바꿀 수 없습니다. 로그인하면 1–90일을 선택할 수 있습니다.",
     "label": {
       "link": "시작하려면 긴 URL을 입력하세요",
       "image": "시작하려면 이미지를 선택하세요"
@@ -69,7 +69,7 @@
     "q2": "url3.cc를 어떻게 사용하나요?",
     "a2": "입력 상자에 긴 URL을 입력하고 생성 버튼을 클릭하여 짧은 URL을 생성하세요",
     "q3": "링크의 유효 기간은 얼마인가요?",
-    "a3": "비로그인 사용자가 생성한 링크의 유효 기간은 30일입니다. 30일 이내에 누군가가 링크를 방문하면 링크의 유효 기간이 30일 연장됩니다",
+    "a3": "비로그인 링크는 생성 후 7일이 지나면 만료되며 기간을 바꿀 수 없습니다. 로그인한 사용자는 1–90일을 선택할 수 있고 기본값은 30일입니다. 비로그인은 시간당 3개, 하루 10개까지이고, 로그인 계정은 하루 30개까지입니다.",
     "q4": "연락은 어떻게 하나요?",
     "a4": "service{'@'}url3.cc로 이메일을 보내주세요"
   },
@@ -94,5 +94,58 @@
   "image_type": "이미지",
   "url_type": "URL",
   "Links": "링크",
-  "Manage_your_links": "링크 관리"
+  "Manage_your_links": "링크 관리",
+  "security": {
+    "limits_guest": "비로그인은 시간당 3개, 하루 10개까지 만들 수 있습니다.",
+    "limits_user": "로그인한 계정은 하루 30개까지 만들 수 있습니다.",
+    "sign_in_longer": "로그인하면 1–90일 중에서 만료 기간을 선택할 수 있습니다. 기본값은 30일입니다.",
+    "created": "링크를 만들었습니다",
+    "create_failed": "링크를 만들지 못했습니다",
+    "rate_limited_guest_hour": "비로그인 한도에 도달했습니다. 시간당 3개입니다. 나중에 다시 시도하거나 로그인하세요.",
+    "rate_limited_guest_day": "비로그인 한도에 도달했습니다. 하루 10개입니다. 내일 다시 시도하거나 로그인하세요.",
+    "rate_limited_user_day": "하루 한도인 30개에 도달했습니다.",
+    "rate_limited_report": "이 네트워크에서 신고가 너무 많습니다. 나중에 다시 시도하세요.",
+    "rate_limited": "요청이 너무 많습니다. 나중에 다시 시도하세요.",
+    "unsafe_invalid": "올바른 http 또는 https URL을 입력하세요.",
+    "unsafe_scheme": "http와 https 링크만 허용됩니다.",
+    "unsafe_ip": "IP 주소로 연결되는 링크는 허용되지 않습니다.",
+    "unsafe_localhost": "localhost로 연결되는 링크는 허용되지 않습니다.",
+    "unsafe_private": "사설 네트워크나 내부 네트워크로 연결되는 링크는 허용되지 않습니다.",
+    "unsafe_blacklist": "이 대상은 차단되었습니다.",
+    "unsafe_safe_browsing": "Safe Browsing에서 이 대상을 안전하지 않음으로 표시하여 단축할 수 없습니다.",
+    "invalid_expiry": "이 계정에서는 해당 만료 기간을 사용할 수 없습니다.",
+    "unauthorized": "이 링크를 만들려면 로그인하세요.",
+    "unsupported_type": "여기서는 http와 https 링크만 줄일 수 있습니다.",
+    "not_found": "이 단축 링크가 없거나 만료되었습니다.",
+    "invalid_report": "신고 사유를 선택하세요.",
+    "image_required": "이미지를 선택하세요.",
+    "expiry": {
+      "label": "링크 만료",
+      "day": "1일",
+      "week": "7일",
+      "month": "30일",
+      "range": "1–90일을 선택할 수 있습니다. 기본값은 30일입니다."
+    },
+    "report": {
+      "button": "신고",
+      "site_button": "단축 링크 신고",
+      "title": "이 링크 신고",
+      "description": "이 단축 링크의 삭제를 검토해 달라고 요청합니다.",
+      "reason": "사유",
+      "details": "세부 내용(선택)",
+      "details_placeholder": "알려 줄 내용을 입력하세요",
+      "submit": "신고 제출",
+      "cancel": "취소",
+      "success": "감사합니다. 신고를 접수했고 검토 대기열에 넣었습니다.",
+      "failed": "신고를 보내지 못했습니다. 다시 시도하세요.",
+      "phishing": "피싱 또는 사기",
+      "malware": "악성코드",
+      "spam": "스팸",
+      "other": "기타",
+      "link_label": "단축 링크",
+      "link_placeholder": "https://url3.cc/example",
+      "invalid_link": "올바른 url3.cc 단축 링크를 입력하세요."
+    },
+    "guest_fixed": "비로그인 링크는 7일 후 만료됩니다."
+  }
 }

@@ -43,7 +43,7 @@
   },
   "demo": {
     "your_short_link": "Tu URL Corta:",
-    "warn": "Los enlaces públicos se eliminarán automáticamente si nadie accede a ellos durante 30 días. Crea una cuenta gratuita para mantener tus enlaces para siempre.",
+    "warn": "Los enlaces de invitados caducan a los 7 días y esa duración no se puede cambiar. Inicia sesión para elegir de 1 a 90 días.",
     "label": {
       "link": "Ingresa tu URL larga para comenzar",
       "image": "Selecciona tu imagen para comenzar"
@@ -69,7 +69,7 @@
     "q2": "¿Cómo uso url3.cc?",
     "a2": "Ingresa una URL larga en el cuadro de entrada y haz clic en el botón Generar para crear una URL corta",
     "q3": "¿Cuál es el período de validez del enlace?",
-    "a3": "El período de validez de los enlaces creados por usuarios no registrados es de 30 días. Si alguien visita el enlace dentro de los 30 días, el período de validez del enlace se extenderá por 30 días más",
+    "a3": "Los enlaces de invitados caducan a los 7 días y esa duración no se puede cambiar. Quienes inician sesión pueden elegir de 1 a 90 días. El valor predeterminado es 30 días. Los invitados pueden crear 3 enlaces por hora y 10 al día. Las cuentas con sesión pueden crear 30 al día.",
     "q4": "¿Cómo contactar?",
     "a4": "Puedes enviarme un correo electrónico a service{'@'}url3.cc"
   },
@@ -94,5 +94,58 @@
   "image_type": "Imagen",
   "url_type": "URL",
   "Links": "Enlaces",
-  "Manage_your_links": "Administra tus enlaces"
+  "Manage_your_links": "Administra tus enlaces",
+  "security": {
+    "limits_guest": "Los invitados pueden crear 3 enlaces por hora y 10 al día.",
+    "limits_user": "Las cuentas con sesión pueden crear 30 enlaces al día.",
+    "sign_in_longer": "Inicia sesión para elegir una caducidad de 1 a 90 días. El valor predeterminado es 30 días.",
+    "created": "Enlace creado",
+    "create_failed": "No se pudo crear el enlace",
+    "rate_limited_guest_hour": "Límite de invitado alcanzado: 3 enlaces cortos por hora. Inténtalo más tarde o inicia sesión.",
+    "rate_limited_guest_day": "Límite de invitado alcanzado: 10 enlaces cortos al día. Inténtalo mañana o inicia sesión.",
+    "rate_limited_user_day": "Límite diario alcanzado: 30 enlaces cortos al día.",
+    "rate_limited_report": "Demasiados reportes desde esta red. Inténtalo más tarde.",
+    "rate_limited": "Demasiadas solicitudes. Inténtalo más tarde.",
+    "unsafe_invalid": "Introduce una URL http o https válida.",
+    "unsafe_scheme": "Solo se permiten enlaces http y https.",
+    "unsafe_ip": "No se permiten enlaces a una dirección IP.",
+    "unsafe_localhost": "No se permiten enlaces a localhost.",
+    "unsafe_private": "No se permiten enlaces a redes privadas o internas.",
+    "unsafe_blacklist": "Este destino está bloqueado.",
+    "unsafe_safe_browsing": "Safe Browsing marcó este destino como no seguro y no se puede acortar.",
+    "invalid_expiry": "Esa caducidad no está disponible para esta cuenta.",
+    "unauthorized": "Inicia sesión para crear este enlace.",
+    "unsupported_type": "Aquí solo se pueden acortar enlaces http y https.",
+    "not_found": "Este enlace corto no existe o ha caducado.",
+    "invalid_report": "Elige un motivo para el reporte.",
+    "image_required": "Debes seleccionar una imagen.",
+    "expiry": {
+      "label": "Caducidad del enlace",
+      "day": "1 día",
+      "week": "7 días",
+      "month": "30 días",
+      "range": "Elige de 1 a 90 días. El valor predeterminado es 30."
+    },
+    "report": {
+      "button": "Reportar",
+      "site_button": "Reportar un enlace corto",
+      "title": "Reportar este enlace",
+      "description": "Pídenos que revisemos este enlace corto para retirarlo.",
+      "reason": "Motivo",
+      "details": "Detalles (opcional)",
+      "details_placeholder": "¿Qué debemos saber?",
+      "submit": "Enviar reporte",
+      "cancel": "Cancelar",
+      "success": "Gracias. Recibimos el reporte y el enlace quedó en revisión.",
+      "failed": "No se pudo enviar el reporte. Inténtalo de nuevo.",
+      "phishing": "Phishing o estafa",
+      "malware": "Malware",
+      "spam": "Spam",
+      "other": "Otro",
+      "link_label": "Enlace corto",
+      "link_placeholder": "https://url3.cc/example",
+      "invalid_link": "Introduce un enlace corto válido de url3.cc."
+    },
+    "guest_fixed": "Los enlaces de invitados caducan a los 7 días."
+  }
 }
