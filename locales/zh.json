@@ -100,7 +100,7 @@
     "created": "連結已建立",
     "create_failed": "無法建立連結",
     "rate_limited_report": "這個網路送出的檢舉過多，請稍後再試。",
-    "rate_limited": "您的請求過於頻繁，請稍後再試。",
+    "rate_limited": "請求過於頻繁，請稍後再試。",
     "unsafe_invalid": "請輸入有效的 http 或 https 網址。",
     "unsafe_scheme": "只允許 http 和 https 連結。",
     "unsafe_ip": "不允許指向 IP 位址的連結。",
