@@ -112,6 +112,7 @@
     "unsafe_localhost": "No se permiten enlaces a localhost.",
     "unsafe_private": "No se permiten enlaces a redes privadas o internas.",
     "unsafe_blacklist": "Este destino está bloqueado.",
+    "unsafe_safe_browsing": "Safe Browsing marcó este destino como no seguro y no se puede acortar.",
     "invalid_expiry": "Esa caducidad no está disponible para esta cuenta.",
     "unauthorized": "Inicia sesión para crear este enlace.",
     "unsupported_type": "Aquí solo se pueden acortar enlaces http y https.",

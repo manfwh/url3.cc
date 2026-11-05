@@ -112,6 +112,7 @@
     "unsafe_localhost": "ไม่อนุญาตลิงก์ที่ชี้ไปยัง localhost",
     "unsafe_private": "ไม่อนุญาตลิงก์ที่ชี้ไปยังเครือข่ายส่วนตัวหรือภายใน",
     "unsafe_blacklist": "ปลายทางนี้ถูกบล็อก",
+    "unsafe_safe_browsing": "Safe Browsing ระบุว่าปลายทางนี้ไม่ปลอดภัย จึงย่อลิงก์ไม่ได้",
     "invalid_expiry": "บัญชีนี้เลือกอายุนั้นไม่ได้",
     "unauthorized": "ลงชื่อเข้าใช้เพื่อสร้างลิงก์นี้",
     "unsupported_type": "ที่นี่ย่อได้เฉพาะลิงก์ http และ https",

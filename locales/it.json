@@ -70,6 +70,7 @@
     "unsafe_localhost": "I link a localhost non sono consentiti.",
     "unsafe_private": "I link a reti private o interne non sono consentiti.",
     "unsafe_blacklist": "Questa destinazione è bloccata.",
+    "unsafe_safe_browsing": "Safe Browsing ha segnalato questa destinazione come non sicura. Non può essere accorciata.",
     "invalid_expiry": "Questa scadenza non è disponibile per questo account.",
     "unauthorized": "Accedi per creare questo link.",
     "unsupported_type": "Qui si possono accorciare solo link http e https.",

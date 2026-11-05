@@ -62,6 +62,13 @@ describe('linkErrorI18nKey', () => {
       data: { code: 'unsafe_url', reason: 'private' }
     }), 'security.unsafe_private')
     assert.equal(linkErrorI18nKey({
+      data: { code: 'unsafe_url', reason: 'safe_browsing' }
+    }), 'security.unsafe_safe_browsing')
+    assert.equal(linkErrorI18nKey({
+      statusCode: 400,
+      data: { code: 'safe_browsing' }
+    }), 'security.unsafe_safe_browsing')
+    assert.equal(linkErrorI18nKey({
       data: { code: 'unsafe_url', reason: 'other' }
     }), 'security.unsafe_invalid')
   })

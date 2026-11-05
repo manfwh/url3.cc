@@ -112,6 +112,7 @@
     "unsafe_localhost": "localhost로 연결되는 링크는 허용되지 않습니다.",
     "unsafe_private": "사설 네트워크나 내부 네트워크로 연결되는 링크는 허용되지 않습니다.",
     "unsafe_blacklist": "이 대상은 차단되었습니다.",
+    "unsafe_safe_browsing": "Safe Browsing에서 이 대상을 안전하지 않음으로 표시하여 단축할 수 없습니다.",
     "invalid_expiry": "이 계정에서는 해당 만료 기간을 사용할 수 없습니다.",
     "unauthorized": "이 링크를 만들려면 로그인하세요.",
     "unsupported_type": "여기서는 http와 https 링크만 줄일 수 있습니다.",

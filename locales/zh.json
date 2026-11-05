@@ -112,6 +112,7 @@
     "unsafe_localhost": "不允許指向 localhost 的連結。",
     "unsafe_private": "不允許指向私人或內部網路的連結。",
     "unsafe_blacklist": "這個目的地已被封鎖。",
+    "unsafe_safe_browsing": "Safe Browsing 將這個目的地標示為不安全，無法建立短連結。",
     "invalid_expiry": "這個帳號無法使用該有效期。",
     "unauthorized": "請先登入再建立這條連結。",
     "unsupported_type": "這裡只能縮短 http 和 https 連結。",

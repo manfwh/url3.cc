@@ -112,6 +112,7 @@
     "unsafe_localhost": "Không cho phép liên kết tới localhost.",
     "unsafe_private": "Không cho phép liên kết tới mạng riêng hoặc mạng nội bộ.",
     "unsafe_blacklist": "Đích này đã bị chặn.",
+    "unsafe_safe_browsing": "Safe Browsing đánh dấu đích này là không an toàn nên không thể rút gọn.",
     "invalid_expiry": "Tài khoản này không dùng được thời hạn đó.",
     "unauthorized": "Hãy đăng nhập để tạo liên kết này.",
     "unsupported_type": "Ở đây chỉ rút gọn được liên kết http và https.",

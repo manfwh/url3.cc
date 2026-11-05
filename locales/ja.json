@@ -112,6 +112,7 @@
     "unsafe_localhost": "localhost へのリンクは利用できません。",
     "unsafe_private": "プライベートネットワークや内部ネットワークへのリンクは利用できません。",
     "unsafe_blacklist": "この宛先はブロックされています。",
+    "unsafe_safe_browsing": "この宛先は Safe Browsing により危険と判定されたため、短縮できません。",
     "invalid_expiry": "このアカウントではその有効期限を選べません。",
     "unauthorized": "このリンクを作成するにはログインしてください。",
     "unsupported_type": "ここでは http と https のリンクのみ短縮できます。",

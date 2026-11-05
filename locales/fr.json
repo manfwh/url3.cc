@@ -112,6 +112,7 @@
     "unsafe_localhost": "Les liens vers localhost ne sont pas autorisés.",
     "unsafe_private": "Les liens vers un réseau privé ou interne ne sont pas autorisés.",
     "unsafe_blacklist": "Cette destination est bloquée.",
+    "unsafe_safe_browsing": "Safe Browsing a signalé cette destination comme dangereuse. Elle ne peut pas être raccourcie.",
     "invalid_expiry": "Cette durée n’est pas disponible pour ce compte.",
     "unauthorized": "Connectez-vous pour créer ce lien.",
     "unsupported_type": "Seuls les liens http et https peuvent être raccourcis ici.",

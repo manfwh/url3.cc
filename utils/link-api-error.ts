@@ -10,7 +10,8 @@ const UNSAFE_REASONS = new Set([
   'ip',
   'localhost',
   'private',
-  'blacklist'
+  'blacklist',
+  'safe_browsing'
 ])
 
 export function linkErrorI18nKey (err: unknown): string {
@@ -23,6 +24,10 @@ export function linkErrorI18nKey (err: unknown): string {
     if (payload.limit === '30/day') { return 'security.rate_limited_user_day' }
     if (payload.limit === '5/hour') { return 'security.rate_limited_report' }
     return 'security.rate_limited'
+  }
+
+  if (payload.code === 'safe_browsing' || payload.reason === 'safe_browsing') {
+    return 'security.unsafe_safe_browsing'
   }
 
   if (payload.code === 'unsafe_url') {
