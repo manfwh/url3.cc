@@ -19,9 +19,6 @@ export function linkErrorI18nKey (err: unknown): string {
   const status = readStatus(err)
 
   if (payload.code === 'rate_limited' || status === 429) {
-    if (payload.limit === '3/hour') { return 'security.rate_limited_guest_hour' }
-    if (payload.limit === '10/day') { return 'security.rate_limited_guest_day' }
-    if (payload.limit === '30/day') { return 'security.rate_limited_user_day' }
     if (payload.limit === '5/hour') { return 'security.rate_limited_report' }
     return 'security.rate_limited'
   }
