@@ -26,6 +26,9 @@ export function linkErrorI18nKey (err: unknown): string {
   if (payload.code === 'safe_browsing' || payload.reason === 'safe_browsing') {
     return 'security.unsafe_safe_browsing'
   }
+  if (payload.code === 'safe_browsing_unavailable') {
+    return 'security.safe_browsing_unavailable'
+  }
 
   if (payload.code === 'unsafe_url') {
     if (payload.reason && UNSAFE_REASONS.has(payload.reason)) {

@@ -7,7 +7,8 @@
     "generate": "nuxt generate",
     "preview": "nuxt preview",
     "postinstall": "nuxt prepare",
-    "gen-type": "supabase gen types typescript --project-id ytvauorrjbktlnagxbkr > database.types.ts"
+    "gen-type": "supabase gen types typescript --project-id ytvauorrjbktlnagxbkr > database.types.ts",
+    "test": "node --experimental-strip-types --import ./test/register.mjs --test utils/*.test.ts server/utils/*.test.ts"
   },
   "devDependencies": {
     "@nuxt/devtools": "^1.0.2",

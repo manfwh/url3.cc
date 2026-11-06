@@ -108,6 +108,7 @@
     "unsafe_private": "Links to private or internal networks are not allowed.",
     "unsafe_blacklist": "This destination is blocked.",
     "unsafe_safe_browsing": "This destination was flagged as unsafe by Safe Browsing and cannot be shortened.",
+    "safe_browsing_unavailable": "Safe Browsing could not be checked, so this link was not created.",
     "invalid_expiry": "That expiry is not available for this account.",
     "unauthorized": "Sign in to create this link.",
     "unsupported_type": "Only http and https links can be shortened here.",

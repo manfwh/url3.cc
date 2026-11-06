@@ -66,6 +66,7 @@
     "unsafe_private": "I link a reti private o interne non sono consentiti.",
     "unsafe_blacklist": "Questa destinazione è bloccata.",
     "unsafe_safe_browsing": "Safe Browsing ha segnalato questa destinazione come non sicura. Non può essere accorciata.",
+    "safe_browsing_unavailable": "Safe Browsing non ha potuto essere verificato, quindi il link breve non è stato creato.",
     "invalid_expiry": "Questa scadenza non è disponibile per questo account.",
     "unauthorized": "Accedi per creare questo link.",
     "unsupported_type": "Qui si possono accorciare solo link http e https.",

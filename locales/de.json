@@ -108,6 +108,7 @@
     "unsafe_private": "Links auf private oder interne Netze sind nicht erlaubt.",
     "unsafe_blacklist": "Dieses Ziel ist blockiert.",
     "unsafe_safe_browsing": "Safe Browsing hat dieses Ziel als unsicher markiert. Es kann nicht gekürzt werden.",
+    "safe_browsing_unavailable": "Safe Browsing konnte nicht geprüft werden, daher wurde der Kurzlink nicht erstellt.",
     "invalid_expiry": "Diese Laufzeit ist für dieses Konto nicht verfügbar.",
     "unauthorized": "Melde dich an, um diesen Link zu erstellen.",
     "unsupported_type": "Hier können nur http- und https-Links gekürzt werden.",
