@@ -1,7 +1,8 @@
-export default defineNuxtRouteMiddleware((to, form) => {
+import { localizedPath } from '~/utils/safe-redirect'
+
+export default defineNuxtRouteMiddleware((to) => {
   const user = useSupabaseUser()
   if (user.value) {
-    return navigateTo('/')
+    return navigateTo(localizedPath(to.path, '/'))
   }
 })
-// noauth

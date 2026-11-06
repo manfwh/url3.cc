@@ -264,7 +264,7 @@ const currentType = computed(() => typeOptions.find(item => item.value === state
       <UFormGroup :label="$t('form.Note')" :hint="$t('form.Optional')" name="note" :description="$t('form.Note_Tip')">
         <UInput v-model="state.note" type="text" color="gray" variant="outline" />
       </UFormGroup>
-      <UFormGroup v-if="!editLink" :label="$t('security.expiry.label')" name="expiresIn" :description="$t('security.expiry.range')" :hint="$t('security.limits_user')">
+      <UFormGroup v-if="!editLink" :label="$t('security.expiry.label')" name="expiresIn" :description="$t('security.expiry.range')">
         <UInput v-model.number="expiryDays" type="number" :min="USER_MIN_DAYS" :max="USER_MAX_DAYS" step="1" required />
       </UFormGroup>
       <div class="text-right">

@@ -17,7 +17,8 @@ export default defineNuxtConfig({
     cookieOptions: {
       maxAge: 60 * 60 * 8,
       sameSite: 'lax',
-      secure: true
+      // Secure cookies are dropped on http://localhost, so only force them in production.
+      secure: process.env.NODE_ENV === 'production'
       // domain: '.localhost'
     },
     redirect: false,

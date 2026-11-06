@@ -10,9 +10,6 @@
     {{ $t('hero.description') }}
   </p>
   <HomeDemoCreate />
-  <div class="mx-4 md:mx-auto max-w-lg mt-2 mb-10">
-    <LinkReportLink />
-  </div>
   <HomeFeatures />
   <HomeQuestion />
 </template>

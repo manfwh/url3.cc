@@ -1,64 +1,98 @@
 <script setup lang="ts">
-import type { FormError, FormSubmitEvent } from '@nuxt/ui/dist/runtime/types'
+import type { FormSubmitEvent } from '@nuxt/ui/dist/runtime/types'
 import type { Database } from '~/types/type'
+import { safeInternalPath } from '~/utils/safe-redirect'
 definePageMeta({
   layout: 'default',
   middleware: 'auth'
 })
 const supabase = useSupabaseClient<Database>()
+const localePath = useLocalePath()
 const url = useRequestURL()
-const redirect = url.searchParams.get('redirect')
-let redirectTo = url.origin + '/confirm'
-if (redirect) {
-  redirectTo = redirectTo + '?redirect=' + encodeURIComponent(redirect)
-}
-async function signInWithGitHub () {
-  const { data, error } = await supabase.auth.signInWithOAuth({
-    provider: 'github',
-    options: {
-      redirectTo
-    }
-  })
-  console.log(data, error)
-}
+const redirectTarget = safeInternalPath(url.searchParams.get('redirect'))
+const redirectTo = redirectTarget
+  ? `${url.origin}/confirm?redirect=${encodeURIComponent(redirectTarget)}`
+  : `${url.origin}/confirm`
+
 const {
   data: { session }
 } = await supabase.auth.getSession()
 
 const submitting = ref(false)
-// const router = useRouter()
-const signInWithOAuth = async () => {
-  const { data, error } = await supabase.auth.signInWithOAuth({
-    provider: 'google',
-    options: {
-      redirectTo,
-      queryParams: {
-        access_type: 'offline',
-        prompt: 'consent'
+const oauthSubmitting = ref(false)
+const errorMessage = ref('')
+
+async function signInWithGitHub () {
+  errorMessage.value = ''
+  oauthSubmitting.value = true
+  try {
+    const { error } = await supabase.auth.signInWithOAuth({
+      provider: 'github',
+      options: {
+        redirectTo
       }
+    })
+    if (error) {
+      errorMessage.value = error.message
     }
-  })
-  console.log('data', data)
-  console.log('error', error)
+  } catch (error) {
+    errorMessage.value = error instanceof Error ? error.message : 'Sign in failed'
+  } finally {
+    oauthSubmitting.value = false
+  }
+}
+const signInWithOAuth = async () => {
+  errorMessage.value = ''
+  oauthSubmitting.value = true
+  try {
+    const { error } = await supabase.auth.signInWithOAuth({
+      provider: 'google',
+      options: {
+        redirectTo,
+        queryParams: {
+          access_type: 'offline',
+          prompt: 'consent'
+        }
+      }
+    })
+    if (error) {
+      errorMessage.value = error.message
+    }
+  } catch (error) {
+    errorMessage.value = error instanceof Error ? error.message : 'Sign in failed'
+  } finally {
+    oauthSubmitting.value = false
+  }
 }
 
 const state = ref({
-  email: undefined
+  email: ''
 })
-const localePath = useLocalePath()
 
-async function submit (event: FormSubmitEvent<any>) {
-  // Do something with data
-  console.log(event.data)
+async function submit (event: FormSubmitEvent<{ email: string }>) {
+  errorMessage.value = ''
   submitting.value = true
-  const { data, error } = await supabase.auth.signInWithOtp({
-    email: event.data.email,
-    options: {
-      // emailRedirectTo: 'https://example.com/welcome',
+  try {
+    const { data, error } = await supabase.auth.signInWithOtp({
+      email: event.data.email,
+      options: {
+        emailRedirectTo: redirectTo
+      }
+    })
+    if (error) {
+      errorMessage.value = error.message
+      return
     }
-  })
-  submitting.value = false
-  navigateTo('/auth/verify-request')
+    if (data.session) {
+      await navigateTo(redirectTarget || localePath('/'))
+      return
+    }
+    await navigateTo(localePath('/auth/verify-request'))
+  } catch (error) {
+    errorMessage.value = error instanceof Error ? error.message : 'Sign in failed'
+  } finally {
+    submitting.value = false
+  }
 }
 
 </script>
@@ -90,8 +124,16 @@ async function submit (event: FormSubmitEvent<any>) {
             <UInput v-model="state.email" color="gray" type="email" placeholder="your email" required />
           </UFormGroup>
 
+          <UAlert
+            v-if="errorMessage"
+            color="red"
+            variant="subtle"
+            icon="i-heroicons-exclamation-triangle"
+            :title="errorMessage"
+          />
+
           <UButton type="submit" block :loading="submitting">
-            {{ !submitting ? 'Continue with email' : '' }}
+            Continue with email
           </UButton>
         </UForm>
       </div>
@@ -99,7 +141,14 @@ async function submit (event: FormSubmitEvent<any>) {
         <!-- <UButton v-if="!session" class="flex-1" color="gray" :ui="{base: 'justify-center', rounded: 'rounded-sm'}" @click="signInWithGitHub">
           <SharedBrandIcons provider="github" />
         </UButton> -->
-        <UButton v-if="!session" class="flex-1" color="gray" :ui="{base: 'justify-center', rounded: 'rounded-sm'}" @click="signInWithOAuth">
+        <UButton
+          v-if="!session"
+          class="flex-1"
+          color="gray"
+          :loading="oauthSubmitting"
+          :ui="{base: 'justify-center', rounded: 'rounded-sm'}"
+          @click="signInWithOAuth"
+        >
           <SharedBrandIcons provider="google" />
           Google
         </UButton>

@@ -69,7 +69,7 @@
     "q2": "¿Cómo uso url3.cc?",
     "a2": "Ingresa una URL larga en el cuadro de entrada y haz clic en el botón Generar para crear una URL corta",
     "q3": "¿Cuál es el período de validez del enlace?",
-    "a3": "Los enlaces de invitados caducan a los 7 días y esa duración no se puede cambiar. Quienes inician sesión pueden elegir de 1 a 90 días. El valor predeterminado es 30 días. Los invitados pueden crear 3 enlaces por hora y 10 al día. Las cuentas con sesión pueden crear 30 al día.",
+    "a3": "Los enlaces de invitados caducan a los 7 días y esa duración no se puede cambiar. Quienes inician sesión pueden elegir de 1 a 90 días. El valor predeterminado es 30 días.",
     "q4": "¿Cómo contactar?",
     "a4": "Puedes enviarme un correo electrónico a service{'@'}url3.cc"
   },
@@ -96,14 +96,9 @@
   "Links": "Enlaces",
   "Manage_your_links": "Administra tus enlaces",
   "security": {
-    "limits_guest": "Los invitados pueden crear 3 enlaces por hora y 10 al día.",
-    "limits_user": "Las cuentas con sesión pueden crear 30 enlaces al día.",
     "sign_in_longer": "Inicia sesión para elegir una caducidad de 1 a 90 días. El valor predeterminado es 30 días.",
     "created": "Enlace creado",
     "create_failed": "No se pudo crear el enlace",
-    "rate_limited_guest_hour": "Límite de invitado alcanzado: 3 enlaces cortos por hora. Inténtalo más tarde o inicia sesión.",
-    "rate_limited_guest_day": "Límite de invitado alcanzado: 10 enlaces cortos al día. Inténtalo mañana o inicia sesión.",
-    "rate_limited_user_day": "Límite diario alcanzado: 30 enlaces cortos al día.",
     "rate_limited_report": "Demasiados reportes desde esta red. Inténtalo más tarde.",
     "rate_limited": "Demasiadas solicitudes. Inténtalo más tarde.",
     "unsafe_invalid": "Introduce una URL http o https válida.",

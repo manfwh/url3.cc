@@ -6,6 +6,7 @@ const colorMode = useColorMode()
 const appConfig = useAppConfig()
 definePageMeta({
   layout: 'dashboard',
+  middleware: 'auth',
   meta: {
     title: 'Stats'
   }
