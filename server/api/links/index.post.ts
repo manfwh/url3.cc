@@ -9,7 +9,7 @@ import { validateRequest } from '~/server/utils/link'
 import { redis } from '~/server/utils/upstash'
 import { defineAuthHandler } from '~/server/utils/handler'
 import { resolveExpiry } from '~/utils/link-policy'
-import { enforceCreateRateLimit } from '~/server/utils/create-policy'
+import { enforceCreateRateLimit, requireLocalDestinations, requireSafeBrowsing } from '~/server/utils/create-policy'
 
 type RequestBody = Exclude<Tables<'links'>, 'id' | 'user_id'> & {slug?: string, expiresIn?: number | string}
 export default defineAuthHandler(async (event) => {
@@ -23,7 +23,12 @@ export default defineAuthHandler(async (event) => {
   if (!expiry.ok) {
     throw createError({ statusCode: 400, statusMessage: 'Invalid expiry', data: { code: 'invalid_expiry' } })
   }
+  const local = requireLocalDestinations({ url, ios: body.ios, android: body.android })
   await enforceCreateRateLimit(event, 'user', userId)
+  const checked = await requireSafeBrowsing(local)
+  if (checked.ios) { body.ios = checked.ios }
+  if (checked.android) { body.android = checked.android }
+  const destinationUrl = checked.url
   const redisOptions = { nx: true, ex: expiry.seconds }
 
   if (event.context.session.user_role !== 'admin' && body.key) {
@@ -50,7 +55,7 @@ export default defineAuthHandler(async (event) => {
     await copyImage(body)
     const { status, error } = await supabase.from('links').insert({
       ...body,
-      ...(url && { url }),
+      ...(destinationUrl && { url: destinationUrl }),
       key,
       user_id: event.context.session.user.id
     })
@@ -61,7 +66,7 @@ export default defineAuthHandler(async (event) => {
     try {
       const response = await redis.set(`short-link:${key}`, {
         type: body.type || 'url',
-        ...(url && { url: encodeURIComponent(url!) }),
+        ...(destinationUrl && { url: encodeURIComponent(destinationUrl) }),
         ...(body.image && { image: body.image }),
         password: !!body.password,
         ...(body.ios && { ios: body.ios }),
@@ -77,7 +82,7 @@ export default defineAuthHandler(async (event) => {
       setResponseStatus(event, 201)
       return {
         key,
-        url: url ?? null,
+        url: destinationUrl ?? null,
         expiresIn: expiry.seconds,
         expiresAt: expiry.seconds > 0 ? new Date(Date.now() + expiry.seconds * 1000).toISOString() : null
       }
@@ -101,12 +106,12 @@ export default defineAuthHandler(async (event) => {
     const [res] = await Promise.all([
       supabase.from('links').insert({
         project_id: project.id,
-        url,
+        url: destinationUrl,
         // user_id: user.id,
         key
       }),
       redis.set(`short-link:${key}`, {
-        ...(url ? { url: encodeURIComponent(url) } : {})
+        ...(destinationUrl ? { url: encodeURIComponent(destinationUrl) } : {})
       }, redisOptions)
     ])
     return res

@@ -1,5 +1,10 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
+  runtimeConfig: {
+    // Server-only. Set SAFE_BROWSING_API_KEY or NUXT_SAFE_BROWSING_API_KEY.
+    // Never put this under `public`.
+    safeBrowsingApiKey: ''
+  },
   devtools: { enabled: false },
   modules: [
     ['@nuxtjs/eslint-module', { lintOnStart: false }],

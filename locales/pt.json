@@ -108,6 +108,7 @@
     "unsafe_private": "Links para redes privadas ou internas não são permitidos.",
     "unsafe_blacklist": "Este destino está bloqueado.",
     "unsafe_safe_browsing": "O Safe Browsing marcou este destino como inseguro e ele não pode ser encurtado.",
+    "safe_browsing_unavailable": "Não foi possível verificar o Safe Browsing, então o link não foi criado.",
     "invalid_expiry": "Essa validade não está disponível para esta conta.",
     "unauthorized": "Entre para criar este link.",
     "unsupported_type": "Aqui só é possível encurtar links http e https.",

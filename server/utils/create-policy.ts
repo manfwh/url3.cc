@@ -1,6 +1,13 @@
 import type { H3Event } from 'h3'
 import { checkUrlSafety } from '~/utils/url-safety'
 import { ratelimit } from '~/server/utils/upstash'
+import {
+  destinationRejection,
+  normalizeDestinationFields,
+  screenDestinationFields,
+  type DestinationFields,
+  type NormalizedDestinations
+} from '~/server/utils/safe-browsing'
 
 type LimitResult = {
   success: boolean
@@ -10,16 +17,25 @@ type LimitResult = {
 export function assertLocalDestination (url: string) {
   const result = checkUrlSafety(url)
   if (!result.ok) {
-    throw createError({
-      statusCode: 400,
-      statusMessage: 'Unsafe URL',
-      data: {
-        code: 'unsafe_url',
-        reason: result.reason
-      }
-    })
+    throw createError(destinationRejection(result.reason))
   }
   return result.url.toString()
+}
+
+export function requireLocalDestinations (fields: DestinationFields) {
+  const local = normalizeDestinationFields(fields)
+  if (!local.ok) {
+    throw createError(destinationRejection(local.reason))
+  }
+  return local
+}
+
+export async function requireSafeBrowsing (fields: NormalizedDestinations) {
+  const screened = await screenDestinationFields(fields)
+  if (!screened.ok) {
+    throw createError(destinationRejection(screened.reason))
+  }
+  return screened
 }
 
 export async function enforceCreateRateLimit (event: H3Event, role: 'guest' | 'user', userId?: string | null) {

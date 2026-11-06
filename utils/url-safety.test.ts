@@ -81,6 +81,10 @@ describe('linkErrorI18nKey', () => {
       data: { code: 'safe_browsing' }
     }), 'security.unsafe_safe_browsing')
     assert.equal(linkErrorI18nKey({
+      statusCode: 503,
+      data: { code: 'safe_browsing_unavailable' }
+    }), 'security.safe_browsing_unavailable')
+    assert.equal(linkErrorI18nKey({
       data: { code: 'unsafe_url', reason: 'other' }
     }), 'security.unsafe_invalid')
   })

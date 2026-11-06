@@ -108,6 +108,7 @@
     "unsafe_private": "Tautan ke jaringan privat atau internal tidak diizinkan.",
     "unsafe_blacklist": "Tujuan ini diblokir.",
     "unsafe_safe_browsing": "Tujuan ini ditandai tidak aman oleh Safe Browsing dan tidak dapat dipendekkan.",
+    "safe_browsing_unavailable": "Safe Browsing tidak dapat diperiksa, jadi tautan pendek tidak dibuat.",
     "invalid_expiry": "Masa berlaku itu tidak tersedia untuk akun ini.",
     "unauthorized": "Masuk untuk membuat tautan ini.",
     "unsupported_type": "Hanya tautan http dan https yang dapat dipendekkan di sini.",
