@@ -304,7 +304,8 @@ export function assertDataset (value: string) {
 function sqlDataset (value: string) {
   const dataset = assertDataset(value)
   if (/^[A-Za-z_][A-Za-z0-9_]*$/.test(dataset)) { return dataset }
-  return `\`${dataset}\``
+  // Analytics Engine accepts double-quoted identifiers. Backticks are a syntax error (HTTP 422).
+  return `"${dataset}"`
 }
 
 function assertAccountId (value: string) {
