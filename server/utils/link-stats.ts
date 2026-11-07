@@ -167,13 +167,15 @@ export function buildLinkStatsQuery (input: {
   }
 
   if (input.endpoint === 'timeserirs') {
+    // Analytics Engine accepts toStartOf* in SELECT, and only column names in
+    // GROUP BY and ORDER BY. Repeating the function is HTTP 422, so use the alias.
     const bucket = BUCKET_SQL[input.window.granularity]
     return selectStatement([
       `SELECT ${bucket} AS start, SUM(_sample_interval) AS clicks`,
       `FROM ${dataset}`,
       `WHERE ${where.join(' AND ')}`,
-      `GROUP BY ${bucket}`,
-      `ORDER BY ${bucket} ASC`,
+      'GROUP BY start',
+      'ORDER BY start ASC',
       `LIMIT ${MAX_BUCKETS}`
     ])
   }
@@ -452,6 +454,11 @@ function parseTimestamp (value: unknown) {
   const sql = /^(\d{4}-\d{2}-\d{2})[ T](\d{2}:\d{2}:\d{2})(\.\d+)?/.exec(textValue)
   if (sql) {
     return new Date(`${sql[1]}T${sql[2]}${sql[3] ?? ''}Z`)
+  }
+  // toStartOfMonth comes back as a date with no time, e.g. "2026-11-01".
+  const dateOnly = /^(\d{4}-\d{2}-\d{2})$/.exec(textValue)
+  if (dateOnly) {
+    return new Date(`${dateOnly[1]}T00:00:00Z`)
   }
   const parsed = new Date(textValue)
   return Number.isNaN(parsed.getTime()) ? null : parsed

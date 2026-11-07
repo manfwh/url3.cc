@@ -71,7 +71,12 @@ describe('analytics engine query mapping', () => {
     assert.match(day, /toStartOfDay\(timestamp\) AS start/)
     assert.match(month, /toStartOfMonth\(timestamp\) AS start/)
     assert.match(hour, /SUM\(_sample_interval\) AS clicks/)
-    assert.match(hour, /ORDER BY toStartOfHour\(timestamp\) ASC/)
+    for (const sql of [minute, hour, day, month]) {
+      assert.match(sql, /GROUP BY start\n/)
+      assert.match(sql, /ORDER BY start ASC\n/)
+      assert.doesNotMatch(sql, /GROUP BY toStartOf/)
+      assert.doesNotMatch(sql, /ORDER BY toStartOf/)
+    }
   })
 
   it('groups each chart dimension by the worker blob contract', () => {
@@ -153,6 +158,18 @@ describe('analytics engine response shapes', () => {
     assert.deepEqual(rows[0], { start: '2026-11-07T00:00:00.000Z', clicks: 0 })
     assert.deepEqual(rows[30], { start: '2026-11-07T00:30:00.000Z', clicks: 4 })
     assert.deepEqual(rows.at(-1), { start: '2026-11-07T01:00:00.000Z', clicks: 0 })
+  })
+
+  it('places date-only month buckets on the matching UTC month', () => {
+    const window = linkStatsWindow('90d', NOW)
+    const rows = mapLinkStatsRows('timeserirs', [
+      { start: '2026-11-01', clicks: '6' }
+    ], window)
+    assert.equal(Array.isArray(rows), true)
+    if (!Array.isArray(rows)) { return }
+    const november = rows.find(point => point.start === '2026-11-01T00:00:00.000Z')
+    assert.deepEqual(november, { start: '2026-11-01T00:00:00.000Z', clicks: 6 })
+    assert.equal(rows.reduce((total, point) => total + point.clicks, 0), 6)
   })
 
   it('maps chart rows to the fields the Vue components read', () => {
