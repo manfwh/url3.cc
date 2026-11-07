@@ -2,14 +2,14 @@ import type { IntervalProps } from '../../lib/stats'
 
 /**
  * Click points written by the redirect Worker (binding CLICK_EVENTS,
- * dataset click_events). Counts use SUM(_sample_interval). index1 is the
+ * dataset url3-cc). Counts use SUM(_sample_interval). index1 is the
  * sampling key and may be truncated to 96 bytes. blob20 keeps the full link
  * key, and reads filter on blob20 so the key match stays exact. Tinybird
  * history is not imported.
  */
 export const CLICK_EVENTS_SCHEMA = {
   binding: 'CLICK_EVENTS',
-  dataset: 'click_events',
+  dataset: 'url3-cc',
   indexes: {
     index1: 'key'
   },
@@ -116,7 +116,7 @@ const DIMENSION_ENDPOINTS: Record<Exclude<LinkStatsEndpoint, 'clicks' | 'timeser
   referer: ['referer']
 }
 
-const DATASET_NAME = /^[A-Za-z_][A-Za-z0-9_]{0,63}$/
+const DATASET_NAME = /^[A-Za-z_][A-Za-z0-9_-]{0,63}$/
 const ACCOUNT_ID = /^[a-f0-9]{32}$/i
 const MAX_BUCKETS = 2000
 const BREAKDOWN_LIMIT = 1000
@@ -149,7 +149,7 @@ export function buildLinkStatsQuery (input: {
   dataset: string
   window: LinkStatsWindow
 }): string {
-  const dataset = assertDataset(input.dataset)
+  const dataset = sqlDataset(input.dataset)
   const keyLiteral = sqlString(assertKey(input.key))
   const fullKey = CLICK_EVENTS_SCHEMA.fullKey
   const where = [
@@ -299,6 +299,12 @@ export function assertDataset (value: string) {
     throw new LinkStatsError(500, 'Analytics dataset name is invalid')
   }
   return dataset
+}
+
+function sqlDataset (value: string) {
+  const dataset = assertDataset(value)
+  if (/^[A-Za-z_][A-Za-z0-9_]*$/.test(dataset)) { return dataset }
+  return `\`${dataset}\``
 }
 
 function assertAccountId (value: string) {

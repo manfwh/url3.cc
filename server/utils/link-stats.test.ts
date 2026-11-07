@@ -51,7 +51,7 @@ describe('analytics engine query mapping', () => {
     const { window, sql } = queryFor('clicks', 'all')
     const start = Math.floor(window.start.getTime() / 1000)
     assert.match(sql, /SELECT SUM\(_sample_interval\) AS clicks/)
-    assert.match(sql, /FROM click_events/)
+    assert.match(sql, /FROM `url3-cc`/)
     assert.match(sql, /blob20 = 'abc123'/)
     assert.match(sql, /blob20 = '' AND index1 = 'abc123'/)
     assert.equal(sql.includes('link_clicks'), false)
@@ -91,7 +91,7 @@ describe('analytics engine query mapping', () => {
       assert.match(sql, /ORDER BY clicks DESC/)
     }
     assert.equal(CLICK_EVENTS_SCHEMA.binding, 'CLICK_EVENTS')
-    assert.equal(CLICK_EVENTS_SCHEMA.dataset, 'click_events')
+    assert.equal(CLICK_EVENTS_SCHEMA.dataset, 'url3-cc')
     assert.equal(CLICK_EVENTS_SCHEMA.fullKey, 'blob20')
     assert.equal(CLICK_EVENTS_SCHEMA.blobs.blob7, 'browser')
     assert.equal(CLICK_EVENTS_SCHEMA.blobs.blob11, 'os')
@@ -105,9 +105,10 @@ describe('analytics engine query mapping', () => {
     const sql = buildLinkStatsQuery({
       endpoint: 'clicks',
       key: "o'brien",
-      dataset: 'click_events',
+      dataset: 'url3-cc',
       window: linkStatsWindow('1h', NOW)
     })
+    assert.match(sql, /FROM `url3-cc`/)
     assert.match(sql, /blob20 = 'o''brien'/)
     assert.match(sql, /index1 = 'o''brien'/)
     assert.equal(sql.split('FORMAT JSON').length, 2)
@@ -116,7 +117,7 @@ describe('analytics engine query mapping', () => {
       () => buildLinkStatsQuery({
         endpoint: 'clicks',
         key: 'abc',
-        dataset: 'link_clicks;drop',
+        dataset: 'url3-cc`;drop',
         window: linkStatsWindow('1h', NOW)
       }),
       (error: unknown) => error instanceof LinkStatsError && error.statusCode === 500
@@ -125,7 +126,7 @@ describe('analytics engine query mapping', () => {
       () => buildLinkStatsQuery({
         endpoint: 'device',
         key: 'bad\nkey',
-        dataset: 'click_events',
+        dataset: 'url3-cc',
         window: linkStatsWindow('1h', NOW)
       }),
       (error: unknown) => error instanceof LinkStatsError && error.statusCode === 400
@@ -207,7 +208,7 @@ describe('analytics engine sql request', () => {
     }, {
       accountId: ACCOUNT_ID,
       apiToken: TOKEN,
-      dataset: 'click_events',
+      dataset: 'url3-cc',
       fetchImpl,
       now: NOW
     })

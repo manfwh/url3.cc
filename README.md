@@ -17,13 +17,13 @@ Link stats are read from Cloudflare Workers Analytics Engine. Set these on the V
 | --- | --- | --- |
 | `CF_ACCOUNT_ID` | yes | Cloudflare account that owns the Analytics Engine dataset. The same value is already used for R2. |
 | `CF_ANALYTICS_API_TOKEN` | yes | Cloudflare API token with **Account / Account Analytics / Read**. The stats route uses it only for the Analytics Engine SQL API. |
-| `CF_ANALYTICS_DATASET` | no | Dataset name on the Worker Analytics Engine binding. Defaults to `click_events`, matching binding `CLICK_EVENTS`. |
+| `CF_ANALYTICS_DATASET` | no | Analytics Engine dataset name. Defaults to `url3-cc`. The Worker binding name stays `CLICK_EVENTS`. |
 
 Nuxt also accepts `NUXT_CF_ACCOUNT_ID`, `NUXT_CF_ANALYTICS_API_TOKEN`, and `NUXT_CF_ANALYTICS_DATASET`.
 
 `TINYBIRD_API_KEY` is no longer read. Clicks stored in Tinybird are not imported. Charts and the stats click total include only data points written after the Worker starts recording to Analytics Engine. The `all` interval still begins on 2022-09-22, so earlier buckets stay at zero.
 
-The redirect Worker records one click per data point on binding `CLICK_EVENTS` (`dataset = "click_events"`). `index1` is the link key used for sampling and may be truncated to 96 bytes. `blob20` stores the full link key. Stats queries filter on `blob20`, and use `index1` only when `blob20` is empty. Counts use `SUM(_sample_interval)` over the Analytics Engine timestamp.
+The redirect Worker records one click per data point on binding `CLICK_EVENTS` with dataset `url3-cc`. `index1` is the link key used for sampling and may be truncated to 96 bytes. `blob20` stores the full link key. Stats queries filter on `blob20`, and use `index1` only when `blob20` is empty. Counts use `SUM(_sample_interval)` over the Analytics Engine timestamp.
 
 | Column | Field |
 | --- | --- |

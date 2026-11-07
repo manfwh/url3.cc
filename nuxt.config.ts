@@ -9,7 +9,7 @@ export default defineNuxtConfig({
     // Nuxt aliases: NUXT_CF_ACCOUNT_ID, NUXT_CF_ANALYTICS_API_TOKEN, NUXT_CF_ANALYTICS_DATASET.
     cfAccountId: '',
     cfAnalyticsApiToken: '',
-    cfAnalyticsDataset: 'click_events'
+    cfAnalyticsDataset: 'url3-cc'
   },
   devtools: { enabled: false },
   modules: [
