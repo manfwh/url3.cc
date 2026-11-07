@@ -3,7 +3,13 @@ export default defineNuxtConfig({
   runtimeConfig: {
     // Server-only. Set SAFE_BROWSING_API_KEY or NUXT_SAFE_BROWSING_API_KEY.
     // Never put this under `public`.
-    safeBrowsingApiKey: ''
+    safeBrowsingApiKey: '',
+    // Server-only Analytics Engine SQL reads. Vercel env (never NUXT_PUBLIC_*):
+    // CF_ACCOUNT_ID, CF_ANALYTICS_API_TOKEN, optional CF_ANALYTICS_DATASET.
+    // Nuxt aliases: NUXT_CF_ACCOUNT_ID, NUXT_CF_ANALYTICS_API_TOKEN, NUXT_CF_ANALYTICS_DATASET.
+    cfAccountId: '',
+    cfAnalyticsApiToken: '',
+    cfAnalyticsDataset: 'link_clicks'
   },
   devtools: { enabled: false },
   modules: [
