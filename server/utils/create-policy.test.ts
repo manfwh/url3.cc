@@ -4,9 +4,9 @@ import { createError, getRequestIP, type H3Event } from 'h3'
 
 Object.assign(globalThis, { createError })
 
-const { enforceCreateRateLimit, enforceReportRateLimit } = await import('./create-policy')
+const { enforceCreateRateLimit, enforcePublicClickRateLimit, enforceReportRateLimit } = await import('./create-policy')
 
-type LimitWindow = '1 h' | '1 d'
+type LimitWindow = '1 m' | '1 h' | '1 d'
 
 type LimitError = {
   statusCode?: number
@@ -55,7 +55,7 @@ function visibleError (err: LimitError) {
 
 async function assertRateLimited (
   run: () => Promise<unknown>,
-  limit: '3/hour' | '10/day' | '30/day' | '5/hour',
+  limit: '3/hour' | '10/day' | '30/day' | '5/hour' | '30/minute' | '240/hour',
   hidden: string[]
 ) {
   await assert.rejects(run, (err: unknown) => {
@@ -189,6 +189,68 @@ describe('enforceReportRateLimit', () => {
     assert.equal(limits.counts.get('report:203.0.113.10:hour'), 6)
     assert.equal(limits.counts.get('report:198.51.100.20:hour'), 1)
     assert.equal(limits.calls.some(call => call.id.startsWith('guest:')), false)
+  })
+})
+
+describe('enforcePublicClickRateLimit', () => {
+  it('limits each forwarded client to 30 public totals per minute', async () => {
+    const limits = memoryLimits()
+    const options = { consume: limits.consume }
+    const hidden = ['203.0.113.10', '198.51.100.20', '127.0.0.1', '10.0.0.4']
+    const clientA = guestEvent('203.0.113.10, 127.0.0.1')
+    const clientB = guestEvent('  198.51.100.20 , 10.0.0.4')
+
+    for (let i = 0; i < 30; i++) {
+      await enforcePublicClickRateLimit(clientA, options)
+      await enforcePublicClickRateLimit(clientB, options)
+    }
+
+    assert.deepEqual(limits.calls.slice(0, 4), [
+      { id: 'public-clicks:203.0.113.10:minute', requests: 30, window: '1 m' },
+      { id: 'public-clicks:203.0.113.10:hour', requests: 240, window: '1 h' },
+      { id: 'public-clicks:198.51.100.20:minute', requests: 30, window: '1 m' },
+      { id: 'public-clicks:198.51.100.20:hour', requests: 240, window: '1 h' }
+    ])
+    assert.equal(limits.calls.some(call => call.id.includes('127.0.0.1')), false)
+    assert.equal(limits.calls.some(call => call.id.includes('10.0.0.4')), false)
+    assert.equal(limits.calls.some(call => call.id.startsWith('guest:')), false)
+    assert.equal(limits.calls.some(call => call.id.startsWith('report:')), false)
+
+    await assertRateLimited(
+      () => enforcePublicClickRateLimit(clientA, options),
+      '30/minute',
+      hidden
+    )
+    assert.equal(limits.counts.get('public-clicks:203.0.113.10:minute'), 31)
+    assert.equal(limits.counts.get('public-clicks:203.0.113.10:hour'), 30)
+    await enforcePublicClickRateLimit(guestEvent('2001:db8::10'), options)
+    assert.equal(limits.counts.get('public-clicks:2001:db8::10:minute'), 1)
+    assert.equal(limits.counts.get('public-clicks:198.51.100.20:minute'), 30)
+  })
+
+  it('still enforces 240 public totals per hour when the minute window is open', async () => {
+    const hourCounts = new Map<string, number>()
+    const consume = (id: string, requests: number) => {
+      if (id.endsWith(':minute')) { return Promise.resolve(true) }
+      const used = (hourCounts.get(id) ?? 0) + 1
+      hourCounts.set(id, used)
+      return Promise.resolve(used <= requests)
+    }
+    const options = { consume }
+    const event = guestEvent('203.0.113.10, 127.0.0.1')
+
+    for (let i = 0; i < 240; i++) {
+      await enforcePublicClickRateLimit(event, options)
+    }
+
+    await assertRateLimited(
+      () => enforcePublicClickRateLimit(event, options),
+      '240/hour',
+      ['203.0.113.10', '127.0.0.1']
+    )
+    await enforcePublicClickRateLimit(guestEvent('198.51.100.20'), options)
+    assert.equal(hourCounts.get('public-clicks:203.0.113.10:hour'), 241)
+    assert.equal(hourCounts.get('public-clicks:198.51.100.20:hour'), 1)
   })
 })
 

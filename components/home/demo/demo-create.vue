@@ -259,7 +259,7 @@ const expiryDays = ref(USER_DEFAULT_DAYS)
               <div class="bg-slate-100 dark:bg-gray-700 rounded p-2 mt-2 mb-4 flex justify-between items-center">
                 <a :href="fullDomain + createdLink.key" target="_blank">{{ fullDomain + createdLink.key }}</a>
                 <div class="flex items-center gap-1">
-                  <LinkClicks :key="createdLink.key!" :link-key="createdLink.key!" :clicks="0" />
+                  <LinkClicks :key="createdLink.key!" :link-key="createdLink.key!" public-total />
                   <UTooltip text="Copy Link">
                     <!-- <copy-button :text="fullDomain + props.link.key" /> -->
                     <SharedCopyButton
