@@ -1,4 +1,4 @@
-import { getRequestIP, type H3Event } from 'h3'
+import { createError, getRequestIP, type H3Event } from 'h3'
 import { checkUrlSafety } from '../../utils/url-safety'
 import {
   destinationRejection,
@@ -13,7 +13,7 @@ type LimitResult = {
   pending?: Promise<unknown>
 }
 
-type LimitWindow = '1 h' | '1 d'
+type LimitWindow = '1 m' | '1 h' | '1 d'
 
 type LimitConsume = (
   id: string,
@@ -21,7 +21,7 @@ type LimitConsume = (
   window: LimitWindow
 ) => Promise<boolean>
 
-type RateLimitOptions = {
+export type RateLimitOptions = {
   consume?: LimitConsume
 }
 
@@ -96,7 +96,20 @@ export async function enforceReportRateLimit (event: H3Event, options: RateLimit
   if (!allowed) { throw rateLimitError('5/hour') }
 }
 
-function rateLimitError (limit: '3/hour' | '10/day' | '30/day' | '5/hour') {
+// The home card refreshes a lifetime total about every 20s while the tab is
+// visible. 30/minute stops a tight loop; 240/hour covers that refresh for one
+// client and caps key guessing against Analytics Engine. Same forwarded IP as
+// guest creates.
+export async function enforcePublicClickRateLimit (event: H3Event, options: RateLimitOptions = {}) {
+  const consume = options.consume ?? limitOnce
+  const ip = requestIp(event)
+  const minute = await consume(`public-clicks:${ip}:minute`, 30, '1 m')
+  if (!minute) { throw rateLimitError('30/minute') }
+  const hour = await consume(`public-clicks:${ip}:hour`, 240, '1 h')
+  if (!hour) { throw rateLimitError('240/hour') }
+}
+
+function rateLimitError (limit: '3/hour' | '10/day' | '30/day' | '5/hour' | '30/minute' | '240/hour') {
   return createError({
     statusCode: 429,
     statusMessage: 'Too Many Requests',

@@ -71,6 +71,14 @@ describe('linkErrorI18nKey', () => {
       data: { code: 'rate_limited', limit: '5/hour' }
     }), 'security.rate_limited_report')
     assert.equal(linkErrorI18nKey({
+      statusCode: 429,
+      data: { code: 'rate_limited', limit: '30/minute' }
+    }), 'security.rate_limited')
+    assert.equal(linkErrorI18nKey({
+      statusCode: 429,
+      data: { code: 'rate_limited', limit: '240/hour' }
+    }), 'security.rate_limited')
+    assert.equal(linkErrorI18nKey({
       data: { code: 'unsafe_url', reason: 'private' }
     }), 'security.unsafe_private')
     assert.equal(linkErrorI18nKey({
