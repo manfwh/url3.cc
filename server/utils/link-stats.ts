@@ -1,29 +1,40 @@
 import type { IntervalProps } from '../../lib/stats'
 
 /**
- * Click data points written by the redirect Worker into Analytics Engine.
- * The SQL table name is the binding's `dataset` (not the binding variable).
- * One point is one click. Counts use SUM(_sample_interval) so sampled rows
- * still represent every click. index1 is the link key so sampling stays
- * accurate per link. Historical Tinybird rows are not imported.
- *
- * writeDataPoint({
- *   indexes: [key],
- *   blobs: [country, city, browser, os, device, referer]
- * })
+ * Click points written by the redirect Worker (binding CLICK_EVENTS,
+ * dataset click_events). Counts use SUM(_sample_interval). index1 is the
+ * sampling key and may be truncated to 96 bytes. blob20 keeps the full link
+ * key, and reads filter on blob20 so the key match stays exact. Tinybird
+ * history is not imported.
  */
-export const LINK_CLICK_DATA_POINT = {
-  dataset: 'link_clicks',
+export const CLICK_EVENTS_SCHEMA = {
+  binding: 'CLICK_EVENTS',
+  dataset: 'click_events',
   indexes: {
     index1: 'key'
   },
+  fullKey: 'blob20',
   blobs: {
     blob1: 'country',
     blob2: 'city',
-    blob3: 'browser',
-    blob4: 'os',
-    blob5: 'device',
-    blob6: 'referer'
+    blob3: 'region',
+    blob4: 'latitude',
+    blob5: 'longitude',
+    blob6: 'ua',
+    blob7: 'browser',
+    blob8: 'browser_version',
+    blob9: 'engine',
+    blob10: 'engine_version',
+    blob11: 'os',
+    blob12: 'os_version',
+    blob13: 'device',
+    blob14: 'device_vendor',
+    blob15: 'device_model',
+    blob16: 'cpu_architecture',
+    blob17: 'bot',
+    blob18: 'referer',
+    blob19: 'referer_url',
+    blob20: 'key'
   }
 } as const
 
@@ -140,8 +151,9 @@ export function buildLinkStatsQuery (input: {
 }): string {
   const dataset = assertDataset(input.dataset)
   const keyLiteral = sqlString(assertKey(input.key))
+  const fullKey = CLICK_EVENTS_SCHEMA.fullKey
   const where = [
-    `index1 = ${keyLiteral}`,
+    `(${fullKey} = ${keyLiteral} OR (${fullKey} = '' AND index1 = ${keyLiteral}))`,
     `timestamp >= ${sqlDateTime(input.window.start)}`,
     `timestamp < ${sqlDateTime(new Date(input.window.end.getTime() + 1000))}`
   ]
@@ -228,7 +240,7 @@ export async function queryLinkStats <E extends string> (
 ): Promise<E extends LinkStatsEndpoint ? LinkStatsByEndpoint[E] : never> {
   const endpoint = assertEndpoint(input.endpoint)
   const interval = assertInterval(input.interval)
-  const dataset = assertDataset(config.dataset || LINK_CLICK_DATA_POINT.dataset)
+  const dataset = assertDataset(config.dataset || CLICK_EVENTS_SCHEMA.dataset)
   const accountId = assertAccountId(config.accountId)
   const apiToken = assertToken(config.apiToken)
   const now = config.now ?? new Date()
@@ -314,7 +326,7 @@ function sqlDateTime (date: Date) {
 }
 
 function blobColumn (dimension: string) {
-  const entry = Object.entries(LINK_CLICK_DATA_POINT.blobs).find(([, name]) => name === dimension)
+  const entry = Object.entries(CLICK_EVENTS_SCHEMA.blobs).find(([, name]) => name === dimension)
   if (!entry) {
     throw new LinkStatsError(500, 'Analytics dimension is not mapped')
   }

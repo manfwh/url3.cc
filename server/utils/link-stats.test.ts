@@ -1,7 +1,7 @@
 import assert from 'node:assert/strict'
 import { describe, it } from 'node:test'
 import {
-  LINK_CLICK_DATA_POINT,
+  CLICK_EVENTS_SCHEMA,
   LinkStatsError,
   buildLinkStatsQuery,
   linkStatsWindow,
@@ -20,7 +20,7 @@ function queryFor (endpoint: Parameters<typeof buildLinkStatsQuery>[0]['endpoint
     sql: buildLinkStatsQuery({
       endpoint,
       key: 'abc123',
-      dataset: LINK_CLICK_DATA_POINT.dataset,
+      dataset: CLICK_EVENTS_SCHEMA.dataset,
       window
     })
   }
@@ -51,8 +51,10 @@ describe('analytics engine query mapping', () => {
     const { window, sql } = queryFor('clicks', 'all')
     const start = Math.floor(window.start.getTime() / 1000)
     assert.match(sql, /SELECT SUM\(_sample_interval\) AS clicks/)
-    assert.match(sql, /FROM link_clicks/)
-    assert.match(sql, /index1 = 'abc123'/)
+    assert.match(sql, /FROM click_events/)
+    assert.match(sql, /blob20 = 'abc123'/)
+    assert.match(sql, /blob20 = '' AND index1 = 'abc123'/)
+    assert.equal(sql.includes('link_clicks'), false)
     assert.match(sql, new RegExp(`timestamp >= toDateTime\\(${start}\\)`))
     assert.doesNotMatch(sql, /GROUP BY/)
     assert.match(sql, /FORMAT JSON$/)
@@ -76,10 +78,10 @@ describe('analytics engine query mapping', () => {
     const expected = [
       ['country', 'blob1 AS country', 'GROUP BY blob1'],
       ['city', 'blob2 AS city, blob1 AS country', 'GROUP BY blob2, blob1'],
-      ['browser', 'blob3 AS browser', 'GROUP BY blob3'],
-      ['os', 'blob4 AS os', 'GROUP BY blob4'],
-      ['device', 'blob5 AS device', 'GROUP BY blob5'],
-      ['referer', 'blob6 AS referer', 'GROUP BY blob6']
+      ['browser', 'blob7 AS browser', 'GROUP BY blob7'],
+      ['os', 'blob11 AS os', 'GROUP BY blob11'],
+      ['device', 'blob13 AS device', 'GROUP BY blob13'],
+      ['referer', 'blob18 AS referer', 'GROUP BY blob18']
     ] as const
 
     for (const [endpoint, select, group] of expected) {
@@ -88,27 +90,25 @@ describe('analytics engine query mapping', () => {
       assert.match(sql, new RegExp(group.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')))
       assert.match(sql, /ORDER BY clicks DESC/)
     }
-    assert.deepEqual(LINK_CLICK_DATA_POINT, {
-      dataset: 'link_clicks',
-      indexes: { index1: 'key' },
-      blobs: {
-        blob1: 'country',
-        blob2: 'city',
-        blob3: 'browser',
-        blob4: 'os',
-        blob5: 'device',
-        blob6: 'referer'
-      }
-    })
+    assert.equal(CLICK_EVENTS_SCHEMA.binding, 'CLICK_EVENTS')
+    assert.equal(CLICK_EVENTS_SCHEMA.dataset, 'click_events')
+    assert.equal(CLICK_EVENTS_SCHEMA.fullKey, 'blob20')
+    assert.equal(CLICK_EVENTS_SCHEMA.blobs.blob7, 'browser')
+    assert.equal(CLICK_EVENTS_SCHEMA.blobs.blob11, 'os')
+    assert.equal(CLICK_EVENTS_SCHEMA.blobs.blob13, 'device')
+    assert.equal(CLICK_EVENTS_SCHEMA.blobs.blob17, 'bot')
+    assert.equal(CLICK_EVENTS_SCHEMA.blobs.blob18, 'referer')
+    assert.equal(CLICK_EVENTS_SCHEMA.blobs.blob20, 'key')
   })
 
   it('quotes link keys and rejects dataset names that are not identifiers', () => {
     const sql = buildLinkStatsQuery({
       endpoint: 'clicks',
       key: "o'brien",
-      dataset: 'link_clicks',
+      dataset: 'click_events',
       window: linkStatsWindow('1h', NOW)
     })
+    assert.match(sql, /blob20 = 'o''brien'/)
     assert.match(sql, /index1 = 'o''brien'/)
     assert.equal(sql.split('FORMAT JSON').length, 2)
 
@@ -125,7 +125,7 @@ describe('analytics engine query mapping', () => {
       () => buildLinkStatsQuery({
         endpoint: 'device',
         key: 'bad\nkey',
-        dataset: 'link_clicks',
+        dataset: 'click_events',
         window: linkStatsWindow('1h', NOW)
       }),
       (error: unknown) => error instanceof LinkStatsError && error.statusCode === 400
@@ -207,7 +207,7 @@ describe('analytics engine sql request', () => {
     }, {
       accountId: ACCOUNT_ID,
       apiToken: TOKEN,
-      dataset: 'link_clicks',
+      dataset: 'click_events',
       fetchImpl,
       now: NOW
     })
@@ -222,7 +222,8 @@ describe('analytics engine sql request', () => {
     assert.equal(headers.get('authorization'), `Bearer ${TOKEN}`)
     assert.equal(calls[0].init.method, 'POST')
     assert.equal(String(calls[0].init.body).includes(TOKEN), false)
-    assert.match(String(calls[0].init.body), /blob5 AS device/)
+    assert.match(String(calls[0].init.body), /blob13 AS device/)
+    assert.match(String(calls[0].init.body), /blob20 = 'abc123'/)
     assert.equal(JSON.stringify(result).includes(TOKEN), false)
   })
 
