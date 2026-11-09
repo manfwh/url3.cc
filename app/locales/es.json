@@ -166,6 +166,23 @@
     "back": "Todos los enlaces",
     "visitor_id": "ID de visitante",
     "visitor_ip": "IP de visitante",
-    "forbidden": "No tienes acceso de administración."
+    "forbidden": "No tienes acceso de administración.",
+    "banned": "Bloqueado",
+    "filter_all": "Todos",
+    "filter_active": "Activo",
+    "filter_banned": "Bloqueado",
+    "filter_expired": "Caducado",
+    "delete": "Eliminar",
+    "ban": "Bloquear",
+    "unban": "Desbloquear",
+    "delete_title": "¿Eliminar este enlace de invitado?",
+    "delete_description": "Esto elimina el enlace corto de forma permanente. Las visitas se detienen y la fila desaparece de la lista.",
+    "ban_title": "¿Bloquear este enlace?",
+    "ban_description": "Las visitas se detienen con la misma respuesta de baja que un reporte. Puedes desbloquearlo después.",
+    "unban_title": "¿Desbloquear este enlace?",
+    "unban_description": "Las visitas vuelven a funcionar hasta que el enlace caduque. Un enlace ya caducado sigue muerto.",
+    "confirm": "Confirmar",
+    "cancel": "Cancelar",
+    "action_failed": "No se pudo actualizar este enlace."
   }
 }

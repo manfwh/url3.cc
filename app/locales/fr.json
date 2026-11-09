@@ -166,6 +166,23 @@
     "back": "Tous les liens invités",
     "visitor_id": "ID visiteur",
     "visitor_ip": "IP visiteur",
-    "forbidden": "Vous n’avez pas accès à l’administration."
+    "forbidden": "Vous n’avez pas accès à l’administration.",
+    "banned": "Bloqué",
+    "filter_all": "Tous",
+    "filter_active": "Actif",
+    "filter_banned": "Bloqué",
+    "filter_expired": "Expiré",
+    "delete": "Supprimer",
+    "ban": "Bloquer",
+    "unban": "Débloquer",
+    "delete_title": "Supprimer ce lien invité ?",
+    "delete_description": "Le lien court est supprimé définitivement. Les visites s’arrêtent et la ligne disparaît de la liste.",
+    "ban_title": "Bloquer ce lien ?",
+    "ban_description": "Les visites s’arrêtent avec la même réponse qu’un signalement. Vous pourrez le débloquer plus tard.",
+    "unban_title": "Débloquer ce lien ?",
+    "unban_description": "Les visites fonctionnent à nouveau jusqu’à l’expiration. Un lien déjà expiré reste mort.",
+    "confirm": "Confirmer",
+    "cancel": "Annuler",
+    "action_failed": "Impossible de mettre à jour ce lien."
   }
 }

@@ -12,6 +12,8 @@ type GuestLink = {
   last_visited_at: string | null
   clicks: number
   expired: boolean
+  banned: boolean
+  banned_at: string | null
   visitor_id: string | null
   visitor_ip: string | null
 }
@@ -27,10 +29,43 @@ type GuestList = {
 const route = useRoute()
 const router = useRouter()
 const localePath = useLocalePath()
+const { t } = useI18n()
+const statuses = ['all', 'active', 'banned', 'expired'] as const
 const q = ref(typeof route.query.q === 'string' ? route.query.q : '')
 watch(() => route.query.q, (value) => {
   q.value = typeof value === 'string' ? value : ''
 })
+
+function currentStatus () {
+  const value = route.query.status
+  if (typeof value === 'string' && statuses.includes(value as typeof statuses[number])) {
+    return value
+  }
+  return 'all'
+}
+
+function pushQuery (patch: { q?: string, page?: number, status?: string }) {
+  const query: Record<string, string> = {}
+  const term = patch.q !== undefined ? patch.q : (typeof route.query.q === 'string' ? route.query.q : '')
+  const status = patch.status !== undefined ? patch.status : currentStatus()
+  const nextPage = patch.page ?? 1
+  if (term) { query.q = term }
+  if (status !== 'all') { query.status = status }
+  if (nextPage > 1) { query.page = String(nextPage) }
+  router.push({ query })
+}
+
+const status = computed({
+  get: () => currentStatus(),
+  set: (value: string) => pushQuery({ status: value, page: 1 })
+})
+
+const statusItems = computed(() => [
+  { label: t('admin.filter_all'), value: 'all' },
+  { label: t('admin.filter_active'), value: 'active' },
+  { label: t('admin.filter_banned'), value: 'banned' },
+  { label: t('admin.filter_expired'), value: 'expired' }
+])
 
 const page = computed({
   get () {
@@ -38,27 +73,20 @@ const page = computed({
     return Number.isInteger(value) && value > 0 ? value : 1
   },
   set (value: number) {
-    const query: Record<string, string> = {}
-    if (typeof route.query.q === 'string' && route.query.q) {
-      query.q = route.query.q
-    }
-    if (value > 1) { query.page = String(value) }
-    router.push({ query })
+    pushQuery({ page: value })
   }
 })
 
 const { data, pending, error } = await useFetch<GuestList>('/api/admin/links', {
   query: computed(() => ({
     page: page.value,
-    q: typeof route.query.q === 'string' ? route.query.q : ''
+    q: typeof route.query.q === 'string' ? route.query.q : '',
+    status: currentStatus()
   }))
 })
 
 function search () {
-  const query: Record<string, string> = {}
-  const term = q.value.trim()
-  if (term) { query.q = term }
-  router.push({ query })
+  pushQuery({ q: q.value.trim(), page: 1 })
 }
 
 function formatTime (value: string | null) {
@@ -92,6 +120,16 @@ function formatTime (value: string | null) {
           {{ $t('admin.search_action') }}
         </UButton>
       </form>
+    </div>
+    <div class="pb-4">
+      <USelectMenu
+        v-model="status"
+        class="w-44"
+        :search-input="false"
+        :items="statusItems"
+        label-key="label"
+        value-key="value"
+      />
     </div>
 
     <UAlert
@@ -161,9 +199,17 @@ function formatTime (value: string | null) {
               {{ formatTime(link.expires_at) }}
             </td>
             <td class="px-3 py-3">
-              <UBadge :color="link.expired ? 'error' : 'success'" variant="subtle">
-                {{ link.expired ? $t('admin.expired') : $t('admin.active') }}
-              </UBadge>
+              <div class="flex flex-wrap gap-1">
+                <UBadge v-if="link.banned" color="error" variant="subtle">
+                  {{ $t('admin.banned') }}
+                </UBadge>
+                <UBadge v-if="link.expired" color="warning" variant="subtle">
+                  {{ $t('admin.expired') }}
+                </UBadge>
+                <UBadge v-if="!link.banned && !link.expired" color="success" variant="subtle">
+                  {{ $t('admin.active') }}
+                </UBadge>
+              </div>
             </td>
           </tr>
         </tbody>

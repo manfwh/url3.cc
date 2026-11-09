@@ -12,7 +12,8 @@ export function omitGuestAdminFields<T extends object> (body: T) {
   delete copy.visitor_ip
   delete copy.expires_at
   delete copy.last_visited_at
-  return copy as Omit<T, 'is_guest' | 'visitor_id' | 'visitor_ip' | 'expires_at' | 'last_visited_at'>
+  delete copy.banned_at
+  return copy as Omit<T, 'is_guest' | 'visitor_id' | 'visitor_ip' | 'expires_at' | 'last_visited_at' | 'banned_at'>
 }
 
 export function visitorIdFromRequest (bodyValue: unknown, cookieValue: unknown) {
@@ -72,6 +73,14 @@ export function guestLinkSearch (value: unknown) {
   const raw = Array.isArray(value) ? value[0] : value
   if (typeof raw !== 'string') { return '' }
   return raw.trim().replace(/[%_*,()\\'"]/g, '').replace(/\s+/g, ' ').slice(0, 120)
+}
+
+export type GuestLinkStatus = 'all' | 'active' | 'banned' | 'expired'
+
+export function guestLinkStatus (value: unknown): GuestLinkStatus {
+  const raw = Array.isArray(value) ? value[0] : value
+  if (raw === 'active' || raw === 'banned' || raw === 'expired') { return raw }
+  return 'all'
 }
 
 export function guestLinkPage (value: unknown) {

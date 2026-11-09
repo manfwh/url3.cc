@@ -166,6 +166,23 @@
     "back": "全部訪客連結",
     "visitor_id": "訪客 ID",
     "visitor_ip": "訪客 IP",
-    "forbidden": "你沒有管理頁面的權限。"
+    "forbidden": "你沒有管理頁面的權限。",
+    "banned": "已封鎖",
+    "filter_all": "全部",
+    "filter_active": "有效",
+    "filter_banned": "已封鎖",
+    "filter_expired": "已到期",
+    "delete": "刪除",
+    "ban": "封鎖",
+    "unban": "解除封鎖",
+    "delete_title": "刪除這個訪客連結？",
+    "delete_description": "這會永久移除短連結。之後的造訪會停止，這筆資料也會從列表消失。",
+    "ban_title": "封鎖這個連結？",
+    "ban_description": "造訪會像檢舉成功一樣停止。之後可以解除封鎖。",
+    "unban_title": "解除封鎖？",
+    "unban_description": "在到期之前，造訪會恢復。已經到期的連結不會復活。",
+    "confirm": "確認",
+    "cancel": "取消",
+    "action_failed": "無法更新這個連結。"
   }
 }

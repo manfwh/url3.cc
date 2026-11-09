@@ -6,6 +6,7 @@ import {
   guestLinkInsert,
   guestLinkPage,
   guestLinkSearch,
+  guestLinkStatus,
   guestVisitorIp,
   isGuestLinkExpired,
   omitGuestAdminFields,
@@ -34,6 +35,7 @@ describe('guestLinkInsert', () => {
     assert.equal(row.visitor_id, VISITOR)
     assert.equal(row.visitor_ip, '203.0.113.10')
     assert.equal(row.clicks, 0)
+    assert.equal(row.banned_at, undefined)
   })
 
   it('drops an invalid visitor id and an unknown address', () => {
@@ -65,6 +67,9 @@ describe('guest link list helpers', () => {
     assert.equal(guestLinkPage('2'), 2)
     assert.equal(guestLinkPage('0'), 1)
     assert.equal(guestLinkPage('nope'), 1)
+    assert.equal(guestLinkStatus('banned'), 'banned')
+    assert.equal(guestLinkStatus('nope'), 'all')
+    assert.equal(guestLinkStatus(['expired']), 'expired')
   })
 
   it('marks a link expired only after expires_at', () => {
@@ -121,7 +126,8 @@ describe('omitGuestAdminFields', () => {
       visitor_id: VISITOR,
       visitor_ip: '203.0.113.10',
       expires_at: '2026-11-16T00:00:00.000Z',
-      last_visited_at: '2026-11-09T00:00:00.000Z'
+      last_visited_at: '2026-11-09T00:00:00.000Z',
+      banned_at: '2026-11-09T00:00:00.000Z'
     })
     assert.deepEqual(body, { key: 'abc', url: 'https://example.com' })
   })

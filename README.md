@@ -31,6 +31,27 @@ New guest creates (`POST /api/demo/links`) still redirect from Redis. After Redi
 
 Apply `supabase/migrations/20261109120000_guest_link_admin.sql` before relying on the list. Guest rows are not readable by `anon` or by a signed-in user's own-row policies. The insert uses the service role.
 
+`/admin/links/:key` can delete or ban that guest link. Delete removes `short-link:${key}`, `link-report:${key}`, and the `links` row. Ban and a successful public report share one state: `links.banned_at` plus `banned: true` on the Redis object. Unban clears both. If `expires_at` is already past, unban deletes the Redis key instead of turning the redirect back on.
+
+The write APIs are admin-only and look the link up by `key` for any owner. The page still lists guest rows only. Apply `supabase/migrations/20261109143000_link_banned_at.sql` before using ban or delete.
+
+### Redis contract for the redirect Worker
+
+Key: `short-link:${key}`. The value stays the JSON object already stored there. Ban adds one field and does not change `url`, `type`, or the TTL:
+
+```json
+{
+  "url": "https://example.com/docs",
+  "type": "url",
+  "is_demo": true,
+  "banned": true
+}
+```
+
+Signed-in links keep their own fields (`password`, `ios`, `android`, images, and the existing encoded `url`). A missing `banned` field means not banned.
+
+The Worker returns **HTTP 410 Gone** when `banned === true`, and redirects otherwise. Do not treat a non-empty `link-report:${key}` list as banned. That list is only the report audit log. `POST /api/links/:key/report` still appends to it, and on success also sets this same `banned: true` flag and `links.banned_at` when a row exists. Admin unban clears the flag so a live link redirects again. There is no separate reported status.
+
 `TINYBIRD_API_KEY` is no longer read. Clicks stored in Tinybird are not imported. Charts and the stats click total include only data points written after the Worker starts recording to Analytics Engine. The `all` interval still begins on 2022-09-22, so earlier buckets stay at zero.
 
 The redirect Worker records one click per data point on binding `CLICK_EVENTS` with dataset `url3-cc`. `index1` is the link key used for sampling and may be truncated to 96 bytes. `blob20` stores the full link key. Stats queries filter on `blob20`, and use `index1` only when `blob20` is empty. Counts use `SUM(_sample_interval)` over the Analytics Engine timestamp.

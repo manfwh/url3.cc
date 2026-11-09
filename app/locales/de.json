@@ -166,6 +166,23 @@
     "back": "Alle Gast-Links",
     "visitor_id": "Besucher-ID",
     "visitor_ip": "Besucher-IP",
-    "forbidden": "Du hast keinen Admin-Zugriff."
+    "forbidden": "Du hast keinen Admin-Zugriff.",
+    "banned": "Gesperrt",
+    "filter_all": "Alle",
+    "filter_active": "Aktiv",
+    "filter_banned": "Gesperrt",
+    "filter_expired": "Abgelaufen",
+    "delete": "Löschen",
+    "ban": "Sperren",
+    "unban": "Entsperren",
+    "delete_title": "Diesen Gast-Link löschen?",
+    "delete_description": "Der Kurzlink wird dauerhaft entfernt. Aufrufe enden, und der Eintrag verschwindet aus der Liste.",
+    "ban_title": "Diesen Link sperren?",
+    "ban_description": "Aufrufe enden mit derselben „nicht mehr verfügbar“-Antwort wie bei einer Meldung. Die Sperre kann später aufgehoben werden.",
+    "unban_title": "Sperre aufheben?",
+    "unban_description": "Aufrufe funktionieren wieder, bis der Link abläuft. Ein bereits abgelaufener Link bleibt tot.",
+    "confirm": "Bestätigen",
+    "cancel": "Abbrechen",
+    "action_failed": "Der Link konnte nicht aktualisiert werden."
   }
 }

@@ -5,10 +5,11 @@ import { readAnalyticsEngineConfig } from './analytics-engine-config'
 import { LinkStatsError, queryLinkStats } from './link-stats'
 import {
   isGuestLinkExpired,
-  resolveGuestClicks
+  resolveGuestClicks,
+  type GuestLinkStatus
 } from './guest-link'
 
-const GUEST_LINK_COLUMNS = 'key,url,created_at,expires_at,last_visited_at,clicks,visitor_id,visitor_ip'
+const GUEST_LINK_COLUMNS = 'key,url,created_at,expires_at,last_visited_at,clicks,visitor_id,visitor_ip,banned_at'
 
 export type GuestLinkRecord = {
   key: string
@@ -19,6 +20,7 @@ export type GuestLinkRecord = {
   clicks: number | null
   visitor_id: string | null
   visitor_ip: string | null
+  banned_at: string | null
 }
 
 export function toAdminGuestLink (row: GuestLinkRecord, clicks: number, now = Date.now()) {
@@ -30,6 +32,8 @@ export function toAdminGuestLink (row: GuestLinkRecord, clicks: number, now = Da
     last_visited_at: row.last_visited_at,
     clicks,
     expired: isGuestLinkExpired(row.expires_at, now),
+    banned: !!row.banned_at,
+    banned_at: row.banned_at,
     visitor_id: row.visitor_id,
     visitor_ip: row.visitor_ip
   }
@@ -58,7 +62,13 @@ async function guestLinks (event: H3Event) {
   return serverSupabaseServiceRole<Database>(event)
 }
 
-export async function listGuestLinks (event: H3Event, page: number, pageSize: number, search: string) {
+export async function listGuestLinks (
+  event: H3Event,
+  page: number,
+  pageSize: number,
+  search: string,
+  status: GuestLinkStatus = 'all'
+) {
   const supabase = await guestLinks(event)
   const from = (page - 1) * pageSize
   const to = from + pageSize - 1
@@ -67,6 +77,15 @@ export async function listGuestLinks (event: H3Event, page: number, pageSize: nu
     .select(GUEST_LINK_COLUMNS, { count: 'exact' })
     .eq('is_guest', true)
     .order('created_at', { ascending: false })
+
+  const now = new Date().toISOString()
+  if (status === 'banned') {
+    request = request.not('banned_at', 'is', null)
+  } else if (status === 'expired') {
+    request = request.is('banned_at', null).lte('expires_at', now)
+  } else if (status === 'active') {
+    request = request.is('banned_at', null).or(`expires_at.is.null,expires_at.gt."${now}"`)
+  }
 
   if (search) {
     const pattern = `%${search}%`
