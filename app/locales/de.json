@@ -31,7 +31,8 @@
       "hour": "Stunde | Stunden",
       "minute": "Minute | Minuten",
       "second": "Sekunde | Sekunden"
-    }
+    },
+    "Admin": "Admin"
   },
   "hero": {
     "title": {
@@ -143,5 +144,28 @@
       "invalid_link": "Gib einen gültigen url3.cc-Kurzlink ein."
     },
     "guest_fixed": "Gast-Links laufen nach 7 Tagen ab."
+  },
+  "admin": {
+    "title": "Gast-Links",
+    "description": "Gast-Links, die nach dem Aktivieren der Admin-Erfassung erstellt wurden. Ältere Links, die nur in Redis liegen, erscheinen nicht.",
+    "search": "Schlüssel oder URL suchen",
+    "search_action": "Suchen",
+    "empty": "Noch keine Gast-Links.",
+    "loading": "Gast-Links werden geladen…",
+    "load_failed": "Gast-Links konnten nicht geladen werden.",
+    "key": "Schlüssel",
+    "url": "Ziel-URL",
+    "created": "Erstellt",
+    "last_visit": "Letzter Besuch",
+    "clicks": "Klicks",
+    "expires": "Läuft ab",
+    "status": "Status",
+    "expired": "Abgelaufen",
+    "active": "Aktiv",
+    "never": "Noch nicht",
+    "back": "Alle Gast-Links",
+    "visitor_id": "Besucher-ID",
+    "visitor_ip": "Besucher-IP",
+    "forbidden": "Du hast keinen Admin-Zugriff."
   }
 }

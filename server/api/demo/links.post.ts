@@ -1,12 +1,15 @@
-import { serverSupabaseUser } from '#supabase/server'
+import { serverSupabaseServiceRole, serverSupabaseUser } from '#supabase/server'
 import { resolveExpiry } from '#shared/utils/link-policy'
-import { enforceCreateRateLimit, requireLocalDestinations, requireSafeBrowsing } from '~~/server/utils/create-policy'
+import { VISITOR_ID_COOKIE } from '#shared/utils/visitor-id'
+import type { Database } from '#shared/types/type'
+import { clientRequestIp, enforceCreateRateLimit, requireLocalDestinations, requireSafeBrowsing } from '~~/server/utils/create-policy'
+import { guestLinkInsert, recordGuestLink, visitorIdFromRequest } from '~~/server/utils/guest-link'
 import { setRandomKey } from '~~/server/utils/upstash'
 
 // Guest create has no captcha in v1. Abuse control is the IP limit (3/hour and 10/day),
 // a local URL check, then Safe Browsing. The API key stays on the server.
 export default defineEventHandler(async (event) => {
-  const body = await readBody(event) as { url?: unknown, type?: unknown, expiresIn?: unknown }
+  const body = await readBody(event) as { url?: unknown, type?: unknown, expiresIn?: unknown, visitorId?: unknown }
   const type = body?.type || 'url'
   if (type !== 'url') {
     throw createError({
@@ -54,11 +57,31 @@ export default defineEventHandler(async (event) => {
     throw createError({ statusCode: 500, statusMessage: 'Create Error', data: { code: 'create_failed' } })
   }
 
+  const expiresAt = expiry.seconds > 0 ? new Date(Date.now() + expiry.seconds * 1000).toISOString() : null
+  if (role === 'guest') {
+    // Redis is the redirect source of truth. The Supabase row is for /admin only.
+    try {
+      const supabase = await serverSupabaseServiceRole<Database>(event)
+      await recordGuestLink(
+        row => supabase.from('links').insert(row),
+        guestLinkInsert({
+          key,
+          url: destination,
+          expiresAt,
+          visitorId: visitorIdFromRequest(body.visitorId, getCookie(event, VISITOR_ID_COOKIE)),
+          visitorIp: clientRequestIp(event)
+        })
+      )
+    } catch (error) {
+      console.error('guest link dual-write failed', error instanceof Error ? error.name : 'error')
+    }
+  }
+
   setResponseStatus(event, 201)
   return {
     key,
     url: destination,
     expiresIn: expiry.seconds,
-    expiresAt: expiry.seconds > 0 ? new Date(Date.now() + expiry.seconds * 1000).toISOString() : null
+    expiresAt
   }
 })

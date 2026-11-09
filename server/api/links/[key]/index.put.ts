@@ -7,6 +7,7 @@ import { serverSupabaseClient } from '#supabase/server'
 import type { Database, Tables } from '#shared/types/type'
 import { validateRequest } from '~~/server/utils/link'
 import { requireLocalDestinations, requireSafeBrowsing } from '~~/server/utils/create-policy'
+import { omitGuestAdminFields } from '~~/server/utils/guest-link'
 
 type RequestBody = Exclude<Tables<'links'>, 'user_id'> & {slug?: string}
 export default defineAuthHandler(async (event) => {
@@ -31,7 +32,7 @@ export default defineAuthHandler(async (event) => {
   }
   await deleteImage(link, body)
 
-  const { status, error } = await supabase.from('links').update(updateBody).eq('id', id).select()
+  const { status, error } = await supabase.from('links').update(omitGuestAdminFields(updateBody)).eq('id', id).select()
   if (error) {
     throw createError({ statusCode: 400, data: 'Update Error' })
   }

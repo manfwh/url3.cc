@@ -18,8 +18,18 @@ Link stats are read from Cloudflare Workers Analytics Engine. Set these on the V
 | `CF_ACCOUNT_ID` | yes | Cloudflare account that owns the Analytics Engine dataset. The same value is already used for R2. |
 | `CF_ANALYTICS_API_TOKEN` | yes | Cloudflare API token with **Account / Account Analytics / Read**. The stats route uses it only for the Analytics Engine SQL API. |
 | `CF_ANALYTICS_DATASET` | no | Analytics Engine dataset name. Defaults to `url3-cc`. The Worker binding name stays `CLICK_EVENTS`. |
+| `ADMIN_EMAILS` | for `/admin` | Comma-separated allowlist of account emails that can open `/admin`. Checked on the server and in the admin route middleware. Do not commit addresses. |
+| `ADMIN_USER_IDS` | no | Optional comma-separated Supabase user UUIDs, for the same allowlist when email is missing. |
 
-Nuxt also accepts `NUXT_CF_ACCOUNT_ID`, `NUXT_CF_ANALYTICS_API_TOKEN`, and `NUXT_CF_ANALYTICS_DATASET`.
+Nuxt also accepts `NUXT_CF_ACCOUNT_ID`, `NUXT_CF_ANALYTICS_API_TOKEN`, `NUXT_CF_ANALYTICS_DATASET`, `NUXT_ADMIN_EMAILS`, and `NUXT_ADMIN_USER_IDS`. None of these belong in `runtimeConfig.public`.
+
+## Guest link admin
+
+New guest creates (`POST /api/demo/links`) still redirect from Redis. After Redis accepts the key, the server also inserts a `links` row with `is_guest=true`, `user_id=null`, `expires_at`, a random `visitor_id`, and the client IP. A Supabase failure is logged and the short link is still returned. Older Redis-only guest links are not imported.
+
+`/admin` lists those rows for the allowlist above. Click totals reuse the Analytics Engine query (`queryLinkStats`, interval `all`) and fall back to `links.clicks` when Analytics Engine is not configured. `last_visited_at` is stored for a later Worker update and stays empty until that exists.
+
+Apply `supabase/migrations/20261109120000_guest_link_admin.sql` before relying on the list. Guest rows are not readable by `anon` or by a signed-in user's own-row policies. The insert uses the service role.
 
 `TINYBIRD_API_KEY` is no longer read. Clicks stored in Tinybird are not imported. Charts and the stats click total include only data points written after the Worker starts recording to Analytics Engine. The `all` interval still begins on 2022-09-22, so earlier buckets stay at zero.
 

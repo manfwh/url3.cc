@@ -25,10 +25,9 @@ type EChartsOption = ComposeOption<
   | TooltipComponentOption
   | PieSeriesOption
 >
-const key = inject('key')
 const stats = useStats()
 
-const { data, pending, error } = useFetch(`/api/links/${key}/stats/device`, {
+const { data, pending, error } = useFetch<any>(useLinkStatsUrl('device'), {
   params: {
     interval: stats?.interval
   },

@@ -10,6 +10,7 @@ import { redis } from '~~/server/utils/upstash'
 import { defineAuthHandler } from '~~/server/utils/handler'
 import { resolveExpiry } from '#shared/utils/link-policy'
 import { enforceCreateRateLimit, requireLocalDestinations, requireSafeBrowsing } from '~~/server/utils/create-policy'
+import { omitGuestAdminFields } from '~~/server/utils/guest-link'
 
 type RequestBody = Exclude<Tables<'links'>, 'id' | 'user_id'> & {slug?: string, expiresIn?: number | string}
 export default defineAuthHandler(async (event) => {
@@ -54,7 +55,7 @@ export default defineAuthHandler(async (event) => {
     // 删除图片前缀_nocjeck_
     await copyImage(body)
     const { status, error } = await supabase.from('links').insert({
-      ...body,
+      ...omitGuestAdminFields(body),
       ...(destinationUrl && { url: destinationUrl }),
       key,
       user_id: event.context.session.user.id

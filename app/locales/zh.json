@@ -31,7 +31,8 @@
       "hour": "小時 | 小時",
       "minute": "分鐘 | 分鐘",
       "second": "秒 | 秒"
-    }
+    },
+    "Admin": "管理"
   },
   "hero": {
     "title": {
@@ -143,5 +144,28 @@
       "invalid_link": "請輸入有效的 url3.cc 短連結。"
     },
     "guest_fixed": "訪客連結固定在 7 天後失效。"
+  },
+  "admin": {
+    "title": "訪客連結",
+    "description": "啟用管理追蹤之後建立的訪客連結。更早只存在 Redis 的連結不會列出。",
+    "search": "搜尋短碼或網址",
+    "search_action": "搜尋",
+    "empty": "還沒有訪客連結。",
+    "loading": "正在載入訪客連結…",
+    "load_failed": "無法載入訪客連結。",
+    "key": "短碼",
+    "url": "目標網址",
+    "created": "建立時間",
+    "last_visit": "最近造訪",
+    "clicks": "點擊",
+    "expires": "到期時間",
+    "status": "狀態",
+    "expired": "已到期",
+    "active": "有效",
+    "never": "尚無",
+    "back": "全部訪客連結",
+    "visitor_id": "訪客 ID",
+    "visitor_ip": "訪客 IP",
+    "forbidden": "你沒有管理頁面的權限。"
   }
 }

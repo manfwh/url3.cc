@@ -31,7 +31,8 @@
       "hour": "heure | heures",
       "minute": "minute | minutes",
       "second": "seconde | secondes"
-    }
+    },
+    "Admin": "Admin"
   },
   "hero": {
     "title": {
@@ -143,5 +144,28 @@
       "invalid_link": "Saisissez un lien court url3.cc valide."
     },
     "guest_fixed": "Les liens invités expirent au bout de 7 jours."
+  },
+  "admin": {
+    "title": "Liens invités",
+    "description": "Liens invités créés après l’activation du suivi d’administration. Les anciens liens présents seulement dans Redis ne sont pas listés.",
+    "search": "Rechercher une clé ou une URL",
+    "search_action": "Rechercher",
+    "empty": "Aucun lien invité pour le moment.",
+    "loading": "Chargement des liens invités…",
+    "load_failed": "Impossible de charger les liens invités.",
+    "key": "Clé",
+    "url": "URL cible",
+    "created": "Créé",
+    "last_visit": "Dernière visite",
+    "clicks": "Clics",
+    "expires": "Expiration",
+    "status": "Statut",
+    "expired": "Expiré",
+    "active": "Actif",
+    "never": "Pas encore",
+    "back": "Tous les liens invités",
+    "visitor_id": "ID visiteur",
+    "visitor_ip": "IP visiteur",
+    "forbidden": "Vous n’avez pas accès à l’administration."
   }
 }

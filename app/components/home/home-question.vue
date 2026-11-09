@@ -26,18 +26,21 @@ const items = [
     <h2 class="text-3xl font-bold mb-8 tracking-tight text-gray-900 dark:text-white sm:text-4xl lg:text-5xl text-center">
       {{ $t('questions.questions') }}
     </h2>
-    <UAccordion type="multiple" :unmount-on-hide="false" :items="items">
-      <template #default="{ item, index, open }">
-        <UButton color="neutral" variant="ghost" class="w-full rounded-none border-b border-gray-200 p-3 dark:border-gray-700">
-          <span class="truncate">{{ index + 1 }}. {{ item.label }}</span>
-          <template #trailing>
-            <UIcon
-              name="i-heroicons-chevron-right-20-solid"
-              class="w-5 h-5 ms-auto transform transition-transform duration-200"
-              :class="[open && 'rotate-90']"
-            />
-          </template>
-        </UButton>
+    <UAccordion
+      type="multiple"
+      :unmount-on-hide="false"
+      :items="items"
+      :ui="{ item: 'last:border-b' }"
+    >
+      <template #default="{ item, index }">
+        {{ index + 1 }}. {{ item.label }}
+      </template>
+      <template #trailing="{ open }">
+        <UIcon
+          name="i-lucide-chevron-down"
+          class="size-5 ms-auto shrink-0 transition-transform duration-200"
+          :class="open && 'rotate-180'"
+        />
       </template>
     </UAccordion>
   </div>

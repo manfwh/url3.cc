@@ -11,7 +11,8 @@
     "download": "Scarica",
     "SignIn": "Accedi",
     "SignOut": "Esci",
-    "Dashboard": "Dashboard"
+    "Dashboard": "Dashboard",
+    "Admin": "Admin"
   },
   "hero": {
     "title": {
@@ -101,5 +102,28 @@
       "invalid_link": "Inserisci un link breve url3.cc valido."
     },
     "guest_fixed": "I link degli ospiti scadono dopo 7 giorni."
+  },
+  "admin": {
+    "title": "Link ospite",
+    "description": "Link ospite creati dopo l’attivazione del monitoraggio admin. I link più vecchi presenti solo in Redis non sono elencati.",
+    "search": "Cerca chiave o URL",
+    "search_action": "Cerca",
+    "empty": "Non ci sono ancora link ospite.",
+    "loading": "Caricamento dei link ospite…",
+    "load_failed": "Impossibile caricare i link ospite.",
+    "key": "Chiave",
+    "url": "URL di destinazione",
+    "created": "Creato",
+    "last_visit": "Ultima visita",
+    "clicks": "Clic",
+    "expires": "Scadenza",
+    "status": "Stato",
+    "expired": "Scaduto",
+    "active": "Attivo",
+    "never": "Non ancora",
+    "back": "Tutti i link ospite",
+    "visitor_id": "ID visitatore",
+    "visitor_ip": "IP visitatore",
+    "forbidden": "Non hai accesso all’amministrazione."
   }
 }

@@ -31,7 +31,8 @@
       "hour": "hour | hours",
       "minute": "minute | minutes",
       "second": "second | seconds"
-    }
+    },
+    "Admin": "Admin"
   },
   "hero": {
     "title": {
@@ -143,5 +144,28 @@
       "invalid_link": "Enter a valid url3.cc short link."
     },
     "guest_fixed": "Guest links expire after 7 days."
+  },
+  "admin": {
+    "title": "Guest links",
+    "description": "Guest links created after admin tracking was enabled. Older Redis-only links are not listed.",
+    "search": "Search key or URL",
+    "search_action": "Search",
+    "empty": "No guest links yet.",
+    "loading": "Loading guest links…",
+    "load_failed": "Could not load guest links.",
+    "key": "Key",
+    "url": "Target URL",
+    "created": "Created",
+    "last_visit": "Last visit",
+    "clicks": "Clicks",
+    "expires": "Expires",
+    "status": "Status",
+    "expired": "Expired",
+    "active": "Active",
+    "never": "Not yet",
+    "back": "All guest links",
+    "visitor_id": "Visitor ID",
+    "visitor_ip": "Visitor IP",
+    "forbidden": "You do not have access to admin."
   }
 }

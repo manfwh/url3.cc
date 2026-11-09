@@ -31,7 +31,8 @@
       "hour": "jam",
       "minute": "menit",
       "second": "detik"
-    }
+    },
+    "Admin": "Admin"
   },
   "hero": {
     "title": {
@@ -143,5 +144,28 @@
       "invalid_link": "Masukkan tautan pendek url3.cc yang valid."
     },
     "guest_fixed": "Tautan tamu kedaluwarsa setelah 7 hari."
+  },
+  "admin": {
+    "title": "Tautan tamu",
+    "description": "Tautan tamu yang dibuat setelah pelacakan admin diaktifkan. Tautan lama yang hanya ada di Redis tidak ditampilkan.",
+    "search": "Cari kunci atau URL",
+    "search_action": "Cari",
+    "empty": "Belum ada tautan tamu.",
+    "loading": "Memuat tautan tamu…",
+    "load_failed": "Tautan tamu tidak dapat dimuat.",
+    "key": "Kunci",
+    "url": "URL tujuan",
+    "created": "Dibuat",
+    "last_visit": "Kunjungan terakhir",
+    "clicks": "Klik",
+    "expires": "Kedaluwarsa",
+    "status": "Status",
+    "expired": "Kedaluwarsa",
+    "active": "Aktif",
+    "never": "Belum ada",
+    "back": "Semua tautan tamu",
+    "visitor_id": "ID pengunjung",
+    "visitor_ip": "IP pengunjung",
+    "forbidden": "Anda tidak memiliki akses admin."
   }
 }

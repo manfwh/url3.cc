@@ -31,7 +31,8 @@
       "hour": "hora | horas",
       "minute": "minuto | minutos",
       "second": "segundo | segundos"
-    }
+    },
+    "Admin": "Admin"
   },
   "hero": {
     "title": {
@@ -143,5 +144,28 @@
       "invalid_link": "Introduce un enlace corto válido de url3.cc."
     },
     "guest_fixed": "Los enlaces de invitados caducan a los 7 días."
+  },
+  "admin": {
+    "title": "Enlaces de invitados",
+    "description": "Enlaces de invitados creados después de activar el seguimiento de administración. Los enlaces antiguos que solo están en Redis no aparecen.",
+    "search": "Buscar clave o URL",
+    "search_action": "Buscar",
+    "empty": "Todavía no hay enlaces de invitados.",
+    "loading": "Cargando enlaces de invitados…",
+    "load_failed": "No se pudieron cargar los enlaces de invitados.",
+    "key": "Clave",
+    "url": "URL de destino",
+    "created": "Creado",
+    "last_visit": "Última visita",
+    "clicks": "Clics",
+    "expires": "Caduca",
+    "status": "Estado",
+    "expired": "Caducado",
+    "active": "Activo",
+    "never": "Aún no",
+    "back": "Todos los enlaces",
+    "visitor_id": "ID de visitante",
+    "visitor_ip": "IP de visitante",
+    "forbidden": "No tienes acceso de administración."
   }
 }

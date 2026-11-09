@@ -4,7 +4,7 @@ import { createError, getRequestIP, type H3Event } from 'h3'
 
 Object.assign(globalThis, { createError })
 
-const { enforceCreateRateLimit, enforcePublicClickRateLimit, enforceReportRateLimit } = await import('./create-policy')
+const { clientRequestIp, enforceCreateRateLimit, enforcePublicClickRateLimit, enforceReportRateLimit } = await import('./create-policy')
 
 type LimitWindow = '1 m' | '1 h' | '1 d'
 
@@ -76,6 +76,7 @@ describe('getRequestIP on this h3 version', () => {
     const event = guestEvent('203.0.113.10, 127.0.0.1')
     assert.equal(getRequestIP(event), '127.0.0.1')
     assert.equal(getRequestIP(event, { xForwardedFor: true }), '203.0.113.10')
+    assert.equal(clientRequestIp(event), '203.0.113.10')
   })
 })
 
