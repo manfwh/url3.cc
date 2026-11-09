@@ -1,6 +1,6 @@
 import { Ratelimit } from '@upstash/ratelimit'
 import { Redis } from '@upstash/redis'
-import { nanoid } from '~/server/utils'
+import { nanoid } from '~~/server/utils'
 
 export const redis = new Redis({
   url: process.env.UPSTASH_REDIS_REST_URL || '',

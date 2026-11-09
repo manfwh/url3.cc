@@ -1,0 +1,34 @@
+diff --git a/dist/runtime/plugin.js b/dist/runtime/plugin.js
+index 39173c7a822a9b421581de714fe7eeb2cdad1936..0165b9c8199793aae8fd4cad8b7a412606c30b8e 100644
+--- a/dist/runtime/plugin.js
++++ b/dist/runtime/plugin.js
+@@ -1,5 +1,5 @@
+ import { createPinia, setActivePinia } from "pinia";
+-import { defineNuxtPlugin, useNuxtApp } from "#app";
++import { defineNuxtPlugin } from "#app";
+ import { toRaw } from "vue";
+ const plugin = defineNuxtPlugin({
+   name: "pinia",
+@@ -10,18 +10,15 @@ const plugin = defineNuxtPlugin({
+     if (nuxtApp.payload && nuxtApp.payload.pinia) {
+       pinia.state.value = nuxtApp.payload.pinia;
+     }
++    nuxtApp.hook("app:rendered", () => {
++      nuxtApp.payload.pinia = toRaw(pinia).state.value;
++      setActivePinia(void 0);
++    });
+     return {
+       provide: {
+         pinia
+       }
+     };
+-  },
+-  hooks: {
+-    "app:rendered"() {
+-      const nuxtApp = useNuxtApp();
+-      nuxtApp.payload.pinia = toRaw(nuxtApp.$pinia).state.value;
+-      setActivePinia(void 0);
+-    }
+   }
+ });
+ export default plugin;

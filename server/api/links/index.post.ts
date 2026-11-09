@@ -3,13 +3,13 @@ import {
   CopyObjectCommand
 } from '@aws-sdk/client-s3'
 import { serverSupabaseClient, serverSupabaseUser } from '#supabase/server'
-import type { Database, Tables } from '~/types/type'
+import type { Database, Tables } from '#shared/types/type'
 
-import { validateRequest } from '~/server/utils/link'
-import { redis } from '~/server/utils/upstash'
-import { defineAuthHandler } from '~/server/utils/handler'
-import { resolveExpiry } from '~/utils/link-policy'
-import { enforceCreateRateLimit, requireLocalDestinations, requireSafeBrowsing } from '~/server/utils/create-policy'
+import { validateRequest } from '~~/server/utils/link'
+import { redis } from '~~/server/utils/upstash'
+import { defineAuthHandler } from '~~/server/utils/handler'
+import { resolveExpiry } from '#shared/utils/link-policy'
+import { enforceCreateRateLimit, requireLocalDestinations, requireSafeBrowsing } from '~~/server/utils/create-policy'
 
 type RequestBody = Exclude<Tables<'links'>, 'id' | 'user_id'> & {slug?: string, expiresIn?: number | string}
 export default defineAuthHandler(async (event) => {
@@ -29,7 +29,7 @@ export default defineAuthHandler(async (event) => {
   if (checked.ios) { body.ios = checked.ios }
   if (checked.android) { body.android = checked.android }
   const destinationUrl = checked.url
-  const redisOptions = { nx: true, ex: expiry.seconds }
+  const redisOptions = { nx: true as const, ex: expiry.seconds }
 
   if (event.context.session.user_role !== 'admin' && body.key) {
     throw createError({ statusCode: 400, data: 'Invalid key' })

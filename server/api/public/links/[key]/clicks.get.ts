@@ -1,4 +1,4 @@
-import { publicClickTotal } from '~/server/utils/public-click-total'
+import { publicClickTotal } from '~~/server/utils/public-click-total'
 
 // Unauthenticated lifetime click total. Timeseries and dimension stats stay on
 // the authenticated /api/links/:key/stats/* routes.

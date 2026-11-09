@@ -1,5 +1,5 @@
 import { createError, getRequestIP, type H3Event } from 'h3'
-import { checkUrlSafety } from '../../utils/url-safety'
+import { checkUrlSafety } from '../../shared/utils/url-safety'
 import {
   destinationRejection,
   normalizeDestinationFields,
