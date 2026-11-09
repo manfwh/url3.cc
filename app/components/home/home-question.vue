@@ -1,5 +1,25 @@
 <script setup lang="ts">
 const { t } = useI18n()
+useHead(() => ({
+  script: [
+    {
+      key: 'ld-faq',
+      type: 'application/ld+json',
+      innerHTML: JSON.stringify({
+        '@context': 'https://schema.org',
+        '@type': 'FAQPage',
+        mainEntity: [1, 2, 3, 4].map(index => ({
+          '@type': 'Question',
+          name: t(`questions.q${index}`),
+          acceptedAnswer: {
+            '@type': 'Answer',
+            text: t(`questions.a${index}`)
+          }
+        }))
+      })
+    }
+  ]
+}))
 const items = [
   {
     label: t('questions.q1'),
