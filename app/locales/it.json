@@ -124,6 +124,23 @@
     "back": "Tutti i link ospite",
     "visitor_id": "ID visitatore",
     "visitor_ip": "IP visitatore",
-    "forbidden": "Non hai accesso all’amministrazione."
+    "forbidden": "Non hai accesso all’amministrazione.",
+    "banned": "Bloccato",
+    "filter_all": "Tutti",
+    "filter_active": "Attivo",
+    "filter_banned": "Bloccato",
+    "filter_expired": "Scaduto",
+    "delete": "Elimina",
+    "ban": "Blocca",
+    "unban": "Sblocca",
+    "delete_title": "Eliminare questo link ospite?",
+    "delete_description": "Il link breve viene rimosso in modo permanente. Le visite si fermano e la riga sparisce dall’elenco.",
+    "ban_title": "Bloccare questo link?",
+    "ban_description": "Le visite si fermano con la stessa risposta di una segnalazione. Puoi sbloccarlo in seguito.",
+    "unban_title": "Sbloccare questo link?",
+    "unban_description": "Le visite tornano a funzionare fino alla scadenza. Un link già scaduto resta spento.",
+    "confirm": "Conferma",
+    "cancel": "Annulla",
+    "action_failed": "Impossibile aggiornare questo link."
   }
 }

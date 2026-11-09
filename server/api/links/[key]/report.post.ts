@@ -1,5 +1,7 @@
 import { nanoid } from '~~/server/utils'
 import { enforceReportRateLimit } from '~~/server/utils/create-policy'
+import { executeReportBan } from '~~/server/utils/link-moderation'
+import { moderationDeps } from '~~/server/utils/link-moderation-store'
 import { findShortLink, isAcceptableKey } from '~~/server/utils/short-link'
 import { redis } from '~~/server/utils/upstash'
 
@@ -37,6 +39,9 @@ export default defineEventHandler(async (event) => {
     details,
     createdAt: new Date().toISOString()
   }
+  // A successful report is the same banned state an admin sets. The Worker
+  // reads banned=true on short-link:${key} and returns HTTP 410.
+  await executeReportBan(await moderationDeps(event), key)
   await redis.rpush(`link-report:${key}`, JSON.stringify(report))
 
   setResponseStatus(event, 201)

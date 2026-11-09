@@ -64,6 +64,7 @@ export interface Database {
           android_image: string | null
           asset_id: number | null
           clicks: number | null
+          banned_at: string | null
           created_at: string
           description: string | null
           domain: string | null
@@ -91,6 +92,7 @@ export interface Database {
           android_asset_id?: number | null
           android_image?: string | null
           asset_id?: number | null
+          banned_at?: string | null
           clicks?: number | null
           created_at?: string
           description?: string | null
@@ -119,6 +121,7 @@ export interface Database {
           android_asset_id?: number | null
           android_image?: string | null
           asset_id?: number | null
+          banned_at?: string | null
           clicks?: number | null
           created_at?: string
           description?: string | null

@@ -11,6 +11,7 @@ export interface Database {
     Tables: {
       links: {
         Row: {
+          banned_at: string | null
           created_at: string
           domain: string | null
           expires_at: string | null
@@ -25,6 +26,7 @@ export interface Database {
           visitor_ip: string | null
         }
         Insert: {
+          banned_at?: string | null
           created_at?: string
           domain?: string | null
           expires_at?: string | null
@@ -39,6 +41,7 @@ export interface Database {
           visitor_ip?: string | null
         }
         Update: {
+          banned_at?: string | null
           created_at?: string
           domain?: string | null
           expires_at?: string | null

@@ -166,6 +166,23 @@
     "back": "ゲストリンク一覧",
     "visitor_id": "ビジター ID",
     "visitor_ip": "ビジター IP",
-    "forbidden": "管理ページを見る権限がありません。"
+    "forbidden": "管理ページを見る権限がありません。",
+    "banned": "停止中",
+    "filter_all": "すべて",
+    "filter_active": "有効",
+    "filter_banned": "停止中",
+    "filter_expired": "期限切れ",
+    "delete": "削除",
+    "ban": "停止",
+    "unban": "停止を解除",
+    "delete_title": "このゲストリンクを削除しますか？",
+    "delete_description": "短縮リンクは完全に削除されます。アクセスは止まり、一覧からも消えます。",
+    "ban_title": "このリンクを停止しますか？",
+    "ban_description": "アクセスは通報が受け付けられたときと同じ応答で止まります。あとから解除できます。",
+    "unban_title": "停止を解除しますか？",
+    "unban_description": "期限前ならアクセスが戻ります。期限切れのリンクは戻しません。",
+    "confirm": "確認",
+    "cancel": "キャンセル",
+    "action_failed": "リンクを更新できませんでした。"
   }
 }

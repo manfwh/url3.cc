@@ -6,6 +6,8 @@ The live database was already patched through the Supabase Dashboard and MCP. `m
 
 `migrations/20261109120000_guest_link_admin.sql` is new and still needs to be applied before `/admin` can list guest links. Run it in the Supabase SQL editor or with the Supabase CLI against project `ytvauorrjbktlnagxbkr`. It adds `is_guest`, `expires_at`, `last_visited_at`, `visitor_id`, and `visitor_ip` on `public.links`, and keeps guest rows out of the authenticated owner policies.
 
+`migrations/20261109143000_link_banned_at.sql` adds nullable `banned_at` and blocks owner inserts/updates from setting it. Apply it after the guest-link migration and before deploying admin ban, unban, or delete. Service-role writes are the only path that sets the column.
+
 ## Remaining follow-ups
 
 - Upgrade Postgres.

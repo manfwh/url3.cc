@@ -166,6 +166,23 @@
     "back": "Tất cả liên kết khách",
     "visitor_id": "ID khách",
     "visitor_ip": "IP khách",
-    "forbidden": "Bạn không có quyền quản trị."
+    "forbidden": "Bạn không có quyền quản trị.",
+    "banned": "Đã chặn",
+    "filter_all": "Tất cả",
+    "filter_active": "Còn hiệu lực",
+    "filter_banned": "Đã chặn",
+    "filter_expired": "Đã hết hạn",
+    "delete": "Xóa",
+    "ban": "Chặn",
+    "unban": "Bỏ chặn",
+    "delete_title": "Xóa liên kết khách này?",
+    "delete_description": "Liên kết rút gọn bị xóa vĩnh viễn. Lượt truy cập dừng lại và dòng biến mất khỏi danh sách.",
+    "ban_title": "Chặn liên kết này?",
+    "ban_description": "Lượt truy cập dừng với cùng phản hồi như khi bị báo cáo. Bạn có thể bỏ chặn sau.",
+    "unban_title": "Bỏ chặn liên kết này?",
+    "unban_description": "Lượt truy cập hoạt động lại cho đến khi liên kết hết hạn. Liên kết đã hết hạn vẫn chết.",
+    "confirm": "Xác nhận",
+    "cancel": "Hủy",
+    "action_failed": "Không cập nhật được liên kết này."
   }
 }

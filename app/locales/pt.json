@@ -166,6 +166,23 @@
     "back": "Todos os links",
     "visitor_id": "ID do visitante",
     "visitor_ip": "IP do visitante",
-    "forbidden": "Você não tem acesso de administração."
+    "forbidden": "Você não tem acesso de administração.",
+    "banned": "Bloqueado",
+    "filter_all": "Todos",
+    "filter_active": "Ativo",
+    "filter_banned": "Bloqueado",
+    "filter_expired": "Expirado",
+    "delete": "Excluir",
+    "ban": "Bloquear",
+    "unban": "Desbloquear",
+    "delete_title": "Excluir este link de visitante?",
+    "delete_description": "Isso remove o link curto de forma permanente. As visitas param e a linha some da lista.",
+    "ban_title": "Bloquear este link?",
+    "ban_description": "As visitas param com a mesma resposta de indisponível de uma denúncia. Dá para desbloquear depois.",
+    "unban_title": "Desbloquear este link?",
+    "unban_description": "As visitas voltam a funcionar até o link expirar. Um link já expirado continua morto.",
+    "confirm": "Confirmar",
+    "cancel": "Cancelar",
+    "action_failed": "Não foi possível atualizar este link."
   }
 }

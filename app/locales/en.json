@@ -166,6 +166,23 @@
     "back": "All guest links",
     "visitor_id": "Visitor ID",
     "visitor_ip": "Visitor IP",
-    "forbidden": "You do not have access to admin."
+    "forbidden": "You do not have access to admin.",
+    "banned": "Banned",
+    "filter_all": "All",
+    "filter_active": "Active",
+    "filter_banned": "Banned",
+    "filter_expired": "Expired",
+    "delete": "Delete",
+    "ban": "Ban",
+    "unban": "Unban",
+    "delete_title": "Delete this guest link?",
+    "delete_description": "This permanently removes the short link. Visits stop, and the row disappears from this list.",
+    "ban_title": "Ban this link?",
+    "ban_description": "Visits stop with the same gone response as a report. You can unban it later.",
+    "unban_title": "Unban this link?",
+    "unban_description": "Visits work again until the link expires. An already expired link stays dead.",
+    "confirm": "Confirm",
+    "cancel": "Cancel",
+    "action_failed": "Could not update this link."
   }
 }

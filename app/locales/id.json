@@ -166,6 +166,23 @@
     "back": "Semua tautan tamu",
     "visitor_id": "ID pengunjung",
     "visitor_ip": "IP pengunjung",
-    "forbidden": "Anda tidak memiliki akses admin."
+    "forbidden": "Anda tidak memiliki akses admin.",
+    "banned": "Diblokir",
+    "filter_all": "Semua",
+    "filter_active": "Aktif",
+    "filter_banned": "Diblokir",
+    "filter_expired": "Kedaluwarsa",
+    "delete": "Hapus",
+    "ban": "Blokir",
+    "unban": "Buka blokir",
+    "delete_title": "Hapus tautan tamu ini?",
+    "delete_description": "Tautan pendek dihapus permanen. Kunjungan berhenti, dan barisnya hilang dari daftar.",
+    "ban_title": "Blokir tautan ini?",
+    "ban_description": "Kunjungan berhenti dengan respons yang sama seperti laporan. Blokir bisa dibuka lagi nanti.",
+    "unban_title": "Buka blokir tautan ini?",
+    "unban_description": "Kunjungan berjalan lagi sampai tautan kedaluwarsa. Tautan yang sudah kedaluwarsa tetap mati.",
+    "confirm": "Konfirmasi",
+    "cancel": "Batal",
+    "action_failed": "Tidak dapat memperbarui tautan ini."
   }
 }
