@@ -1,4 +1,4 @@
-import type { IntervalProps } from '../../lib/stats'
+import type { IntervalProps } from '../../app/lib/stats'
 
 /**
  * Click points written by the redirect Worker (binding CLICK_EVENTS,

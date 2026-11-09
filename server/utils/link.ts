@@ -1,4 +1,4 @@
-import { checkUrlSafety } from '~/utils/url-safety'
+import { checkUrlSafety } from '#shared/utils/url-safety'
 // 验证请求参数
 export const validateRequest = (body: any) => {
   if (body.type === 'url' && (typeof body.url !== 'string' || !body.url.trim())) {

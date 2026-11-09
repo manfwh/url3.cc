@@ -1,5 +1,6 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
+  compatibilityDate: '2026-11-09',
   runtimeConfig: {
     // Server-only. Set SAFE_BROWSING_API_KEY or NUXT_SAFE_BROWSING_API_KEY.
     // Never put this under `public`.
@@ -12,15 +13,46 @@ export default defineNuxtConfig({
     cfAnalyticsDataset: 'url3-cc'
   },
   devtools: { enabled: false },
+  typescript: {
+    // Nuxt 4 defaults this on. Existing handlers index into known arrays and
+    // objects; keep the Nuxt 3 checker behavior so the migration does not
+    // rewrite those call sites.
+    tsConfig: {
+      compilerOptions: {
+        noUncheckedIndexedAccess: false,
+        types: ['node']
+      }
+    },
+    nodeTsConfig: {
+      compilerOptions: {
+        noUncheckedIndexedAccess: false,
+        types: ['node']
+      }
+    },
+    sharedTsConfig: {
+      compilerOptions: {
+        noUncheckedIndexedAccess: false,
+        types: ['node']
+      }
+    }
+  },
+  nitro: {
+    typescript: {
+      tsConfig: {
+        compilerOptions: {
+          noUncheckedIndexedAccess: false,
+          types: ['node']
+        }
+      }
+    }
+  },
   modules: [
-    ['@nuxtjs/eslint-module', { lintOnStart: false }],
     '@nuxtjs/supabase',
     '@vueuse/nuxt',
     '@nuxt/ui',
-    '@nuxtjs/google-fonts',
     '@nuxtjs/i18n',
     '@nuxt/content',
-    'nuxt-simple-sitemap',
+    '@nuxtjs/sitemap',
     '@pinia/nuxt'
   ],
   css: ['~/assets/css/main.css', '~/assets/css/scrollbars.css'],
@@ -35,99 +67,43 @@ export default defineNuxtConfig({
     redirect: false,
     redirectOptions: {
       login: '/login',
+      callback: '/confirm',
       exclude: ['/']
-    } as any
-  } as any,
+    },
+    types: '~~/shared/database.types.ts'
+  },
   devServer: {
     port: 8888
   },
   build: {
     transpile: [/echarts/, 'vue-echarts', 'resize-detector']
   },
-  ui: {
-    icons: ['lucide']
+  fonts: {
+    families: [
+      { name: 'Inter', provider: 'google' }
+    ]
   },
   i18n: {
     baseUrl: 'https://app.url3.cc',
+    strategy: 'prefix_except_default',
+    defaultLocale: 'en',
+    restructureDir: '.',
+    vueI18n: './i18n.config.ts',
     locales: [
-      {
-        code: 'en',
-        iso: 'en-US',
-        foo: 'bar'
-      }, {
-        code: 'zh',
-        iso: 'zh-TW',
-        foo: 'bar'
-      }, {
-        code: 'ja',
-        iso: 'ja-JP',
-        foo: 'bar'
-      },
-      {
-        code: 'ko',
-        iso: 'ko-KR',
-        foo: 'bar'
-      },
-      {
-        code: 'id',
-        name: 'Bahasa Indonesia',
-        iso: 'id-ID'
-      },
-      {
-        code: 'vi',
-        name: 'Tiếng Việt',
-        iso: 'vi-VN'
-      },
-      {
-        code: 'th',
-        name: 'ไทย',
-        iso: 'th-TH'
-      },
-      {
-        code: 'es',
-        iso: 'es-ES',
-        foo: 'bar'
-      },
-      {
-        code: 'pt',
-        iso: 'pt-BR',
-        foo: 'bar'
-      },
-      {
-        code: 'fr',
-        iso: 'fr-FR',
-        foo: 'bar'
-      },
-      {
-        code: 'ru',
-        iso: 'ru-RU',
-        foo: 'bar'
-      },
-      {
-        code: 'it',
-        iso: 'it-IT',
-        foo: 'bar'
-      },
-      {
-        code: 'de',
-        iso: 'de-DE',
-        foo: 'bar'
-      }
-    ],
-    defaultLocale: 'en'
-  },
-  content: {
-    highlight: {
-      theme: 'material-theme'
-      // Theme used in all color schemes.
-      // theme: 'github-light'
-
-    }
-  },
-  googleFonts: {
-    families: {
-      Inter: true
-    }
+      { code: 'en', language: 'en-US' },
+      { code: 'zh', language: 'zh-TW' },
+      { code: 'ja', language: 'ja-JP' },
+      { code: 'ko', language: 'ko-KR' },
+      { code: 'id', name: 'Bahasa Indonesia', language: 'id-ID' },
+      { code: 'vi', name: 'Tiếng Việt', language: 'vi-VN' },
+      { code: 'th', name: 'ไทย', language: 'th-TH' },
+      { code: 'es', language: 'es-ES' },
+      { code: 'pt', language: 'pt-BR' },
+      { code: 'fr', language: 'fr-FR' },
+      { code: 'ru', language: 'ru-RU' },
+      { code: 'it', language: 'it-IT' },
+      { code: 'de', language: 'de-DE' }
+    ]
   },
   site: {
     url: 'https://app.url3.cc'

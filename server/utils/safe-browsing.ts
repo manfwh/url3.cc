@@ -1,4 +1,4 @@
-import { checkUrlSafety, type UrlSafetyReason } from '../../utils/url-safety'
+import { checkUrlSafety, type UrlSafetyReason } from '../../shared/utils/url-safety'
 
 export type DestinationFields = {
   url?: unknown

@@ -3,8 +3,8 @@ import {
   DeleteObjectCommand
 } from '@aws-sdk/client-s3'
 import { serverSupabaseClient } from '#supabase/server'
-import type { Database } from '~/types/type'
-import { redis } from '~/server/utils/upstash'
+import type { Database } from '#shared/types/type'
+import { redis } from '~~/server/utils/upstash'
 
 export default defineAuthHandler(async (event) => {
   const supabase = await serverSupabaseClient<Database>(event)

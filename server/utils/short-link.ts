@@ -1,7 +1,7 @@
 import type { H3Event } from 'h3'
 import { serverSupabaseClient } from '#supabase/server'
-import type { Database } from '~/types/type'
-import { redis } from '~/server/utils/upstash'
+import type { Database } from '#shared/types/type'
+import { redis } from '~~/server/utils/upstash'
 
 export type StoredLink = {
   type: string
