@@ -73,6 +73,9 @@ export interface Database {
           ios_asset_id: number | null
           ios_image: string | null
           key: string
+          expires_at: string | null
+          is_guest: boolean
+          last_visited_at: string | null
           note: string | null
           password: string | null
           project_id: number | null
@@ -80,6 +83,8 @@ export interface Database {
           type: Database['public']['Enums']['link_type']
           url: string | null
           user_id: string | null
+          visitor_id: string | null
+          visitor_ip: string | null
         }
         Insert: {
           android?: string | null
@@ -96,6 +101,9 @@ export interface Database {
           ios_asset_id?: number | null
           ios_image?: string | null
           key: string
+          expires_at?: string | null
+          is_guest?: boolean
+          last_visited_at?: string | null
           note?: string | null
           password?: string | null
           project_id?: number | null
@@ -103,6 +111,8 @@ export interface Database {
           type?: Database['public']['Enums']['link_type']
           url?: string | null
           user_id?: string | null
+          visitor_id?: string | null
+          visitor_ip?: string | null
         }
         Update: {
           android?: string | null
@@ -119,6 +129,9 @@ export interface Database {
           ios_asset_id?: number | null
           ios_image?: string | null
           key?: string
+          expires_at?: string | null
+          is_guest?: boolean
+          last_visited_at?: string | null
           note?: string | null
           password?: string | null
           project_id?: number | null
@@ -126,6 +139,8 @@ export interface Database {
           type?: Database['public']['Enums']['link_type']
           url?: string | null
           user_id?: string | null
+          visitor_id?: string | null
+          visitor_ip?: string | null
         }
         Relationships: [
           {

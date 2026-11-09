@@ -31,7 +31,8 @@
       "hour": "時 | 時間",
       "minute": "分 | 分間",
       "second": "秒 | 秒"
-    }
+    },
+    "Admin": "管理"
   },
   "hero": {
     "title": {
@@ -143,5 +144,28 @@
       "invalid_link": "有効な url3.cc のショートリンクを入力してください。"
     },
     "guest_fixed": "ゲストのリンクは 7 日で期限切れになります。"
+  },
+  "admin": {
+    "title": "ゲストリンク",
+    "description": "管理トラッキングを有効にした後に作成されたゲストリンクです。それ以前の Redis のみのリンクは表示されません。",
+    "search": "キーまたは URL を検索",
+    "search_action": "検索",
+    "empty": "ゲストリンクはまだありません。",
+    "loading": "ゲストリンクを読み込み中…",
+    "load_failed": "ゲストリンクを読み込めませんでした。",
+    "key": "キー",
+    "url": "リンク先",
+    "created": "作成",
+    "last_visit": "最終訪問",
+    "clicks": "クリック",
+    "expires": "有効期限",
+    "status": "状態",
+    "expired": "期限切れ",
+    "active": "有効",
+    "never": "まだなし",
+    "back": "ゲストリンク一覧",
+    "visitor_id": "ビジター ID",
+    "visitor_ip": "ビジター IP",
+    "forbidden": "管理ページを見る権限がありません。"
   }
 }

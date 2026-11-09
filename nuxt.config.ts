@@ -10,7 +10,11 @@ export default defineNuxtConfig({
     // Nuxt aliases: NUXT_CF_ACCOUNT_ID, NUXT_CF_ANALYTICS_API_TOKEN, NUXT_CF_ANALYTICS_DATASET.
     cfAccountId: '',
     cfAnalyticsApiToken: '',
-    cfAnalyticsDataset: 'url3-cc'
+    cfAnalyticsDataset: 'url3-cc',
+    // Server-only admin allowlist. Vercel: ADMIN_EMAILS, optional ADMIN_USER_IDS.
+    // Nuxt aliases: NUXT_ADMIN_EMAILS, NUXT_ADMIN_USER_IDS. Never NUXT_PUBLIC_*.
+    adminEmails: '',
+    adminUserIds: ''
   },
   devtools: { enabled: false },
   typescript: {
@@ -110,6 +114,6 @@ export default defineNuxtConfig({
   },
   sitemap: {
     xsl: false,
-    exclude: ['/auth/**', '/test/**', '/confirm', '/dashboard']
+    exclude: ['/auth/**', '/test/**', '/confirm', '/dashboard', '/admin', '/admin/**', '/*/admin', '/*/admin/**']
   }
 })

@@ -13,29 +13,44 @@ export interface Database {
         Row: {
           created_at: string
           domain: string | null
+          expires_at: string | null
           id: number
+          is_guest: boolean
           key: string
+          last_visited_at: string | null
           project_id: number | null
           url: string | null
           user_id: string | null
+          visitor_id: string | null
+          visitor_ip: string | null
         }
         Insert: {
           created_at?: string
           domain?: string | null
+          expires_at?: string | null
           id?: number
+          is_guest?: boolean
           key: string
+          last_visited_at?: string | null
           project_id?: number | null
           url?: string | null
           user_id?: string | null
+          visitor_id?: string | null
+          visitor_ip?: string | null
         }
         Update: {
           created_at?: string
           domain?: string | null
+          expires_at?: string | null
           id?: number
+          is_guest?: boolean
           key?: string
+          last_visited_at?: string | null
           project_id?: number | null
           url?: string | null
           user_id?: string | null
+          visitor_id?: string | null
+          visitor_ip?: string | null
         }
         Relationships: [
           {

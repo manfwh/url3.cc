@@ -2,7 +2,9 @@
 
 Project: **shortLink** (`ytvauorrjbktlnagxbkr`).
 
-The live database was already patched through the Supabase Dashboard and MCP. `migrations/` records that SQL in the repo. It is history only and was not re-applied from this change.
+The live database was already patched through the Supabase Dashboard and MCP. `migrations/20261105120304_fix_rls_policies_and_security_definer.sql` records that SQL in the repo. It is history only and was not re-applied from this change.
+
+`migrations/20261109120000_guest_link_admin.sql` is new and still needs to be applied before `/admin` can list guest links. Run it in the Supabase SQL editor or with the Supabase CLI against project `ytvauorrjbktlnagxbkr`. It adds `is_guest`, `expires_at`, `last_visited_at`, `visitor_id`, and `visitor_ip` on `public.links`, and keeps guest rows out of the authenticated owner policies.
 
 ## Remaining follow-ups
 

@@ -31,7 +31,8 @@
       "hour": "hora | horas",
       "minute": "minuto | minutos",
       "second": "segundo | segundos"
-    }
+    },
+    "Admin": "Admin"
   },
   "hero": {
     "title": {
@@ -143,5 +144,28 @@
       "invalid_link": "Informe um link curto válido do url3.cc."
     },
     "guest_fixed": "Links de visitantes expiram após 7 dias."
+  },
+  "admin": {
+    "title": "Links de visitantes",
+    "description": "Links de visitantes criados depois que o acompanhamento de administração foi ativado. Links antigos que existem só no Redis não aparecem.",
+    "search": "Buscar chave ou URL",
+    "search_action": "Buscar",
+    "empty": "Ainda não há links de visitantes.",
+    "loading": "Carregando links de visitantes…",
+    "load_failed": "Não foi possível carregar os links de visitantes.",
+    "key": "Chave",
+    "url": "URL de destino",
+    "created": "Criado",
+    "last_visit": "Última visita",
+    "clicks": "Cliques",
+    "expires": "Expira",
+    "status": "Status",
+    "expired": "Expirado",
+    "active": "Ativo",
+    "never": "Ainda não",
+    "back": "Todos os links",
+    "visitor_id": "ID do visitante",
+    "visitor_ip": "IP do visitante",
+    "forbidden": "Você não tem acesso de administração."
   }
 }

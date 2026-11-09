@@ -34,9 +34,8 @@ type EChartsOption = ComposeOption<
 >
 const json: any = await $fetch('/data/world.geo.json')
 registerMap('world', json)
-const key = inject('key')
 const stats = useStats()
-const { data, pending, error } = useFetch(`/api/links/${key}/stats/country`, {
+const { data, pending, error } = useFetch<any>(useLinkStatsUrl('country'), {
   params: {
     interval: stats?.interval
   },

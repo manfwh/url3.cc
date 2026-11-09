@@ -31,7 +31,8 @@
       "hour": "giờ",
       "minute": "phút",
       "second": "giây"
-    }
+    },
+    "Admin": "Quản trị"
   },
   "hero": {
     "title": {
@@ -143,5 +144,28 @@
       "invalid_link": "Nhập liên kết ngắn url3.cc hợp lệ."
     },
     "guest_fixed": "Liên kết của khách hết hạn sau 7 ngày."
+  },
+  "admin": {
+    "title": "Liên kết khách",
+    "description": "Liên kết khách được tạo sau khi bật theo dõi quản trị. Liên kết cũ chỉ có trên Redis không được liệt kê.",
+    "search": "Tìm khóa hoặc URL",
+    "search_action": "Tìm",
+    "empty": "Chưa có liên kết khách.",
+    "loading": "Đang tải liên kết khách…",
+    "load_failed": "Không tải được liên kết khách.",
+    "key": "Khóa",
+    "url": "URL đích",
+    "created": "Tạo lúc",
+    "last_visit": "Lần truy cập cuối",
+    "clicks": "Lượt nhấp",
+    "expires": "Hết hạn",
+    "status": "Trạng thái",
+    "expired": "Đã hết hạn",
+    "active": "Còn hạn",
+    "never": "Chưa có",
+    "back": "Tất cả liên kết khách",
+    "visitor_id": "ID khách",
+    "visitor_ip": "IP khách",
+    "forbidden": "Bạn không có quyền quản trị."
   }
 }

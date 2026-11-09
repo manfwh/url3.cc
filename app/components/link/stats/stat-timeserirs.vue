@@ -25,9 +25,8 @@ type EChartsOption = ComposeOption<
   | LineSeriesOption
 >
 
-const key = inject('key')
 const stats = useStats()
-const { data, pending, error } = useFetch(`/api/links/${key}/stats/timeserirs`, {
+const { data, pending, error } = useFetch<any>(useLinkStatsUrl('timeserirs'), {
   params: {
     interval: stats?.interval
   },

@@ -229,10 +229,32 @@ describe('detail stats stay authenticated', () => {
       return readFileSync(file, 'utf8').includes('queryLinkStats')
     })
     assert.deepEqual(callers.map(file => file.slice(serverRoot.length + 1)).sort(), [
+      'api/admin/links/[key]/stats/[endpoint].get.ts',
+      'utils/guest-link-admin.ts',
       'utils/link-stats-route.ts',
       'utils/link-stats.ts',
       'utils/public-click-total.ts'
     ])
+
+    const apiRoot = fileURLToPath(new URL('../api', import.meta.url))
+    const statsCallers = walk(apiRoot).filter((file) => {
+      const source = readFileSync(file, 'utf8')
+      return source.includes('queryLinkStats') || source.includes('guest-link-admin')
+    })
+    assert.deepEqual(statsCallers.map(file => file.slice(apiRoot.length + 1)).sort(), [
+      'admin/links/[key].get.ts',
+      'admin/links/[key]/stats/[endpoint].get.ts',
+      'admin/links/index.get.ts'
+    ])
+    for (const file of statsCallers) {
+      const source = readFileSync(file, 'utf8')
+      assert.match(source, /defineAdminHandler/)
+      assert.doesNotMatch(source, /defineEventHandler|publicClickTotal/)
+    }
+    const adminHandler = readFileSync(fileURLToPath(new URL('./admin-handler.ts', import.meta.url)), 'utf8')
+    assert.match(adminHandler, /statusCode:\s*401/)
+    assert.match(adminHandler, /statusCode:\s*403/)
+    assert.match(adminHandler, /isAllowlistedAdmin/)
 
     const publicSource = readFileSync(fileURLToPath(new URL('./public-click-total.ts', import.meta.url)), 'utf8')
     assert.match(publicSource, /endpoint:\s*PUBLIC_CLICK_TOTAL\.endpoint/)

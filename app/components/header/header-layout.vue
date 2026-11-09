@@ -5,6 +5,19 @@ import { useUserStore } from '~/store/user'
 const userStore = useUserStore()
 const { user: userInfo } = storeToRefs(userStore)
 const localePath = useLocalePath()
+const sessionUser = useSupabaseUser()
+const requestFetch = useRequestFetch()
+const { data: isAdmin } = await useAsyncData('admin-nav', async () => {
+  if (!sessionUser.value) { return false }
+  try {
+    await requestFetch('/api/admin/session')
+    return true
+  } catch {
+    return false
+  }
+}, {
+  watch: [sessionUser]
+})
 const items = computed(() => [
   [{
     label: userInfo.value?.email || '-',
@@ -40,7 +53,10 @@ const items = computed(() => [
           <UButton v-if="!userInfo" variant="outline" :to="localePath('/login')">
             {{ $t('common.SignIn') }}
           </UButton>
-          <UButton v-else :to="localePath('/dashboard')" variant="outline">
+          <UButton v-if="isAdmin" :to="localePath('/admin')" variant="outline">
+            {{ $t('common.Admin') }}
+          </UButton>
+          <UButton v-if="userInfo" :to="localePath('/dashboard')" variant="outline">
             {{ $t('common.Dashboard') }}
           </UButton>
           <UDropdownMenu

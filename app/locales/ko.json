@@ -31,7 +31,8 @@
       "hour": "시간",
       "minute": "분",
       "second": "초"
-    }
+    },
+    "Admin": "관리"
   },
   "hero": {
     "title": {
@@ -143,5 +144,28 @@
       "invalid_link": "올바른 url3.cc 단축 링크를 입력하세요."
     },
     "guest_fixed": "비로그인 링크는 7일 후 만료됩니다."
+  },
+  "admin": {
+    "title": "게스트 링크",
+    "description": "관리 추적을 켠 뒤에 만들어진 게스트 링크입니다. 그 이전의 Redis 전용 링크는 목록에 없습니다.",
+    "search": "키 또는 URL 검색",
+    "search_action": "검색",
+    "empty": "게스트 링크가 아직 없습니다.",
+    "loading": "게스트 링크를 불러오는 중…",
+    "load_failed": "게스트 링크를 불러오지 못했습니다.",
+    "key": "키",
+    "url": "대상 URL",
+    "created": "생성",
+    "last_visit": "최근 방문",
+    "clicks": "클릭",
+    "expires": "만료",
+    "status": "상태",
+    "expired": "만료됨",
+    "active": "유효",
+    "never": "없음",
+    "back": "모든 게스트 링크",
+    "visitor_id": "방문자 ID",
+    "visitor_ip": "방문자 IP",
+    "forbidden": "관리 페이지에 접근할 수 없습니다."
   }
 }

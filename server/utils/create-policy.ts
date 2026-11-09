@@ -62,8 +62,12 @@ export async function requireSafeBrowsing (fields: NormalizedDestinations) {
 // h3 1.11 returns the socket peer unless xForwardedFor is set. On Vercel that
 // peer is the local proxy (127.0.0.1). Vercel overwrites x-forwarded-for with
 // the connecting client, so the first entry is a per-client rate-limit key.
-function requestIp (event: H3Event) {
+export function clientRequestIp (event: H3Event) {
   return getRequestIP(event, { xForwardedFor: true }) || 'unknown'
+}
+
+function requestIp (event: H3Event) {
+  return clientRequestIp(event)
 }
 
 export async function enforceCreateRateLimit (

@@ -5,6 +5,7 @@ import DraggerUpload from '~/components/shared/upload/dragger-upload.vue'
 import type { UploadFile } from '@/components/shared/upload/types'
 import { checkUrlSafety } from '#shared/utils/url-safety'
 import { linkErrorI18nKey } from '~/utils/link-api-error'
+import { readOrCreateVisitorId } from '~/utils/visitor-id'
 import { DAY_SECONDS, USER_DEFAULT_DAYS, USER_MAX_DAYS, USER_MIN_DAYS } from '#shared/utils/link-policy'
 const { fullDomain } = useAppConfig()
 const toast = useToast()
@@ -89,7 +90,7 @@ const handleSubmit = (e: Event) => {
     method: 'POST',
     body: isAuthed.value
       ? { url, type: 'url', expiresIn: days * DAY_SECONDS }
-      : { url, type: 'url' }
+      : { url, type: 'url', visitorId: readOrCreateVisitorId() }
   }).then((data) => {
     links.value.unshift({ key: data.key, url: data.url || url })
     formRef.value?.reset()
