@@ -56,6 +56,7 @@ export default defineNuxtConfig({
     '@nuxt/ui',
     '@nuxtjs/i18n',
     '@nuxt/content',
+    '@nuxtjs/robots',
     '@nuxtjs/sitemap',
     '@pinia/nuxt'
   ],
@@ -112,8 +113,40 @@ export default defineNuxtConfig({
   site: {
     url: 'https://app.url3.cc'
   },
+  // Unprefixed rules also match locale paths (/zh/login, /de/dashboard, ...).
+  // /login is noindex but still crawlable so a search engine can drop it.
+  routeRules: {
+    '/dashboard': { robots: 'noindex, nofollow' },
+    '/dashboard/**': { robots: 'noindex, nofollow' },
+    '/admin': { robots: 'noindex, nofollow' },
+    '/admin/**': { robots: 'noindex, nofollow' },
+    '/auth': { robots: 'noindex, nofollow' },
+    '/auth/**': { robots: 'noindex, nofollow' },
+    '/confirm': { robots: 'noindex, nofollow' },
+    '/login': { robots: 'noindex, nofollow' },
+    '/test': { robots: 'noindex, nofollow' },
+    '/test/**': { robots: 'noindex, nofollow' }
+  },
+  robots: {
+    credits: false,
+    mergeWithRobotsTxtPath: false,
+    sitemap: ['https://app.url3.cc/sitemap.xml'],
+    // Prefix rules. @nuxtjs/robots expands each path across i18n locales.
+    disallow: ['/dashboard', '/admin', '/auth', '/confirm', '/test']
+  },
   sitemap: {
     xsl: false,
-    exclude: ['/auth/**', '/test/**', '/confirm', '/dashboard', '/admin', '/admin/**', '/*/admin', '/*/admin/**']
+    exclude: [
+      '/auth/**',
+      '/test/**',
+      '/confirm',
+      '/dashboard',
+      '/admin',
+      '/admin/**',
+      '/*/admin',
+      '/*/admin/**',
+      '/login',
+      /^\/(?:[a-z]{2}\/)?login\/?$/
+    ]
   }
 })
