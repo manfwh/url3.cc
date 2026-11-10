@@ -125,7 +125,10 @@ export default defineNuxtConfig({
     '/confirm': { robots: 'noindex, nofollow' },
     '/login': { robots: 'noindex, nofollow' },
     '/test': { robots: 'noindex, nofollow' },
-    '/test/**': { robots: 'noindex, nofollow' }
+    '/test/**': { robots: 'noindex, nofollow' },
+    // Password gate for a short link. Crawlable so the noindex tag can be seen.
+    '/protecded': { robots: 'noindex, nofollow' },
+    '/protecded/**': { robots: 'noindex, nofollow' }
   },
   robots: {
     credits: false,
@@ -146,7 +149,12 @@ export default defineNuxtConfig({
       '/*/admin',
       '/*/admin/**',
       '/login',
-      /^\/(?:[a-z]{2}\/)?login\/?$/
+      /^\/(?:[a-z]{2}\/)?login\/?$/,
+      '/protecded',
+      '/protecded/**',
+      '/*/protecded',
+      '/*/protecded/**',
+      /^\/(?:[a-z]{2}\/)?protecded(?:\/.*)?$/
     ]
   }
 })

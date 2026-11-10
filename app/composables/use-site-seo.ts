@@ -1,19 +1,26 @@
-const SITE_URL = 'https://app.url3.cc'
-const OG_IMAGE = `${SITE_URL}/og.png`
+import { absoluteUrl, isLocalizedHome, SITE_ORIGIN } from '~/utils/public-seo'
+
+const OG_IMAGE = `${SITE_ORIGIN}/og.png`
 
 export function useSiteSeo () {
-  const { t } = useI18n()
+  const { t, locale } = useI18n()
   const route = useRoute()
-  const title = computed(() => t('site.title'))
-  const description = computed(() => t('site.description'))
-  const pageUrl = computed(() => new URL(route.path || '/', SITE_URL).href)
+  const title = computed(() => {
+    void locale.value
+    return t('site.title')
+  })
+  const description = computed(() => {
+    void locale.value
+    return t('site.description')
+  })
 
   useSeoMeta({
     title,
     description,
     ogTitle: title,
     ogDescription: description,
-    ogUrl: pageUrl,
+    // Homepage og:url is the i18n self-canonical so it stays aligned with hreflang.
+    ogUrl: () => isLocalizedHome(route.path) ? undefined : absoluteUrl(route.path),
     ogType: 'website',
     ogImage: OG_IMAGE,
     ogImageWidth: 1200,
@@ -35,7 +42,7 @@ export function useSiteSeo () {
           '@context': 'https://schema.org',
           '@type': 'WebApplication',
           name: title.value,
-          url: SITE_URL,
+          url: SITE_ORIGIN,
           description: description.value,
           applicationCategory: 'UtilitiesApplication',
           operatingSystem: 'Web',
