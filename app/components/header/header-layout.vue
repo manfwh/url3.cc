@@ -38,12 +38,12 @@ const items = computed(() => [
   <div class="sticky inset-x-0 top-0 z-30 w-full border-b dark:border-gray-600 backdrop-blur-lg">
     <div class="mx-auto w-full max-w-screen-xl px-2.5 lg:px-20">
       <div class="flex justify-between items-center h-16">
-        <h1 class="text-primary font-semibold text-sl md:text-2xl ">
+        <div class="text-primary font-semibold text-sl md:text-2xl ">
           <nuxt-link :to="localePath('/')" class="flex items-center">
             <img src="~/assets/imgs/logo.png" alt="logo" class="w-8 h-8 md:w-10 md:h-10 mr-2 block">
             URL3.cc
           </nuxt-link>
-        </h1>
+        </div>
         <div class="flex items-center space-x-4">
           <div class="flex">
             <SharedSwitchLanguage class="hidden md:block" />

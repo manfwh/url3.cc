@@ -9,6 +9,10 @@
   <p class="text-center text-gray-700 dark:text-gray-300 font-[Inter]">
     {{ $t('hero.description') }}
   </p>
+  <SharedPublicSiteLinks
+    :include-home="false"
+    class="mt-8 justify-center text-sm text-gray-600 dark:text-gray-300"
+  />
   <HomeDemoCreate />
   <HomeFeatures />
   <HomeQuestion />

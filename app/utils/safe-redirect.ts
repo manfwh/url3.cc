@@ -1,4 +1,4 @@
-const NON_DEFAULT_LOCALES = ['zh', 'ja', 'ko', 'id', 'vi', 'th', 'es', 'pt', 'fr', 'ru', 'it', 'de']
+export const NON_DEFAULT_LOCALES = ['zh', 'ja', 'ko', 'id', 'vi', 'th', 'es', 'pt', 'fr', 'ru', 'it', 'de']
 
 export function localizedPath (currentPath: string, path: string) {
   const match = currentPath.match(/^\/([a-z]{2})(?=\/|$)/)

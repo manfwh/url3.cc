@@ -1,5 +1,12 @@
 <script setup lang="ts">
-const { t } = useI18n()
+const { t, locale } = useI18n()
+const items = computed(() => {
+  void locale.value
+  return [1, 2, 3, 4].map(index => ({
+    label: t(`questions.q${index}`),
+    content: t(`questions.a${index}`)
+  }))
+})
 useHead(() => ({
   script: [
     {
@@ -8,41 +15,22 @@ useHead(() => ({
       innerHTML: JSON.stringify({
         '@context': 'https://schema.org',
         '@type': 'FAQPage',
-        mainEntity: [1, 2, 3, 4].map(index => ({
+        mainEntity: items.value.map(item => ({
           '@type': 'Question',
-          name: t(`questions.q${index}`),
+          name: item.label,
           acceptedAnswer: {
             '@type': 'Answer',
-            text: t(`questions.a${index}`)
+            text: item.content
           }
         }))
       })
     }
   ]
 }))
-const items = [
-  {
-    label: t('questions.q1'),
-    content: t('questions.a1')
-  },
-  {
-    label: t('questions.q2'),
-    content: t('questions.a2')
-  },
-  {
-    label: t('questions.q3'),
-    content: t('questions.a3')
-  },
-  {
-    label: t('questions.q4'),
-    content: t('questions.a4')
-  }
-
-]
 </script>
 
 <template>
-  <div class="mx-auto px-4 sm:px-6 lg:px-8 max-w-7xl pb-20">
+  <div id="faq" class="scroll-mt-24 mx-auto px-4 sm:px-6 lg:px-8 max-w-7xl pb-20">
     <h2 class="text-3xl font-bold mb-8 tracking-tight text-gray-900 dark:text-white sm:text-4xl lg:text-5xl text-center">
       {{ $t('questions.questions') }}
     </h2>
