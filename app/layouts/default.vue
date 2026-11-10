@@ -40,10 +40,7 @@ const seoMeta = computed(() => localizedHome.value ? head.value.meta ?? [] : [])
       <HeaderLayout />
       <slot />
       <footer class="mx-auto w-full max-w-screen-xl px-2.5 lg:px-20 text-slate-700 dark:text-slate-300 py-4 text-sm">
-        <SharedPublicSiteLinks />
-        <p class="mt-3">
-          © 2026 URL3.CC. All rights reserved.
-        </p>
+        © 2026 URL3.CC. All rights reserved.
       </footer>
       <ModalContainer />
       <Background />
